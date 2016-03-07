@@ -1,0 +1,883 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Candidate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CandidateStatusTypeId" Type="int" />
+    <Property Name="DesiredEmploymentTypeId" Type="int" />
+    <Property Name="CurrentEmploymentTypeId" Type="int" />
+    <Property Name="TravelTypeId" Type="int" />
+    <Property Name="SourceTypeId" Type="int" />
+    <Property Name="MaxTravelTypeId" Type="int" />
+    <Property Name="AvailableDate" Type="date" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="CurrentSalary" Type="int" />
+    <Property Name="DesiredSalary" Type="int" />
+    <Property Name="CurrentRate" Type="int" />
+    <Property Name="DesiredRate" Type="int" />
+    <Property Name="ReferralId" Type="int" />
+    <Property Name="ResumeSummary" Type="varchar(max)" />
+    <Property Name="IsOpenToRelocation" Type="bit" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="MPLOY_OrganizationId" Type="int" />
+  </EntityType>
+  <EntityType Name="CandidateNote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CandidateId" Type="int" Nullable="false" />
+    <Property Name="Note" Type="varchar(max)" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompanyTypeId" Type="int" Nullable="false" />
+    <Property Name="IndustryId" Type="int" />
+    <Property Name="RevenueSizeTypeId" Type="int" />
+    <Property Name="EmployeeSizeTypeId" Type="int" />
+    <Property Name="BillingFrequencyTypeId" Type="int" />
+    <Property Name="BillingMethodTypeId" Type="int" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="MPLOY_OrganizationId" Type="int" />
+    <Property Name="MPLOY_IdUser" Type="int" />
+  </EntityType>
+  <EntityType Name="CompanyContactInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="ContactInformationTypeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="CompanyMailAddress">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="MailingAddressId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="MailingAddressId" Type="int" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="ContactInformationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="InfoFormat" Type="varchar" MaxLength="50" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="SourceTypeId" Type="int" />
+    <Property Name="CustomerTypeId" Type="int" />
+    <Property Name="Title" Type="varchar" MaxLength="100" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="MPLOY_OrganizationId" Type="int" />
+  </EntityType>
+  <EntityType Name="GenderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="GlobalEntity">
+    <Key>
+      <PropertyRef Name="GlobalEntityId" />
+    </Key>
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EntityTypeId" Type="int" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="MailingAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Line1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Line2" Type="varchar" MaxLength="50" />
+    <Property Name="Stop" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Zip" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="MailingAddressType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="MaxTravelType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="101" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="PreferredPhoneNumberId" Type="int" />
+    <Property Name="PreferredEmailAddressId" Type="int" />
+    <Property Name="PreferredTypicalRoleId" Type="int" />
+    <Property Name="GenderTypeId" Type="int" />
+    <Property Name="RaceTypeId" Type="int" />
+    <Property Name="CitizenshipTypeId" Type="int" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="MPLOY_ContactId" Type="int" />
+    <Property Name="MPLOY_UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="PersonContactInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="ContactInformationTypeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="PersonMailAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="MailingAddressId" Type="int" Nullable="false" />
+    <Property Name="MailingAddressTypeId" Type="int" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <EntityType Name="Requirement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="VMSField" Type="varchar" MaxLength="50" />
+    <Property Name="RequirementTypeId" Type="int" Nullable="false" />
+    <Property Name="RequirementPriorityTypeId" Type="int" Nullable="false" />
+    <Property Name="RequirementProjectTypeId" Type="int" Nullable="false" />
+    <Property Name="RequirementStatusTypeId" Type="int" Nullable="false" />
+    <Property Name="RequirementWinLossReasonTypeId" Type="int" />
+    <Property Name="TravelTypeId" Type="int" />
+    <Property Name="MaxTravelTypeId" Type="int" />
+    <Property Name="PaymentTermTypeId" Type="int" />
+    <Property Name="PostingDate" Type="date" Nullable="false" />
+    <Property Name="DesiredStartDate" Type="date" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="ClosedDate" Type="date" />
+    <Property Name="MinRate" Type="int" />
+    <Property Name="MaxRate" Type="int" />
+    <Property Name="Budget" Type="int" />
+    <Property Name="Duration" Type="int" />
+    <Property Name="ContractDetails" Type="varchar(max)" />
+    <Property Name="IsTravelRequired" Type="bit" Nullable="false" />
+    <Property Name="IsDrugTestRequired" Type="bit" Nullable="false" />
+    <Property Name="IsBackgroundCheckRequired" Type="bit" Nullable="false" />
+    <Property Name="IsWorkFromHome" Type="bit" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="MPLOY_JobId" Type="int" />
+    <Property Name="MPLOY_ContactId" Type="int" />
+  </EntityType>
+  <EntityType Name="SourceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedById" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" />
+  </EntityType>
+  <Association Name="CompanyContactCompany">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyContactInformation" Type="Self.CompanyContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyContactInformation">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Candidate_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyContactInformation_ContactInformationType">
+    <End Role="ContactInformationType" Type="Self.ContactInformationType" Multiplicity="1" />
+    <End Role="CompanyContactInformation" Type="Self.CompanyContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactInformationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyContactInformation">
+        <PropertyRef Name="ContactInformationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_SourceType">
+    <End Role="SourceType" Type="Self.SourceType" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="SourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation">
+    <End Role="PersonContactInformation" Type="Self.PersonContactInformation" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhoneNumberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation1">
+    <End Role="PersonContactInformation" Type="Self.PersonContactInformation" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredEmailAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonContactInformation_ContactInformationType">
+    <End Role="ContactInformationType" Type="Self.ContactInformationType" Multiplicity="1" />
+    <End Role="PersonContactInformation" Type="Self.PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactInformationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="ContactInformationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonContactInformation_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="PersonContactInformation" Type="Self.PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="Requirement" Type="Self.Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_MaxTravelType">
+    <End Role="MaxTravelType" Type="Self.MaxTravelType" Multiplicity="0..1" />
+    <End Role="Requirement" Type="Self.Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCandidatePersonId">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCandidateSourceId">
+    <End Role="SourceType" Type="Self.SourceType" Multiplicity="0..1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="SourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCandidatetoTravel">
+    <End Role="MaxTravelType" Type="Self.MaxTravelType" Multiplicity="0..1" />
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCompanyMailAddressAddressId">
+    <End Role="MailingAddress" Type="Self.MailingAddress" Multiplicity="1" />
+    <End Role="CompanyMailAddress" Type="Self.CompanyMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyMailAddress">
+        <PropertyRef Name="MailingAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKNoteCandidateId">
+    <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+    <End Role="CandidateNote" Type="Self.CandidateNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateNote">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKOrganizaitonMailAddressCompanyId">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyMailAddress" Type="Self.CompanyMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyMailAddress">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonGenderId">
+    <End Role="GenderType" Type="Self.GenderType" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="GenderTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressAddressId">
+    <End Role="MailingAddress" Type="Self.MailingAddress" Multiplicity="1" />
+    <End Role="PersonMailAddress" Type="Self.PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="MailingAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressPersonId">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="PersonMailAddress" Type="Self.PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressTypeId">
+    <End Role="MailingAddressType" Type="Self.MailingAddressType" Multiplicity="1" />
+    <End Role="PersonMailAddress" Type="Self.PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddressType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="MailingAddressTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CandidateDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="API">
+    <Parameter Name="CandidateId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CreateNewCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="API">
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+    <Parameter Name="CandidateStatusTypeId" Type="int" Mode="In" />
+    <Parameter Name="DesiredEmploymentTypeId" Type="int" Mode="In" />
+    <Parameter Name="CurrentEmploymentTypeId" Type="int" Mode="In" />
+    <Parameter Name="TravelTypeId" Type="int" Mode="In" />
+    <Parameter Name="SourceTypeId" Type="int" Mode="In" />
+    <Parameter Name="MaxTravelTypeId" Type="int" Mode="In" />
+    <Parameter Name="AvailableDate" Type="datetime" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="CurrentSalary" Type="int" Mode="In" />
+    <Parameter Name="DesiredSalary" Type="int" Mode="In" />
+    <Parameter Name="CurrentRate" Type="int" Mode="In" />
+    <Parameter Name="DesiredRate" Type="int" Mode="In" />
+    <Parameter Name="IsOpenToRelocation" Type="bit" Mode="In" />
+    <Parameter Name="RecruiterId" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AssignAccountabilityRecruiter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CORE">
+    <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CreateGlobalEntity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CORE">
+    <Parameter Name="EntityTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedById" Type="int" Mode="In" />
+    <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="CreatePerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CORE">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SaveSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CORE">
+    <Parameter Name="ActivityLogId" Type="int" Mode="In" />
+    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+    <Parameter Name="SalesRecruitingWorkflowName" Type="varchar" Mode="In" />
+    <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+    <Parameter Name="ActivityDetail" Type="varchar(max)" Mode="In" />
+    <Parameter Name="LoggedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CheckCustomerAgainstCandidateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CustomerIdContact" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FindCustomerOrganizationId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="personId" Type="int" Mode="In" />
+    <Parameter Name="mployOrganizationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCompanyContactAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCompanyJobAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentCompany" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetContactLogAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetHiringActivityAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentJobId" Type="int" Mode="In" />
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserFromMployUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MployUserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="CandidateStatusTypeId" Type="int" Mode="In" />
+    <Parameter Name="DesiredEmploymentTypeId" Type="int" Mode="In" />
+    <Parameter Name="CurrentEmploymentTypeId" Type="int" Mode="In" />
+    <Parameter Name="TravelTypeId" Type="int" Mode="In" />
+    <Parameter Name="SourceTypeId" Type="int" Mode="In" />
+    <Parameter Name="MaxTravelTypeId" Type="int" Mode="In" />
+    <Parameter Name="AvailableDate" Type="date" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="CurrentSalary" Type="int" Mode="In" />
+    <Parameter Name="DesiredSalary" Type="int" Mode="In" />
+    <Parameter Name="CurrentRate" Type="int" Mode="In" />
+    <Parameter Name="DesiredRate" Type="int" Mode="In" />
+    <Parameter Name="ReferralId" Type="int" Mode="In" />
+    <Parameter Name="ResumeSummary" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IsOpenToRelocation" Type="bit" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_OrganizationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCandidateNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CandidateId" Type="int" Mode="In" />
+    <Parameter Name="Note" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CreateDate" Type="date" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCompany" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+    <Parameter Name="CompanyTypeId" Type="int" Mode="In" />
+    <Parameter Name="IndustryId" Type="int" Mode="In" />
+    <Parameter Name="RevenueSizeTypeId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeSizeTypeId" Type="int" Mode="In" />
+    <Parameter Name="BillingFrequencyTypeId" Type="int" Mode="In" />
+    <Parameter Name="BillingMethodTypeId" Type="int" Mode="In" />
+    <Parameter Name="SalesPersonId" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
+    <Parameter Name="MployIdUser" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCompanyContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="ContactInformationTypeId" Type="int" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Fax" Type="varchar" Mode="In" />
+    <Parameter Name="URL" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCompanyMailingAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Line1" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="State" Type="varchar" Mode="In" />
+    <Parameter Name="Zip" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCompanyNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Note" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="SourceTypeId" Type="int" Mode="In" />
+    <Parameter Name="CustomerTypeId" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCustomerNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
+    <Parameter Name="Note" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CreateDate" Type="date" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="GenderTypeId" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="date" Mode="In" />
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertPersonContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="ContactInformationTypeId" Type="int" Mode="In" />
+    <Parameter Name="ContactData" Type="varchar" Mode="In" />
+    <Parameter Name="PreferredPhone" Type="bit" Mode="In" />
+    <Parameter Name="PreferredEmail" Type="bit" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertPersonMailingAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="Line1" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="State" Type="varchar" Mode="In" />
+    <Parameter Name="Zip" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+    <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadHiringActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadSourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="personId" Type="int" Mode="In" />
+    <Parameter Name="mployContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateUserMployId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="personId" Type="int" Mode="In" />
+    <Parameter Name="mployUserId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CandidateNote" EntityType="Self.CandidateNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyContactInformation" EntityType="Self.CompanyContactInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyMailAddress" EntityType="Self.CompanyMailAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactInformationType" EntityType="Self.ContactInformationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GenderType" EntityType="Self.GenderType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GlobalEntity" EntityType="Self.GlobalEntity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MailingAddress" EntityType="Self.MailingAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MailingAddressType" EntityType="Self.MailingAddressType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaxTravelType" EntityType="Self.MaxTravelType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonContactInformation" EntityType="Self.PersonContactInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonMailAddress" EntityType="Self.PersonMailAddress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Requirement" EntityType="Self.Requirement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SourceType" EntityType="Self.SourceType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="CompanyContactCompany" Association="Self.CompanyContactCompany">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyContactInformation" EntitySet="CompanyContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Candidate_GlobalEntity" Association="Self.FK_Candidate_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="Candidate" EntitySet="Candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_GlobalEntity" Association="Self.FK_Company_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyContactInformation_ContactInformationType" Association="Self.FK_CompanyContactInformation_ContactInformationType">
+      <End Role="ContactInformationType" EntitySet="ContactInformationType" />
+      <End Role="CompanyContactInformation" EntitySet="CompanyContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_GlobalEntity" Association="Self.FK_Customer_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Self.FK_Customer_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_SourceType" Association="Self.FK_Customer_SourceType">
+      <End Role="SourceType" EntitySet="SourceType" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Self.FK_Person_PersonContactInformation">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Self.FK_Person_PersonContactInformation1">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonContactInformation_ContactInformationType" Association="Self.FK_PersonContactInformation_ContactInformationType">
+      <End Role="ContactInformationType" EntitySet="ContactInformationType" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Self.FK_PersonContactInformation_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Self.FK_Requirement_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="Requirement" EntitySet="Requirement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_MaxTravelType" Association="Self.FK_Requirement_MaxTravelType">
+      <End Role="MaxTravelType" EntitySet="MaxTravelType" />
+      <End Role="Requirement" EntitySet="Requirement" />
+    </AssociationSet>
+    <AssociationSet Name="FKCandidatePersonId" Association="Self.FKCandidatePersonId">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Candidate" EntitySet="Candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FKCandidateSourceId" Association="Self.FKCandidateSourceId">
+      <End Role="SourceType" EntitySet="SourceType" />
+      <End Role="Candidate" EntitySet="Candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FKCandidatetoTravel" Association="Self.FKCandidatetoTravel">
+      <End Role="MaxTravelType" EntitySet="MaxTravelType" />
+      <End Role="Candidate" EntitySet="Candidate" />
+    </AssociationSet>
+    <AssociationSet Name="FKCompanyMailAddressAddressId" Association="Self.FKCompanyMailAddressAddressId">
+      <End Role="MailingAddress" EntitySet="MailingAddress" />
+      <End Role="CompanyMailAddress" EntitySet="CompanyMailAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FKNoteCandidateId" Association="Self.FKNoteCandidateId">
+      <End Role="Candidate" EntitySet="Candidate" />
+      <End Role="CandidateNote" EntitySet="CandidateNote" />
+    </AssociationSet>
+    <AssociationSet Name="FKOrganizaitonMailAddressCompanyId" Association="Self.FKOrganizaitonMailAddressCompanyId">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyMailAddress" EntitySet="CompanyMailAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonGenderId" Association="Self.FKPersonGenderId">
+      <End Role="GenderType" EntitySet="GenderType" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressAddressId" Association="Self.FKPersonMailAddressAddressId">
+      <End Role="MailingAddress" EntitySet="MailingAddress" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Self.FKPersonMailAddressPersonId">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressTypeId" Association="Self.FKPersonMailAddressTypeId">
+      <End Role="MailingAddressType" EntitySet="MailingAddressType" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

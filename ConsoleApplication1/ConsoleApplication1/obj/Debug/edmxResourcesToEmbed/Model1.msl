@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <FunctionImportMapping FunctionImportName="GetCompanyContactAssociation1" FunctionName="Model.Store.GetCompanyContactAssociation" />
+    <EntitySetMapping Name="GlobalEntities">
+      <EntityTypeMapping TypeName="Model.GlobalEntity">
+        <MappingFragment StoreEntitySet="GlobalEntity">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="EntityTypeId" ColumnName="EntityTypeId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Candidates">
+      <EntityTypeMapping TypeName="Model.Candidate">
+        <MappingFragment StoreEntitySet="Candidate">
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="ResumeSummary" ColumnName="ResumeSummary" />
+          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaxTravelTypes">
+      <EntityTypeMapping TypeName="Model.MaxTravelType">
+        <MappingFragment StoreEntitySet="MaxTravelType">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateNotes">
+      <EntityTypeMapping TypeName="Model.CandidateNote">
+        <MappingFragment StoreEntitySet="CandidateNote">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyMailAddresses">
+      <EntityTypeMapping TypeName="Model.CompanyMailAddress">
+        <MappingFragment StoreEntitySet="CompanyMailAddress">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="MailingAddressId" ColumnName="MailingAddressId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenderTypes">
+      <EntityTypeMapping TypeName="Model.GenderType">
+        <MappingFragment StoreEntitySet="GenderType">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SourceTypes">
+      <EntityTypeMapping TypeName="Model.SourceType">
+        <MappingFragment StoreEntitySet="SourceType">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CandidateDetail" FunctionName="Model.Store.CandidateDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.CandidateDetail_Result">
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
+          <ScalarProperty Name="PreferredEmailAddress" ColumnName="PreferredEmailAddress" />
+          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
+          <ScalarProperty Name="PreferredPhoneNumber" ColumnName="PreferredPhoneNumber" />
+          <ScalarProperty Name="TypicalRoleId" ColumnName="TypicalRoleId" />
+          <ScalarProperty Name="TypicalRoleName" ColumnName="TypicalRoleName" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="CandidateStatusTypeName" ColumnName="CandidateStatusTypeName" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeName" ColumnName="DesiredEmploymentTypeName" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeName" ColumnName="CurrentEmploymentTypeName" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="TravelTypeName" ColumnName="TravelTypeName" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="SourceTypeName" ColumnName="SourceTypeName" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="MaxTravelTypeName" ColumnName="MaxTravelTypeName" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="HasResume" ColumnName="HasResume" />
+          <ScalarProperty Name="LastEmployerCompanyName" ColumnName="LastEmployerCompanyName" />
+          <ScalarProperty Name="LastJobTitle" ColumnName="LastJobTitle" />
+          <ScalarProperty Name="LinkedInProfileUrl" ColumnName="LinkedInProfileUrl" />
+          <ScalarProperty Name="ActivityCount" ColumnName="ActivityCount" />
+          <ScalarProperty Name="RequirementCount" ColumnName="RequirementCount" />
+          <ScalarProperty Name="SkillCount" ColumnName="SkillCount" />
+          <ScalarProperty Name="MatchingSkillCount" ColumnName="MatchingSkillCount" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="LastActivityEntityTypeName" ColumnName="LastActivityEntityTypeName" />
+          <ScalarProperty Name="LastActivitySalesRecruitingWorkflowName" ColumnName="LastActivitySalesRecruitingWorkflowName" />
+          <ScalarProperty Name="LastActivityNote" ColumnName="LastActivityNote" />
+          <ScalarProperty Name="LastActivityTimestamp" ColumnName="LastActivityTimestamp" />
+          <ScalarProperty Name="RequirementCandidateStatusTypeName" ColumnName="RequirementCandidateStatusTypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CreateNewCandidate" FunctionName="Model.Store.CreateNewCandidate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.CreateNewCandidate_Result">
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
+          <ScalarProperty Name="PreferredEmailAddress" ColumnName="PreferredEmailAddress" />
+          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
+          <ScalarProperty Name="PreferredPhoneNumber" ColumnName="PreferredPhoneNumber" />
+          <ScalarProperty Name="TypicalRoleId" ColumnName="TypicalRoleId" />
+          <ScalarProperty Name="TypicalRoleName" ColumnName="TypicalRoleName" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="CandidateStatusTypeName" ColumnName="CandidateStatusTypeName" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeName" ColumnName="DesiredEmploymentTypeName" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeName" ColumnName="CurrentEmploymentTypeName" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="TravelTypeName" ColumnName="TravelTypeName" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="SourceTypeName" ColumnName="SourceTypeName" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="MaxTravelTypeName" ColumnName="MaxTravelTypeName" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="HasResume" ColumnName="HasResume" />
+          <ScalarProperty Name="LastEmployerCompanyName" ColumnName="LastEmployerCompanyName" />
+          <ScalarProperty Name="LastJobTitle" ColumnName="LastJobTitle" />
+          <ScalarProperty Name="LinkedInProfileUrl" ColumnName="LinkedInProfileUrl" />
+          <ScalarProperty Name="ActivityCount" ColumnName="ActivityCount" />
+          <ScalarProperty Name="RequirementCount" ColumnName="RequirementCount" />
+          <ScalarProperty Name="SkillCount" ColumnName="SkillCount" />
+          <ScalarProperty Name="MatchingSkillCount" ColumnName="MatchingSkillCount" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="LastActivityEntityTypeName" ColumnName="LastActivityEntityTypeName" />
+          <ScalarProperty Name="LastActivitySalesRecruitingWorkflowName" ColumnName="LastActivitySalesRecruitingWorkflowName" />
+          <ScalarProperty Name="LastActivityNote" ColumnName="LastActivityNote" />
+          <ScalarProperty Name="LastActivityTimestamp" ColumnName="LastActivityTimestamp" />
+          <ScalarProperty Name="RequirementCandidateStatusTypeName" ColumnName="RequirementCandidateStatusTypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AssignAccountabilityRecruiter" FunctionName="Model.Store.AssignAccountabilityRecruiter" />
+    <FunctionImportMapping FunctionImportName="CreateGlobalEntity" FunctionName="Model.Store.CreateGlobalEntity" />
+    <FunctionImportMapping FunctionImportName="CreatePerson" FunctionName="Model.Store.CreatePerson" />
+    <FunctionImportMapping FunctionImportName="SaveSalesRecruitingActivityLog" FunctionName="Model.Store.SaveSalesRecruitingActivityLog" />
+    <FunctionImportMapping FunctionImportName="ReadCandidateContractType" FunctionName="Model.Store.ReadCandidateContractType" />
+    <FunctionImportMapping FunctionImportName="ReadContactLog" FunctionName="Model.Store.ReadContactLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadContactLog_Result1">
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadHiringActivity" FunctionName="Model.Store.ReadHiringActivity">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadHiringActivity_Result1">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadJob" FunctionName="Model.Store.ReadJob">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadJob_Result2">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+          <ScalarProperty Name="IdContactManager" ColumnName="IdContactManager" />
+          <ScalarProperty Name="PositionTitle" ColumnName="PositionTitle" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="RequirementNumber" ColumnName="RequirementNumber" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="JobType" ColumnName="JobType" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+          <ScalarProperty Name="AssignedRecruiter" ColumnName="AssignedRecruiter" />
+          <ScalarProperty Name="MPLOY_CompanyId" ColumnName="MPLOY_CompanyId" />
+          <ScalarProperty Name="MPLOY_CompanyName" ColumnName="MPLOY_CompanyName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadSourceType" FunctionName="Model.Store.ReadSourceType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadSourceType_Result3">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdatePersonMployContactId" FunctionName="Model.Store.UpdatePersonMployContactId" />
+    <EntitySetMapping Name="MailingAddresses">
+      <EntityTypeMapping TypeName="Model.MailingAddress">
+        <MappingFragment StoreEntitySet="MailingAddress">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Stop" ColumnName="Stop" />
+          <ScalarProperty Name="Line2" ColumnName="Line2" />
+          <ScalarProperty Name="Line1" ColumnName="Line1" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailingAddressTypes">
+      <EntityTypeMapping TypeName="Model.MailingAddressType">
+        <MappingFragment StoreEntitySet="MailingAddressType">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonMailAddresses">
+      <EntityTypeMapping TypeName="Model.PersonMailAddress">
+        <MappingFragment StoreEntitySet="PersonMailAddress">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="MailingAddressTypeId" ColumnName="MailingAddressTypeId" />
+          <ScalarProperty Name="MailingAddressId" ColumnName="MailingAddressId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactInformationTypes">
+      <EntityTypeMapping TypeName="Model.ContactInformationType">
+        <MappingFragment StoreEntitySet="ContactInformationType">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="InfoFormat" ColumnName="InfoFormat" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonContactInformations">
+      <EntityTypeMapping TypeName="Model.PersonContactInformation">
+        <MappingFragment StoreEntitySet="PersonContactInformation">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ContactInformationTypeId" ColumnName="ContactInformationTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyContactInformations">
+      <EntityTypeMapping TypeName="Model.CompanyContactInformation">
+        <MappingFragment StoreEntitySet="CompanyContactInformation">
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ContactInformationTypeId" ColumnName="ContactInformationTypeId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="Model.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CitizenshipTypeId" ColumnName="CitizenshipTypeId" />
+          <ScalarProperty Name="RaceTypeId" ColumnName="RaceTypeId" />
+          <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
+          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
+          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
+          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UpdateUserMployId" FunctionName="Model.Store.UpdateUserMployId" />
+    <EntitySetMapping Name="Requirements">
+      <EntityTypeMapping TypeName="Model.Requirement">
+        <MappingFragment StoreEntitySet="Requirement">
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
+          <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
+          <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
+          <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
+          <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
+          <ScalarProperty Name="MinRate" ColumnName="MinRate" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="RequirementWinLossReasonTypeId" ColumnName="RequirementWinLossReasonTypeId" />
+          <ScalarProperty Name="RequirementStatusTypeId" ColumnName="RequirementStatusTypeId" />
+          <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
+          <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
+          <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
+          <ScalarProperty Name="VMSField" ColumnName="VMSField" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetUserFromMployUserId" FunctionName="Model.Store.GetUserFromMployUserId" />
+    <FunctionImportMapping FunctionImportName="CheckCustomerAgainstCandidateData" FunctionName="Model.Store.CheckCustomerAgainstCandidateData" />
+    <FunctionImportMapping FunctionImportName="InsertPersonContactInformation" FunctionName="Model.Store.InsertPersonContactInformation" />
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="Model.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
+          <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
+          <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
+          <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
+          <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="Model.Store.InsertUser" />
+    <FunctionImportMapping FunctionImportName="ReadUser" FunctionName="Model.Store.ReadUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadUser_Result2">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="idBranch" ColumnName="idBranch" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="UserData" ColumnName="UserData" />
+          <ScalarProperty Name="enabled" ColumnName="enabled" />
+          <ScalarProperty Name="hidden" ColumnName="hidden" />
+          <ScalarProperty Name="initials" ColumnName="initials" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCompany" FunctionName="Model.Store.InsertCompany">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCompany_Result9">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+          <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
+          <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
+          <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
+          <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCompanyContactInformation" FunctionName="Model.Store.InsertCompanyContactInformation" />
+    <FunctionImportMapping FunctionImportName="InsertCompanyMailingAddress" FunctionName="Model.Store.InsertCompanyMailingAddress" />
+    <FunctionImportMapping FunctionImportName="InsertCompanyNote" FunctionName="Model.Store.InsertCompanyNote" />
+    <FunctionImportMapping FunctionImportName="ReadCompanyType" FunctionName="Model.Store.ReadCompanyType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadCompanyType_Result1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadOrganization_Result4">
+          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="idOrganizationType" ColumnName="idOrganizationType" />
+          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+          <ScalarProperty Name="ExternalNote" ColumnName="ExternalNote" />
+          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="idbranch" ColumnName="idbranch" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadContact" FunctionName="Model.Store.ReadContact">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadContact_Result3">
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="eMail" ColumnName="eMail" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="idContactType" ColumnName="idContactType" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="handle1text" ColumnName="handle1text" />
+          <ScalarProperty Name="handle1type" ColumnName="handle1type" />
+          <ScalarProperty Name="handle2text" ColumnName="handle2text" />
+          <ScalarProperty Name="handle2type" ColumnName="handle2type" />
+          <ScalarProperty Name="handle3text" ColumnName="handle3text" />
+          <ScalarProperty Name="handle3type" ColumnName="handle3type" />
+          <ScalarProperty Name="handle0text" ColumnName="handle0text" />
+          <ScalarProperty Name="handle0type" ColumnName="handle0type" />
+          <ScalarProperty Name="IdSource" ColumnName="IdSource" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="SelfId" ColumnName="SelfId" />
+          <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadPerson" FunctionName="Model.Store.ReadPerson">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadPerson_Result9">
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="eMail" ColumnName="eMail" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="idContactType" ColumnName="idContactType" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="handle1text" ColumnName="handle1text" />
+          <ScalarProperty Name="handle1type" ColumnName="handle1type" />
+          <ScalarProperty Name="handle2text" ColumnName="handle2text" />
+          <ScalarProperty Name="handle2type" ColumnName="handle2type" />
+          <ScalarProperty Name="handle3text" ColumnName="handle3text" />
+          <ScalarProperty Name="handle3type" ColumnName="handle3type" />
+          <ScalarProperty Name="handle0text" ColumnName="handle0text" />
+          <ScalarProperty Name="handle0type" ColumnName="handle0type" />
+          <ScalarProperty Name="IdSource" ColumnName="IdSource" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="SelfId" ColumnName="SelfId" />
+          <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="Model.Store.InsertCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCustomer_Result2">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertPerson" FunctionName="Model.Store.InsertPerson" />
+    <FunctionImportMapping FunctionImportName="FindCustomerOrganizationId" FunctionName="Model.Store.FindCustomerOrganizationId" />
+    <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
+    <FunctionImportMapping FunctionImportName="InsertCandidateNote" FunctionName="Model.Store.InsertCandidateNote" />
+    <FunctionImportMapping FunctionImportName="InsertCandidate" FunctionName="Model.Store.InsertCandidate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCandidate_Result4">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+          <ScalarProperty Name="ResumeSummary" ColumnName="ResumeSummary" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

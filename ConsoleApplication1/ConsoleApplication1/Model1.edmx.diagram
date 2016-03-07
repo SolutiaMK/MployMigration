@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ad59f9d4712414394b23b182597db35" Name="Diagram1" ZoomLevel="82" >
+        <EntityTypeShape EntityType="Model.GlobalEntity" Width="1.5" PointX="0.75" PointY="15.25" />
+        <EntityTypeShape EntityType="Model.Candidate" Width="1.5" PointX="3" PointY="10.75" />
+        <AssociationConnector Association="Model.FK_Candidate_GlobalEntity" />
+        <EntityTypeShape EntityType="Model.MaxTravelType" Width="1.5" PointX="0.75" PointY="19.625" />
+        <AssociationConnector Association="Model.FKCandidatetoTravel" />
+        <EntityTypeShape EntityType="Model.CandidateNote" Width="1.5" PointX="5.25" PointY="22.625" />
+        <AssociationConnector Association="Model.FKNoteCandidateId" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="13.375" PointY="17.25" />
+        <AssociationConnector Association="Model.FK_Customer_GlobalEntity" />
+        <EntityTypeShape EntityType="Model.CompanyMailAddress" Width="1.5" PointX="10.375" PointY="12.875" />
+        <EntityTypeShape EntityType="Model.GenderType" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.SourceType" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="Model.FKCandidateSourceId" />
+        <AssociationConnector Association="Model.FK_Customer_SourceType" />
+        <EntityTypeShape EntityType="Model.MailingAddress" Width="1.5" PointX="3" PointY="27.5" />
+        <EntityTypeShape EntityType="Model.MailingAddressType" Width="1.5" PointX="3" PointY="24.375" />
+        <EntityTypeShape EntityType="Model.PersonMailAddress" Width="1.5" PointX="5.25" PointY="18.25" />
+        <AssociationConnector Association="Model.FKCompanyMailAddressAddressId" />
+        <AssociationConnector Association="Model.FKPersonMailAddressAddressId" />
+        <AssociationConnector Association="Model.FKPersonMailAddressTypeId" />
+        <EntityTypeShape EntityType="Model.ContactInformationType" Width="1.5" PointX="0.75" PointY="27.625" />
+        <EntityTypeShape EntityType="Model.PersonContactInformation" Width="1.5" PointX="0.625" PointY="23.125" />
+        <AssociationConnector Association="Model.FK_PersonContactInformation_ContactInformationType" />
+        <EntityTypeShape EntityType="Model.CompanyContactInformation" Width="1.5" PointX="13.375" PointY="23.375" />
+        <AssociationConnector Association="Model.FK_CompanyContactInformation_ContactInformationType" />
+        <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="6" PointY="8.875" />
+        <AssociationConnector Association="Model.FKCandidatePersonId" />
+        <AssociationConnector Association="Model.FK_Customer_Person" />
+        <AssociationConnector Association="Model.FKPersonGenderId" />
+        <AssociationConnector Association="Model.FK_Person_PersonContactInformation" />
+        <AssociationConnector Association="Model.FK_Person_PersonContactInformation1" />
+        <AssociationConnector Association="Model.FK_PersonContactInformation_Person" />
+        <AssociationConnector Association="Model.FKPersonMailAddressPersonId" />
+        <EntityTypeShape EntityType="Model.Requirement" Width="1.5" PointX="8" PointY="15.875" />
+        <AssociationConnector Association="Model.FK_Requirement_GlobalEntity" />
+        <AssociationConnector Association="Model.FK_Requirement_MaxTravelType" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="3" PointY="18.375" />
+        <AssociationConnector Association="Model.CompanyContactCompany" />
+        <AssociationConnector Association="Model.FK_Company_GlobalEntity" />
+        <AssociationConnector Association="Model.FK_Customer_Company" />
+        <AssociationConnector Association="Model.FKOrganizaitonMailAddressCompanyId" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

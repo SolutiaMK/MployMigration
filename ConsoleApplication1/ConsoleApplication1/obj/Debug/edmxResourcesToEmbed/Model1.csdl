@@ -1,0 +1,2258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetCompanyJobAssociation" ReturnType="Collection(Int32)">
+      <Parameter Name="currentCompany" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCompanyContactAssociation" ReturnType="Collection(Int32)">
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetJobPersonId" ReturnType="Collection(Int32)">
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result3)">
+      <Parameter Name="currentJobId" Mode="In" Type="Int32" />
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetContactLogAssociation" ReturnType="Collection(Int32)">
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCompanyContactAssociation1" ReturnType="Collection(Int32)">
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="GlobalEntities" EntityType="Model.GlobalEntity" />
+    <EntitySet Name="Candidates" EntityType="Model.Candidate" />
+    <AssociationSet Name="FK_Candidate_GlobalEntity" Association="Model.FK_Candidate_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <EntitySet Name="MaxTravelTypes" EntityType="Model.MaxTravelType" />
+    <AssociationSet Name="FKCandidatetoTravel" Association="Model.FKCandidatetoTravel">
+      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <EntitySet Name="CandidateNotes" EntityType="Model.CandidateNote" />
+    <AssociationSet Name="FKNoteCandidateId" Association="Model.FKNoteCandidateId">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="CandidateNote" EntitySet="CandidateNotes" />
+    </AssociationSet>
+    <EntitySet Name="Customers" EntityType="Model.Customer" />
+    <AssociationSet Name="FK_Customer_GlobalEntity" Association="Model.FK_Customer_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <EntitySet Name="CompanyMailAddresses" EntityType="Model.CompanyMailAddress" />
+    <EntitySet Name="GenderTypes" EntityType="Model.GenderType" />
+    <EntitySet Name="SourceTypes" EntityType="Model.SourceType" />
+    <AssociationSet Name="FKCandidateSourceId" Association="Model.FKCandidateSourceId">
+      <End Role="SourceType" EntitySet="SourceTypes" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_SourceType" Association="Model.FK_Customer_SourceType">
+      <End Role="SourceType" EntitySet="SourceTypes" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <FunctionImport Name="CandidateDetail" ReturnType="Collection(Model.CandidateDetail_Result)">
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreateNewCandidate" ReturnType="Collection(Model.CreateNewCandidate_Result)">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmailAddress" Mode="In" Type="String" />
+      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
+      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
+      <Parameter Name="RecruiterId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AssignAccountabilityRecruiter">
+      <Parameter Name="GlobalEntityId" Mode="In" Type="Guid" />
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreateGlobalEntity">
+      <Parameter Name="EntityTypeName" Mode="In" Type="String" />
+      <Parameter Name="CreatedById" Mode="In" Type="Int32" />
+      <Parameter Name="GlobalEntityId" Mode="InOut" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="CreatePerson">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmailAddress" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SaveSalesRecruitingActivityLog">
+      <Parameter Name="ActivityLogId" Mode="In" Type="Int32" />
+      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+      <Parameter Name="SalesRecruitingWorkflowName" Mode="In" Type="String" />
+      <Parameter Name="GlobalEntityId" Mode="In" Type="Guid" />
+      <Parameter Name="ActivityNote" Mode="In" Type="String" />
+      <Parameter Name="ActivityDetail" Mode="In" Type="String" />
+      <Parameter Name="LoggedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadCandidateContractType" />
+    <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result1)" />
+    <FunctionImport Name="ReadHiringActivity" ReturnType="Collection(Model.ReadHiringActivity_Result1)" />
+    <FunctionImport Name="ReadJob" ReturnType="Collection(Model.ReadJob_Result2)" />
+    <FunctionImport Name="ReadSourceType" ReturnType="Collection(Model.ReadSourceType_Result3)" />
+    <FunctionImport Name="UpdatePersonMployContactId">
+      <Parameter Name="personId" Mode="In" Type="Int32" />
+      <Parameter Name="mployContactId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="MailingAddresses" EntityType="Model.MailingAddress" />
+    <EntitySet Name="MailingAddressTypes" EntityType="Model.MailingAddressType" />
+    <EntitySet Name="PersonMailAddresses" EntityType="Model.PersonMailAddress" />
+    <AssociationSet Name="FKCompanyMailAddressAddressId" Association="Model.FKCompanyMailAddressAddressId">
+      <End Role="MailingAddress" EntitySet="MailingAddresses" />
+      <End Role="CompanyMailAddress" EntitySet="CompanyMailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressAddressId" Association="Model.FKPersonMailAddressAddressId">
+      <End Role="MailingAddress" EntitySet="MailingAddresses" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressTypeId" Association="Model.FKPersonMailAddressTypeId">
+      <End Role="MailingAddressType" EntitySet="MailingAddressTypes" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
+    </AssociationSet>
+    <EntitySet Name="ContactInformationTypes" EntityType="Model.ContactInformationType" />
+    <EntitySet Name="PersonContactInformations" EntityType="Model.PersonContactInformation" />
+    <AssociationSet Name="FK_PersonContactInformation_ContactInformationType" Association="Model.FK_PersonContactInformation_ContactInformationType">
+      <End Role="ContactInformationType" EntitySet="ContactInformationTypes" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+    </AssociationSet>
+    <EntitySet Name="CompanyContactInformations" EntityType="Model.CompanyContactInformation" />
+    <AssociationSet Name="FK_CompanyContactInformation_ContactInformationType" Association="Model.FK_CompanyContactInformation_ContactInformationType">
+      <End Role="ContactInformationType" EntitySet="ContactInformationTypes" />
+      <End Role="CompanyContactInformation" EntitySet="CompanyContactInformations" />
+    </AssociationSet>
+    <EntitySet Name="People" EntityType="Model.Person" />
+    <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonGenderId" Association="Model.FKPersonGenderId">
+      <End Role="GenderType" EntitySet="GenderTypes" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Model.FK_Person_PersonContactInformation">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Model.FK_Person_PersonContactInformation1">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Model.FK_PersonContactInformation_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Model.FKPersonMailAddressPersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
+    </AssociationSet>
+    <FunctionImport Name="UpdateUserMployId">
+      <Parameter Name="personId" Mode="In" Type="Int32" />
+      <Parameter Name="mployUserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Requirements" EntityType="Model.Requirement" />
+    <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Model.FK_Requirement_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_MaxTravelType" Association="Model.FK_Requirement_MaxTravelType">
+      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <FunctionImport Name="GetUserFromMployUserId" ReturnType="Collection(Int32)">
+      <Parameter Name="MployUserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCustomerNote" ReturnType="Collection(Int32)">
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CheckCustomerAgainstCandidateData" ReturnType="Collection(Boolean)">
+      <Parameter Name="CustomerIdContact" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonContactInformation" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ContactData" Mode="In" Type="String" />
+      <Parameter Name="PreferredPhone" Mode="In" Type="Boolean" />
+      <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Companies" EntityType="Model.Company" />
+    <AssociationSet Name="CompanyContactCompany" Association="Model.CompanyContactCompany">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyContactInformation" EntitySet="CompanyContactInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_GlobalEntity" Association="Model.FK_Company_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Company" Association="Model.FK_Customer_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FKOrganizaitonMailAddressCompanyId" Association="Model.FKOrganizaitonMailAddressCompanyId">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyMailAddress" EntitySet="CompanyMailAddresses" />
+    </AssociationSet>
+    <FunctionImport Name="InsertUser" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmailAddress" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result2)" />
+    <FunctionImport Name="InsertCompany" ReturnType="Collection(Model.InsertCompany_Result9)">
+      <Parameter Name="CompanyName" Mode="In" Type="String" />
+      <Parameter Name="CompanyTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="IndustryId" Mode="In" Type="Int32" />
+      <Parameter Name="RevenueSizeTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeSizeTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="BillingFrequencyTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="BillingMethodTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SalesPersonId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+      <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompanyContactInformation" ReturnType="Collection(Int32)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+      <Parameter Name="Fax" Mode="In" Type="String" />
+      <Parameter Name="URL" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompanyMailingAddress" ReturnType="Collection(Int32)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Line1" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="Zip" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompanyNote" ReturnType="Collection(Int32)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadCompanyType" ReturnType="Collection(Model.ReadCompanyType_Result1)" />
+    <FunctionImport Name="ReadOrganization" ReturnType="Collection(Model.ReadOrganization_Result4)" />
+    <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result3)" />
+    <FunctionImport Name="ReadPerson" ReturnType="Collection(Model.ReadPerson_Result9)" />
+    <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result2)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPerson" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="GenderTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="FindCustomerOrganizationId" ReturnType="Collection(Int32)">
+      <Parameter Name="personId" Mode="In" Type="Int32" />
+      <Parameter Name="mployOrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="Line1" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="Zip" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCandidateNote" ReturnType="Collection(Int32)">
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCandidate" ReturnType="Collection(Model.InsertCandidate_Result4)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
+      <Parameter Name="ReferralId" Mode="In" Type="Int32" />
+      <Parameter Name="ResumeSummary" Mode="In" Type="String" />
+      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ReadPerson_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Test" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson1_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Test" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result2">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result3">
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserowner_as_iduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle3type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result4">
+    <Property Type="Int32" Name="Copy_of_idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="Copy_of_Created_Date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Copy_of_idorganization" Nullable="true" />
+    <Property Type="String" Name="Copy_of__lastname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_middlename" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_firstname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Copy_of_city" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_state" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_iduserowner_as_iduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of__handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copy_of_notes" Nullable="true" />
+    <Property Type="String" Name="Copy_of_resumetext" Nullable="true" />
+    <Property Type="String" Name="Copy_of_xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result5">
+    <Property Type="Int32" Name="idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Line1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserowner_as_iduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="ResumeText" Nullable="true" />
+    <Property Type="String" Name="xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadSourceType_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadCandidateContractType_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadCandidateContractType_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result6">
+    <Property Type="Int32" Name="idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Satus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="ResumeText" Nullable="true" />
+    <Property Type="String" Name="xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadSourceType_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result7">
+    <Property Type="Int32" Name="idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="ResumeText" Nullable="true" />
+    <Property Type="String" Name="xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization_Result">
+    <Property Type="String" Name="idorganization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Organization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" />
+    <Property Type="String" Name="OrganizationType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadContact_Result">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdOrganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadContact_Result1">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdOrganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadJob_Result">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContactManager" Nullable="true" />
+    <Property Type="String" Name="PositionTitle" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Priority" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+    <Property Type="Int32" Name="AssignedRecruiter" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadJob_Result1">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContactManager" Nullable="true" />
+    <Property Type="String" Name="PositionTitle" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Priority" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+    <Property Type="Int32" Name="AssignedRecruiter" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_CompanyId" Nullable="true" />
+    <Property Type="String" Name="MPLOY_CompanyName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadHiringActivity_Result">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation_Result">
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+    <Property Type="Int32" Name="Column2" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation_Result1">
+    <Property Type="Int32" Name="int" Nullable="true" />
+    <Property Type="Int32" Name="int1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation_Result2">
+    <Property Type="Int32" Name="jobId" Nullable="true" />
+    <Property Type="Int32" Name="contactId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadContactLog_Result">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Note" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation_Result3">
+    <Property Type="Int32" Name="jobId" Nullable="true" />
+    <Property Type="Int32" Name="contactId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation1_Result">
+    <Property Type="Int32" Name="jobId" Nullable="true" />
+    <Property Type="Int32" Name="contactId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadContact1_Result">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdOrganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadContactLog1_Result">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Note" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadHiringActivity1_Result">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadJob1_Result">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContactManager" Nullable="true" />
+    <Property Type="String" Name="PositionTitle" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Priority" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+    <Property Type="Int32" Name="AssignedRecruiter" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_CompanyId" Nullable="true" />
+    <Property Type="String" Name="MPLOY_CompanyName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization1_Result">
+    <Property Type="String" Name="idorganization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Organization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" />
+    <Property Type="String" Name="OrganizationType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson1_Result2">
+    <Property Type="Int32" Name="idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="ResumeText" Nullable="true" />
+    <Property Type="String" Name="xdata" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="GlobalEntity">
+    <Key>
+      <PropertyRef Name="GlobalEntityId" />
+    </Key>
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="EntityTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="GlobalEntity" ToRole="Candidate" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_GlobalEntity" FromRole="GlobalEntity" ToRole="Customer" />
+    <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="GlobalEntity" ToRole="Requirement" />
+    <NavigationProperty Name="Companies" Relationship="Model.FK_Company_GlobalEntity" FromRole="GlobalEntity" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Candidate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="CandidateStatusTypeId" Type="Int32" />
+    <Property Name="DesiredEmploymentTypeId" Type="Int32" />
+    <Property Name="CurrentEmploymentTypeId" Type="Int32" />
+    <Property Name="TravelTypeId" Type="Int32" />
+    <Property Name="SourceTypeId" Type="Int32" />
+    <Property Name="MaxTravelTypeId" Type="Int32" />
+    <Property Name="AvailableDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="CurrentSalary" Type="Int32" />
+    <Property Name="DesiredSalary" Type="Int32" />
+    <Property Name="CurrentRate" Type="Int32" />
+    <Property Name="DesiredRate" Type="Int32" />
+    <Property Name="ReferralId" Type="Int32" />
+    <Property Name="ResumeSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsOpenToRelocation" Type="Boolean" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="Candidate" ToRole="GlobalEntity" />
+    <NavigationProperty Name="MaxTravelType" Relationship="Model.FKCandidatetoTravel" FromRole="Candidate" ToRole="MaxTravelType" />
+    <NavigationProperty Name="CandidateNotes" Relationship="Model.FKNoteCandidateId" FromRole="Candidate" ToRole="CandidateNote" />
+    <NavigationProperty Name="SourceType" Relationship="Model.FKCandidateSourceId" FromRole="Candidate" ToRole="SourceType" />
+    <NavigationProperty Name="Person" Relationship="Model.FKCandidatePersonId" FromRole="Candidate" ToRole="Person" />
+    <Property Name="MPLOY_OrganizationId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Candidate_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MaxTravelType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatetoTravel" FromRole="MaxTravelType" ToRole="Candidate" />
+    <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="MaxTravelType" ToRole="Requirement" />
+  </EntityType>
+  <Association Name="FKCandidatetoTravel">
+    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CandidateNote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateId" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="Candidate" Relationship="Model.FKNoteCandidateId" FromRole="CandidateNote" ToRole="Candidate" />
+  </EntityType>
+  <Association Name="FKNoteCandidateId">
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="1" />
+    <End Type="Model.CandidateNote" Role="CandidateNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateNote">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="SourceTypeId" Type="Int32" />
+    <Property Name="CustomerTypeId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_OrganizationId" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Customer_GlobalEntity" FromRole="Customer" ToRole="GlobalEntity" />
+    <NavigationProperty Name="SourceType" Relationship="Model.FK_Customer_SourceType" FromRole="Customer" ToRole="SourceType" />
+    <NavigationProperty Name="Person" Relationship="Model.FK_Customer_Person" FromRole="Customer" ToRole="Person" />
+    <NavigationProperty Name="Company" Relationship="Model.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
+  </EntityType>
+  <Association Name="FK_Customer_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CompanyMailAddress">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="MailingAddressId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="MailingAddressId" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="MailingAddress" Relationship="Model.FKCompanyMailAddressAddressId" FromRole="CompanyMailAddress" ToRole="MailingAddress" />
+    <NavigationProperty Name="Company" Relationship="Model.FKOrganizaitonMailAddressCompanyId" FromRole="CompanyMailAddress" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="GenderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="People" Relationship="Model.FKPersonGenderId" FromRole="GenderType" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="SourceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_SourceType" FromRole="SourceType" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FKCandidateSourceId">
+    <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="SourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_SourceType">
+    <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="SourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="CandidateDetail_Result">
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
+    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
+    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
+    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="Boolean" Name="HasResume" Nullable="false" />
+    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
+    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
+    <Property Type="Int32" Name="SkillCount" Nullable="false" />
+    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
+    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="CreateNewCandidate_Result">
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
+    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
+    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
+    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="Boolean" Name="HasResume" Nullable="false" />
+    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
+    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
+    <Property Type="Int32" Name="SkillCount" Nullable="false" />
+    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
+    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result8">
+    <Property Type="Int32" Name="idcontact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idorganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Source" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="ResumeText" Nullable="true" />
+    <Property Type="String" Name="xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadContact_Result2">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdOrganization" Nullable="true" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadContactLog_Result1">
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Note" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadHiringActivity_Result1">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContact" Nullable="true" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadJob_Result2">
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdJob" Nullable="true" />
+    <Property Type="Int32" Name="IdContactManager" Nullable="true" />
+    <Property Type="String" Name="PositionTitle" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Priority" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Xdata" Nullable="true" />
+    <Property Type="Int32" Name="AssignedRecruiter" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_CompanyId" Nullable="true" />
+    <Property Type="String" Name="MPLOY_CompanyName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization_Result1">
+    <Property Type="String" Name="idorganization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Organization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" />
+    <Property Type="String" Name="OrganizationType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadSourceType_Result2">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadSourceType_Result3">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="MailingAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Line1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Line2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Zip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="CompanyMailAddresses" Relationship="Model.FKCompanyMailAddressAddressId" FromRole="MailingAddress" ToRole="CompanyMailAddress" />
+    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressAddressId" FromRole="MailingAddress" ToRole="PersonMailAddress" />
+  </EntityType>
+  <EntityType Name="MailingAddressType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressTypeId" FromRole="MailingAddressType" ToRole="PersonMailAddress" />
+  </EntityType>
+  <EntityType Name="PersonMailAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="MailingAddressId" Type="Int32" Nullable="false" />
+    <Property Name="MailingAddressTypeId" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="MailingAddress" Relationship="Model.FKPersonMailAddressAddressId" FromRole="PersonMailAddress" ToRole="MailingAddress" />
+    <NavigationProperty Name="MailingAddressType" Relationship="Model.FKPersonMailAddressTypeId" FromRole="PersonMailAddress" ToRole="MailingAddressType" />
+    <NavigationProperty Name="Person" Relationship="Model.FKPersonMailAddressPersonId" FromRole="PersonMailAddress" ToRole="Person" />
+  </EntityType>
+  <Association Name="FKCompanyMailAddressAddressId">
+    <End Type="Model.MailingAddress" Role="MailingAddress" Multiplicity="1" />
+    <End Type="Model.CompanyMailAddress" Role="CompanyMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyMailAddress">
+        <PropertyRef Name="MailingAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressAddressId">
+    <End Type="Model.MailingAddress" Role="MailingAddress" Multiplicity="1" />
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="MailingAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressTypeId">
+    <End Type="Model.MailingAddressType" Role="MailingAddressType" Multiplicity="1" />
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingAddressType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="MailingAddressTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ContactInformationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InfoFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_ContactInformationType" FromRole="ContactInformationType" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="CompanyContactInformations" Relationship="Model.FK_CompanyContactInformation_ContactInformationType" FromRole="ContactInformationType" ToRole="CompanyContactInformation" />
+  </EntityType>
+  <EntityType Name="PersonContactInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="ContactInformationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="ContactInformationType" Relationship="Model.FK_PersonContactInformation_ContactInformationType" FromRole="PersonContactInformation" ToRole="ContactInformationType" />
+    <NavigationProperty Name="People" Relationship="Model.FK_Person_PersonContactInformation" FromRole="PersonContactInformation" ToRole="Person" />
+    <NavigationProperty Name="People1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="PersonContactInformation" ToRole="Person" />
+    <NavigationProperty Name="Person" Relationship="Model.FK_PersonContactInformation_Person" FromRole="PersonContactInformation" ToRole="Person" />
+  </EntityType>
+  <Association Name="FK_PersonContactInformation_ContactInformationType">
+    <End Type="Model.ContactInformationType" Role="ContactInformationType" Multiplicity="1" />
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactInformationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="ContactInformationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="InsertCandidate_Result">
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
+    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
+    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
+    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="Boolean" Name="HasResume" Nullable="false" />
+    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
+    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
+    <Property Type="Int32" Name="SkillCount" Nullable="false" />
+    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
+    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="InsertCandidate_Result1">
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
+    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
+    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
+    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="Boolean" Name="HasResume" Nullable="false" />
+    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
+    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
+    <Property Type="Int32" Name="SkillCount" Nullable="false" />
+    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
+    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="InsertCandidate_Result2">
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
+    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
+    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
+    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="Boolean" Name="HasResume" Nullable="false" />
+    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
+    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
+    <Property Type="Int32" Name="SkillCount" Nullable="false" />
+    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
+    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <EntityType Name="CompanyContactInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="ContactInformationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <NavigationProperty Name="ContactInformationType" Relationship="Model.FK_CompanyContactInformation_ContactInformationType" FromRole="CompanyContactInformation" ToRole="ContactInformationType" />
+    <NavigationProperty Name="Company" Relationship="Model.CompanyContactCompany" FromRole="CompanyContactInformation" ToRole="Company" />
+  </EntityType>
+  <Association Name="FK_CompanyContactInformation_ContactInformationType">
+    <End Type="Model.ContactInformationType" Role="ContactInformationType" Multiplicity="1" />
+    <End Type="Model.CompanyContactInformation" Role="CompanyContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactInformationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyContactInformation">
+        <PropertyRef Name="ContactInformationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ReadUser_Result">
+    <Property Type="Int64" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Initials" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PreferredPhoneNumberId" Type="Int32" />
+    <Property Name="PreferredEmailAddressId" Type="Int32" />
+    <Property Name="PreferredTypicalRoleId" Type="Int32" />
+    <Property Name="GenderTypeId" Type="Int32" />
+    <Property Name="RaceTypeId" Type="Int32" />
+    <Property Name="CitizenshipTypeId" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="MPLOY_UserId" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatePersonId" FromRole="Person" ToRole="Candidate" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
+    <NavigationProperty Name="GenderType" Relationship="Model.FKPersonGenderId" FromRole="Person" ToRole="GenderType" />
+    <NavigationProperty Name="PersonContactInformation" Relationship="Model.FK_Person_PersonContactInformation" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonContactInformation1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_Person" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressPersonId" FromRole="Person" ToRole="PersonMailAddress" />
+  </EntityType>
+  <Association Name="FKCandidatePersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonGenderId">
+    <End Type="Model.GenderType" Role="GenderType" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="GenderTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhoneNumberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation1">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredEmailAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonContactInformation_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressPersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Requirement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="VMSField" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RequirementTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementPriorityTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementProjectTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementStatusTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementWinLossReasonTypeId" Type="Int32" />
+    <Property Name="TravelTypeId" Type="Int32" />
+    <Property Name="MaxTravelTypeId" Type="Int32" />
+    <Property Name="PaymentTermTypeId" Type="Int32" />
+    <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DesiredStartDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="ClosedDate" Type="DateTime" Precision="0" />
+    <Property Name="MinRate" Type="Int32" />
+    <Property Name="MaxRate" Type="Int32" />
+    <Property Name="Budget" Type="Int32" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="ContractDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsTravelRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsDrugTestRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsBackgroundCheckRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsWorkFromHome" Type="Boolean" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_JobId" Type="Int32" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="Requirement" ToRole="GlobalEntity" />
+    <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
+  </EntityType>
+  <Association Name="FK_Requirement_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_MaxTravelType">
+    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="InsertCompany_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization_Result2">
+    <Property Type="Decimal" Name="IdUser" Nullable="true" Precision="20" Scale="0" />
+    <Property Type="Int64" Name="IdOrganization" Nullable="true" />
+    <Property Type="String" Name="Organization" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="OrganizationType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InternalNote" Nullable="true" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadCompanyType_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result2">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result3">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result4">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result5">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result6">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result7">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result8">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadUser_Result1">
+    <Property Type="Int64" Name="IdUser" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Initials" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ReadUser1_Result">
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="8" />
+    <Property Type="DateTime" Name="lastlogin" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UID" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="idBranch" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserData" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="enabled" Nullable="false" />
+    <Property Type="Boolean" Name="hidden" Nullable="false" />
+    <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
+  </ComplexType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyTypeId" Type="Int32" Nullable="false" />
+    <Property Name="IndustryId" Type="Int32" />
+    <Property Name="RevenueSizeTypeId" Type="Int32" />
+    <Property Name="EmployeeSizeTypeId" Type="Int32" />
+    <Property Name="BillingFrequencyTypeId" Type="Int32" />
+    <Property Name="BillingMethodTypeId" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_OrganizationId" Type="Int32" />
+    <Property Name="MPLOY_IdUser" Type="Int32" />
+    <NavigationProperty Name="CompanyContactInformations" Relationship="Model.CompanyContactCompany" FromRole="Company" ToRole="CompanyContactInformation" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Company_GlobalEntity" FromRole="Company" ToRole="GlobalEntity" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
+    <NavigationProperty Name="CompanyMailAddresses" Relationship="Model.FKOrganizaitonMailAddressCompanyId" FromRole="Company" ToRole="CompanyMailAddress" />
+  </EntityType>
+  <Association Name="CompanyContactCompany">
+    <End Type="Model.Company" Role="Company" Multiplicity="1" />
+    <End Type="Model.CompanyContactInformation" Role="CompanyContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyContactInformation">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Company">
+    <End Type="Model.Company" Role="Company" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKOrganizaitonMailAddressCompanyId">
+    <End Type="Model.Company" Role="Company" Multiplicity="1" />
+    <End Type="Model.CompanyMailAddress" Role="CompanyMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyMailAddress">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ReadUser_Result2">
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="8" />
+    <Property Type="DateTime" Name="lastlogin" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UID" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="idBranch" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserData" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="enabled" Nullable="false" />
+    <Property Type="Boolean" Name="hidden" Nullable="false" />
+    <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadCompanyType1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization_Result3">
+    <Property Type="Int32" Name="idOrganization" Nullable="false" />
+    <Property Type="String" Name="Organization" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="URL" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idOrganizationType" Nullable="false" />
+    <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idbranch" Nullable="true" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result9">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadCompanyType_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadOrganization_Result4">
+    <Property Type="Int32" Name="idOrganization" Nullable="false" />
+    <Property Type="String" Name="Organization" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Fax" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="URL" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idOrganizationType" Nullable="false" />
+    <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="ExternalNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idbranch" Nullable="true" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadContact_Result3">
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idOrganization" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idContactType" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle1type" Nullable="true" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle2type" Nullable="true" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle3type" Nullable="true" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle0type" Nullable="true" />
+    <Property Type="Int32" Name="IdSource" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result9">
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idOrganization" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idContactType" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle1type" Nullable="true" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle2type" Nullable="true" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle3type" Nullable="true" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle0type" Nullable="true" />
+    <Property Type="Int32" Name="IdSource" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer_Result2">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCandidate_Result3">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Int32" Name="ReferralId" Nullable="true" />
+    <Property Type="String" Name="ResumeSummary" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCandidate_Result4">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Int32" Name="ReferralId" Nullable="true" />
+    <Property Type="String" Name="ResumeSummary" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+</Schema>
