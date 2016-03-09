@@ -332,7 +332,9 @@ namespace ConsoleApplication1
 
                     //CustomerMigration.ContactImport();
 
-                    CandidateMigration.TestUpdate();
+                    //CandidateMigration.TestUpdate();
+
+                    RequirementMigration.JobImport();
                     
                     
 

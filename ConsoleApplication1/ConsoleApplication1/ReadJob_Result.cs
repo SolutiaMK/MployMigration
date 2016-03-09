@@ -13,24 +13,30 @@ namespace ConsoleApplication1
     
     public partial class ReadJob_Result
     {
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.DateTime> ClosedDate { get; set; }
-        public Nullable<int> IdJob { get; set; }
-        public Nullable<int> IdContactManager { get; set; }
+        public int idJob { get; set; }
         public string PositionTitle { get; set; }
-        public Nullable<int> IdUser { get; set; }
+        public System.DateTime Created { get; set; }
+        public Nullable<System.DateTime> Closed { get; set; }
+        public int iduser { get; set; }
         public string RequirementNumber { get; set; }
-        public string City { get; set; }
         public string Address { get; set; }
+        public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string StartDate { get; set; }
-        public string InternalNote { get; set; }
         public string Description { get; set; }
-        public string JobType { get; set; }
-        public string Priority { get; set; }
-        public string Xdata { get; set; }
-        public Nullable<int> AssignedRecruiter { get; set; }
+        public string InternalNote { get; set; }
+        public int idJobType { get; set; }
+        public Nullable<int> idUserClosed { get; set; }
+        public Nullable<int> idUserFilled { get; set; }
+        public Nullable<System.DateTime> Updated { get; set; }
+        public Nullable<int> Priority { get; set; }
+        public string XData { get; set; }
+        public Nullable<int> idContactManager { get; set; }
+        public string ClosedReason { get; set; }
+        public Nullable<int> idUserRecruiter { get; set; }
+        public string Country { get; set; }
+        public string ThankYou { get; set; }
     }
 }

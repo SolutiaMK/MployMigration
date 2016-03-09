@@ -13,12 +13,20 @@ namespace ConsoleApplication1
     
     public partial class ReadUser_Result
     {
-        public Nullable<long> IdUser { get; set; }
-        public string UserName { get; set; }
+        public int idUser { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public Nullable<System.DateTime> lastlogin { get; set; }
+        public System.DateTime created { get; set; }
+        public System.Guid UID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
-        public string Email { get; set; }
+        public string email { get; set; }
+        public int idBranch { get; set; }
         public string Phone { get; set; }
-        public string Initials { get; set; }
+        public string UserData { get; set; }
+        public bool enabled { get; set; }
+        public bool hidden { get; set; }
+        public string initials { get; set; }
     }
 }

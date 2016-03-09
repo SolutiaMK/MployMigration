@@ -12,26 +12,16 @@ namespace ConsoleApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class GlobalEntity
+    public partial class RequirementNote
     {
-        public GlobalEntity()
-        {
-            this.Candidates = new HashSet<Candidate>();
-            this.Customers = new HashSet<Customer>();
-            this.Companies = new HashSet<Company>();
-            this.Requirements = new HashSet<Requirement>();
-        }
-    
-        public System.Guid GlobalEntityId { get; set; }
-        public int EntityTypeId { get; set; }
+        public int Id { get; set; }
+        public int RequirementId { get; set; }
+        public string Note { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
     
-        public virtual ICollection<Candidate> Candidates { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Company> Companies { get; set; }
-        public virtual ICollection<Requirement> Requirements { get; set; }
+        public virtual Requirement Requirement { get; set; }
     }
 }
