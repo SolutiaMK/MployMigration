@@ -90,6 +90,7 @@
     <Compile Include="ContactInformationType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContactLogMigration.cs" />
     <Compile Include="CustomerMigration.cs" />
     <Compile Include="CreateNewCandidate_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -127,6 +128,7 @@
     </Compile>
     <Compile Include="Helper\Catch.cs" />
     <Compile Include="Helper\Helper.cs" />
+    <Compile Include="HiringActivityMigration.cs" />
     <Compile Include="ImportHelperMethods.cs" />
     <Compile Include="InsertCandidate_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
