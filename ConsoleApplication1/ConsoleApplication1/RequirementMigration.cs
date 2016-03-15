@@ -114,6 +114,13 @@ namespace ConsoleApplication1
                         {
                             var requirementNoteId = _db.InsertRequirementNote(_requirementId, requirementRecord.InternalNote, createDate, 0);
                         }
+                        //Store the Closed Reason from Mploy as a RequirementNote:
+                        if (!string.IsNullOrEmpty(requirementRecord.ClosedReason))
+                        {
+                            //Add a new requirement note record for the closed reason, append "Closed Reason" to the front for clarity of where the note came from in the MPLOY db:
+                            var reqClosedReasonNote = "Closed Reason: " + requirementRecord.ClosedReason;
+                            var requirementNoteId = _db.InsertRequirementNote(_requirementId, reqClosedReasonNote, createDate, 0);
+                        }
 
 
                         Debug.WriteLine("\n" + "Requirement imported: " + MPLOYIdJob + " : " + Name);

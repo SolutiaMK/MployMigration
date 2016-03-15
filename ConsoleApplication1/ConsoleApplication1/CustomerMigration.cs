@@ -69,8 +69,11 @@ namespace ConsoleApplication1
 
                         //If the contact record is a contact (contactTypeId of 1) AND the orgainization record:
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 && contactRecord.IdOrganization != 4)
-                        {                            
-                        
+                        {
+                            if (contactRecord.IdContact == 20551)
+                            {
+                                var name = contactRecord.IdContactType;
+                            }
                             //Get the user id:
                             var idUserVar = ImportHelperMethods.GetUserId(contactRecord.IdUser);
 
