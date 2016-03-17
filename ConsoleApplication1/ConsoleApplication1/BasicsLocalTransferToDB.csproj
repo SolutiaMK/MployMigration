@@ -214,6 +214,9 @@
     <Compile Include="PersonContactInformation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonInformationFromMploy_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PersonMailAddress.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
