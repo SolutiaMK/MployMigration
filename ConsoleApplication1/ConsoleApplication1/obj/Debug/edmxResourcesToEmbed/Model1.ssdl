@@ -285,6 +285,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -801,6 +802,8 @@
   <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadSourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />

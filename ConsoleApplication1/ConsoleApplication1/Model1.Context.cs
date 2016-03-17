@@ -73,19 +73,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetJobPersonId", currentContactParameter);
         }
     
-        public virtual ObjectResult<GetHiringActivityAssociation_Result3> GetHiringActivityAssociation(Nullable<int> currentJobId, Nullable<int> currentContact)
-        {
-            var currentJobIdParameter = currentJobId.HasValue ?
-                new ObjectParameter("currentJobId", currentJobId) :
-                new ObjectParameter("currentJobId", typeof(int));
-    
-            var currentContactParameter = currentContact.HasValue ?
-                new ObjectParameter("currentContact", currentContact) :
-                new ObjectParameter("currentContact", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHiringActivityAssociation_Result3>("GetHiringActivityAssociation", currentJobIdParameter, currentContactParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> GetContactLogAssociation(Nullable<int> currentContact)
         {
             var currentContactParameter = currentContact.HasValue ?
@@ -242,35 +229,6 @@ namespace ConsoleApplication1
                 new ObjectParameter("CustomerIdContact", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("CheckCustomerAgainstCandidateData", customerIdContactParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> InsertPersonContactInformation(Nullable<int> personId, Nullable<int> contactInformationTypeId, string contactData, Nullable<bool> preferredPhone, Nullable<bool> preferredEmail, Nullable<int> modifiedById)
-        {
-            var personIdParameter = personId.HasValue ?
-                new ObjectParameter("PersonId", personId) :
-                new ObjectParameter("PersonId", typeof(int));
-    
-            var contactInformationTypeIdParameter = contactInformationTypeId.HasValue ?
-                new ObjectParameter("ContactInformationTypeId", contactInformationTypeId) :
-                new ObjectParameter("ContactInformationTypeId", typeof(int));
-    
-            var contactDataParameter = contactData != null ?
-                new ObjectParameter("ContactData", contactData) :
-                new ObjectParameter("ContactData", typeof(string));
-    
-            var preferredPhoneParameter = preferredPhone.HasValue ?
-                new ObjectParameter("PreferredPhone", preferredPhone) :
-                new ObjectParameter("PreferredPhone", typeof(bool));
-    
-            var preferredEmailParameter = preferredEmail.HasValue ?
-                new ObjectParameter("PreferredEmail", preferredEmail) :
-                new ObjectParameter("PreferredEmail", typeof(bool));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPersonContactInformation", personIdParameter, contactInformationTypeIdParameter, contactDataParameter, preferredPhoneParameter, preferredEmailParameter, modifiedByIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> InsertUser(Nullable<int> personId, string firstName, string lastName, string emailAddress, Nullable<int> modifiedById, Nullable<int> mPLOY_UserId)
@@ -868,6 +826,67 @@ namespace ConsoleApplication1
                 new ObjectParameter("MPLOY_IdUser", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertRequirement_Result>("InsertRequirement", nameParameter, descriptionParameter, vMSFieldParameter, requirementTypeIdParameter, requirementPriorityTypeIdParameter, requirementProjectTypeIdParameter, requirementStatusTypeIdParameter, requirementWinLossReasonTypeIdParameter, travelTypeIdParameter, maxTravelTypeIdParameter, paymentTermTypeIdParameter, postingDateParameter, desiredStartDateParameter, startDateParameter, endDateParameter, closedDateParameter, minRateParameter, maxRateParameter, budgetParameter, durationParameter, contractDetailsParameter, isTravelRequiredParameter, isDrugTestRequiredParameter, isBackgroundCheckRequiredParameter, isWorkFromHomeParameter, createDateParameter, modifiedByIdParameter, mPLOY_JobIdParameter, mPLOY_ContactIdParameter, mPLOY_IdUserFilledParameter, mPLOY_IdUserClosedParameter, mPLOY_IdUserRecruiterParameter, mPLOY_IdUserParameter);
+        }
+    
+        public virtual ObjectResult<ReadtbJobLog_Result> ReadtbJobLog()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobLog_Result>("ReadtbJobLog");
+        }
+    
+        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
+        }
+    
+        public virtual ObjectResult<GetHiringActivityAssociation_Result> GetHiringActivityAssociation(Nullable<int> currentJobId, Nullable<int> currentContact)
+        {
+            var currentJobIdParameter = currentJobId.HasValue ?
+                new ObjectParameter("currentJobId", currentJobId) :
+                new ObjectParameter("currentJobId", typeof(int));
+    
+            var currentContactParameter = currentContact.HasValue ?
+                new ObjectParameter("currentContact", currentContact) :
+                new ObjectParameter("currentContact", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHiringActivityAssociation_Result>("GetHiringActivityAssociation", currentJobIdParameter, currentContactParameter);
+        }
+    
+        public virtual ObjectResult<PersonInformationFromMploy_Result> PersonInformationFromMploy(Nullable<int> mPLOY_ContactId)
+        {
+            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
+                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
+                new ObjectParameter("MPLOY_ContactId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PersonInformationFromMploy_Result>("PersonInformationFromMploy", mPLOY_ContactIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertPersonContactInformation(Nullable<int> personId, Nullable<int> contactInformationTypeId, string contactData, Nullable<bool> preferredPhone, Nullable<bool> preferredEmail, Nullable<int> modifiedById)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            var contactInformationTypeIdParameter = contactInformationTypeId.HasValue ?
+                new ObjectParameter("ContactInformationTypeId", contactInformationTypeId) :
+                new ObjectParameter("ContactInformationTypeId", typeof(int));
+    
+            var contactDataParameter = contactData != null ?
+                new ObjectParameter("ContactData", contactData) :
+                new ObjectParameter("ContactData", typeof(string));
+    
+            var preferredPhoneParameter = preferredPhone.HasValue ?
+                new ObjectParameter("PreferredPhone", preferredPhone) :
+                new ObjectParameter("PreferredPhone", typeof(bool));
+    
+            var preferredEmailParameter = preferredEmail.HasValue ?
+                new ObjectParameter("PreferredEmail", preferredEmail) :
+                new ObjectParameter("PreferredEmail", typeof(bool));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPersonContactInformation", personIdParameter, contactInformationTypeIdParameter, contactDataParameter, preferredPhoneParameter, preferredEmailParameter, modifiedByIdParameter);
         }
     }
 }

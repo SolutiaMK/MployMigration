@@ -68,7 +68,8 @@ namespace ConsoleApplication1
                         //{
 
                         //If the contact record is a contact (contactTypeId of 1) AND the orgainization record:
-                        if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 && contactRecord.IdOrganization != 4)
+                        if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
+                            contactRecord.IdOrganization != 4)
                         {
                             if (contactRecord.IdContact == 20551)
                             {
@@ -80,11 +81,13 @@ namespace ConsoleApplication1
                             //Get the Organization Id:
                             var orgId = ImportHelperMethods.GetIdOrganization(contactRecord.IdOrganization);
 
-                            var genderTypeId = ImportHelperMethods.GetGenderTypeId(contactRecord.Gender);                                                   
+                            var genderTypeId = ImportHelperMethods.GetGenderTypeId(contactRecord.Gender);
 
                             //Insert the Contact as a Person record first:
                             //Returns the PersonId
-                            var personResult = _db.InsertPerson(null, contactRecord.FirstName, contactRecord.LastName, genderTypeId, 0, contactRecord.Created, contactRecord.IdContact, idUserVar).ToList();
+                            var personResult =
+                                _db.InsertPerson(null, contactRecord.FirstName, contactRecord.LastName, genderTypeId, 0,
+                                    contactRecord.Created, contactRecord.IdContact, idUserVar).ToList();
                             _personId = Convert.ToInt32(personResult[0]);
 
 
@@ -93,7 +96,8 @@ namespace ConsoleApplication1
                             var sourceTypeIdForContact = ImportHelperMethods.GetSourceTypeId(contactRecord.Source);
 
                             //Get the customers associated org id:
-                            var customerOrgId = _db.FindCustomerOrganizationId(_personId, Convert.ToInt32(contactRecord.IdOrganization));
+                            var customerOrgId = _db.FindCustomerOrganizationId(_personId,
+                                Convert.ToInt32(contactRecord.IdOrganization));
                             foreach (var org in customerOrgId)
                             {
                                 orgId = org;
@@ -105,40 +109,52 @@ namespace ConsoleApplication1
 
                             //Insert as a Customer
                             //Returns the Customer record
-                            var customerResult = _db.InsertCustomer(orgId, _personId, sourceTypeIdForContact, customerTypeId, contactRecord.Title, null, null, contactRecord.Created, 0, orgId).ToList();
+                            var customerResult =
+                                _db.InsertCustomer(orgId, _personId, sourceTypeIdForContact, customerTypeId,
+                                    contactRecord.Title, null, null, contactRecord.Created, 0, orgId).ToList();
                             foreach (var item in customerResult)
                             {
                                 _customerId = item.Id;
                             }
 
-                            
+
 
                             //Insert Contact Information
                             //Returns the PersonContactInformation.Id
                             var personContactInformationId = -1;
 
                             //Insert Email address:
-                            var personEmail = _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, null, 0).ToList();
-                            
+                            var personEmail =
+                                _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, null, 0)
+                                    .ToList();
+
                             //0:                        
-                            personContactInformationId = InsertContactInformation(contactRecord.handle0text, contactRecord.handle0type);
+                            personContactInformationId = InsertContactInformation(contactRecord.handle0text,
+                                contactRecord.handle0type);
 
                             //1:
-                            personContactInformationId = InsertContactInformation(contactRecord.handle1text, contactRecord.handle1type);
+                            personContactInformationId = InsertContactInformation(contactRecord.handle1text,
+                                contactRecord.handle1type);
 
                             //2:
-                            personContactInformationId = InsertContactInformation(contactRecord.handle2text, contactRecord.handle2type);
+                            personContactInformationId = InsertContactInformation(contactRecord.handle2text,
+                                contactRecord.handle2type);
 
                             //3:
-                            personContactInformationId = InsertContactInformation(contactRecord.handle3text, contactRecord.handle3type);
+                            personContactInformationId = InsertContactInformation(contactRecord.handle3text,
+                                contactRecord.handle3type);
 
 
                             //Insert Mailing Address & PersonMailAddress
                             //Inserts into the MailAddress table and the PersonMailAddress table
-                            if (!string.IsNullOrEmpty(contactRecord.Address) && !string.IsNullOrEmpty(contactRecord.City) && !string.IsNullOrEmpty(contactRecord.State) && !string.IsNullOrEmpty(contactRecord.Zip))
+                            if (!string.IsNullOrEmpty(contactRecord.Address) &&
+                                !string.IsNullOrEmpty(contactRecord.City) && !string.IsNullOrEmpty(contactRecord.State) &&
+                                !string.IsNullOrEmpty(contactRecord.Zip))
                             {
                                 //Returns the PersonMailAddress.Id
-                                var personMailAddressResult = _db.InsertPersonMailingAddress(_personId, contactRecord.Address, contactRecord.City, contactRecord.State, contactRecord.Zip, 0).ToList();
+                                var personMailAddressResult =
+                                    _db.InsertPersonMailingAddress(_personId, contactRecord.Address, contactRecord.City,
+                                        contactRecord.State, contactRecord.Zip, 0).ToList();
                                 _personMailAddressId = Convert.ToInt32(personMailAddressResult[0]);
                             }
 
@@ -148,11 +164,18 @@ namespace ConsoleApplication1
                             if (!string.IsNullOrEmpty(contactRecord.Notes))
                             {
                                 //Returns the CustomerNote.Id
-                                var customerNoteResult = _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.CreatedDate, 0).ToList();
+                                var customerNoteResult =
+                                    _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.CreatedDate,
+                                        0).ToList();
                             }
 
-                            Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " + contactRecord.LastName + " Customer Id: " + _customerId);
+                            Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
+                                            contactRecord.LastName + " Customer Id: " + _customerId);
 
+                        }
+                        else
+                        {
+                            //Write out the skipped records here:
                         }
                         
                     //}

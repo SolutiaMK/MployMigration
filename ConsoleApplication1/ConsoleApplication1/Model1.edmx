@@ -290,6 +290,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="ModifiedById" Type="int" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -797,6 +798,9 @@
           <Parameter Name="ModifiedById" Type="int" Mode="In" />
           <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="PersonInformationFromMploy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+        </Function>
         <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
@@ -806,6 +810,8 @@
         <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadSourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+        <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+        <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="personId" Type="int" Mode="In" />
@@ -949,10 +955,6 @@
           <FunctionImport Name="GetJobPersonId" ReturnType="Collection(Int32)">
           <Parameter Name="currentContact" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result3)">
-            <Parameter Name="currentJobId" Mode="In" Type="Int32" />
-            <Parameter Name="currentContact" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetContactLogAssociation" ReturnType="Collection(Int32)">
             <Parameter Name="currentContact" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1056,14 +1058,6 @@
           </FunctionImport>
           <FunctionImport Name="CheckCustomerAgainstCandidateData" ReturnType="Collection(Boolean)">
           <Parameter Name="CustomerIdContact" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="InsertPersonContactInformation" ReturnType="Collection(Int32)">
-            <Parameter Name="PersonId" Mode="In" Type="Int32" />
-            <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="ContactData" Mode="In" Type="String" />
-            <Parameter Name="PreferredPhone" Mode="In" Type="Boolean" />
-            <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Companies" EntityType="Model.Company" />
           <AssociationSet Name="CompanyContactCompany" Association="Model.CompanyContactCompany">
@@ -1284,6 +1278,23 @@
             <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
             <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ReadtbJobLog" ReturnType="Collection(Model.ReadtbJobLog_Result)" />
+          <FunctionImport Name="ReadtbJobFlow" ReturnType="Collection(Model.ReadtbJobFlow_Result)" />
+          <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result)">
+            <Parameter Name="currentJobId" Mode="In" Type="Int32" />
+            <Parameter Name="currentContact" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PersonInformationFromMploy" ReturnType="Collection(Model.PersonInformationFromMploy_Result)">
+          <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPersonContactInformation" ReturnType="Collection(Int32)">
+            <Parameter Name="PersonId" Mode="In" Type="Int32" />
+            <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="ContactData" Mode="In" Type="String" />
+            <Parameter Name="PreferredPhone" Mode="In" Type="Boolean" />
+            <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="ReadSourceType_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1355,32 +1366,12 @@
           <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Xdata" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="GetHiringActivityAssociation_Result">
-          <Property Type="Int32" Name="Column1" Nullable="true" />
-          <Property Type="Int32" Name="Column2" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetHiringActivityAssociation_Result1">
-          <Property Type="Int32" Name="int" Nullable="true" />
-          <Property Type="Int32" Name="int1" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetHiringActivityAssociation_Result2">
-          <Property Type="Int32" Name="jobId" Nullable="true" />
-          <Property Type="Int32" Name="contactId" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="ReadContactLog_Result">
           <Property Type="Int32" Name="IdContact" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="IdUser" Nullable="true" />
           <Property Type="String" Name="Note" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetHiringActivityAssociation_Result3">
-          <Property Type="Int32" Name="jobId" Nullable="true" />
-          <Property Type="Int32" Name="contactId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetHiringActivityAssociation1_Result">
-          <Property Type="Int32" Name="jobId" Nullable="true" />
-          <Property Type="Int32" Name="contactId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ReadContact1_Result">
           <Property Type="Int32" Name="IdContact" Nullable="true" />
@@ -1622,6 +1613,7 @@
           <Property Name="CreatedById" Type="Int32" />
           <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
           <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_SourceType" FromRole="SourceType" ToRole="Customer" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FKCandidateSourceId">
           <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
@@ -2959,6 +2951,72 @@
           <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
           <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ReadtbJobLog_Result">
+          <Property Type="Int32" Name="idJobLog" Nullable="false" />
+          <Property Type="Int32" Name="idJob" Nullable="false" />
+          <Property Type="Int32" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="Note" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ReadtbJobFlow_Result">
+          <Property Type="Int32" Name="idJobFlow" Nullable="false" />
+          <Property Type="Int32" Name="idJob" Nullable="false" />
+          <Property Type="Int32" Name="idUser" Nullable="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Scheduled" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Outcome" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="Canceled" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idEventType" Nullable="false" />
+          <Property Type="String" Name="ShortOutcome" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="XData" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="guid" Nullable="false" />
+          <Property Type="DateTime" Name="enddate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdContact" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetHiringActivityAssociation_Result">
+          <Property Type="Int32" Name="jobId" Nullable="true" />
+          <Property Type="Int32" Name="candidateId" Nullable="true" />
+          <Property Type="Int32" Name="customerId" Nullable="true" />
+          <Property Type="Int32" Name="personId" Nullable="true" />
+          <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="PersonInformationFromMploy_Result">
+          <Property Type="Int32" Name="idContact" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="idOrganization" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="idContactType" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="guid" Nullable="false" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle1type" Nullable="true" />
+          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle2type" Nullable="true" />
+          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle3type" Nullable="true" />
+          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle0type" Nullable="true" />
+          <Property Type="Int32" Name="IdSource" Nullable="true" />
+          <Property Type="Int32" Name="IdStatus" Nullable="false" />
+          <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3080,6 +3138,7 @@
           <EntitySetMapping Name="SourceTypes">
             <EntityTypeMapping TypeName="Model.SourceType">
               <MappingFragment StoreEntitySet="SourceType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
@@ -3267,7 +3326,6 @@
           <FunctionImportMapping FunctionImportName="UpdateUserMployId" FunctionName="Model.Store.UpdateUserMployId" />
           <FunctionImportMapping FunctionImportName="GetUserFromMployUserId" FunctionName="Model.Store.GetUserFromMployUserId" />
           <FunctionImportMapping FunctionImportName="CheckCustomerAgainstCandidateData" FunctionName="Model.Store.CheckCustomerAgainstCandidateData" />
-          <FunctionImportMapping FunctionImportName="InsertPersonContactInformation" FunctionName="Model.Store.InsertPersonContactInformation" />
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="Model.Company">
               <MappingFragment StoreEntitySet="Company">
@@ -3698,6 +3756,89 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadtbJobLog" FunctionName="Model.Store.ReadtbJobLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadtbJobLog_Result">
+                <ScalarProperty Name="idJobLog" ColumnName="idJobLog" />
+                <ScalarProperty Name="idJob" ColumnName="idJob" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadtbJobFlow" FunctionName="Model.Store.ReadtbJobFlow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadtbJobFlow_Result">
+                <ScalarProperty Name="idJobFlow" ColumnName="idJobFlow" />
+                <ScalarProperty Name="idJob" ColumnName="idJob" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+                <ScalarProperty Name="Canceled" ColumnName="Canceled" />
+                <ScalarProperty Name="idEventType" ColumnName="idEventType" />
+                <ScalarProperty Name="ShortOutcome" ColumnName="ShortOutcome" />
+                <ScalarProperty Name="XData" ColumnName="XData" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHiringActivityAssociation" FunctionName="Model.Store.GetHiringActivityAssociation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetHiringActivityAssociation_Result">
+                <ScalarProperty Name="jobId" ColumnName="jobId" />
+                <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+                <ScalarProperty Name="errorString" ColumnName="errorString" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PersonInformationFromMploy" FunctionName="Model.Store.PersonInformationFromMploy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.PersonInformationFromMploy_Result">
+                <ScalarProperty Name="idContact" ColumnName="idContact" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="idContactType" ColumnName="idContactType" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="handle1text" ColumnName="handle1text" />
+                <ScalarProperty Name="handle1type" ColumnName="handle1type" />
+                <ScalarProperty Name="handle2text" ColumnName="handle2text" />
+                <ScalarProperty Name="handle2type" ColumnName="handle2type" />
+                <ScalarProperty Name="handle3text" ColumnName="handle3text" />
+                <ScalarProperty Name="handle3type" ColumnName="handle3type" />
+                <ScalarProperty Name="handle0text" ColumnName="handle0text" />
+                <ScalarProperty Name="handle0type" ColumnName="handle0type" />
+                <ScalarProperty Name="IdSource" ColumnName="IdSource" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="SelfId" ColumnName="SelfId" />
+                <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertPersonContactInformation" FunctionName="Model.Store.InsertPersonContactInformation" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

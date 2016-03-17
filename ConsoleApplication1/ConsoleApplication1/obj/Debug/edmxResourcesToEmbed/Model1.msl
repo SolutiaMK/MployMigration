@@ -116,6 +116,7 @@
     <EntitySetMapping Name="SourceTypes">
       <EntityTypeMapping TypeName="Model.SourceType">
         <MappingFragment StoreEntitySet="SourceType">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
@@ -731,6 +732,47 @@
           <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
           <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
           <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadtbJobLog" FunctionName="Model.Store.ReadtbJobLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadtbJobLog_Result">
+          <ScalarProperty Name="idJobLog" ColumnName="idJobLog" />
+          <ScalarProperty Name="idJob" ColumnName="idJob" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadtbJobFlow" FunctionName="Model.Store.ReadtbJobFlow">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadtbJobFlow_Result">
+          <ScalarProperty Name="idJobFlow" ColumnName="idJobFlow" />
+          <ScalarProperty Name="idJob" ColumnName="idJob" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+          <ScalarProperty Name="Canceled" ColumnName="Canceled" />
+          <ScalarProperty Name="idEventType" ColumnName="idEventType" />
+          <ScalarProperty Name="ShortOutcome" ColumnName="ShortOutcome" />
+          <ScalarProperty Name="XData" ColumnName="XData" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetHiringActivityAssociation" FunctionName="Model.Store.GetHiringActivityAssociation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.GetHiringActivityAssociation_Result">
+          <ScalarProperty Name="jobId" ColumnName="jobId" />
+          <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="errorString" ColumnName="errorString" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

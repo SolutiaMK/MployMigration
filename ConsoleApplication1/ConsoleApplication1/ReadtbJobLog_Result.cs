@@ -11,9 +11,12 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class GetHiringActivityAssociation_Result3
+    public partial class ReadtbJobLog_Result
     {
-        public Nullable<int> jobId { get; set; }
-        public Nullable<int> contactId { get; set; }
+        public int idJobLog { get; set; }
+        public int idJob { get; set; }
+        public int idUser { get; set; }
+        public string Note { get; set; }
+        public System.DateTime Created { get; set; }
     }
 }

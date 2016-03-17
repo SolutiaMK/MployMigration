@@ -13,7 +13,10 @@ namespace ConsoleApplication1
     
     public partial class GetHiringActivityAssociation_Result
     {
-        public Nullable<int> Column1 { get; set; }
-        public Nullable<int> Column2 { get; set; }
+        public Nullable<int> jobId { get; set; }
+        public Nullable<int> candidateId { get; set; }
+        public Nullable<int> customerId { get; set; }
+        public Nullable<int> personId { get; set; }
+        public string errorString { get; set; }
     }
 }

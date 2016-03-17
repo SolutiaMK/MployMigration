@@ -10,10 +10,6 @@
     <FunctionImport Name="GetJobPersonId" ReturnType="Collection(Int32)">
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result3)">
-      <Parameter Name="currentJobId" Mode="In" Type="Int32" />
-      <Parameter Name="currentContact" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="GetContactLogAssociation" ReturnType="Collection(Int32)">
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -345,6 +341,12 @@
       <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
       <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="ReadtbJobLog" ReturnType="Collection(Model.ReadtbJobLog_Result)" />
+    <FunctionImport Name="ReadtbJobFlow" ReturnType="Collection(Model.ReadtbJobFlow_Result)" />
+    <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result)">
+      <Parameter Name="currentJobId" Mode="In" Type="Int32" />
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -416,32 +418,12 @@
     <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Xdata" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="GetHiringActivityAssociation_Result">
-    <Property Type="Int32" Name="Column1" Nullable="true" />
-    <Property Type="Int32" Name="Column2" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="GetHiringActivityAssociation_Result1">
-    <Property Type="Int32" Name="int" Nullable="true" />
-    <Property Type="Int32" Name="int1" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="GetHiringActivityAssociation_Result2">
-    <Property Type="Int32" Name="jobId" Nullable="true" />
-    <Property Type="Int32" Name="contactId" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadContactLog_Result">
     <Property Type="Int32" Name="IdContact" Nullable="true" />
     <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
     <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="IdUser" Nullable="true" />
     <Property Type="String" Name="Note" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="GetHiringActivityAssociation_Result3">
-    <Property Type="Int32" Name="jobId" Nullable="true" />
-    <Property Type="Int32" Name="contactId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="GetHiringActivityAssociation1_Result">
-    <Property Type="Int32" Name="jobId" Nullable="true" />
-    <Property Type="Int32" Name="contactId" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ReadContact1_Result">
     <Property Type="Int32" Name="IdContact" Nullable="true" />
@@ -683,6 +665,7 @@
     <Property Name="CreatedById" Type="Int32" />
     <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_SourceType" FromRole="SourceType" ToRole="Customer" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FKCandidateSourceId">
     <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
@@ -2019,5 +2002,34 @@
     <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadtbJobLog_Result">
+    <Property Type="Int32" Name="idJobLog" Nullable="false" />
+    <Property Type="Int32" Name="idJob" Nullable="false" />
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="String" Name="Note" Nullable="false" MaxLength="Max" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="ReadtbJobFlow_Result">
+    <Property Type="Int32" Name="idJobFlow" Nullable="false" />
+    <Property Type="Int32" Name="idJob" Nullable="false" />
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Scheduled" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Note" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Outcome" Nullable="true" MaxLength="Max" />
+    <Property Type="DateTime" Name="Canceled" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idEventType" Nullable="false" />
+    <Property Type="String" Name="ShortOutcome" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="XData" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="DateTime" Name="enddate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdContact" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetHiringActivityAssociation_Result">
+    <Property Type="Int32" Name="jobId" Nullable="true" />
+    <Property Type="Int32" Name="candidateId" Nullable="true" />
+    <Property Type="Int32" Name="customerId" Nullable="true" />
+    <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>
