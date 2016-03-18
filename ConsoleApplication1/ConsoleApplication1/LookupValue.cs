@@ -412,12 +412,26 @@ namespace ConsoleApplication1
                     else if (match.Value == "<payrate>" && nextValue != "</payrate>")
                     {
                         nextValue = CleanMoneyString.Replace(nextValue, "");
-                        insertRequirementActivityLog.PayRate = Convert.ToInt32(nextValue);
+                        if (!string.IsNullOrEmpty(nextValue))
+                        {
+                            insertRequirementActivityLog.PayRate = Convert.ToInt32(nextValue);
+                        }
+                        else
+                        {
+                            insertRequirementActivityLog.PayRate = null;
+                        }  
                     }
                     else if (match.Value == "<billrate>" && nextValue != "</billrate>")
                     {
                         nextValue = CleanMoneyString.Replace(nextValue, "");
-                        insertRequirementActivityLog.BillRate = Convert.ToInt32(nextValue);
+                        if (!string.IsNullOrEmpty(nextValue))
+                        {
+                            insertRequirementActivityLog.BillRate = Convert.ToInt32(nextValue);
+                        }
+                        else
+                        {
+                            insertRequirementActivityLog.BillRate = null;
+                        }                        
                     }
 
                 }

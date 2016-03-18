@@ -34,13 +34,14 @@ namespace ConsoleApplication1
                     {
                         //Get the Candidate and Requirement Id for the incoming MPLOY Contact and Job Id:
                         //Set the _candidateId and _requirementId here:
-                        var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob, activityRecord.IdContact);
+                        var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob,
+                            activityRecord.IdContact);
 
                         //If the Customer Id returned is not null, then create a record in the Person table and the Candidate table for that MPLOY_contactId
                         //Skip Gloria Sharp: MPLOY_ContactId = 4226                        
                         var errorString = string.Empty;
                         foreach (var result in returnedIds)
-                        {                       
+                        {
                             _requirementId = Convert.ToInt32(result.jobId);
                             _candidateId = Convert.ToInt32(result.candidateId);
                             _customerId = Convert.ToInt32(result.customerId);
@@ -52,121 +53,133 @@ namespace ConsoleApplication1
                         if (!string.IsNullOrEmpty(errorString))
                         {
                             //Print out orphaned record info:
-                            Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob + " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " + activityRecord.idJobFlow + " *****");                        
+                            Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+                                            " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+                                            activityRecord.idJobFlow + " *****");
                         }
-                        else if (_candidateId == 0) //If the CandidateId is null:
-                        {
-                            //Handle adding the idContact from this record as a new person and Candidate first.
-                            var data = _db.ReadPerson().ToList(x => new Model.Person
-                            {
-                                FirstName = x.FirstName,
-                                LastName = x.LastName,
-                                MiddleName = x.MiddleName,
-                                Gender = x.Gender,
-                                //Status = x.Status,
-                                Address = x.Address,
-                                City = x.City,
-                                State = x.State,
-                                Zip = x.Zip,
-                                Email = x.eMail,
-                                handle0type = Convert.ToInt32(x.handle0type),
-                                handle0text = x.handle0text,
-                                handle1type = Convert.ToInt32(x.handle1type),
-                                handle1text = x.handle1text,
-                                handle2type = Convert.ToInt32(x.handle2type),
-                                handle2text = x.handle2text,
-                                handle3type = Convert.ToInt32(x.handle3type),
-                                handle3text = x.handle3text,
-                                xdata = x.Xdata,
-                                Notes = x.Notes,
-                                ResumeText = x.ResumeText,
-                                //Source = x.Source,
-                                IdContact = Convert.ToInt32(x.idContact),
-                                IdContactType = Convert.ToInt32(x.idContactType),
-                                IdUser = Convert.ToInt32((x.idUserOwner)),
-                                Source = Convert.ToInt32(x.IdSource),
-                                IdStatus = x.IdStatus,
-                                Created = Convert.ToDateTime(x.Created)
-                            });
-                            //get the record for the contactId we are looking at:
-                            var mployContactResult = data.Where(d => d.IdContact == activityRecord.IdContact).ToList();
-                            foreach (var item in mployContactResult)
-                            {
-                                //Skip Gloria Sharp:
-                                if (item.IdContact != 4226)
-                                {
-                                    //Insert as person maybe?
-
-                                    //CandidateMigration.InsertCandidate(item);
-                                }
-                                
-                            }
-                            
-                        }
-                       //else 
+                        //else if (_candidateId == 0) //If the CandidateId is null:
                         //{
-                        //Continue like normal:                
- 
-                         //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
+                        //    //Handle adding the idContact from this record as a new person and Candidate first.
+                        //    var data = _db.ReadPerson().ToList(x => new Model.Person
+                        //    {
+                        //        FirstName = x.FirstName,
+                        //        LastName = x.LastName,
+                        //        MiddleName = x.MiddleName,
+                        //        Gender = x.Gender,
+                        //        //Status = x.Status,
+                        //        Address = x.Address,
+                        //        City = x.City,
+                        //        State = x.State,
+                        //        Zip = x.Zip,
+                        //        Email = x.eMail,
+                        //        handle0type = Convert.ToInt32(x.handle0type),
+                        //        handle0text = x.handle0text,
+                        //        handle1type = Convert.ToInt32(x.handle1type),
+                        //        handle1text = x.handle1text,
+                        //        handle2type = Convert.ToInt32(x.handle2type),
+                        //        handle2text = x.handle2text,
+                        //        handle3type = Convert.ToInt32(x.handle3type),
+                        //        handle3text = x.handle3text,
+                        //        xdata = x.Xdata,
+                        //        Notes = x.Notes,
+                        //        ResumeText = x.ResumeText,
+                        //        //Source = x.Source,
+                        //        IdContact = Convert.ToInt32(x.idContact),
+                        //        IdContactType = Convert.ToInt32(x.idContactType),
+                        //        IdUser = Convert.ToInt32((x.idUserOwner)),
+                        //        Source = Convert.ToInt32(x.IdSource),
+                        //        IdStatus = x.IdStatus,
+                        //        Created = Convert.ToDateTime(x.Created)
+                        //    });
+                        //    //get the record for the contactId we are looking at:
+                        //    var mployContactResult = data.Where(d => d.IdContact == activityRecord.IdContact).ToList();
+                        //    foreach (var item in mployContactResult)
+                        //    {
+                        //        //Skip Gloria Sharp:
+                        //        if (item.IdContact != 4226)
+                        //        {
+                        //            //Insert as person maybe?
 
-                        //Get the SalesRecruitingActivityLog PayRate and BillRate:
-                        var insertActivityLog = new SalesRecruitingActivityLog();
-                        if (!string.IsNullOrEmpty(activityRecord.XData))
+                        //            //CandidateMigration.InsertCandidate(item);
+                        //        }
+                                
+                        //    }
+                            
+                        //}
+                       else if (_candidateId == 0){  //If the CandidateId is null:
+                           Debug.WriteLine("\n" + errorString + " - No CandidateId " + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+                                           " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+                                           activityRecord.idJobFlow + " *****");
+                       }
+                        else 
                         {
-                            //Parse the XData for the Bill and Pay rate:
-                            insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
-                        }
+                            //Continue like normal:                
+ 
+                             //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
+
+                            //Get the SalesRecruitingActivityLog PayRate and BillRate:
+                            var insertActivityLog = new SalesRecruitingActivityLog();
+                            if (!string.IsNullOrEmpty(activityRecord.XData))
+                            {
+                                //Parse the XData for the Bill and Pay rate:
+                                insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
+                            }
                         
 
-                        //Get the SalesRecruitingActivityLog.SalesRecruitingWorkflowId:
-                        var workflowId = GetSalesRecruitingWorkflowId(activityRecord.idEventType);                      
+                            //Get the SalesRecruitingActivityLog.SalesRecruitingWorkflowId:
+                            var workflowId = GetSalesRecruitingWorkflowId(activityRecord.idEventType);                      
 
-                        //Find the RequirementCandidateStatusTypeId for the RequirementCandidate table:
-                        var requirementCandidateStatusTypeId = GetRequirementCandidateStatusTypeId(activityRecord.idEventType);
+                            //Find the RequirementCandidateStatusTypeId for the RequirementCandidate table:
+                            var requirementCandidateStatusTypeId = GetRequirementCandidateStatusTypeId(activityRecord.idEventType);
 
-                        //Find the RequirementStatusTypeId for the Requirement table
-                        var requirementStatusTypeId = GetRequirementStatusTypeId(activityRecord.idEventType);
+                            //Find the RequirementStatusTypeId for the Requirement table
+                            var requirementStatusTypeId = GetRequirementStatusTypeId(activityRecord.idEventType);
 
-                        //Find the updated CandidateStatusTypeId to update the CandidateStatusTypeId in the Candidate table 
-                        var candidateStatusTypeId = GetCandidateStatusTypeId(activityRecord.idEventType);
+                            //Find the updated CandidateStatusTypeId to update the CandidateStatusTypeId in the Candidate table 
+                            var candidateStatusTypeId = GetCandidateStatusTypeId(activityRecord.idEventType);
                          
 
-                        //***** Insert into the SalesRecruitingActivityLog and RequirementCandidate tables *****
+                            //***** Insert into the SalesRecruitingActivityLog and RequirementCandidate tables *****
 
-                        var activityNote = string.Empty;
-                        if (string.IsNullOrEmpty(activityRecord.Note))
-                        {
-                            activityNote = " ";
-                        }
+                            var activityNote = activityRecord.Note;
+                            if (string.IsNullOrEmpty(activityRecord.Note))
+                            {
+                                activityNote = " ";
+                            }
 
-                        //If the hiring activity has a cancled date, the the workflow and req status is closed:
-                        if (activityRecord.Canceled.HasValue)
-                        {
-                            //Conversion:
-                            workflowId = 44;
-                            //Closed:
-                            requirementStatusTypeId = 11;
-                        }
+                            //If the hiring activity has a cancled date, the the workflow and req status is closed:
+                            if (activityRecord.Canceled.HasValue)
+                            {
+                                //Conversion:
+                                workflowId = 44;
+                                //Closed:
+                                requirementStatusTypeId = 11;
+                            }
 
-                        //Insert into the SalesRecruitingActivityLog table:
-                        var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
-                        //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
-                        var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, requirementCandidateStatusTypeId, activityRecord.Created, 0, activityRecord.Created, activityRecord.idUser);
+                            //Insert into the SalesRecruitingActivityLog table:
+                            var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
+                            var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, requirementCandidateStatusTypeId, activityRecord.Created, 0, activityRecord.Created, activityRecord.idUser);
                         
-                        //***** Update the Requirement and Candidate tables to have the appropriate types based off of the latest hiring activity associated to them *****
+                            //***** Update the Requirement and Candidate tables to have the appropriate types based off of the latest hiring activity associated to them *****
 
-                        //Update the Requirement.RequirementStatusTypeId:
-                        var updatedRequirementId = _db.UpdateRequirementStatusType(activityRecord.idJob, requirementStatusTypeId);
-                        //Update the Candidate.CandidateStatusTypeId:
-                        //Only update if the CandidateStatus is reset in the GetCandidateStatusTypeId function, if it returns a -1 then skip resetting the CandidateStatusType:
-                        if (candidateStatusTypeId != -1)
-                        {                          
-                            var updatedCandidateStatusTypeId = _db.UpdateCandidateStatusType(activityRecord.IdContact, candidateStatusTypeId);
-                        }
+                            //Update the Requirement.RequirementStatusTypeId:
+                            if (requirementStatusTypeId != -1)
+                            {
+                                //Same logic as CandidateStatusTypeId, only update if the requirementStatusType is actually reset:
+                                var updatedRequirementId = _db.UpdateRequirementStatusType(activityRecord.idJob, requirementStatusTypeId);
+                            }
                         
+                            //Update the Candidate.CandidateStatusTypeId:
+                            //Only update if the CandidateStatus is reset in the GetCandidateStatusTypeId function, if it returns a -1 then skip resetting the CandidateStatusType:
+                            if (candidateStatusTypeId != -1)
+                            {                          
+                                var updatedCandidateStatusTypeId = _db.UpdateCandidateStatusType(activityRecord.IdContact, candidateStatusTypeId);
+                            }
 
-                        //}
-                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob);                    
+                            Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow); 
+                        }
+                                           
                     }
                 }
                  catch
