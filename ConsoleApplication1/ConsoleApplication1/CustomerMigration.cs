@@ -71,10 +71,15 @@ namespace ConsoleApplication1
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
                             contactRecord.IdOrganization != 4)
                         {
-                            if (contactRecord.IdContact == 20551)
-                            {
-                                var name = contactRecord.IdContactType;
-                            }
+                            //if (contactRecord.IdContact == 20551)
+                            //{
+                            //    var name = contactRecord.IdContactType;
+                            //}
+
+                            //Get the Contacts with the typeId = 1 that have hiring activities:
+
+                            //Add a catch to skip those records, they are added as a Candidate instead.
+
                             //Get the user id:
                             var idUserVar = ImportHelperMethods.GetUserId(contactRecord.IdUser);
 

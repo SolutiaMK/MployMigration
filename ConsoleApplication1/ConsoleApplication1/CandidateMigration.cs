@@ -92,6 +92,7 @@ namespace ConsoleApplication1
                             InsertCandidate(candidateRecord, personId);
                         }                                          
                     }
+                    //Import the contacts that are customers with hiring activities:
 
                 }
                 catch

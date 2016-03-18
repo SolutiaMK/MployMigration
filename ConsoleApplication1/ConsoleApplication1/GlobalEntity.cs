@@ -20,6 +20,7 @@ namespace ConsoleApplication1
             this.Customers = new HashSet<Customer>();
             this.Companies = new HashSet<Company>();
             this.Requirements = new HashSet<Requirement>();
+            this.SalesRecruitingActivityLogs = new HashSet<SalesRecruitingActivityLog>();
         }
     
         public System.Guid GlobalEntityId { get; set; }
@@ -33,5 +34,6 @@ namespace ConsoleApplication1
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
+        public virtual ICollection<SalesRecruitingActivityLog> SalesRecruitingActivityLogs { get; set; }
     }
 }

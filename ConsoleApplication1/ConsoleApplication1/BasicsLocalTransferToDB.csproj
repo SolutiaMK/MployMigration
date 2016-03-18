@@ -307,10 +307,19 @@
     <Compile Include="RequirementNote.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="SalesRecruitingActivityLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="SourceType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="CandidateMigration.cs" />
+    <Compile Include="UpdateCandidateStatusType_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateRequirementStatusType_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserMigration.cs" />
   </ItemGroup>
   <ItemGroup>

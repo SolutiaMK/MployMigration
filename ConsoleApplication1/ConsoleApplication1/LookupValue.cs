@@ -386,43 +386,44 @@ namespace ConsoleApplication1
             return insertRequirement;
         }
 
-        //public static RequirementActivityLog ParseHiringActivityXML(string xdata, RequirementActivityLog insertRequirementActivityLog)
-        //{
-        //    //Remove the $ and ',' from the xdata so that I can convert the numbers to ints.
+        public static SalesRecruitingActivityLog ParseHiringActivityXML(string xdata, SalesRecruitingActivityLog insertRequirementActivityLog)
+        {
+            //Remove the $ and ',' from the xdata so that I can convert the numbers to ints.
+            xdata = xdata.Replace(",", "");
+            //Read in the xml string
+            String pattern = "(<.*?>)|(.+?(?=<|$))"; //"(?<=>)(\w*)(?=<\/)";
+            //Break it up using Regex 
+            Regex rgx = new Regex(pattern);
+            MatchCollection matches = rgx.Matches(xdata);
 
-        //    xdata = xdata.Replace(",", "");
-        //    //Read in the xml string
-        //    String pattern = "(<.*?>)|(.+?(?=<|$))"; //"(?<=>)(\w*)(?=<\/)";
-        //    //Break it up using Regex 
-        //    Regex rgx = new Regex(pattern);
-        //    MatchCollection matches = rgx.Matches(xdata);
+            //Go through the matches list and assign the values between the tags to the correct spots in the DB
+            if (matches.Count > 0)
+            {
+                foreach (Match match in matches)
+                {
+                    //Console.WriteLine("XML: " + match.Value);
+                    var nextValue = match.NextMatch().Value;
 
-        //    //Go through the matches list and assign the values between the tags to the correct spots in the DB
-        //    if (matches.Count > 0)
-        //    {
-        //        foreach (Match match in matches)
-        //        {
-        //            //Console.WriteLine("XML: " + match.Value);
-        //            var nextValue = match.NextMatch().Value;
+                    if (nextValue == "</xdata>")
+                    {
+                        //At this point we are at the end of the xdata string and it will error if it runs again.  Once on "</xdata>" there is no NextValue to grab.
+                        break;
+                    }
+                    else if (match.Value == "<payrate>" && nextValue != "</payrate>")
+                    {
+                        nextValue = CleanMoneyString.Replace(nextValue, "");
+                        insertRequirementActivityLog.PayRate = Convert.ToInt32(nextValue);
+                    }
+                    else if (match.Value == "<billrate>" && nextValue != "</billrate>")
+                    {
+                        nextValue = CleanMoneyString.Replace(nextValue, "");
+                        insertRequirementActivityLog.BillRate = Convert.ToInt32(nextValue);
+                    }
 
-        //            if (nextValue == "</xdata>")
-        //            {
-        //                //At this point we are at the end of the xdata string and it will error if it runs again.  Once on "</xdata>" there is no NextValue to grab.
-        //                break;
-        //            }
-        //            else if (match.Value == "<payrate>" && nextValue != "</payrate>")
-        //            {
-        //                //insertRequirementActivityLog.Client
-        //            }
-        //            else if (match.Value == "<billrate>" && nextValue != "</billrate>")
-        //            {
-
-        //            }
-                    
-        //        }
-        //    }
-        //    return insertRequirementActivityLog;
-        //}
+                }
+            }
+            return insertRequirementActivityLog;
+        }
 
         //This function takes in a string that holds which stored procedure we want run. Then it returns a list of Key/Value  pairs of the Id/Description from the specified Type table.
         public static List<KeyValuePair<int, string>> GetTypeIdList(List<KeyValuePair<int, string>> sourceTypeList )

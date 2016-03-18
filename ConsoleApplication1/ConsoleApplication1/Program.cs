@@ -41,209 +41,6 @@ namespace ConsoleApplication1
 
 
 
-        //Insert into GlobalEntity:
-        static GlobalEntity InsertGlobalEntity(Model.Person record, int entityType)
-        {
-            //Insert the EntityTypeId of the new record
-            GlobalEntity insertGlobalEntity = new GlobalEntity();
-            insertGlobalEntity.EntityTypeId = entityType;            
-            //Save the record to the DB
-            _db.GlobalEntities.Add(insertGlobalEntity);
-            _db.SaveChanges();
-            //Get the generated GlobalEntityId and save it to be used later
-            _globalEntityId = insertGlobalEntity.GlobalEntityId;
-            return insertGlobalEntity;
-        }
-
-
-
-        //Insert Methods:
-        static Person InsertPerson(Model.Person record)
-        {
-            //Insert into person table by creating an instance of the Person object
-            Person insertPerson = new Person();
-
-            insertPerson.FirstName = record.FirstName;
-            insertPerson.LastName = record.LastName;
-
-            Debug.WriteLine("\n" + record.FirstName + " " + record.LastName + "");
-
-            //Check to see if the First and Last names are ever null
-
-            if (record.FirstName == null)
-            {
-                insertPerson.FirstName = "Not Provided";
-            }
-            else if (record.LastName == null)
-            {
-                insertPerson.LastName = "Not Provided";
-            }
-            //else if (record.FirstName == null && record.LastName == null)
-            //{
-            //    continue;
-            //}//add else to handle the normal case (they have both names)
-
-            insertPerson.MPLOY_ContactId = record.IdContact;
-
-            //Insert the CreateDate from the Candidate file but if null, then use the system time.
-            //insertPerson.CreateDate = record.CreatedDate != null ? record.CreatedDate : DateTime.Now;
-            //insertPerson.CreateDate = System.DateTime.Now;
-            insertPerson.CreateDate = Convert.ToDateTime(record.CreatedDate);
-
-            //Check the Status column from the Candidate file.  If Status == 'Active', then IsActive = true, else IsActive = false if status == Inactive or Not Being Considered.
-            //insertPerson.IsActive = (record.Status == "Active") ? true : false;
-            //switch (record.Status)
-            //{
-            //    case "Active":
-            //        insertPerson.IsActive = true;
-            //        break;
-            //    case "Inactive":
-            //        insertPerson.IsActive = false;
-            //        break;
-            //    case "Not Being Considered":
-            //        insertPerson.IsActive = false;
-            //        break;
-            //}
-
-            //Check Gender and assign the correct type. Possibly bring the GenderTypeId table in and assign that way instead of hard coding...                      
-            //Calls the FindGenderType(), takes in the current rows gender column, validates type, returns the assigned gender type Id.
-            //insertPerson.GenderTypeId = LookupValue.FindGenderType(record.Gender, insertPerson);
-
-            insertPerson.LastUpdated = DateTime.Now;
-
-            //add to the person table and save the changes
-            _db.People.Add(insertPerson);
-            _db.SaveChanges();
-
-            //Get the person's Id
-            _personId = insertPerson.Id;
-            return insertPerson;
-        }
-
-//        static void InsertContactInformation(ConsoleApplication1.Model.Person record)
-//        {
-//            PersonContactInformation insertContactInformation = new PersonContactInformation();
-//            //ContactInfoType contactInfoType = new ContactInfoType();
-
-//            insertContactInformation.CreateDate = DateTime.Now;
-//            insertContactInformation.LastUpdated = DateTime.Now;
-
-///*            if (record.handle3type.Contains(",") && record.handle3type != null)
-//            {
-//                record.handle3type = record.handle3type.Replace(",", "");
-//            }
-// */
-
-//            //Call AssignHandleTextType() for each Mploy handleType column (0-3)                                        
-//            //0:
-//            insertContactInformation.PersonId = _personId;
-//            //Calls a method to find the ContactTypeId of the handleText from the Candidate file, and inserts it into the ContactInformation table in the DB.
-//            var contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle0type, record.handle0text);
-//            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
-//            if (record.handle0type != "0" && !string.IsNullOrEmpty(record.handle0type) && record.handle0type != "3")
-//            {
-//                insertContactInformation.Description = record.handle0text;
-//                _db.PersonContactInformations.Add(insertContactInformation);
-//                _db.SaveChanges();
-//            }
-//            //insertContactInformation.IsPreferred = true;
-//            //insertContactInformation.IsActive = true;
-
-//            //1: 
-//            insertContactInformation.PersonId = _personId;
-//            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle1type, record.handle1text);
-//            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
-//            if (record.handle1type != "0" && !string.IsNullOrEmpty(record.handle1type) && record.handle1type != "3")
-//            {
-//                insertContactInformation.Description = record.handle1text;
-//                _db.PersonContactInformations.Add(insertContactInformation);
-//                _db.SaveChanges();
-//            }
-//            //2:
-//            insertContactInformation.PersonId = _personId;
-//            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle2type, record.handle2text);
-//            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
-//            if (record.handle2type != "0" && !string.IsNullOrEmpty(record.handle2type) && record.handle2type != "3")
-//            {
-//                insertContactInformation.Description = record.handle2text;
-//                _db.PersonContactInformations.Add(insertContactInformation);
-//                _db.SaveChanges();
-//            }
-
-//            //3:
-//            insertContactInformation.PersonId = _personId;
-//            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle3type, record.handle3text);
-//            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
-//            if (record.handle3type != "0" && !string.IsNullOrEmpty(record.handle3type) && record.handle3type != "3")
-//            {
-//                insertContactInformation.Description = record.handle3text;
-//                _db.PersonContactInformations.Add(insertContactInformation);
-//                _db.SaveChanges();
-//            }
-
-//            //Email: Mploy has email as a seperate column, so I am inserting it seperate from the Handletext/type fields
-//            insertContactInformation.PersonId = _personId;
-//            insertContactInformation.ContactInformationTypeId = 2;
-//            insertContactInformation.Description = record.Email;
-//            _db.PersonContactInformations.Add(insertContactInformation);
-//            _db.SaveChanges();
-//        }
-
-        static void InsertMailingAddress(ConsoleApplication1.Model.Person record)
-        {
-            //I changed the CreateDate & LastUpdated columns to be of type DateTime2. I need to look into this...
-            //Do same for the MailingAddress table
-            MailingAddress insertMailingAddress = new MailingAddress();
-
-            //Check the Status column from the Candidate file.  If Status == 'Active', then IsActive = true, else IsActive = false.
-            //insertPerson.IsActive = (record.Status == "Active") ? true : false;
-
-            insertMailingAddress.Line1 = (string.IsNullOrEmpty(record.Address))
-                ? "Not Available"
-                : record.Address;
-            //record.idcontact.ToString();
-
-
-            insertMailingAddress.City = (string.IsNullOrEmpty(record.City))
-                ? "Not Available"
-                : record.City;
-            insertMailingAddress.State = (string.IsNullOrEmpty(record.State))
-                ? "NA"
-                : record.State;
-            insertMailingAddress.Zip = (string.IsNullOrEmpty(record.Zip))
-                ? "Not Available"
-                : record.Zip;
-
-
-            insertMailingAddress.CreateDate = System.DateTime.Now;
-            insertMailingAddress.LastUpdated = System.DateTime.Now;
-
-            //Add to the MailingAddress table
-            _db.MailingAddresses.Add(insertMailingAddress);
-
-            _db.SaveChanges();
-            //Get the mailingAddress's Id
-            _mailingAddressId = insertMailingAddress.Id;
-        }
-
-        static void InsertPersonMailAddress(ConsoleApplication1.Model.Person record)
-        {
-            //Take the ids and insert into the PersonMailAddress table
-            PersonMailAddress insertPersonMailAddress = new PersonMailAddress();
-            insertPersonMailAddress.PersonId = _personId;
-            insertPersonMailAddress.MailingAddressId = _mailingAddressId;
-
-            //PersonMailAddress -> MailAddressType: 1 = home, 2 = office
-            //Not null field, I am defaulting it to 1 for now.
-            insertPersonMailAddress.MailingAddressTypeId = 1;
-            insertPersonMailAddress.CreateDate = DateTime.Now;
-            insertPersonMailAddress.LastUpdated = DateTime.Now;
-
-            //Add the new PersonMailAddress to the db and save the changes
-            _db.PersonMailAddresses.Add(insertPersonMailAddress);
-            _db.SaveChanges();
-        }
-
 
 
         //Takes in the current Candidate that is being added and the Candidate's associated person record
@@ -1027,3 +824,210 @@ namespace ConsoleApplication1
         }
     }
 }
+
+//Old code, saving for now
+/**
+        //Insert into GlobalEntity:
+        static GlobalEntity InsertGlobalEntity(Model.Person record, int entityType)
+        {
+            //Insert the EntityTypeId of the new record
+            GlobalEntity insertGlobalEntity = new GlobalEntity();
+            insertGlobalEntity.EntityTypeId = entityType;            
+            //Save the record to the DB
+            _db.GlobalEntities.Add(insertGlobalEntity);
+            _db.SaveChanges();
+            //Get the generated GlobalEntityId and save it to be used later
+            _globalEntityId = insertGlobalEntity.GlobalEntityId;
+            return insertGlobalEntity;
+        }
+
+
+
+        //Insert Methods:
+        static Person InsertPerson(Model.Person record)
+        {
+            //Insert into person table by creating an instance of the Person object
+            Person insertPerson = new Person();
+
+            insertPerson.FirstName = record.FirstName;
+            insertPerson.LastName = record.LastName;
+
+            Debug.WriteLine("\n" + record.FirstName + " " + record.LastName + "");
+
+            //Check to see if the First and Last names are ever null
+
+            if (record.FirstName == null)
+            {
+                insertPerson.FirstName = "Not Provided";
+            }
+            else if (record.LastName == null)
+            {
+                insertPerson.LastName = "Not Provided";
+            }
+            //else if (record.FirstName == null && record.LastName == null)
+            //{
+            //    continue;
+            //}//add else to handle the normal case (they have both names)
+
+            insertPerson.MPLOY_ContactId = record.IdContact;
+
+            //Insert the CreateDate from the Candidate file but if null, then use the system time.
+            //insertPerson.CreateDate = record.CreatedDate != null ? record.CreatedDate : DateTime.Now;
+            //insertPerson.CreateDate = System.DateTime.Now;
+            insertPerson.CreateDate = Convert.ToDateTime(record.CreatedDate);
+
+            //Check the Status column from the Candidate file.  If Status == 'Active', then IsActive = true, else IsActive = false if status == Inactive or Not Being Considered.
+            //insertPerson.IsActive = (record.Status == "Active") ? true : false;
+            //switch (record.Status)
+            //{
+            //    case "Active":
+            //        insertPerson.IsActive = true;
+            //        break;
+            //    case "Inactive":
+            //        insertPerson.IsActive = false;
+            //        break;
+            //    case "Not Being Considered":
+            //        insertPerson.IsActive = false;
+            //        break;
+            //}
+
+            //Check Gender and assign the correct type. Possibly bring the GenderTypeId table in and assign that way instead of hard coding...                      
+            //Calls the FindGenderType(), takes in the current rows gender column, validates type, returns the assigned gender type Id.
+            //insertPerson.GenderTypeId = LookupValue.FindGenderType(record.Gender, insertPerson);
+
+            insertPerson.LastUpdated = DateTime.Now;
+
+            //add to the person table and save the changes
+            _db.People.Add(insertPerson);
+            _db.SaveChanges();
+
+            //Get the person's Id
+            _personId = insertPerson.Id;
+            return insertPerson;
+        }
+
+        static void InsertContactInformation(ConsoleApplication1.Model.Person record)
+        {
+            PersonContactInformation insertContactInformation = new PersonContactInformation();
+            //ContactInfoType contactInfoType = new ContactInfoType();
+
+            insertContactInformation.CreateDate = DateTime.Now;
+            insertContactInformation.LastUpdated = DateTime.Now;
+
+            if (record.handle3type.Contains(",") && record.handle3type != null)
+            {
+                record.handle3type = record.handle3type.Replace(",", "");
+            }
+ 
+
+            //Call AssignHandleTextType() for each Mploy handleType column (0-3)                                        
+            //0:
+            insertContactInformation.PersonId = _personId;
+            //Calls a method to find the ContactTypeId of the handleText from the Candidate file, and inserts it into the ContactInformation table in the DB.
+            var contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle0type, record.handle0text);
+            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
+            if (record.handle0type != "0" && !string.IsNullOrEmpty(record.handle0type) && record.handle0type != "3")
+            {
+                insertContactInformation.Description = record.handle0text;
+                _db.PersonContactInformations.Add(insertContactInformation);
+                _db.SaveChanges();
+            }
+            //insertContactInformation.IsPreferred = true;
+            //insertContactInformation.IsActive = true;
+
+            //1: 
+            insertContactInformation.PersonId = _personId;
+            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle1type, record.handle1text);
+            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
+            if (record.handle1type != "0" && !string.IsNullOrEmpty(record.handle1type) && record.handle1type != "3")
+            {
+                insertContactInformation.Description = record.handle1text;
+                _db.PersonContactInformations.Add(insertContactInformation);
+                _db.SaveChanges();
+            }
+            //2:
+            insertContactInformation.PersonId = _personId;
+            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle2type, record.handle2text);
+            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
+            if (record.handle2type != "0" && !string.IsNullOrEmpty(record.handle2type) && record.handle2type != "3")
+            {
+                insertContactInformation.Description = record.handle2text;
+                _db.PersonContactInformations.Add(insertContactInformation);
+                _db.SaveChanges();
+            }
+
+            //3:
+            insertContactInformation.PersonId = _personId;
+            contactInfoTypeId = LookupValue.AssignHandleTextType(record.handle3type, record.handle3text);
+            insertContactInformation.ContactInformationTypeId = contactInfoTypeId;
+            if (record.handle3type != "0" && !string.IsNullOrEmpty(record.handle3type) && record.handle3type != "3")
+            {
+                insertContactInformation.Description = record.handle3text;
+                _db.PersonContactInformations.Add(insertContactInformation);
+                _db.SaveChanges();
+            }
+
+            //Email: Mploy has email as a seperate column, so I am inserting it seperate from the Handletext/type fields
+            insertContactInformation.PersonId = _personId;
+            insertContactInformation.ContactInformationTypeId = 2;
+            insertContactInformation.Description = record.Email;
+            _db.PersonContactInformations.Add(insertContactInformation);
+            _db.SaveChanges();
+        }
+
+        static void InsertMailingAddress(ConsoleApplication1.Model.Person record)
+        {
+            //I changed the CreateDate & LastUpdated columns to be of type DateTime2. I need to look into this...
+            //Do same for the MailingAddress table
+            MailingAddress insertMailingAddress = new MailingAddress();
+
+            //Check the Status column from the Candidate file.  If Status == 'Active', then IsActive = true, else IsActive = false.
+            //insertPerson.IsActive = (record.Status == "Active") ? true : false;
+
+            insertMailingAddress.Line1 = (string.IsNullOrEmpty(record.Address))
+                ? "Not Available"
+                : record.Address;
+            //record.idcontact.ToString();
+
+
+            insertMailingAddress.City = (string.IsNullOrEmpty(record.City))
+                ? "Not Available"
+                : record.City;
+            insertMailingAddress.State = (string.IsNullOrEmpty(record.State))
+                ? "NA"
+                : record.State;
+            insertMailingAddress.Zip = (string.IsNullOrEmpty(record.Zip))
+                ? "Not Available"
+                : record.Zip;
+
+
+            insertMailingAddress.CreateDate = System.DateTime.Now;
+            insertMailingAddress.LastUpdated = System.DateTime.Now;
+
+            //Add to the MailingAddress table
+            _db.MailingAddresses.Add(insertMailingAddress);
+
+            _db.SaveChanges();
+            //Get the mailingAddress's Id
+            _mailingAddressId = insertMailingAddress.Id;
+        }
+
+        static void InsertPersonMailAddress(ConsoleApplication1.Model.Person record)
+        {
+            //Take the ids and insert into the PersonMailAddress table
+            PersonMailAddress insertPersonMailAddress = new PersonMailAddress();
+            insertPersonMailAddress.PersonId = _personId;
+            insertPersonMailAddress.MailingAddressId = _mailingAddressId;
+
+            //PersonMailAddress -> MailAddressType: 1 = home, 2 = office
+            //Not null field, I am defaulting it to 1 for now.
+            insertPersonMailAddress.MailingAddressTypeId = 1;
+            insertPersonMailAddress.CreateDate = DateTime.Now;
+            insertPersonMailAddress.LastUpdated = DateTime.Now;
+
+            //Add the new PersonMailAddress to the db and save the changes
+            _db.PersonMailAddresses.Add(insertPersonMailAddress);
+            _db.SaveChanges();
+        }
+
+**/

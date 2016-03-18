@@ -279,6 +279,26 @@
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedById" Type="int" />
   </EntityType>
+  <EntityType Name="SalesRecruitingActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesRecruitingWorkflowId" Type="int" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ActivityNote" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="ActivityOutcome" Type="varchar(max)" />
+    <Property Name="ActivityTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="PayRate" Type="int" />
+    <Property Name="BillRate" Type="int" />
+    <Property Name="ScheduledDateTime" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CreatedById" Type="int" Nullable="false" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="MPLOY_ContactId" Type="int" />
+    <Property Name="MPLOY_UserId" Type="int" />
+  </EntityType>
   <EntityType Name="SourceType">
     <Key>
       <PropertyRef Name="Id" />
@@ -468,6 +488,18 @@
       </Principal>
       <Dependent Role="RequirementNote">
         <PropertyRef Name="RequirementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="SalesRecruitingActivityLog" Type="Self.SalesRecruitingActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="SalesRecruitingActivityLog">
+        <PropertyRef Name="GlobalEntityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -773,6 +805,15 @@
     <Parameter Name="MPLOY_IdUserRecruiter" Type="int" Mode="In" />
     <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertRequirementCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="RequirementId" Type="int" Mode="In" />
+    <Parameter Name="CandidateId" Type="int" Mode="In" />
+    <Parameter Name="RequirementCandidateStatusTypeId" Type="int" Mode="In" />
+    <Parameter Name="StatusTypeDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertRequirementCompensation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="RequirementCompensationTypeId" Type="int" Mode="In" />
     <Parameter Name="RequirementId" Type="int" Mode="In" />
@@ -785,6 +826,20 @@
     <Parameter Name="CreateDate" Type="date" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+    <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PayRate" Type="int" Mode="In" />
+    <Parameter Name="BillRate" Type="int" Mode="In" />
+    <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="PersonId" Type="int" Mode="In" />
     <Parameter Name="FirstName" Type="varchar" Mode="In" />
@@ -792,6 +847,9 @@
     <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
     <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PersonInformationFromMploy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
   </Function>
   <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
@@ -805,9 +863,17 @@
   <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="UpdateCandidateStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="newCandidateStatusTypeId" Type="int" Mode="In" />
+  </Function>
   <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />
     <Parameter Name="mployContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateRequirementStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
+    <Parameter Name="newRequirementStatusTypeId" Type="int" Mode="In" />
   </Function>
   <Function Name="UpdateUserMployId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />
@@ -831,6 +897,7 @@
     <EntitySet Name="PersonMailAddress" EntityType="Self.PersonMailAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Requirement" EntityType="Self.Requirement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequirementNote" EntityType="Self.RequirementNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesRecruitingActivityLog" EntityType="Self.SalesRecruitingActivityLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SourceType" EntityType="Self.SourceType" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="CompanyContactCompany" Association="Self.CompanyContactCompany">
       <End Role="Company" EntitySet="Company" />
@@ -891,6 +958,10 @@
     <AssociationSet Name="FK_RequirementNote_Requirement" Association="Self.FK_RequirementNote_Requirement">
       <End Role="Requirement" EntitySet="Requirement" />
       <End Role="RequirementNote" EntitySet="RequirementNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Self.FK_SalesRecruitingActivityLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLog" />
     </AssociationSet>
     <AssociationSet Name="FKCandidatePersonId" Association="Self.FKCandidatePersonId">
       <End Role="Person" EntitySet="Person" />

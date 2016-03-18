@@ -284,6 +284,26 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedById" Type="int" />
         </EntityType>
+        <EntityType Name="SalesRecruitingActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesRecruitingWorkflowId" Type="int" Nullable="false" />
+          <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivityNote" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ActivityOutcome" Type="varchar(max)" />
+          <Property Name="ActivityTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="PayRate" Type="int" />
+          <Property Name="BillRate" Type="int" />
+          <Property Name="ScheduledDateTime" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CreatedById" Type="int" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="MPLOY_ContactId" Type="int" />
+          <Property Name="MPLOY_UserId" Type="int" />
+        </EntityType>
         <EntityType Name="SourceType">
           <Key>
             <PropertyRef Name="Id" />
@@ -473,6 +493,18 @@
             </Principal>
             <Dependent Role="RequirementNote">
               <PropertyRef Name="RequirementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
+          <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+          <End Role="SalesRecruitingActivityLog" Type="Self.SalesRecruitingActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GlobalEntity">
+              <PropertyRef Name="GlobalEntityId" />
+            </Principal>
+            <Dependent Role="SalesRecruitingActivityLog">
+              <PropertyRef Name="GlobalEntityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -778,6 +810,15 @@
           <Parameter Name="MPLOY_IdUserRecruiter" Type="int" Mode="In" />
           <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertRequirementCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="RequirementId" Type="int" Mode="In" />
+          <Parameter Name="CandidateId" Type="int" Mode="In" />
+          <Parameter Name="RequirementCandidateStatusTypeId" Type="int" Mode="In" />
+          <Parameter Name="StatusTypeDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedById" Type="int" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertRequirementCompensation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="RequirementCompensationTypeId" Type="int" Mode="In" />
           <Parameter Name="RequirementId" Type="int" Mode="In" />
@@ -789,6 +830,20 @@
           <Parameter Name="Note" Type="varchar(max)" Mode="In" />
           <Parameter Name="CreateDate" Type="date" Mode="In" />
           <Parameter Name="ModifiedById" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+          <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+          <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PayRate" Type="int" Mode="In" />
+          <Parameter Name="BillRate" Type="int" Mode="In" />
+          <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -813,9 +868,17 @@
         <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+        <Function Name="UpdateCandidateStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+          <Parameter Name="newCandidateStatusTypeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="personId" Type="int" Mode="In" />
           <Parameter Name="mployContactId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateRequirementStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
+          <Parameter Name="newRequirementStatusTypeId" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateUserMployId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="personId" Type="int" Mode="In" />
@@ -839,6 +902,7 @@
           <EntitySet Name="PersonMailAddress" EntityType="Self.PersonMailAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requirement" EntityType="Self.Requirement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequirementNote" EntityType="Self.RequirementNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesRecruitingActivityLog" EntityType="Self.SalesRecruitingActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SourceType" EntityType="Self.SourceType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="CompanyContactCompany" Association="Self.CompanyContactCompany">
             <End Role="Company" EntitySet="Company" />
@@ -899,6 +963,10 @@
           <AssociationSet Name="FK_RequirementNote_Requirement" Association="Self.FK_RequirementNote_Requirement">
             <End Role="Requirement" EntitySet="Requirement" />
             <End Role="RequirementNote" EntitySet="RequirementNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Self.FK_SalesRecruitingActivityLog_GlobalEntity">
+            <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+            <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLog" />
           </AssociationSet>
           <AssociationSet Name="FKCandidatePersonId" Association="Self.FKCandidatePersonId">
             <End Role="Person" EntitySet="Person" />
@@ -1295,6 +1363,42 @@
             <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
             <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
+            <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+            <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+            <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCandidateStatusType" ReturnType="Collection(Model.UpdateCandidateStatusType_Result)">
+            <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+            <Parameter Name="newCandidateStatusTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRequirementStatusType" ReturnType="Collection(Model.UpdateRequirementStatusType_Result)">
+            <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+            <Parameter Name="newRequirementStatusTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertSalesRecruitingActivityLog" ReturnType="Collection(Int32)">
+            <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+            <Parameter Name="ActivityNote" Mode="In" Type="String" />
+            <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
+            <Parameter Name="PayRate" Mode="In" Type="Int32" />
+            <Parameter Name="BillRate" Mode="In" Type="Int32" />
+            <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="SalesRecruitingActivityLogs" EntityType="Model.SalesRecruitingActivityLog" />
+          <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
+            <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+            <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="ReadSourceType_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1443,6 +1547,7 @@
           <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_GlobalEntity" FromRole="GlobalEntity" ToRole="Customer" />
           <NavigationProperty Name="Companies" Relationship="Model.FK_Company_GlobalEntity" FromRole="GlobalEntity" ToRole="Company" />
           <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="GlobalEntity" ToRole="Requirement" />
+          <NavigationProperty Name="SalesRecruitingActivityLogs" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="SalesRecruitingActivityLog" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -3017,6 +3122,102 @@
           <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="UpdateCandidateStatusType_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+          <Property Type="Int32" Name="PersonId" Nullable="false" />
+          <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+          <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+          <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+          <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+          <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+          <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+          <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+          <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+          <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+          <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+          <Property Type="Int32" Name="ReferralId" Nullable="true" />
+          <Property Type="String" Name="ResumeSummary" Nullable="true" />
+          <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UpdateRequirementStatusType_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
+          <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
+          <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
+          <Property Type="Int32" Name="RequirementStatusTypeId" Nullable="false" />
+          <Property Type="Int32" Name="RequirementWinLossReasonTypeId" Nullable="true" />
+          <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+          <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+          <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+          <Property Type="DateTime" Name="PostingDate" Nullable="false" />
+          <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
+          <Property Type="Int32" Name="MinRate" Nullable="true" />
+          <Property Type="Int32" Name="MaxRate" Nullable="true" />
+          <Property Type="Int32" Name="Budget" Nullable="true" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="ContractDetails" Nullable="true" />
+          <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
+          <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
+          <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
+          <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="SalesRecruitingActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesRecruitingWorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+          <Property Name="ActivityNote" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityOutcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PayRate" Type="Int32" />
+          <Property Name="BillRate" Type="Int32" />
+          <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MPLOY_ContactId" Type="Int32" />
+          <Property Name="MPLOY_UserId" Type="Int32" />
+          <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="SalesRecruitingActivityLog" ToRole="GlobalEntity" />
+        </EntityType>
+        <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
+          <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+          <End Type="Model.SalesRecruitingActivityLog" Role="SalesRecruitingActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GlobalEntity">
+              <PropertyRef Name="GlobalEntityId" />
+            </Principal>
+            <Dependent Role="SalesRecruitingActivityLog">
+              <PropertyRef Name="GlobalEntityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3839,6 +4040,100 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertPersonContactInformation" FunctionName="Model.Store.InsertPersonContactInformation" />
+          <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
+          <FunctionImportMapping FunctionImportName="UpdateCandidateStatusType" FunctionName="Model.Store.UpdateCandidateStatusType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.UpdateCandidateStatusType_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+                <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+                <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+                <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+                <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+                <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+                <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+                <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+                <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+                <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+                <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+                <ScalarProperty Name="ResumeSummary" ColumnName="ResumeSummary" />
+                <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateRequirementStatusType" FunctionName="Model.Store.UpdateRequirementStatusType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.UpdateRequirementStatusType_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VMSField" ColumnName="VMSField" />
+                <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
+                <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
+                <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
+                <ScalarProperty Name="RequirementStatusTypeId" ColumnName="RequirementStatusTypeId" />
+                <ScalarProperty Name="RequirementWinLossReasonTypeId" ColumnName="RequirementWinLossReasonTypeId" />
+                <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+                <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+                <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+                <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+                <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="MinRate" ColumnName="MinRate" />
+                <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
+                <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
+                <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
+                <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
+                <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
+                <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+                <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
+                <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
+                <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertSalesRecruitingActivityLog" FunctionName="Model.Store.InsertSalesRecruitingActivityLog" />
+          <EntitySetMapping Name="SalesRecruitingActivityLogs">
+            <EntityTypeMapping TypeName="Model.SalesRecruitingActivityLog">
+              <MappingFragment StoreEntitySet="SalesRecruitingActivityLog">
+                <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
+                <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
+                <ScalarProperty Name="BillRate" ColumnName="BillRate" />
+                <ScalarProperty Name="PayRate" ColumnName="PayRate" />
+                <ScalarProperty Name="ActivityTimestamp" ColumnName="ActivityTimestamp" />
+                <ScalarProperty Name="ActivityOutcome" ColumnName="ActivityOutcome" />
+                <ScalarProperty Name="ActivityNote" ColumnName="ActivityNote" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="SalesRecruitingWorkflowId" ColumnName="SalesRecruitingWorkflowId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

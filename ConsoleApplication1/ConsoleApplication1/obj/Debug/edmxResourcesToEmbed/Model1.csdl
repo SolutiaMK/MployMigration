@@ -114,14 +114,6 @@
     <FunctionImport Name="CheckCustomerAgainstCandidateData" ReturnType="Collection(Boolean)">
       <Parameter Name="CustomerIdContact" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertPersonContactInformation" ReturnType="Collection(Int32)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="ContactData" Mode="In" Type="String" />
-      <Parameter Name="PreferredPhone" Mode="In" Type="Boolean" />
-      <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
     <EntitySet Name="Companies" EntityType="Model.Company" />
     <AssociationSet Name="CompanyContactCompany" Association="Model.CompanyContactCompany">
       <End Role="Company" EntitySet="Companies" />
@@ -347,6 +339,53 @@
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="PersonInformationFromMploy" ReturnType="Collection(Model.PersonInformationFromMploy_Result)">
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonContactInformation" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ContactData" Mode="In" Type="String" />
+      <Parameter Name="PreferredPhone" Mode="In" Type="Boolean" />
+      <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateCandidateStatusType" ReturnType="Collection(Model.UpdateCandidateStatusType_Result)">
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="newCandidateStatusTypeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateRequirementStatusType" ReturnType="Collection(Model.UpdateRequirementStatusType_Result)">
+      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+      <Parameter Name="newRequirementStatusTypeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertSalesRecruitingActivityLog" ReturnType="Collection(Int32)">
+      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+      <Parameter Name="ActivityNote" Mode="In" Type="String" />
+      <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
+      <Parameter Name="PayRate" Mode="In" Type="Int32" />
+      <Parameter Name="BillRate" Mode="In" Type="Int32" />
+      <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="SalesRecruitingActivityLogs" EntityType="Model.SalesRecruitingActivityLog" />
+    <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -495,6 +534,7 @@
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_GlobalEntity" FromRole="GlobalEntity" ToRole="Customer" />
     <NavigationProperty Name="Companies" Relationship="Model.FK_Company_GlobalEntity" FromRole="GlobalEntity" ToRole="Company" />
     <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="GlobalEntity" ToRole="Requirement" />
+    <NavigationProperty Name="SalesRecruitingActivityLogs" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="SalesRecruitingActivityLog" />
   </EntityType>
   <EntityType Name="Candidate">
     <Key>
@@ -2030,6 +2070,139 @@
     <Property Type="Int32" Name="jobId" Nullable="true" />
     <Property Type="Int32" Name="candidateId" Nullable="true" />
     <Property Type="Int32" Name="customerId" Nullable="true" />
+    <Property Type="Int32" Name="personId" Nullable="true" />
     <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
   </ComplexType>
+  <ComplexType Name="PersonInformationFromMploy_Result">
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idOrganization" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idContactType" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle1type" Nullable="true" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle2type" Nullable="true" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle3type" Nullable="true" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle0type" Nullable="true" />
+    <Property Type="Int32" Name="IdSource" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UpdateCandidateStatusType_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Int32" Name="ReferralId" Nullable="true" />
+    <Property Type="String" Name="ResumeSummary" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UpdateRequirementStatusType_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementStatusTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementWinLossReasonTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="PostingDate" Nullable="false" />
+    <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
+    <Property Type="Int32" Name="MinRate" Nullable="true" />
+    <Property Type="Int32" Name="MaxRate" Nullable="true" />
+    <Property Type="Int32" Name="Budget" Nullable="true" />
+    <Property Type="Int32" Name="Duration" Nullable="true" />
+    <Property Type="String" Name="ContractDetails" Nullable="true" />
+    <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="SalesRecruitingActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalesRecruitingWorkflowId" Type="Int32" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="ActivityNote" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="ActivityOutcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ActivityTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PayRate" Type="Int32" />
+    <Property Name="BillRate" Type="Int32" />
+    <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" Nullable="false" />
+    <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="MPLOY_UserId" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="SalesRecruitingActivityLog" ToRole="GlobalEntity" />
+  </EntityType>
+  <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.SalesRecruitingActivityLog" Role="SalesRecruitingActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="SalesRecruitingActivityLog">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
