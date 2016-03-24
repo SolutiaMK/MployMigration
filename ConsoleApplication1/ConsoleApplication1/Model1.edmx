@@ -1186,8 +1186,6 @@
             <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReadCompanyType" ReturnType="Collection(Model.ReadCompanyType_Result1)" />
-          <FunctionImport Name="ReadOrganization" ReturnType="Collection(Model.ReadOrganization_Result4)" />
-          <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result3)" />
           <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result2)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="PersonId" Mode="In" Type="Int32" />
@@ -1398,6 +1396,8 @@
             <End Role="Person" EntitySet="People" />
             <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
           </AssociationSet>
+          <FunctionImport Name="ReadOrganization" ReturnType="Collection(Model.ReadOrganization_Result)" />
+          <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result)" />
           </EntityContainer>
         <ComplexType Name="ReadSourceType_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1410,54 +1410,6 @@
         <ComplexType Name="ReadCandidateContractType_Result1">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="ReadContact_Result">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdOrganization" Nullable="true" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="ReadContact_Result1">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdOrganization" Nullable="true" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ReadHiringActivity_Result">
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -1476,30 +1428,6 @@
           <Property Type="Int32" Name="IdUser" Nullable="true" />
           <Property Type="String" Name="Note" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="ReadContact1_Result">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdOrganization" Nullable="true" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="ReadContactLog1_Result">
           <Property Type="Int32" Name="IdContact" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -1516,21 +1444,6 @@
           <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Xdata" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ReadOrganization1_Result">
-          <Property Type="String" Name="idorganization" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Organization" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Url" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="InternalNote" Nullable="true" />
-          <Property Type="String" Name="ExternalNote" Nullable="true" />
-          <Property Type="String" Name="OrganizationType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="iduserownerAsIduser" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="GlobalEntity">
           <Key>
@@ -1840,30 +1753,6 @@
           <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
           <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
           <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-        </ComplexType>
-        <ComplexType Name="ReadContact_Result2">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdOrganization" Nullable="true" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IdUserOwnerAsIduser" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle0type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle1type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle2type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="handle3type" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ReadContactLog_Result1">
           <Property Type="Int32" Name="IdContact" Nullable="true" />
@@ -2501,25 +2390,6 @@
           <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CreatedById" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="ReadOrganization_Result4">
-          <Property Type="Int32" Name="idOrganization" Nullable="false" />
-          <Property Type="String" Name="Organization" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="Fax" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="URL" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="idOrganizationType" Nullable="false" />
-          <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="ExternalNote" Nullable="true" MaxLength="Max" />
-          <Property Type="Int32" Name="idUserOwner" Nullable="true" />
-          <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="idbranch" Nullable="true" />
-          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="InsertCustomer1_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
@@ -2535,42 +2405,6 @@
           <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CreatedById" Nullable="true" />
           <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ReadContact_Result3">
-          <Property Type="Int32" Name="idContact" Nullable="false" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
-          <Property Type="Int32" Name="idOrganization" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="idContactType" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
-          <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="idUserOwner" Nullable="true" />
-          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
-          <Property Type="Guid" Name="guid" Nullable="false" />
-          <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
-          <Property Type="Int32" Name="handle1type" Nullable="true" />
-          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
-          <Property Type="Int32" Name="handle2type" Nullable="true" />
-          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
-          <Property Type="Int32" Name="handle3type" Nullable="true" />
-          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
-          <Property Type="Int32" Name="handle0type" Nullable="true" />
-          <Property Type="Int32" Name="IdSource" Nullable="true" />
-          <Property Type="Int32" Name="IdStatus" Nullable="false" />
-          <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="InsertCustomer_Result2">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3201,6 +3035,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ReadOrganization_Result">
+          <Property Type="Int32" Name="idOrganization" Nullable="false" />
+          <Property Type="String" Name="Organization" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="URL" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="idOrganizationType" Nullable="false" />
+          <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ExternalNote" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+          <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idbranch" Nullable="true" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReadContact_Result">
+          <Property Type="Int32" Name="idContact" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="idOrganization" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="idContactType" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="guid" Nullable="false" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle1type" Nullable="true" />
+          <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle2type" Nullable="true" />
+          <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle3type" Nullable="true" />
+          <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="handle0type" Nullable="true" />
+          <Property Type="Int32" Name="IdSource" Nullable="true" />
+          <Property Type="Int32" Name="IdStatus" Nullable="false" />
+          <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3540,69 +3429,6 @@
                 <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.ReadOrganization_Result4">
-                <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
-                <ScalarProperty Name="Organization" ColumnName="Organization" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="idOrganizationType" ColumnName="idOrganizationType" />
-                <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
-                <ScalarProperty Name="ExternalNote" ColumnName="ExternalNote" />
-                <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
-                <ScalarProperty Name="Updated" ColumnName="Updated" />
-                <ScalarProperty Name="idbranch" ColumnName="idbranch" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReadContact" FunctionName="Model.Store.ReadContact">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.ReadContact_Result3">
-                <ScalarProperty Name="idContact" ColumnName="idContact" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="eMail" ColumnName="eMail" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="idContactType" ColumnName="idContactType" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Updated" ColumnName="Updated" />
-                <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="Xdata" ColumnName="Xdata" />
-                <ScalarProperty Name="guid" ColumnName="guid" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="handle1text" ColumnName="handle1text" />
-                <ScalarProperty Name="handle1type" ColumnName="handle1type" />
-                <ScalarProperty Name="handle2text" ColumnName="handle2text" />
-                <ScalarProperty Name="handle2type" ColumnName="handle2type" />
-                <ScalarProperty Name="handle3text" ColumnName="handle3text" />
-                <ScalarProperty Name="handle3type" ColumnName="handle3type" />
-                <ScalarProperty Name="handle0text" ColumnName="handle0text" />
-                <ScalarProperty Name="handle0type" ColumnName="handle0type" />
-                <ScalarProperty Name="IdSource" ColumnName="IdSource" />
-                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
-                <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="SelfId" ColumnName="SelfId" />
-                <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4093,6 +3919,69 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadOrganization_Result">
+                <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="idOrganizationType" ColumnName="idOrganizationType" />
+                <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+                <ScalarProperty Name="ExternalNote" ColumnName="ExternalNote" />
+                <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="idbranch" ColumnName="idbranch" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadContact" FunctionName="Model.Store.ReadContact">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadContact_Result">
+                <ScalarProperty Name="idContact" ColumnName="idContact" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="idContactType" ColumnName="idContactType" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="handle1text" ColumnName="handle1text" />
+                <ScalarProperty Name="handle1type" ColumnName="handle1type" />
+                <ScalarProperty Name="handle2text" ColumnName="handle2text" />
+                <ScalarProperty Name="handle2type" ColumnName="handle2type" />
+                <ScalarProperty Name="handle3text" ColumnName="handle3text" />
+                <ScalarProperty Name="handle3type" ColumnName="handle3type" />
+                <ScalarProperty Name="handle0text" ColumnName="handle0text" />
+                <ScalarProperty Name="handle0type" ColumnName="handle0type" />
+                <ScalarProperty Name="IdSource" ColumnName="IdSource" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="SelfId" ColumnName="SelfId" />
+                <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

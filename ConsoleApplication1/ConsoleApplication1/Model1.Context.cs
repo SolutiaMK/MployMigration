@@ -390,16 +390,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadCompanyType_Result1>("ReadCompanyType");
         }
     
-        public virtual ObjectResult<ReadOrganization_Result4> ReadOrganization()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadOrganization_Result4>("ReadOrganization");
-        }
-    
-        public virtual ObjectResult<ReadContact_Result3> ReadContact()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContact_Result3>("ReadContact");
-        }
-    
         public virtual ObjectResult<InsertCustomer_Result2> InsertCustomer(Nullable<int> companyId, Nullable<int> personId, Nullable<int> sourceTypeId, Nullable<int> customerTypeId, string title, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<System.DateTime> createDate, Nullable<int> modifiedById, Nullable<int> mployOrganizationId)
         {
             var companyIdParameter = companyId.HasValue ?
@@ -1000,6 +990,16 @@ namespace ConsoleApplication1
         public virtual ObjectResult<ReadUser_Result> ReadUser()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadUser_Result>("ReadUser");
+        }
+    
+        public virtual ObjectResult<ReadOrganization_Result> ReadOrganization()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadOrganization_Result>("ReadOrganization");
+        }
+    
+        public virtual ObjectResult<ReadContact_Result> ReadContact()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContact_Result>("ReadContact");
         }
     }
 }

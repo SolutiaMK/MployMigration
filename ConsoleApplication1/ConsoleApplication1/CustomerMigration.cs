@@ -67,7 +67,7 @@ namespace ConsoleApplication1
                         //if (!checkForDuplicateRecords.Any())
                         //{
 
-                        //If the contact record is a contact (contactTypeId of 1) AND the orgainization record:
+                        //If the contact record is a contact (contactTypeId of 1) AND the orgainization record id is not null or 4 (the id of the blank organization record):
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
                             contactRecord.IdOrganization != 4)
                         {

@@ -123,11 +123,11 @@ namespace ConsoleApplication1
                     sourceList = LookupValue.GetTypeIdList(sourceList);
 
 
-                    UserMigration.UserImport();
+                    //UserMigration.UserImport();
 
                     //OrganizationMigration.OrganizationImport();
 
-                    //CustomerMigration.ContactImport();
+                    CustomerMigration.ContactImport();
 
                     //CandidateMigration.TestUpdate();
 

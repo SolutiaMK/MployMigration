@@ -337,69 +337,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.ReadOrganization_Result4">
-          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
-          <ScalarProperty Name="Organization" ColumnName="Organization" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="Zip" ColumnName="Zip" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="idOrganizationType" ColumnName="idOrganizationType" />
-          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
-          <ScalarProperty Name="ExternalNote" ColumnName="ExternalNote" />
-          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
-          <ScalarProperty Name="Updated" ColumnName="Updated" />
-          <ScalarProperty Name="idbranch" ColumnName="idbranch" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ReadContact" FunctionName="Model.Store.ReadContact">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.ReadContact_Result3">
-          <ScalarProperty Name="idContact" ColumnName="idContact" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="eMail" ColumnName="eMail" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="Zip" ColumnName="Zip" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="idContactType" ColumnName="idContactType" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="Updated" ColumnName="Updated" />
-          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
-          <ScalarProperty Name="guid" ColumnName="guid" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="handle1text" ColumnName="handle1text" />
-          <ScalarProperty Name="handle1type" ColumnName="handle1type" />
-          <ScalarProperty Name="handle2text" ColumnName="handle2text" />
-          <ScalarProperty Name="handle2type" ColumnName="handle2type" />
-          <ScalarProperty Name="handle3text" ColumnName="handle3text" />
-          <ScalarProperty Name="handle3type" ColumnName="handle3type" />
-          <ScalarProperty Name="handle0text" ColumnName="handle0text" />
-          <ScalarProperty Name="handle0type" ColumnName="handle0type" />
-          <ScalarProperty Name="IdSource" ColumnName="IdSource" />
-          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
-          <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="SelfId" ColumnName="SelfId" />
-          <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="Model.Store.InsertCustomer">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.InsertCustomer_Result2">
@@ -887,5 +824,68 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadOrganization_Result">
+          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="idOrganizationType" ColumnName="idOrganizationType" />
+          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+          <ScalarProperty Name="ExternalNote" ColumnName="ExternalNote" />
+          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="idbranch" ColumnName="idbranch" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadContact" FunctionName="Model.Store.ReadContact">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadContact_Result">
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="eMail" ColumnName="eMail" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="idOrganization" ColumnName="idOrganization" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="idContactType" ColumnName="idContactType" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="idUserOwner" ColumnName="idUserOwner" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Xdata" ColumnName="Xdata" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="handle1text" ColumnName="handle1text" />
+          <ScalarProperty Name="handle1type" ColumnName="handle1type" />
+          <ScalarProperty Name="handle2text" ColumnName="handle2text" />
+          <ScalarProperty Name="handle2type" ColumnName="handle2type" />
+          <ScalarProperty Name="handle3text" ColumnName="handle3text" />
+          <ScalarProperty Name="handle3type" ColumnName="handle3type" />
+          <ScalarProperty Name="handle0text" ColumnName="handle0text" />
+          <ScalarProperty Name="handle0type" ColumnName="handle0type" />
+          <ScalarProperty Name="IdSource" ColumnName="IdSource" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="ResumeText" ColumnName="ResumeText" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="SelfId" ColumnName="SelfId" />
+          <ScalarProperty Name="INTERSECT_GenderTypeId" ColumnName="INTERSECT_GenderTypeId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
