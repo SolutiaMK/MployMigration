@@ -23,6 +23,7 @@ namespace ConsoleApplication1
         }
     
         public int Id { get; set; }
+        public System.Guid GlobalId { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

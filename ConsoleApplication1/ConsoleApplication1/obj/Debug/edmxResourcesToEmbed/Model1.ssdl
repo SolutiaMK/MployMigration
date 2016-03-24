@@ -183,6 +183,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="101" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -247,7 +248,6 @@
     <Property Name="DesiredStartDate" Type="date" />
     <Property Name="StartDate" Type="date" />
     <Property Name="EndDate" Type="date" />
-    <Property Name="ClosedDate" Type="date" />
     <Property Name="MinRate" Type="int" />
     <Property Name="MaxRate" Type="int" />
     <Property Name="Budget" Type="int" />
@@ -263,6 +263,7 @@
     <Property Name="CreatedById" Type="int" />
     <Property Name="MPLOY_JobId" Type="int" />
     <Property Name="MPLOY_ContactId" Type="int" />
+    <Property Name="ClosedDate" Type="date" />
     <Property Name="MPLOY_IdUserClosed" Type="int" />
     <Property Name="MPLOY_IdUserFilled" Type="int" />
     <Property Name="MPLOY_IdUserRecruiter" Type="int" />
@@ -289,12 +290,12 @@
     <Property Name="ActivityNote" Type="varchar" MaxLength="1000" Nullable="false" />
     <Property Name="ActivityOutcome" Type="varchar(max)" />
     <Property Name="ActivityTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" Nullable="false" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PayRate" Type="int" />
     <Property Name="BillRate" Type="int" />
     <Property Name="ScheduledDateTime" Type="datetime" />
     <Property Name="EndDate" Type="datetime" />
-    <Property Name="CreatedById" Type="int" Nullable="false" />
-    <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="MPLOY_ContactId" Type="int" />
     <Property Name="MPLOY_UserId" Type="int" />
@@ -854,8 +855,6 @@
   <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
-  <Function Name="ReadContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
-  <Function Name="ReadHiringActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />

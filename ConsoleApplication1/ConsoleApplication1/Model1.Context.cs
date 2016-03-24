@@ -43,9 +43,9 @@ namespace ConsoleApplication1
         public virtual DbSet<CompanyContactInformation> CompanyContactInformations { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<RequirementNote> RequirementNotes { get; set; }
-        public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Requirement> Requirements { get; set; }
         public virtual DbSet<SalesRecruitingActivityLog> SalesRecruitingActivityLogs { get; set; }
+        public virtual DbSet<Person> People { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetCompanyJobAssociation(Nullable<int> currentCompany)
         {
@@ -645,11 +645,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadPerson_Result>("ReadPerson");
         }
     
-        public virtual ObjectResult<ReadUser_Result> ReadUser()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadUser_Result>("ReadUser");
-        }
-    
         public virtual ObjectResult<Nullable<int>> InsertPerson(Nullable<int> personId, string firstName, string lastName, Nullable<int> genderTypeId, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_UserId)
         {
             var personIdParameter = personId.HasValue ?
@@ -1000,6 +995,11 @@ namespace ConsoleApplication1
                 new ObjectParameter("MPLOY_JobId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertSalesRecruitingActivityLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter, mPLOY_JobIdParameter);
+        }
+    
+        public virtual ObjectResult<ReadUser_Result> ReadUser()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadUser_Result>("ReadUser");
         }
     }
 }

@@ -36,20 +36,20 @@
         <AssociationConnector Association="Model.FK_Customer_Company" />
         <AssociationConnector Association="Model.FKOrganizaitonMailAddressCompanyId" />
         <EntityTypeShape EntityType="Model.RequirementNote" Width="1.5" PointX="10.375" PointY="18.5" />
-        <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="6" PointY="10.875" />
         <EntityTypeShape EntityType="Model.Requirement" Width="1.5" PointX="8" PointY="17.5" />
+        <AssociationConnector Association="Model.FK_Requirement_GlobalEntity" />
+        <AssociationConnector Association="Model.FK_Requirement_MaxTravelType" />
+        <AssociationConnector Association="Model.FK_RequirementNote_Requirement" />
+        <EntityTypeShape EntityType="Model.SalesRecruitingActivityLog" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity" />
+        <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="6" PointY="10.875" />
         <AssociationConnector Association="Model.FKCandidatePersonId" />
         <AssociationConnector Association="Model.FK_Customer_Person" />
         <AssociationConnector Association="Model.FKPersonGenderId" />
-        <AssociationConnector Association="Model.FK_Requirement_GlobalEntity" />
-        <AssociationConnector Association="Model.FK_Requirement_MaxTravelType" />
         <AssociationConnector Association="Model.FK_Person_PersonContactInformation" />
         <AssociationConnector Association="Model.FK_Person_PersonContactInformation1" />
         <AssociationConnector Association="Model.FK_PersonContactInformation_Person" />
         <AssociationConnector Association="Model.FKPersonMailAddressPersonId" />
-        <AssociationConnector Association="Model.FK_RequirementNote_Requirement" />
-        <EntityTypeShape EntityType="Model.SalesRecruitingActivityLog" Width="1.5" PointX="3" PointY="5.75" />
-        <AssociationConnector Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

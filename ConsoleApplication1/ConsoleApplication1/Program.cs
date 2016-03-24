@@ -123,7 +123,7 @@ namespace ConsoleApplication1
                     sourceList = LookupValue.GetTypeIdList(sourceList);
 
 
-                    //UserMigration.UserImport();
+                    UserMigration.UserImport();
 
                     //OrganizationMigration.OrganizationImport();
 
@@ -133,7 +133,7 @@ namespace ConsoleApplication1
 
                     //RequirementMigration.JobImport();
                     
-                    HiringActivityMigration.ImportHiringActivity();
+                    //HiringActivityMigration.ImportHiringActivity();
 
 
 

@@ -244,21 +244,7 @@
       <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadPerson" ReturnType="Collection(Model.ReadPerson_Result)" />
-    <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result)" />
-    <EntitySet Name="People" EntityType="Model.Person" />
     <EntitySet Name="Requirements" EntityType="Model.Requirement" />
-    <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
-      <End Role="Person" EntitySet="People" />
-      <End Role="Candidate" EntitySet="Candidates" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
-      <End Role="Person" EntitySet="People" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FKPersonGenderId" Association="Model.FKPersonGenderId">
-      <End Role="GenderType" EntitySet="GenderTypes" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
     <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Model.FK_Requirement_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntities" />
       <End Role="Requirement" EntitySet="Requirements" />
@@ -266,22 +252,6 @@
     <AssociationSet Name="FK_Requirement_MaxTravelType" Association="Model.FK_Requirement_MaxTravelType">
       <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
       <End Role="Requirement" EntitySet="Requirements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Model.FK_Person_PersonContactInformation">
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Model.FK_Person_PersonContactInformation1">
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Model.FK_PersonContactInformation_Person">
-      <End Role="Person" EntitySet="People" />
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-    </AssociationSet>
-    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Model.FKPersonMailAddressPersonId">
-      <End Role="Person" EntitySet="People" />
-      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
     </AssociationSet>
     <AssociationSet Name="FK_RequirementNote_Requirement" Association="Model.FK_RequirementNote_Requirement">
       <End Role="Requirement" EntitySet="Requirements" />
@@ -385,6 +355,36 @@
     <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntities" />
       <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
+    </AssociationSet>
+    <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result)" />
+    <EntitySet Name="People" EntityType="Model.Person" />
+    <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonGenderId" Association="Model.FKPersonGenderId">
+      <End Role="GenderType" EntitySet="GenderTypes" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Model.FK_Person_PersonContactInformation">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Model.FK_Person_PersonContactInformation1">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Model.FK_PersonContactInformation_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Model.FKPersonMailAddressPersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
@@ -1367,23 +1367,6 @@
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="ReadUser1_Result">
-    <Property Type="Int32" Name="idUser" Nullable="false" />
-    <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
-    <Property Type="String" Name="password" Nullable="false" MaxLength="8" />
-    <Property Type="DateTime" Name="lastlogin" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
-    <Property Type="Guid" Name="UID" Nullable="false" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="email" Nullable="false" MaxLength="255" />
-    <Property Type="Int32" Name="idBranch" Nullable="false" />
-    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="UserData" Nullable="true" MaxLength="Max" />
-    <Property Type="Boolean" Name="enabled" Nullable="false" />
-    <Property Type="Boolean" Name="hidden" Nullable="false" />
-    <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
-  </ComplexType>
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="Id" />
@@ -1768,52 +1751,6 @@
     <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="ReadUser_Result">
-    <Property Type="Int32" Name="idUser" Nullable="false" />
-    <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
-    <Property Type="String" Name="password" Nullable="false" MaxLength="8" />
-    <Property Type="DateTime" Name="lastlogin" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
-    <Property Type="Guid" Name="UID" Nullable="false" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="email" Nullable="false" MaxLength="255" />
-    <Property Type="Int32" Name="idBranch" Nullable="false" />
-    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="UserData" Nullable="true" MaxLength="Max" />
-    <Property Type="Boolean" Name="enabled" Nullable="false" />
-    <Property Type="Boolean" Name="hidden" Nullable="false" />
-    <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
-  </ComplexType>
-  <EntityType Name="Person">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PreferredPhoneNumberId" Type="Int32" />
-    <Property Name="PreferredEmailAddressId" Type="Int32" />
-    <Property Name="PreferredTypicalRoleId" Type="Int32" />
-    <Property Name="GenderTypeId" Type="Int32" />
-    <Property Name="RaceTypeId" Type="Int32" />
-    <Property Name="CitizenshipTypeId" Type="Int32" />
-    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedById" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" />
-    <Property Name="MPLOY_ContactId" Type="Int32" />
-    <Property Name="MPLOY_UserId" Type="Int32" />
-    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatePersonId" FromRole="Person" ToRole="Candidate" />
-    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
-    <NavigationProperty Name="GenderType" Relationship="Model.FKPersonGenderId" FromRole="Person" ToRole="GenderType" />
-    <NavigationProperty Name="PersonContactInformation" Relationship="Model.FK_Person_PersonContactInformation" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonContactInformation1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_Person" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressPersonId" FromRole="Person" ToRole="PersonMailAddress" />
-  </EntityType>
   <EntityType Name="Requirement">
     <Key>
       <PropertyRef Name="Id" />
@@ -1858,42 +1795,6 @@
     <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
     <NavigationProperty Name="RequirementNotes" Relationship="Model.FK_RequirementNote_Requirement" FromRole="Requirement" ToRole="RequirementNote" />
   </EntityType>
-  <Association Name="FKCandidatePersonId">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Candidate">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_Person">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKPersonGenderId">
-    <End Type="Model.GenderType" Role="GenderType" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GenderType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="GenderTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Requirement_GlobalEntity">
     <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
     <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
@@ -1915,54 +1816,6 @@
       </Principal>
       <Dependent Role="Requirement">
         <PropertyRef Name="MaxTravelTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Person_PersonContactInformation">
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonContactInformation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="PreferredPhoneNumberId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Person_PersonContactInformation1">
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonContactInformation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="PreferredEmailAddressId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PersonContactInformation_Person">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonContactInformation">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKPersonMailAddressPersonId">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonMailAddress">
-        <PropertyRef Name="PersonId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2202,6 +2055,137 @@
       </Principal>
       <Dependent Role="SalesRecruitingActivityLog">
         <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ReadUser_Result">
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="8" />
+    <Property Type="DateTime" Name="lastlogin" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+    <Property Type="Guid" Name="UID" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="idBranch" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserData" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="enabled" Nullable="false" />
+    <Property Type="Boolean" Name="hidden" Nullable="false" />
+    <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
+  </ComplexType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PreferredPhoneNumberId" Type="Int32" />
+    <Property Name="PreferredEmailAddressId" Type="Int32" />
+    <Property Name="PreferredTypicalRoleId" Type="Int32" />
+    <Property Name="GenderTypeId" Type="Int32" />
+    <Property Name="RaceTypeId" Type="Int32" />
+    <Property Name="CitizenshipTypeId" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="MPLOY_UserId" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatePersonId" FromRole="Person" ToRole="Candidate" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
+    <NavigationProperty Name="GenderType" Relationship="Model.FKPersonGenderId" FromRole="Person" ToRole="GenderType" />
+    <NavigationProperty Name="PersonContactInformation" Relationship="Model.FK_Person_PersonContactInformation" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonContactInformation1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_Person" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressPersonId" FromRole="Person" ToRole="PersonMailAddress" />
+  </EntityType>
+  <Association Name="FKCandidatePersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonGenderId">
+    <End Type="Model.GenderType" Role="GenderType" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="GenderTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhoneNumberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation1">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredEmailAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonContactInformation_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressPersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="PersonId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
