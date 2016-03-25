@@ -672,11 +672,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPerson", personIdParameter, firstNameParameter, lastNameParameter, genderTypeIdParameter, modifiedByIdParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter);
         }
     
-        public virtual ObjectResult<ReadJob_Result> ReadJob()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadJob_Result>("ReadJob");
-        }
-    
         public virtual ObjectResult<InsertRequirement_Result> InsertRequirement(string name, string description, string vMSField, Nullable<int> requirementTypeId, Nullable<int> requirementPriorityTypeId, Nullable<int> requirementProjectTypeId, Nullable<int> requirementStatusTypeId, Nullable<int> requirementWinLossReasonTypeId, Nullable<int> travelTypeId, Nullable<int> maxTravelTypeId, Nullable<int> paymentTermTypeId, Nullable<System.DateTime> postingDate, Nullable<System.DateTime> desiredStartDate, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<System.DateTime> closedDate, Nullable<int> minRate, Nullable<int> maxRate, Nullable<int> budget, Nullable<int> duration, string contractDetails, Nullable<bool> isTravelRequired, Nullable<bool> isDrugTestRequired, Nullable<bool> isBackgroundCheckRequired, Nullable<bool> isWorkFromHome, Nullable<System.DateTime> createDate, Nullable<int> modifiedById, Nullable<int> mPLOY_JobId, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_IdUserFilled, Nullable<int> mPLOY_IdUserClosed, Nullable<int> mPLOY_IdUserRecruiter, Nullable<int> mPLOY_IdUser)
         {
             var nameParameter = name != null ?
@@ -817,11 +812,6 @@ namespace ConsoleApplication1
         public virtual ObjectResult<ReadtbJobLog_Result> ReadtbJobLog()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobLog_Result>("ReadtbJobLog");
-        }
-    
-        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
         }
     
         public virtual ObjectResult<GetHiringActivityAssociation_Result> GetHiringActivityAssociation(Nullable<int> currentJobId, Nullable<int> currentContact)
@@ -1000,6 +990,16 @@ namespace ConsoleApplication1
         public virtual ObjectResult<ReadContact_Result> ReadContact()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContact_Result>("ReadContact");
+        }
+    
+        public virtual ObjectResult<ReadJob_Result> ReadJob()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadJob_Result>("ReadJob");
+        }
+    
+        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
         }
     }
 }
