@@ -16,6 +16,8 @@ namespace ConsoleApplication1
         //private static int _mailingAddressId = -1;
         //private static int _personId = -1;
         private static int _requirementId = -1;
+        private static int _candidateId = -1;
+        private static int _customerId = -1;
 
         static Entities _db;
         //static List<KeyValuePair<int, string>> _sourceList = new List<KeyValuePair<int, string>>();
@@ -123,13 +125,39 @@ namespace ConsoleApplication1
                         }
 
 
-                        Debug.WriteLine("\n" + "Requirement imported: " + MPLOYIdJob + " : " + Name);
+                        //*********************** Create the RequirementCustomer records ****************
+                        //The idContact on the Requirement should be associated to a customer. Create that requirementCustomer association here.
+                        //It will be updated during the HiringActivity import if there is a newer association from teh hiring activities.
+
+                        var returnedIds = _db.GetRequirementContactAssociation(requirementRecord.idJob,
+                            requirementRecord.idContactManager);
+
+                        //Find the customeid in intersect that matches the mploy contact                   
+                        var errorString = string.Empty;
+                        var personId = -1;
+                        foreach (var result in returnedIds)
+                        {
+                            _requirementId = Convert.ToInt32(result.jobId);
+                            _candidateId = Convert.ToInt32(result.candidateId);
+                            _customerId = Convert.ToInt32(result.customerId);
+                            personId = Convert.ToInt32(result.personId);
+                            errorString = Convert.ToString(result.errorString);
+                        }
+                        //***** This RequirementCustomer Relationship is populated during the Requirement import process *****
+                        //Insert the new record into the RequirementCustomer table if the _customerId is not null:
+                        if (_customerId != 0)
+                        {
+                            var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, true, 0, requirementRecord.Created, requirementRecord.iduser);
+                        }
+
+
+                        Debug.WriteLine("\n" + "Requirement imported: " + MPLOYIdJob + " : " + Name + " CustomerId: " + _customerId);
                     }
                 }
                 catch
                 (Exception ex)
                 {
-                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with PersonId: " + _requirementId));
+                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with RequirementId: " + _requirementId));
                 }
 
             }
@@ -172,127 +200,4 @@ namespace ConsoleApplication1
             return reqPriorityTypeId;
         }
     }
-
-
-    //    public static int GetCandidateStatusTypeId(int statusId)
-    //    {
-    //        int candidateStatusTypeId = -1;
-
-    //        switch (statusId)
-    //        {
-    //            case 1:
-    //                candidateStatusTypeId = 1;
-    //                break;
-    //            case 2:
-    //                candidateStatusTypeId = 4;
-    //                break;
-    //            case 4:
-    //                candidateStatusTypeId = 2;
-    //                break;
-    //            default:
-    //                candidateStatusTypeId = 3;
-    //                break;
-    //        }
-    //        return candidateStatusTypeId;
-    //    }
-
-    //    //Inserts the ContactInformation for the given personId and contact info:
-    //    static int InsertContactInformation(string contactData, int contactDataType)
-    //    {
-
-    //        //Email is inserted with the Person
-
-    //        var contactInfoTypeId = 0;
-    //        var personContactInformationId = 0;
-    //        //Call AssignHandleTextType() for each Mploy handleType column (0-3)                                        
-    //        //0:
-    //        if (contactDataType != 0 && contactDataType != 3)
-    //        {
-    //            //Calls a method to find the ContactTypeId of the handleText from the Candidate file, and inserts it into the ContactInformation table in the DB.
-    //            contactInfoTypeId = LookupValue.AssignHandleTextType(contactDataType, contactData);
-    //            List<int?> result;
-    //            switch (contactInfoTypeId)
-    //            {
-    //                case 1:
-    //                case 5:
-    //                case 6:
-    //                case 14:
-    //                    {
-    //                        result = _db.InsertPersonContactInformation(_personId, contactInfoTypeId, contactData, true, false, 0).ToList();
-    //                    }
-    //                    break;
-    //                case 2:
-    //                    {
-    //                        result = _db.InsertPersonContactInformation(_personId, contactInfoTypeId, contactData, false, true, 0).ToList();
-    //                    }
-    //                    break;
-    //                default:
-    //                    result = _db.InsertPersonContactInformation(_personId, contactInfoTypeId, contactData, false, false, 0).ToList();
-    //                    break;
-    //            }
-
-    //            personContactInformationId = Convert.ToInt32(result[0]);
-
-    //        }
-
-    //        return personContactInformationId;
-    //    }
-
-
-
-    //    static void InsertMailingAddress(ConsoleApplication1.Model.Person record)
-    //    {
-    //        //I changed the CreateDate & LastUpdated columns to be of type DateTime2. I need to look into this...
-    //        //Do same for the MailingAddress table
-    //        MailingAddress insertMailingAddress = new MailingAddress();
-
-    //        //Check the Status column from the Candidate file.  If Status == 'Active', then IsActive = true, else IsActive = false.
-    //        //insertPerson.IsActive = (record.Status == "Active") ? true : false;
-
-    //        insertMailingAddress.Line1 = (string.IsNullOrEmpty(record.Address))
-    //            ? "Not Available"
-    //            : record.Address;
-    //        //record.idcontact.ToString();
-
-
-    //        insertMailingAddress.City = (string.IsNullOrEmpty(record.City))
-    //            ? "Not Available"
-    //            : record.City;
-    //        insertMailingAddress.State = (string.IsNullOrEmpty(record.State))
-    //            ? "NA"
-    //            : record.State;
-    //        insertMailingAddress.Zip = (string.IsNullOrEmpty(record.Zip))
-    //            ? "Not Available"
-    //            : record.Zip;
-
-
-    //        insertMailingAddress.CreateDate = System.DateTime.Now;
-    //        insertMailingAddress.LastUpdated = System.DateTime.Now;
-
-    //        //Add to the MailingAddress table
-    //        _db.MailingAddresses.Add(insertMailingAddress);
-
-    //        _db.SaveChanges();
-    //        //Get the mailingAddress's Id
-    //        _mailingAddressId = insertMailingAddress.Id;
-    //    }
-
-    //    static void InsertPersonMailAddress(ConsoleApplication1.Model.Person record)
-    //    {
-    //        //Take the ids and insert into the PersonMailAddress table
-    //        PersonMailAddress insertPersonMailAddress = new PersonMailAddress();
-    //        insertPersonMailAddress.PersonId = _personId;
-    //        insertPersonMailAddress.MailingAddressId = _mailingAddressId;
-
-    //        //PersonMailAddress -> MailAddressType: 1 = home, 2 = office
-    //        //Not null field, I am defaulting it to 1 for now.
-    //        insertPersonMailAddress.MailingAddressTypeId = 1;
-    //        insertPersonMailAddress.CreateDate = DateTime.Now;
-    //        insertPersonMailAddress.LastUpdated = DateTime.Now;
-
-    //        //Add the new PersonMailAddress to the db and save the changes
-    //        _db.PersonMailAddresses.Add(insertPersonMailAddress);
-    //        _db.SaveChanges();
-    //    }
-    //}
 }

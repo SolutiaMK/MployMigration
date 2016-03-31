@@ -26,7 +26,7 @@ namespace ConsoleApplication1
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
-        public bool IsActive { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }

@@ -130,7 +130,7 @@ namespace ConsoleApplication1
 
                             //Insert Email address:
                             var personEmail =
-                                _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, null, 0)
+                                _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, true, 0)
                                     .ToList();
 
                             //0:                        

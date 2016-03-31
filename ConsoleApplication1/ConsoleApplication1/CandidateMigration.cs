@@ -147,7 +147,7 @@ namespace ConsoleApplication1
             //Insert the Person's email:
             if (!string.IsNullOrEmpty(candidateRecord.Email))
             {
-                var personEmail = _db.InsertPersonContactInformation(personId, 2, candidateRecord.Email, null, null, 0).ToList();
+                var personEmail = _db.InsertPersonContactInformation(personId, 2, candidateRecord.Email, null, true, 0).ToList();
             }
 
             //Insert Candidate Information

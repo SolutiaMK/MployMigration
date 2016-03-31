@@ -106,16 +106,16 @@ namespace ConsoleApplication1
                         //    }
                             
                         //}
-                       else if (_candidateId == 0){  //If the CandidateId is null:
-                           Debug.WriteLine("\n" + errorString + " - No CandidateId " + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
-                                           " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
-                                           activityRecord.idJobFlow + " *****");
-                       }
+                        //else if (_candidateId == 0){  //If the CandidateId is null:
+                        //    Debug.WriteLine("\n" + errorString + " - No CandidateId " + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+                        //                    " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+                        //                    activityRecord.idJobFlow + " *****");
+                        //}
                         else 
                         {
                             //Continue like normal:                
  
-                             //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
+                                //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
 
                             //Get the SalesRecruitingActivityLog PayRate and BillRate:
                             var insertActivityLog = new SalesRecruitingActivityLog();
@@ -158,8 +158,21 @@ namespace ConsoleApplication1
 
                             //Insert into the SalesRecruitingActivityLog table:
                             var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            
+                            //**************** Update or create the RequirementCandodate/Customer relationships based on the incoming hiring activity  *****
+
                             //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
-                            var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, requirementCandidateStatusTypeId, activityRecord.Created, 0, activityRecord.Created, activityRecord.idUser);
+                            if (_candidateId != 0)
+                            {
+                                var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, requirementCandidateStatusTypeId, activityRecord.Created, 0, activityRecord.Created, activityRecord.idUser);    
+                            }
+                            
+                            //***** This RequirementCustomer Relationship is populated during the Requirement import process *****
+                            //Insert the new record into the RequirementCustomer table if the _customerId if not null:
+                            if (_customerId != 0)
+                            {
+                                var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, true, 0, activityRecord.Created,activityRecord.idUser);
+                            }
                         
                             //***** Update the Requirement and Candidate tables to have the appropriate types based off of the latest hiring activity associated to them *****
 

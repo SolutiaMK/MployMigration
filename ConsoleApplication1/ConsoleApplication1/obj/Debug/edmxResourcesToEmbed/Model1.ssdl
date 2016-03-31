@@ -47,7 +47,9 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="CompanyTypeId" Type="int" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="CompanyTypeId" Type="int" />
     <Property Name="IndustryId" Type="int" />
     <Property Name="RevenueSizeTypeId" Type="int" />
     <Property Name="EmployeeSizeTypeId" Type="int" />
@@ -236,6 +238,8 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" />
     <Property Name="VMSField" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="char" MaxLength="2" />
     <Property Name="RequirementTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementPriorityTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementProjectTypeId" Type="int" Nullable="false" />
@@ -288,7 +292,7 @@
     <Property Name="SalesRecruitingWorkflowId" Type="int" Nullable="false" />
     <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ActivityNote" Type="varchar" MaxLength="1000" Nullable="false" />
-    <Property Name="ActivityOutcome" Type="varchar(max)" />
+    <Property Name="ActivityDetail" Type="varchar(max)" />
     <Property Name="ActivityTimestamp" Type="datetime" Nullable="false" />
     <Property Name="CreatedById" Type="int" Nullable="false" />
     <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -296,7 +300,7 @@
     <Property Name="BillRate" Type="int" />
     <Property Name="ScheduledDateTime" Type="datetime" />
     <Property Name="EndDate" Type="datetime" />
-    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
     <Property Name="MPLOY_ContactId" Type="int" />
     <Property Name="MPLOY_UserId" Type="int" />
   </EntityType>
@@ -306,7 +310,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -663,6 +667,10 @@
     <Parameter Name="currentJobId" Type="int" Mode="In" />
     <Parameter Name="currentContact" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetRequirementContactAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentJobId" Type="int" Mode="In" />
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetUserFromMployUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MployUserId" Type="int" Mode="In" />
   </Function>
@@ -820,6 +828,14 @@
     <Parameter Name="RequirementId" Type="int" Mode="In" />
     <Parameter Name="Amount" Type="int" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertRequirementCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="RequirementId" Type="int" Mode="In" />
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
+    <Parameter Name="IsPrimaryContact" Type="bit" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertRequirementNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="RequirementId" Type="int" Mode="In" />

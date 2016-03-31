@@ -282,6 +282,8 @@
     <EntitySetMapping Name="Companies">
       <EntityTypeMapping TypeName="Model.Company">
         <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
           <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
           <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
@@ -489,6 +491,8 @@
     <EntitySetMapping Name="Requirements">
       <EntityTypeMapping TypeName="Model.Requirement">
         <MappingFragment StoreEntitySet="Requirement">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
           <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
           <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
@@ -634,7 +638,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertPersonContactInformation" FunctionName="Model.Store.InsertPersonContactInformation" />
-    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
     <FunctionImportMapping FunctionImportName="UpdateCandidateStatusType" FunctionName="Model.Store.UpdateCandidateStatusType">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.UpdateCandidateStatusType_Result">
@@ -706,28 +709,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertSalesRecruitingActivityLog" FunctionName="Model.Store.InsertSalesRecruitingActivityLog" />
-    <EntitySetMapping Name="SalesRecruitingActivityLogs">
-      <EntityTypeMapping TypeName="Model.SalesRecruitingActivityLog">
-        <MappingFragment StoreEntitySet="SalesRecruitingActivityLog">
-          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
-          <ScalarProperty Name="BillRate" ColumnName="BillRate" />
-          <ScalarProperty Name="PayRate" ColumnName="PayRate" />
-          <ScalarProperty Name="ActivityTimestamp" ColumnName="ActivityTimestamp" />
-          <ScalarProperty Name="ActivityOutcome" ColumnName="ActivityOutcome" />
-          <ScalarProperty Name="ActivityNote" ColumnName="ActivityNote" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="SalesRecruitingWorkflowId" ColumnName="SalesRecruitingWorkflowId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="ReadUser" FunctionName="Model.Store.ReadUser">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadUser_Result">
@@ -884,6 +865,41 @@
           <ScalarProperty Name="guid" ColumnName="guid" />
           <ScalarProperty Name="enddate" ColumnName="enddate" />
           <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="SalesRecruitingActivityLogs">
+      <EntityTypeMapping TypeName="Model.SalesRecruitingActivityLog">
+        <MappingFragment StoreEntitySet="SalesRecruitingActivityLog">
+          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
+          <ScalarProperty Name="BillRate" ColumnName="BillRate" />
+          <ScalarProperty Name="PayRate" ColumnName="PayRate" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="ActivityTimestamp" ColumnName="ActivityTimestamp" />
+          <ScalarProperty Name="ActivityDetail" ColumnName="ActivityDetail" />
+          <ScalarProperty Name="ActivityNote" ColumnName="ActivityNote" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="SalesRecruitingWorkflowId" ColumnName="SalesRecruitingWorkflowId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
+    <FunctionImportMapping FunctionImportName="InsertRequirementCustomer" FunctionName="Model.Store.InsertRequirementCustomer" />
+    <FunctionImportMapping FunctionImportName="InsertSalesRecruitingActivityLog" FunctionName="Model.Store.InsertSalesRecruitingActivityLog" />
+    <FunctionImportMapping FunctionImportName="GetRequirementContactAssociation" FunctionName="Model.Store.GetRequirementContactAssociation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.GetRequirementContactAssociation_Result">
+          <ScalarProperty Name="jobId" ColumnName="jobId" />
+          <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="personId" ColumnName="personId" />
+          <ScalarProperty Name="errorString" ColumnName="errorString" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

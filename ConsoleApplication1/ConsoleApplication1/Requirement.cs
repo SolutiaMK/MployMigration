@@ -55,6 +55,8 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_IdUserClosed { get; set; }
         public Nullable<int> MPLOY_IdUserFilled { get; set; }
         public Nullable<int> MPLOY_IdUserRecruiter { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
     
         public virtual GlobalEntity GlobalEntity { get; set; }
         public virtual MaxTravelType MaxTravelType { get; set; }

@@ -40,8 +40,6 @@
         <AssociationConnector Association="Model.FK_Requirement_GlobalEntity" />
         <AssociationConnector Association="Model.FK_Requirement_MaxTravelType" />
         <AssociationConnector Association="Model.FK_RequirementNote_Requirement" />
-        <EntityTypeShape EntityType="Model.SalesRecruitingActivityLog" Width="1.5" PointX="3" PointY="5.75" />
-        <AssociationConnector Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity" />
         <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="6" PointY="10.875" />
         <AssociationConnector Association="Model.FKCandidatePersonId" />
         <AssociationConnector Association="Model.FK_Customer_Person" />
@@ -50,6 +48,8 @@
         <AssociationConnector Association="Model.FK_Person_PersonContactInformation1" />
         <AssociationConnector Association="Model.FK_PersonContactInformation_Person" />
         <AssociationConnector Association="Model.FKPersonMailAddressPersonId" />
+        <EntityTypeShape EntityType="Model.SalesRecruitingActivityLog" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

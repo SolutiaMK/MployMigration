@@ -18,15 +18,15 @@ namespace ConsoleApplication1
         public int SalesRecruitingWorkflowId { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string ActivityNote { get; set; }
-        public string ActivityOutcome { get; set; }
+        public string ActivityDetail { get; set; }
         public System.DateTime ActivityTimestamp { get; set; }
+        public int CreatedById { get; set; }
+        public string CreatedByName { get; set; }
         public Nullable<int> PayRate { get; set; }
         public Nullable<int> BillRate { get; set; }
         public Nullable<System.DateTime> ScheduledDateTime { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public int CreatedById { get; set; }
-        public string CreatedByName { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> MPLOY_ContactId { get; set; }
         public Nullable<int> MPLOY_UserId { get; set; }
     

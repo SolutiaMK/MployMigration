@@ -131,9 +131,9 @@ namespace ConsoleApplication1
 
                     //CandidateMigration.TestUpdate();
 
-                    //RequirementMigration.JobImport();
+                    RequirementMigration.JobImport();
                     
-                    HiringActivityMigration.ImportHiringActivity();
+                    //HiringActivityMigration.ImportHiringActivity();
 
 
 

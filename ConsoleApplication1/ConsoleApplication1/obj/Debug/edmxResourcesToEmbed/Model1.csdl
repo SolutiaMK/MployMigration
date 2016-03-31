@@ -316,15 +316,6 @@
       <Parameter Name="PreferredEmail" Mode="In" Type="Boolean" />
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
-      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="UpdateCandidateStatusType" ReturnType="Collection(Model.UpdateCandidateStatusType_Result)">
       <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
       <Parameter Name="newCandidateStatusTypeId" Mode="In" Type="Int32" />
@@ -333,25 +324,6 @@
       <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
       <Parameter Name="newRequirementStatusTypeId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertSalesRecruitingActivityLog" ReturnType="Collection(Int32)">
-      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
-      <Parameter Name="ActivityNote" Mode="In" Type="String" />
-      <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
-      <Parameter Name="PayRate" Mode="In" Type="Int32" />
-      <Parameter Name="BillRate" Mode="In" Type="Int32" />
-      <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <EntitySet Name="SalesRecruitingActivityLogs" EntityType="Model.SalesRecruitingActivityLog" />
-    <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
-      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
-      <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
-    </AssociationSet>
     <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result)" />
     <EntitySet Name="People" EntityType="Model.Person" />
     <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
@@ -386,6 +358,46 @@
     <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result)" />
     <FunctionImport Name="ReadJob" ReturnType="Collection(Model.ReadJob_Result)" />
     <FunctionImport Name="ReadtbJobFlow" ReturnType="Collection(Model.ReadtbJobFlow_Result)" />
+    <EntitySet Name="SalesRecruitingActivityLogs" EntityType="Model.SalesRecruitingActivityLog" />
+    <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
+    </AssociationSet>
+    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertRequirementCustomer" ReturnType="Collection(Int32)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="IsPrimaryContact" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertSalesRecruitingActivityLog" ReturnType="Collection(Int32)">
+      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+      <Parameter Name="ActivityNote" Mode="In" Type="String" />
+      <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
+      <Parameter Name="PayRate" Mode="In" Type="Int32" />
+      <Parameter Name="BillRate" Mode="In" Type="Int32" />
+      <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetRequirementContactAssociation" ReturnType="Collection(Model.GetRequirementContactAssociation_Result)">
+      <Parameter Name="currentJobId" Mode="In" Type="Int32" />
+      <Parameter Name="currentContact" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -618,7 +630,7 @@
     <Property Name="CreatedById" Type="Int32" />
     <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_SourceType" FromRole="SourceType" ToRole="Customer" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <Association Name="FKCandidateSourceId">
     <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
@@ -1263,7 +1275,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CompanyTypeId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyTypeId" Type="Int32" />
     <Property Name="IndustryId" Type="Int32" />
     <Property Name="RevenueSizeTypeId" Type="Int32" />
     <Property Name="EmployeeSizeTypeId" Type="Int32" />
@@ -1279,6 +1291,8 @@
     <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Company_GlobalEntity" FromRole="Company" ToRole="GlobalEntity" />
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
     <NavigationProperty Name="CompanyMailAddresses" Relationship="Model.FKOrganizaitonMailAddressCompanyId" FromRole="Company" ToRole="CompanyMailAddress" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="CompanyContactCompany">
     <End Type="Model.Company" Role="Company" Multiplicity="1" />
@@ -1628,6 +1642,8 @@
     <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="Requirement" ToRole="GlobalEntity" />
     <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
     <NavigationProperty Name="RequirementNotes" Relationship="Model.FK_RequirementNote_Requirement" FromRole="Requirement" ToRole="RequirementNote" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_Requirement_GlobalEntity">
     <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
@@ -1816,39 +1832,6 @@
     <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
   </ComplexType>
-  <EntityType Name="SalesRecruitingActivityLog">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalesRecruitingWorkflowId" Type="Int32" Nullable="false" />
-    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
-    <Property Name="ActivityNote" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Name="ActivityOutcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ActivityTimestamp" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="PayRate" Type="Int32" />
-    <Property Name="BillRate" Type="Int32" />
-    <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" Nullable="false" />
-    <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="MPLOY_ContactId" Type="Int32" />
-    <Property Name="MPLOY_UserId" Type="Int32" />
-    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="SalesRecruitingActivityLog" ToRole="GlobalEntity" />
-  </EntityType>
-  <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
-    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
-    <End Type="Model.SalesRecruitingActivityLog" Role="SalesRecruitingActivityLog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GlobalEntity">
-        <PropertyRef Name="GlobalEntityId" />
-      </Principal>
-      <Dependent Role="SalesRecruitingActivityLog">
-        <PropertyRef Name="GlobalEntityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="ReadUser_Result">
     <Property Type="Int32" Name="idUser" Nullable="false" />
     <Property Type="String" Name="username" Nullable="false" MaxLength="8" />
@@ -2077,5 +2060,45 @@
     <Property Type="Guid" Name="guid" Nullable="false" />
     <Property Type="DateTime" Name="enddate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="IdContact" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="SalesRecruitingActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalesRecruitingWorkflowId" Type="Int32" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="ActivityNote" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="ActivityDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ActivityTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" Nullable="false" />
+    <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayRate" Type="Int32" />
+    <Property Name="BillRate" Type="Int32" />
+    <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="MPLOY_UserId" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="SalesRecruitingActivityLog" ToRole="GlobalEntity" />
+  </EntityType>
+  <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.SalesRecruitingActivityLog" Role="SalesRecruitingActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="SalesRecruitingActivityLog">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetRequirementContactAssociation_Result">
+    <Property Type="Int32" Name="jobId" Nullable="true" />
+    <Property Type="Int32" Name="candidateId" Nullable="true" />
+    <Property Type="Int32" Name="customerId" Nullable="true" />
+    <Property Type="Int32" Name="personId" Nullable="true" />
+    <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>

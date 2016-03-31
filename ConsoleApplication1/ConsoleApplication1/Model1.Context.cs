@@ -44,8 +44,8 @@ namespace ConsoleApplication1
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<RequirementNote> RequirementNotes { get; set; }
         public virtual DbSet<Requirement> Requirements { get; set; }
-        public virtual DbSet<SalesRecruitingActivityLog> SalesRecruitingActivityLogs { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<SalesRecruitingActivityLog> SalesRecruitingActivityLogs { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetCompanyJobAssociation(Nullable<int> currentCompany)
         {
@@ -865,6 +865,57 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPersonContactInformation", personIdParameter, contactInformationTypeIdParameter, contactDataParameter, preferredPhoneParameter, preferredEmailParameter, modifiedByIdParameter);
         }
     
+        public virtual ObjectResult<UpdateCandidateStatusType_Result> UpdateCandidateStatusType(Nullable<int> mPLOY_ContactId, Nullable<int> newCandidateStatusTypeId)
+        {
+            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
+                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
+                new ObjectParameter("MPLOY_ContactId", typeof(int));
+    
+            var newCandidateStatusTypeIdParameter = newCandidateStatusTypeId.HasValue ?
+                new ObjectParameter("newCandidateStatusTypeId", newCandidateStatusTypeId) :
+                new ObjectParameter("newCandidateStatusTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateCandidateStatusType_Result>("UpdateCandidateStatusType", mPLOY_ContactIdParameter, newCandidateStatusTypeIdParameter);
+        }
+    
+        public virtual ObjectResult<UpdateRequirementStatusType_Result> UpdateRequirementStatusType(Nullable<int> mPLOY_JobId, Nullable<int> newRequirementStatusTypeId)
+        {
+            var mPLOY_JobIdParameter = mPLOY_JobId.HasValue ?
+                new ObjectParameter("MPLOY_JobId", mPLOY_JobId) :
+                new ObjectParameter("MPLOY_JobId", typeof(int));
+    
+            var newRequirementStatusTypeIdParameter = newRequirementStatusTypeId.HasValue ?
+                new ObjectParameter("newRequirementStatusTypeId", newRequirementStatusTypeId) :
+                new ObjectParameter("newRequirementStatusTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateRequirementStatusType_Result>("UpdateRequirementStatusType", mPLOY_JobIdParameter, newRequirementStatusTypeIdParameter);
+        }
+    
+        public virtual ObjectResult<ReadUser_Result> ReadUser()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadUser_Result>("ReadUser");
+        }
+    
+        public virtual ObjectResult<ReadOrganization_Result> ReadOrganization()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadOrganization_Result>("ReadOrganization");
+        }
+    
+        public virtual ObjectResult<ReadContact_Result> ReadContact()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContact_Result>("ReadContact");
+        }
+    
+        public virtual ObjectResult<ReadJob_Result> ReadJob()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadJob_Result>("ReadJob");
+        }
+    
+        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
+        }
+    
         public virtual ObjectResult<Nullable<int>> InsertRequirementCandidate(Nullable<int> requirementId, Nullable<int> candidateId, Nullable<int> requirementCandidateStatusTypeId, Nullable<System.DateTime> statusTypeDate, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
         {
             var requirementIdParameter = requirementId.HasValue ?
@@ -898,30 +949,33 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertRequirementCandidate", requirementIdParameter, candidateIdParameter, requirementCandidateStatusTypeIdParameter, statusTypeDateParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
         }
     
-        public virtual ObjectResult<UpdateCandidateStatusType_Result> UpdateCandidateStatusType(Nullable<int> mPLOY_ContactId, Nullable<int> newCandidateStatusTypeId)
+        public virtual ObjectResult<Nullable<int>> InsertRequirementCustomer(Nullable<int> requirementId, Nullable<int> customerId, Nullable<bool> isPrimaryContact, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
         {
-            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
-                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
-                new ObjectParameter("MPLOY_ContactId", typeof(int));
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
     
-            var newCandidateStatusTypeIdParameter = newCandidateStatusTypeId.HasValue ?
-                new ObjectParameter("newCandidateStatusTypeId", newCandidateStatusTypeId) :
-                new ObjectParameter("newCandidateStatusTypeId", typeof(int));
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateCandidateStatusType_Result>("UpdateCandidateStatusType", mPLOY_ContactIdParameter, newCandidateStatusTypeIdParameter);
-        }
+            var isPrimaryContactParameter = isPrimaryContact.HasValue ?
+                new ObjectParameter("IsPrimaryContact", isPrimaryContact) :
+                new ObjectParameter("IsPrimaryContact", typeof(bool));
     
-        public virtual ObjectResult<UpdateRequirementStatusType_Result> UpdateRequirementStatusType(Nullable<int> mPLOY_JobId, Nullable<int> newRequirementStatusTypeId)
-        {
-            var mPLOY_JobIdParameter = mPLOY_JobId.HasValue ?
-                new ObjectParameter("MPLOY_JobId", mPLOY_JobId) :
-                new ObjectParameter("MPLOY_JobId", typeof(int));
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
     
-            var newRequirementStatusTypeIdParameter = newRequirementStatusTypeId.HasValue ?
-                new ObjectParameter("newRequirementStatusTypeId", newRequirementStatusTypeId) :
-                new ObjectParameter("newRequirementStatusTypeId", typeof(int));
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateRequirementStatusType_Result>("UpdateRequirementStatusType", mPLOY_JobIdParameter, newRequirementStatusTypeIdParameter);
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertRequirementCustomer", requirementIdParameter, customerIdParameter, isPrimaryContactParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> InsertSalesRecruitingActivityLog(Nullable<int> salesRecruitingWorkflowId, string activityNote, string activityOutcome, Nullable<int> payRate, Nullable<int> billRate, Nullable<System.DateTime> scheduledDateTime, Nullable<System.DateTime> endDate, Nullable<System.DateTime> activityTimestamp, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_UserId, Nullable<int> mPLOY_JobId)
@@ -977,29 +1031,17 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertSalesRecruitingActivityLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter, mPLOY_JobIdParameter);
         }
     
-        public virtual ObjectResult<ReadUser_Result> ReadUser()
+        public virtual ObjectResult<GetRequirementContactAssociation_Result> GetRequirementContactAssociation(Nullable<int> currentJobId, Nullable<int> currentContact)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadUser_Result>("ReadUser");
-        }
+            var currentJobIdParameter = currentJobId.HasValue ?
+                new ObjectParameter("currentJobId", currentJobId) :
+                new ObjectParameter("currentJobId", typeof(int));
     
-        public virtual ObjectResult<ReadOrganization_Result> ReadOrganization()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadOrganization_Result>("ReadOrganization");
-        }
+            var currentContactParameter = currentContact.HasValue ?
+                new ObjectParameter("currentContact", currentContact) :
+                new ObjectParameter("currentContact", typeof(int));
     
-        public virtual ObjectResult<ReadContact_Result> ReadContact()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContact_Result>("ReadContact");
-        }
-    
-        public virtual ObjectResult<ReadJob_Result> ReadJob()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadJob_Result>("ReadJob");
-        }
-    
-        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementContactAssociation_Result>("GetRequirementContactAssociation", currentJobIdParameter, currentContactParameter);
         }
     }
 }
