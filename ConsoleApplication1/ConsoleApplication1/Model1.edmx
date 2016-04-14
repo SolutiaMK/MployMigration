@@ -719,6 +719,13 @@
           <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
           <Parameter Name="MployIdUser" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertCompanyBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedById" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertCompanyContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="ContactInformationTypeId" Type="int" Mode="In" />
@@ -740,6 +747,19 @@
           <Parameter Name="Note" Type="varchar(max)" Mode="In" />
           <Parameter Name="ModifiedById" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+          <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+          <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PayRate" Type="int" Mode="In" />
+          <Parameter Name="BillRate" Type="int" Mode="In" />
+          <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -751,6 +771,13 @@
           <Parameter Name="CreateDate" Type="datetime" Mode="In" />
           <Parameter Name="ModifiedById" Type="int" Mode="In" />
           <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertCustomerBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="ModifiedById" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertCustomerNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="CustomerId" Type="int" Mode="In" />
@@ -862,6 +889,20 @@
           <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
           <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
         </Function>
+        <Function Name="InsertSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
+          <Parameter Name="ModifiedById" Type="int" Mode="In" />
+          <Parameter Name="MPLOY_SkillId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertSkillCategoryMapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="SkillId" Type="int" Mode="In" />
+          <Parameter Name="SkillCategoryId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedById" Type="int" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="PersonId" Type="int" Mode="In" />
           <Parameter Name="FirstName" Type="varchar" Mode="In" />
@@ -876,9 +917,11 @@
         <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+        <Function Name="ReadContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+        <Function Name="ReadSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadSourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
         <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
@@ -1093,7 +1136,6 @@
             <Parameter Name="LoggedById" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ReadCandidateContractType" />
-          <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result1)" />
           <FunctionImport Name="ReadHiringActivity" ReturnType="Collection(Model.ReadHiringActivity_Result1)" />
           <FunctionImport Name="ReadSourceType" ReturnType="Collection(Model.ReadSourceType_Result3)" />
           <FunctionImport Name="UpdatePersonMployContactId">
@@ -1426,6 +1468,49 @@
             <Parameter Name="currentJobId" Mode="In" Type="Int32" />
             <Parameter Name="currentContact" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result)" />
+          <FunctionImport Name="InsertCustomerBranch" ReturnType="Collection(Int32)">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertContactLog" ReturnType="Collection(Int32)">
+            <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+            <Parameter Name="ActivityNote" Mode="In" Type="String" />
+            <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
+            <Parameter Name="PayRate" Mode="In" Type="Int32" />
+            <Parameter Name="BillRate" Mode="In" Type="Int32" />
+            <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReadSkill" ReturnType="Collection(Model.ReadSkill_Result)" />
+          <FunctionImport Name="InsertSkill" ReturnType="Collection(Model.InsertSkill_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_SkillId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertSkillCategoryMapping" ReturnType="Collection(Model.InsertSkillCategoryMapping_Result)">
+            <Parameter Name="SkillId" Mode="In" Type="Int32" />
+            <Parameter Name="SkillCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="ReadSourceType_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1448,20 +1533,6 @@
           <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Xdata" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ReadContactLog_Result">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdUser" Nullable="true" />
-          <Property Type="String" Name="Note" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ReadContactLog1_Result">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdUser" Nullable="true" />
-          <Property Type="String" Name="Note" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ReadHiringActivity1_Result">
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -1781,13 +1852,6 @@
           <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
           <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
           <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-        </ComplexType>
-        <ComplexType Name="ReadContactLog_Result1">
-          <Property Type="Int32" Name="IdContact" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdUser" Nullable="true" />
-          <Property Type="String" Name="Note" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ReadHiringActivity_Result1">
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -3129,6 +3193,40 @@
           <Property Type="Int32" Name="personId" Nullable="true" />
           <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="ReadContactLog_Result">
+          <Property Type="Int32" Name="idLog" Nullable="false" />
+          <Property Type="Int32" Name="idContact" Nullable="false" />
+          <Property Type="Int32" Name="idUser" Nullable="false" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Note" Nullable="false" MaxLength="Max" />
+          <Property Type="Int32" Name="idLogType" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReadSkill_Result">
+          <Property Type="Int32" Name="idSkill" Nullable="false" />
+          <Property Type="String" Name="Skill" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="idCategory" Nullable="false" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="seqno" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="InsertSkill_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_SkillId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="InsertSkillCategoryMapping_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="SkillId" Nullable="false" />
+          <Property Type="Int32" Name="SkillCategoryId" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4034,6 +4132,59 @@
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="personId" ColumnName="personId" />
                 <ScalarProperty Name="errorString" ColumnName="errorString" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadContactLog" FunctionName="Model.Store.ReadContactLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadContactLog_Result">
+                <ScalarProperty Name="idLog" ColumnName="idLog" />
+                <ScalarProperty Name="idContact" ColumnName="idContact" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="idLogType" ColumnName="idLogType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertCustomerBranch" FunctionName="Model.Store.InsertCustomerBranch" />
+          <FunctionImportMapping FunctionImportName="InsertCompanyBranch" FunctionName="Model.Store.InsertCompanyBranch" />
+          <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
+          <FunctionImportMapping FunctionImportName="ReadSkill" FunctionName="Model.Store.ReadSkill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ReadSkill_Result">
+                <ScalarProperty Name="idSkill" ColumnName="idSkill" />
+                <ScalarProperty Name="Skill" ColumnName="Skill" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="seqno" ColumnName="seqno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertSkill" FunctionName="Model.Store.InsertSkill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.InsertSkill_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="MPLOY_SkillId" ColumnName="MPLOY_SkillId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertSkillCategoryMapping" FunctionName="Model.Store.InsertSkillCategoryMapping">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.InsertSkillCategoryMapping_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="SkillCategoryId" ColumnName="SkillCategoryId" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

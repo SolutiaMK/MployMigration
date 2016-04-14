@@ -12,86 +12,9 @@ namespace ConsoleApplication1
     public class Program
     {        
 
-        /********************
-         * This is the main program to inport the data from the temp tables to the DB.
-         * The temp files are created by running the SSIS program 'BasicsLocalTransferFromMploy'. It will read in the Mploy CSV files and import the data into a temp table in the DB
-         * Then that temp data is imported to the correct tables by running this.
-         * 
-         * I have commented each section below. When I was running and testing this I would run one section at a time. (These all start in the Main.)
-         * 
-         * For example:
-         * Uncomment the 'Candidate Insert' section to import the data from the Mploy file 'Candidate'. 
-         * I tried to name each section according to the Mploy file name it was comming from.
-         * It is also in the order I imported everything in from top down to deal with dependencies. (starting in the main)
-        *********************/
-
         static Entities _db;
 
-        static Guid _globalEntityId;
-        static int _personId = 0;
-        static int _mailingAddressId = 0;
-        static int _candidateId = 0;
-        static List<KeyValuePair<int, string>> sourceList = new List<KeyValuePair<int, string>>();
-
-        static int _companyId = 0;
-        static int _companyMailingAddressId = 0;
-
-        private static int _contactId = 0;
-
-
-
-
-
-
-        //Takes in the current Candidate that is being added and the Candidate's associated person record
-        //Inserts the candidate record and returns the inserted candidate so it can be used later.
-        //public static Candidate InsertCandidateRecord(ConsoleApplication1.Model.Person candidateRecord, Person insertPerson)
-        //{
-        //    var insertedCandidate = new Candidate();
-
-
-        //    Candidate insertCandidate = new Candidate();
-        //    //Insert the current personId so the data is associated to the right person.
-        //    insertCandidate.PersonId = _personId;
-
-        //    ///////////////////////////  Parse XML  ////////////////////////////////////                        
-        //    //Calls a method to parse through the xdata column as long as it is not null.
-        //    if (candidateRecord.xdata != null)
-        //    {
-        //        insertCandidate = LookupValue.ParseXML(candidateRecord.xdata, _db, insertCandidate,
-        //            insertPerson);
-        //        //_db.People.Attach(insertPerson);
-        //        //_db.SaveChanges();
-        //    }
-        //    switch (candidateRecord.Status)
-        //    {
-        //        case "Active":
-        //            insertCandidate.CandidateStatusTypeId = 1;
-        //            break;
-        //        case "Inactive":
-        //            insertCandidate.CandidateStatusTypeId = 0;
-        //            break;
-        //        case "Not Being Considered":
-        //            insertCandidate.CandidateStatusTypeId = 2;
-        //            break;
-        //    }
-
-        //    //Method to lookup the SourceType from the Source column in the "Candidate" file to the corresponding SourceTypeId from the SoureType table in the DB
-        //    insertCandidate = LookupValue.FindSourceType(insertCandidate, candidateRecord.Source, sourceList);
-        //    insertCandidate.CreateDate = DateTime.Now;
-        //    insertCandidate.LastUpdated = DateTime.Now;
-
-        //    insertCandidate.ResumeSummary = candidateRecord.ResumeText;
-
-        //    //insertCandidate.IsActive = true;
-        //    insertCandidate.ModifiedById = 0;
-        //    insertCandidate.CreatedById = 0;
-
-
-        //    insertCandidate.GlobalEntityId = _globalEntityId;
-
-        //    return insertedCandidate;
-        //}
+        //static List<KeyValuePair<int, string>> sourceList = new List<KeyValuePair<int, string>>();
 
         static void Main(string[] args)
         {
@@ -99,29 +22,16 @@ namespace ConsoleApplication1
             {
                 try
                 {
-
-                    ////Reads in the Candidate record from the Temp table in the DB and uses our custom model.
-                    //var data = _db.ReadPerson().ToList(x => new Model.Person { FirstName = x.FirstName, LastName = x.LastName, MiddleName = x.MiddleName, Gender = x.Gender, Status = x.Status, Address = x.Address, City = x.City, 
-                    //    State = x.State, Zip = x.Zip, Email = x.Email, handle0type = x.handle0type, handle0text = x.handle0text, handle1type = x.handle1type, handle1text = x.handle1text, 
-                    //    handle2type = x.handle2type, handle2text = x.handle2text, handle3type = x.handle3type, handle3text = x.handle3text, xdata = x.xdata, Notes = x.Notes, ResumeText = x.ResumeText, Source = x.Source, IdContact = Convert.ToInt32(x.idcontact)});
-
-                    ////Read in and store the temp Organzation table from the DB:
-                    ////var organizationData = _db.ReadOrganization().ToList();
-                    
-                    ////Read in the temp Contact table from the DB:
-                    //var contactData = _db.ReadContact().ToList(x => new ConsoleApplication1.Model.Person { FirstName = x.FirstName, LastName = x.LastName, MiddleName = x.MiddleName, Gender = x.Gender, Address = x.Address, City = x.City, 
-                    //    State = x.State, Zip = x.Zip, Email = x.Email, handle0type = x.handle0type, handle0text = x.handle0text, handle1type = x.handle1type, handle1text = x.handle1text, 
-                    //    handle2type = x.handle2type, handle2text = x.handle2text, handle3type = x.handle3type, handle3text = x.handle3text, IdOrganization = Convert.ToInt32(x.IdOrganization), Title = x.Title, Created = Convert.ToDateTime(x.Created), IdContact = Convert.ToInt32(x.IdContact)});
-
-                    ////var jobData = _db.ReadJob().ToList();
-
-                    //var hiringActivityData = _db.ReadHiringActivity().ToList();
-
-                    //var contactLogData = _db.ReadContactLog().ToList();
-
-                    //Calls the GetSourceTypeList method to generate the list I use to find the source for each person
-                    sourceList = LookupValue.GetTypeIdList(sourceList);
-
+                    /**
+                     * The order of the migration:
+                     * User
+                     * Organization
+                     * Customer
+                     * Candidate
+                     * HiringActivity (tbJobFlow table in MPLOY)
+                     * ContactLog (tbContactLog table in MPLOY)
+                     * Skills
+                     **/
 
                     //UserMigration.UserImport();
 
@@ -131,145 +41,219 @@ namespace ConsoleApplication1
 
                     //CandidateMigration.TestUpdate();
 
-                    RequirementMigration.JobImport();
+                    //RequirementMigration.JobImport();
                     
                     //HiringActivityMigration.ImportHiringActivity();
 
+                    //ContactLogMigration.ImportContactLog();
+
+                    SkillsMigration.SkillsImport();
+                
+                }
+                catch
+                (Exception ex)
+                {                 
+                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with migration process in the Program.cs file."));
+                }
+            }
+            
+        }
+    }
+}
+
+//Old code, saving for now
+
+//Takes in the current Candidate that is being added and the Candidate's associated person record
+//Inserts the candidate record and returns the inserted candidate so it can be used later.
+//public static Candidate InsertCandidateRecord(ConsoleApplication1.Model.Person candidateRecord, Person insertPerson)
+//{
+//    var insertedCandidate = new Candidate();
 
 
+//    Candidate insertCandidate = new Candidate();
+//    //Insert the current personId so the data is associated to the right person.
+//    insertCandidate.PersonId = _personId;
+
+//    ///////////////////////////  Parse XML  ////////////////////////////////////                        
+//    //Calls a method to parse through the xdata column as long as it is not null.
+//    if (candidateRecord.xdata != null)
+//    {
+//        insertCandidate = LookupValue.ParseXML(candidateRecord.xdata, _db, insertCandidate,
+//            insertPerson);
+//        //_db.People.Attach(insertPerson);
+//        //_db.SaveChanges();
+//    }
+//    switch (candidateRecord.Status)
+//    {
+//        case "Active":
+//            insertCandidate.CandidateStatusTypeId = 1;
+//            break;
+//        case "Inactive":
+//            insertCandidate.CandidateStatusTypeId = 0;
+//            break;
+//        case "Not Being Considered":
+//            insertCandidate.CandidateStatusTypeId = 2;
+//            break;
+//    }
+
+//    //Method to lookup the SourceType from the Source column in the "Candidate" file to the corresponding SourceTypeId from the SoureType table in the DB
+//    insertCandidate = LookupValue.FindSourceType(insertCandidate, candidateRecord.Source, sourceList);
+//    insertCandidate.CreateDate = DateTime.Now;
+//    insertCandidate.LastUpdated = DateTime.Now;
+
+//    insertCandidate.ResumeSummary = candidateRecord.ResumeText;
+
+//    //insertCandidate.IsActive = true;
+//    insertCandidate.ModifiedById = 0;
+//    insertCandidate.CreatedById = 0;
 
 
+//    insertCandidate.GlobalEntityId = _globalEntityId;
+
+//    return insertedCandidate;
+//}
+
+////Reads in the Candidate record from the Temp table in the DB and uses our custom model.
+//var data = _db.ReadPerson().ToList(x => new Model.Person { FirstName = x.FirstName, LastName = x.LastName, MiddleName = x.MiddleName, Gender = x.Gender, Status = x.Status, Address = x.Address, City = x.City, 
+//    State = x.State, Zip = x.Zip, Email = x.Email, handle0type = x.handle0type, handle0text = x.handle0text, handle1type = x.handle1type, handle1text = x.handle1text, 
+//    handle2type = x.handle2type, handle2text = x.handle2text, handle3type = x.handle3type, handle3text = x.handle3text, xdata = x.xdata, Notes = x.Notes, ResumeText = x.ResumeText, Source = x.Source, IdContact = Convert.ToInt32(x.idcontact)});
+
+////Read in and store the temp Organzation table from the DB:
+////var organizationData = _db.ReadOrganization().ToList();
+
+////Read in the temp Contact table from the DB:
+//var contactData = _db.ReadContact().ToList(x => new ConsoleApplication1.Model.Person { FirstName = x.FirstName, LastName = x.LastName, MiddleName = x.MiddleName, Gender = x.Gender, Address = x.Address, City = x.City, 
+//    State = x.State, Zip = x.Zip, Email = x.Email, handle0type = x.handle0type, handle0text = x.handle0text, handle1type = x.handle1type, handle1text = x.handle1text, 
+//    handle2type = x.handle2type, handle2text = x.handle2text, handle3type = x.handle3type, handle3text = x.handle3text, IdOrganization = Convert.ToInt32(x.IdOrganization), Title = x.Title, Created = Convert.ToDateTime(x.Created), IdContact = Convert.ToInt32(x.IdContact)});
+
+////var jobData = _db.ReadJob().ToList();
+
+//var hiringActivityData = _db.ReadHiringActivity().ToList();
+
+//var contactLogData = _db.ReadContactLog().ToList();
+
+//////////////// Candidate Insert ////////////////
+//Read each person from the data
+//foreach (var record in data){
+//This 'if' is for testing:
+//if (record.LastName == "Larson" && record.FirstName == "Adam")
+//{
 
 
+//    ///////////////////////////  Person  ////////////////////////////////////
+//    //Call the insert Person method, return the insertPerson var to be used later.
+//    Person insertPerson = InsertPerson(record);
 
 
+//    ///////////////////////////////  ContactInformation  ////////////////////////////////////
+//    InsertContactInformation(record);
 
 
-
-                    
-
-                    //////////////// Candidate Insert ////////////////
-                    //Read each person from the data
-                    //foreach (var record in data){
-                        //This 'if' is for testing:
-                        //if (record.LastName == "Larson" && record.FirstName == "Adam")
-                        //{
-                            
-
-                    //    ///////////////////////////  Person  ////////////////////////////////////
-                    //    //Call the insert Person method, return the insertPerson var to be used later.
-                    //    Person insertPerson = InsertPerson(record);
+//    ///////////////////////////////  MailingAddress  ////////////////////////////////////
+//    InsertMailingAddress(record);
 
 
-                    //    ///////////////////////////////  ContactInformation  ////////////////////////////////////
-                    //    InsertContactInformation(record);
+//    //If the mailingAddressId & the personId > 0, then insert into PersonMailAddress & Candidate:
+//    if (_mailingAddressId > 0 && _personId > 0)
+//    {
+
+//        ///////////////////////////  PersonMailAddress  ////////////////////////////////////
+//        InsertPersonMailAddress(record);
 
 
-                    //    ///////////////////////////////  MailingAddress  ////////////////////////////////////
-                    //    InsertMailingAddress(record);
+//        //Global Entity
+//        //Candidate = EntityTypeId of 2
+//        int entityType = 2;
+//        GlobalEntity insertGlobalEntity = InsertGlobalEntity(record, entityType);
 
 
-                    //    //If the mailingAddressId & the personId > 0, then insert into PersonMailAddress & Candidate:
-                    //    if (_mailingAddressId > 0 && _personId > 0)
-                    //    {
+//        ///////////////////////////  Candidate  ////////////////////////////////////   
 
-                    //        ///////////////////////////  PersonMailAddress  ////////////////////////////////////
-                    //        InsertPersonMailAddress(record);
-
-
-                    //        //Global Entity
-                    //        //Candidate = EntityTypeId of 2
-                    //        int entityType = 2;
-                    //        GlobalEntity insertGlobalEntity = InsertGlobalEntity(record, entityType);
+//        //Calls the InsertCandidate function with the current person and candidate info.
+//        //Returns the candidate record to be saved to the database.
+//        var insertCandidate = InsertCandidateRecord(record, insertPerson);
 
 
-                    //        ///////////////////////////  Candidate  ////////////////////////////////////   
+//        //MOVED TO THE INSERTCANDIDATERECORD FUNCTION!!!!!!!!!
+//        //Candidate insertCandidate = new Candidate();
+//        ////Insert the current personId so the data is associated to the right person.
+//        //insertCandidate.PersonId = personId;
 
-                    //        //Calls the InsertCandidate function with the current person and candidate info.
-                    //        //Returns the candidate record to be saved to the database.
-                    //        var insertCandidate = InsertCandidateRecord(record, insertPerson);
-                                
-                   
-                    //        //MOVED TO THE INSERTCANDIDATERECORD FUNCTION!!!!!!!!!
-                    //        //Candidate insertCandidate = new Candidate();
-                    //        ////Insert the current personId so the data is associated to the right person.
-                    //        //insertCandidate.PersonId = personId;
+//        /////////////////////////////  Parse XML  ////////////////////////////////////                        
+//        ////Calls a method to parse through the xdata column as long as it is not null.
+//        //if (record.xdata != null)
+//        //{
+//        //    insertCandidate = LookupValue.ParseXML(record.xdata, _db, insertCandidate,
+//        //        insertPerson);
+//        //    //_db.People.Attach(insertPerson);
+//        //    //_db.SaveChanges();
+//        //}
+//        //switch (record.Status)
+//        //{
+//        //    case "Active":
+//        //        insertCandidate.CandidateStatusTypeId = 1;
+//        //        break;
+//        //    case "Inactive":
+//        //        insertCandidate.CandidateStatusTypeId = 0;
+//        //        break; 
+//        //    case "Not Being Considered":
+//        //        insertCandidate.CandidateStatusTypeId = 2;
+//        //        break;
+//        //}
 
-                    //        /////////////////////////////  Parse XML  ////////////////////////////////////                        
-                    //        ////Calls a method to parse through the xdata column as long as it is not null.
-                    //        //if (record.xdata != null)
-                    //        //{
-                    //        //    insertCandidate = LookupValue.ParseXML(record.xdata, _db, insertCandidate,
-                    //        //        insertPerson);
-                    //        //    //_db.People.Attach(insertPerson);
-                    //        //    //_db.SaveChanges();
-                    //        //}
-                    //        //switch (record.Status)
-                    //        //{
-                    //        //    case "Active":
-                    //        //        insertCandidate.CandidateStatusTypeId = 1;
-                    //        //        break;
-                    //        //    case "Inactive":
-                    //        //        insertCandidate.CandidateStatusTypeId = 0;
-                    //        //        break; 
-                    //        //    case "Not Being Considered":
-                    //        //        insertCandidate.CandidateStatusTypeId = 2;
-                    //        //        break;
-                    //        //}
+//        ////Method to lookup the SourceType from the Source column in the "Candidate" file to the corresponding SourceTypeId from the SoureType table in the DB
+//        //insertCandidate = LookupValue.FindSourceType(insertCandidate, record.Source, sourceList);
+//        //insertCandidate.CreateDate = DateTime.Now;
+//        //insertCandidate.LastUpdated = DateTime.Now;
 
-                    //        ////Method to lookup the SourceType from the Source column in the "Candidate" file to the corresponding SourceTypeId from the SoureType table in the DB
-                    //        //insertCandidate = LookupValue.FindSourceType(insertCandidate, record.Source, sourceList);
-                    //        //insertCandidate.CreateDate = DateTime.Now;
-                    //        //insertCandidate.LastUpdated = DateTime.Now;
+//        //insertCandidate.ResumeSummary = record.ResumeText;
 
-                    //        //insertCandidate.ResumeSummary = record.ResumeText;
+//        ////insertCandidate.IsActive = true;
+//        //insertCandidate.ModifiedById = 0;
+//        //insertCandidate.CreatedById = 0;
+//        ////////////////////////////////////////////// Moved to the InsertCandidateRecord function - END
+//        _db.Candidates.Add(insertCandidate);
+//        _db.SaveChanges();
 
-                    //        ////insertCandidate.IsActive = true;
-                    //        //insertCandidate.ModifiedById = 0;
-                    //        //insertCandidate.CreatedById = 0;
-                    //        ////////////////////////////////////////////// Moved to the InsertCandidateRecord function - END
-                    //        _db.Candidates.Add(insertCandidate);
-                    //        _db.SaveChanges();
+//        _candidateId = insertCandidate.Id;
+//    }
 
-                    //        _candidateId = insertCandidate.Id;
-                    //    }
-
-                    //    ///////////////////////////  CandidateNote  ////////////////////////////////////
-                    //    //Needs a type from the CandidateNoteType: 1 == Summary, 2 == Comments
-                    //    //Connects to Candidate from the CandidateId
+//    ///////////////////////////  CandidateNote  ////////////////////////////////////
+//    //Needs a type from the CandidateNoteType: 1 == Summary, 2 == Comments
+//    //Connects to Candidate from the CandidateId
 
 
-                    //    CandidateNote insertCandidateNote = new CandidateNote();
-                    //    insertCandidateNote.CandidateId = _candidateId;
-                    //    //Insert the Notes associated with current Candidate. If null, insert "None Provided"
-                    //    insertCandidateNote.Note = record.Notes ?? "None Provided";
+//    CandidateNote insertCandidateNote = new CandidateNote();
+//    insertCandidateNote.CandidateId = _candidateId;
+//    //Insert the Notes associated with current Candidate. If null, insert "None Provided"
+//    insertCandidateNote.Note = record.Notes ?? "None Provided";
 
 
-                    //    //insertCandidateNote.CommentDate = DateTime.Now; //(DateTime) record.CreatedDate;
-                    //    //Default the notes column to have the CandidateNoteTypeId to 2 because all the notes from Mploy should be comments.
-                    //    //insertCandidateNote.CandidateNoteTypeId = 2;
-                    //    insertCandidateNote.CreateDate = DateTime.Now;
-                    //    insertCandidateNote.LastUpdated = DateTime.Now;
-                            
-
-                    //    _db.CandidateNotes.Add(insertCandidateNote);
-                    //    _db.SaveChanges();
+//    //insertCandidateNote.CommentDate = DateTime.Now; //(DateTime) record.CreatedDate;
+//    //Default the notes column to have the CandidateNoteTypeId to 2 because all the notes from Mploy should be comments.
+//    //insertCandidateNote.CandidateNoteTypeId = 2;
+//    insertCandidateNote.CreateDate = DateTime.Now;
+//    insertCandidateNote.LastUpdated = DateTime.Now;
 
 
-                    //        //NOTE:
-                    //        //The only column I have not imported yet is the Title column.  
-                    //        //It should belong in JobHistory, but I sould import the Orginization file before inserting into the JobHistory table.
-                    //        //This will need to be accessed at some point, so I will need to decide how to save it or how to import files so that they can reference eachother.
-                         
+//    _db.CandidateNotes.Add(insertCandidateNote);
+//    _db.SaveChanges();
 
-                    //    _mailingAddressId = 0;
-                    //    _personId = 0;
-                    //    _candidateId = 0;
-                    ////}//End of the name catch
-                    //} 
-                    
- //End of the record foreach
-    //End of the Candidate insert
+
+//        //NOTE:
+//        //The only column I have not imported yet is the Title column.  
+//        //It should belong in JobHistory, but I sould import the Orginization file before inserting into the JobHistory table.
+//        //This will need to be accessed at some point, so I will need to decide how to save it or how to import files so that they can reference eachother.
+
+
+//    _mailingAddressId = 0;
+//    _personId = 0;
+//    _candidateId = 0;
+////}//End of the name catch
+//} 
+
+//End of the record foreach
+//End of the Candidate insert
 
 /*
 
@@ -715,117 +699,98 @@ namespace ConsoleApplication1
                                 /****************** End the Job insert **************************#1#
 */
 
+///////////////////////////  ContactLog File Inserts ////////////////////////////////////
+/****************** Start the ContactLog insert ***************************/
+//foreach (var contactLogRecord in contactLogData)
+//{
+//    //if (contactLogRecord.IdContact == 53)
+//    //{
+//    ActivityLog insertActivityLog = new ActivityLog();
 
+//    var returnedId = _db.GetContactLogAssociation(contactLogRecord.IdContact).ToList();
+//    insertActivityLog.PersonId = Convert.ToInt32(returnedId[0]);
+//    //Skip the contacts from Mploy that are cadidates for now. Candidate records do not have the needed Mploy Ids associaed to them yet in our db.
+//    //I need to rerun the Candidate insert to do this and I a waiting b/c it takes so long.
+//    if (insertActivityLog.PersonId == 0)
+//    {
+//        continue;                          
+//    }
+//    //insertActivityLog.ActivityLogTypeId =;
+//    insertActivityLog.ActivityLogDate = Convert.ToDateTime(contactLogRecord.CreatedDate);
+//    insertActivityLog.CreateDate = Convert.ToDateTime(contactLogRecord.CreatedDate);
+//    insertActivityLog.LastUpdated = DateTime.Now;
+//    //Insert the contactLog notes and if the notes column is null, then insert "None Available"
+//    insertActivityLog.Notes = contactLogRecord.Note ?? "None Available";
 
+//    /*
+//     * ActivityLogType Id & Description:
+//    1.	Sent Email
+//    2.	Received Email 
+//    3.	Spoke with
+//    4.	Sent Linkedin InMail
+//    5.	Received LinkedIn InMail
+//    6.	Left VoiceMail
+//    7.	Status Changed
+//    8.	Received Voicemail   
+//    9	Schedule Call
+//    10.	Other Log Entry
+//    11.	Met With
+//    12.	Sent InMail
+//    */
 
-                            ///////////////////////////  ContactLog File Inserts ////////////////////////////////////
-                            /****************** Start the ContactLog insert ***************************/
-                            //foreach (var contactLogRecord in contactLogData)
-                            //{
-                            //    //if (contactLogRecord.IdContact == 53)
-                            //    //{
-                            //    ActivityLog insertActivityLog = new ActivityLog();
+//    switch (contactLogRecord.LogType)
+//    {
+//        case "Sent Email":
+//            insertActivityLog.ActivityLogTypeId = 1;
+//            break;
+//        case "Left Voicemail":
+//            insertActivityLog.ActivityLogTypeId = 6;
+//            break;
+//        case "Received Email":
+//            insertActivityLog.ActivityLogTypeId = 2;
+//            break;
+//        case "Schedule Call":
+//            insertActivityLog.ActivityLogTypeId = 9;
+//            break;
+//        case "Spoke With":
+//            insertActivityLog.ActivityLogTypeId = 3;
+//            break;
+//        case "Status Changed":
+//            insertActivityLog.ActivityLogTypeId = 7;
+//            break;
+//        case "Other Log Entry":
+//            insertActivityLog.ActivityLogTypeId = 10;
+//            break;
+//        case "Met With":
+//            insertActivityLog.ActivityLogTypeId = 11;
+//            break;
+//        case "Sent InMail":
+//            insertActivityLog.ActivityLogTypeId = 12;
+//            break;
+//        default:
+//            insertActivityLog.ActivityLogTypeId = 10;
+//            break;
+//    }
 
-                            //    var returnedId = _db.GetContactLogAssociation(contactLogRecord.IdContact).ToList();
-                            //    insertActivityLog.PersonId = Convert.ToInt32(returnedId[0]);
-                            //    //Skip the contacts from Mploy that are cadidates for now. Candidate records do not have the needed Mploy Ids associaed to them yet in our db.
-                            //    //I need to rerun the Candidate insert to do this and I a waiting b/c it takes so long.
-                            //    if (insertActivityLog.PersonId == 0)
-                            //    {
-                            //        continue;                          
-                            //    }
-                            //    //insertActivityLog.ActivityLogTypeId =;
-                            //    insertActivityLog.ActivityLogDate = Convert.ToDateTime(contactLogRecord.CreatedDate);
-                            //    insertActivityLog.CreateDate = Convert.ToDateTime(contactLogRecord.CreatedDate);
-                            //    insertActivityLog.LastUpdated = DateTime.Now;
-                            //    //Insert the contactLog notes and if the notes column is null, then insert "None Available"
-                            //    insertActivityLog.Notes = contactLogRecord.Note ?? "None Available";
+//   /* switch (contactLogRecord.IdUser)
+//    {
+//        case 5:
+//            insertActivityLog.ModifiedById = 24;
+//            break;
+//        case 6:
+//            insertActivityLog.ModifiedById = 
 
-                            //    /*
-                            //     * ActivityLogType Id & Description:
-                            //    1.	Sent Email
-                            //    2.	Received Email 
-                            //    3.	Spoke with
-                            //    4.	Sent Linkedin InMail
-                            //    5.	Received LinkedIn InMail
-                            //    6.	Left VoiceMail
-                            //    7.	Status Changed
-                            //    8.	Received Voicemail   
-                            //    9	Schedule Call
-                            //    10.	Other Log Entry
-                            //    11.	Met With
-                            //    12.	Sent InMail
-                            //    */
+//    }*/
+//    insertActivityLog.ModifiedById = 1;
 
-                            //    switch (contactLogRecord.LogType)
-                            //    {
-                            //        case "Sent Email":
-                            //            insertActivityLog.ActivityLogTypeId = 1;
-                            //            break;
-                            //        case "Left Voicemail":
-                            //            insertActivityLog.ActivityLogTypeId = 6;
-                            //            break;
-                            //        case "Received Email":
-                            //            insertActivityLog.ActivityLogTypeId = 2;
-                            //            break;
-                            //        case "Schedule Call":
-                            //            insertActivityLog.ActivityLogTypeId = 9;
-                            //            break;
-                            //        case "Spoke With":
-                            //            insertActivityLog.ActivityLogTypeId = 3;
-                            //            break;
-                            //        case "Status Changed":
-                            //            insertActivityLog.ActivityLogTypeId = 7;
-                            //            break;
-                            //        case "Other Log Entry":
-                            //            insertActivityLog.ActivityLogTypeId = 10;
-                            //            break;
-                            //        case "Met With":
-                            //            insertActivityLog.ActivityLogTypeId = 11;
-                            //            break;
-                            //        case "Sent InMail":
-                            //            insertActivityLog.ActivityLogTypeId = 12;
-                            //            break;
-                            //        default:
-                            //            insertActivityLog.ActivityLogTypeId = 10;
-                            //            break;
-                            //    }
+//    insertActivityLog.IsActive = true;
 
-                            //   /* switch (contactLogRecord.IdUser)
-                            //    {
-                            //        case 5:
-                            //            insertActivityLog.ModifiedById = 24;
-                            //            break;
-                            //        case 6:
-                            //            insertActivityLog.ModifiedById = 
+//    _db.ActivityLogs.Add(insertActivityLog);
+//    _db.SaveChanges();
+//    //}
 
-                            //    }*/
-                            //    insertActivityLog.ModifiedById = 1;
-
-                            //    insertActivityLog.IsActive = true;
-
-                            //    _db.ActivityLogs.Add(insertActivityLog);
-                            //    _db.SaveChanges();
-                            //    //}
-
-                            //}
-                            /****************** End the ContactLog insert ***************************/
-
-
-                  
-                }
-                catch
-                (Exception ex)
-                {                 
-                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with PersonId: " + _personId + ", and MailingAddressId: " + _mailingAddressId));
-                }
-            }
-            
-        }
-    }
-}
-
-//Old code, saving for now
+//}
+/****************** End the ContactLog insert ***************************/
 /**
         //Insert into GlobalEntity:
         static GlobalEntity InsertGlobalEntity(Model.Person record, int entityType)

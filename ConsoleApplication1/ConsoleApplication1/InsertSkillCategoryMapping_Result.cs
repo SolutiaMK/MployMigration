@@ -11,13 +11,14 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class ReadContactLog_Result
+    public partial class InsertSkillCategoryMapping_Result
     {
-        public int idLog { get; set; }
-        public int idContact { get; set; }
-        public int idUser { get; set; }
-        public System.DateTime created { get; set; }
-        public string Note { get; set; }
-        public int idLogType { get; set; }
+        public int Id { get; set; }
+        public int SkillId { get; set; }
+        public int SkillCategoryId { get; set; }
+        public System.DateTime LastUpdated { get; set; }
+        public Nullable<int> ModifiedById { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<int> CreatedById { get; set; }
     }
 }

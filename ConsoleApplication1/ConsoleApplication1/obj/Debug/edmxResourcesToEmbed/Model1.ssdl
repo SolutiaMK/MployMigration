@@ -714,6 +714,13 @@
     <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
     <Parameter Name="MployIdUser" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertCompanyBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertCompanyContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="ContactInformationTypeId" Type="int" Mode="In" />
@@ -735,6 +742,19 @@
     <Parameter Name="Note" Type="varchar(max)" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+    <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PayRate" Type="int" Mode="In" />
+    <Parameter Name="BillRate" Type="int" Mode="In" />
+    <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -746,6 +766,13 @@
     <Parameter Name="CreateDate" Type="datetime" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
     <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertCustomerBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertCustomerNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CustomerId" Type="int" Mode="In" />
@@ -871,6 +898,7 @@
   <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />

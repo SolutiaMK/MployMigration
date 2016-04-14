@@ -98,6 +98,10 @@ namespace ConsoleApplication1
                                 var noteResult = _db.InsertCompanyNote(_companyId, orgRecord.ExternalNote, 0);
                             }
 
+                            //Insert into the CompanyBranch table
+                            var branchId = ImportHelperMethods.GetBranchId(orgRecord.State, orgRecord.City);
+                            var companyBranchResult = _db.InsertCompanyBranch(_companyId, branchId, orgRecord.Created, 0,
+                                orgRecord.idUserOwner);
                         }
                         else
                         {

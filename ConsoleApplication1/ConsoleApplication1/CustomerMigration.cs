@@ -114,9 +114,10 @@ namespace ConsoleApplication1
 
                             //Insert as a Customer
                             //Returns the Customer record
+                            //***********CHANGED THE MPLOY Org Id to the IDORGANIZATION LIKE IT SHOULD BE...
                             var customerResult =
                                 _db.InsertCustomer(orgId, _personId, sourceTypeIdForContact, customerTypeId,
-                                    contactRecord.Title, null, null, contactRecord.Created, 0, orgId).ToList();
+                                    contactRecord.Title, null, null, contactRecord.Created, 0, contactRecord.IdOrganization).ToList();
                             foreach (var item in customerResult)
                             {
                                 _customerId = item.Id;
@@ -173,6 +174,10 @@ namespace ConsoleApplication1
                                     _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.CreatedDate,
                                         0).ToList();
                             }
+
+                            //Insert the CustomerBranch record:
+                            var branchId = ImportHelperMethods.GetBranchId(contactRecord.State, contactRecord.City);
+                            var customerBranchResult = _db.InsertCustomerBranch(_customerId, branchId, contactRecord.Created, 0, contactRecord.IdUser);
 
                             Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
                                             contactRecord.LastName + " Customer Id: " + _customerId);

@@ -903,5 +903,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadContactLog" FunctionName="Model.Store.ReadContactLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadContactLog_Result">
+          <ScalarProperty Name="idLog" ColumnName="idLog" />
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="idLogType" ColumnName="idLogType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCustomerBranch" FunctionName="Model.Store.InsertCustomerBranch" />
+    <FunctionImportMapping FunctionImportName="InsertCompanyBranch" FunctionName="Model.Store.InsertCompanyBranch" />
+    <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
   </EntityContainerMapping>
 </Mapping>

@@ -11,12 +11,13 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class ReadContactLog_Result1
+    public partial class ReadSkill_Result
     {
-        public Nullable<int> IdContact { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string LogType { get; set; }
-        public Nullable<int> IdUser { get; set; }
-        public string Note { get; set; }
+        public int idSkill { get; set; }
+        public string Skill { get; set; }
+        public string Description { get; set; }
+        public int idCategory { get; set; }
+        public System.DateTime created { get; set; }
+        public int seqno { get; set; }
     }
 }

@@ -11,12 +11,14 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class ReadContactLog1_Result
+    public partial class InsertSkill_Result
     {
-        public Nullable<int> IdContact { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string LogType { get; set; }
-        public Nullable<int> IdUser { get; set; }
-        public string Note { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public System.DateTime LastUpdated { get; set; }
+        public Nullable<int> ModifiedById { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<int> CreatedById { get; set; }
+        public Nullable<int> MPLOY_SkillId { get; set; }
     }
 }

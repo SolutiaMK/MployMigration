@@ -65,7 +65,6 @@
       <Parameter Name="LoggedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadCandidateContractType" />
-    <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result1)" />
     <FunctionImport Name="ReadHiringActivity" ReturnType="Collection(Model.ReadHiringActivity_Result1)" />
     <FunctionImport Name="ReadSourceType" ReturnType="Collection(Model.ReadSourceType_Result3)" />
     <FunctionImport Name="UpdatePersonMployContactId">
@@ -398,6 +397,34 @@
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result)" />
+    <FunctionImport Name="InsertCustomerBranch" ReturnType="Collection(Int32)">
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertContactLog" ReturnType="Collection(Int32)">
+      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
+      <Parameter Name="ActivityNote" Mode="In" Type="String" />
+      <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
+      <Parameter Name="PayRate" Mode="In" Type="Int32" />
+      <Parameter Name="BillRate" Mode="In" Type="Int32" />
+      <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -420,20 +447,6 @@
     <Property Type="String" Name="Outcome" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="EventType" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Xdata" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="ReadContactLog_Result">
-    <Property Type="Int32" Name="IdContact" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdUser" Nullable="true" />
-    <Property Type="String" Name="Note" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="ReadContactLog1_Result">
-    <Property Type="Int32" Name="IdContact" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdUser" Nullable="true" />
-    <Property Type="String" Name="Note" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ReadHiringActivity1_Result">
     <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -753,13 +766,6 @@
     <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
     <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
     <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-  </ComplexType>
-  <ComplexType Name="ReadContactLog_Result1">
-    <Property Type="Int32" Name="IdContact" Nullable="true" />
-    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="LogType" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdUser" Nullable="true" />
-    <Property Type="String" Name="Note" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ReadHiringActivity_Result1">
     <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -2100,5 +2106,13 @@
     <Property Type="Int32" Name="customerId" Nullable="true" />
     <Property Type="Int32" Name="personId" Nullable="true" />
     <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadContactLog_Result">
+    <Property Type="Int32" Name="idLog" Nullable="false" />
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="Int32" Name="idUser" Nullable="false" />
+    <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Note" Nullable="false" MaxLength="Max" />
+    <Property Type="Int32" Name="idLogType" Nullable="false" />
   </ComplexType>
 </Schema>

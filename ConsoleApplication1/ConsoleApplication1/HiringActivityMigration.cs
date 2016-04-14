@@ -56,61 +56,7 @@ namespace ConsoleApplication1
                             Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
                                             " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
                                             activityRecord.idJobFlow + " *****");
-                        }
-                        //else if (_candidateId == 0) //If the CandidateId is null:
-                        //{
-                        //    //Handle adding the idContact from this record as a new person and Candidate first.
-                        //    var data = _db.ReadPerson().ToList(x => new Model.Person
-                        //    {
-                        //        FirstName = x.FirstName,
-                        //        LastName = x.LastName,
-                        //        MiddleName = x.MiddleName,
-                        //        Gender = x.Gender,
-                        //        //Status = x.Status,
-                        //        Address = x.Address,
-                        //        City = x.City,
-                        //        State = x.State,
-                        //        Zip = x.Zip,
-                        //        Email = x.eMail,
-                        //        handle0type = Convert.ToInt32(x.handle0type),
-                        //        handle0text = x.handle0text,
-                        //        handle1type = Convert.ToInt32(x.handle1type),
-                        //        handle1text = x.handle1text,
-                        //        handle2type = Convert.ToInt32(x.handle2type),
-                        //        handle2text = x.handle2text,
-                        //        handle3type = Convert.ToInt32(x.handle3type),
-                        //        handle3text = x.handle3text,
-                        //        xdata = x.Xdata,
-                        //        Notes = x.Notes,
-                        //        ResumeText = x.ResumeText,
-                        //        //Source = x.Source,
-                        //        IdContact = Convert.ToInt32(x.idContact),
-                        //        IdContactType = Convert.ToInt32(x.idContactType),
-                        //        IdUser = Convert.ToInt32((x.idUserOwner)),
-                        //        Source = Convert.ToInt32(x.IdSource),
-                        //        IdStatus = x.IdStatus,
-                        //        Created = Convert.ToDateTime(x.Created)
-                        //    });
-                        //    //get the record for the contactId we are looking at:
-                        //    var mployContactResult = data.Where(d => d.IdContact == activityRecord.IdContact).ToList();
-                        //    foreach (var item in mployContactResult)
-                        //    {
-                        //        //Skip Gloria Sharp:
-                        //        if (item.IdContact != 4226)
-                        //        {
-                        //            //Insert as person maybe?
-
-                        //            //CandidateMigration.InsertCandidate(item);
-                        //        }
-                                
-                        //    }
-                            
-                        //}
-                        //else if (_candidateId == 0){  //If the CandidateId is null:
-                        //    Debug.WriteLine("\n" + errorString + " - No CandidateId " + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
-                        //                    " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
-                        //                    activityRecord.idJobFlow + " *****");
-                        //}
+                        }                        
                         else 
                         {
                             //Continue like normal:                
@@ -406,3 +352,58 @@ namespace ConsoleApplication1
         }
     }
 }
+//After the If and before the else in the main section:
+//else if (_candidateId == 0) //If the CandidateId is null:
+//{
+//    //Handle adding the idContact from this record as a new person and Candidate first.
+//    var data = _db.ReadPerson().ToList(x => new Model.Person
+//    {
+//        FirstName = x.FirstName,
+//        LastName = x.LastName,
+//        MiddleName = x.MiddleName,
+//        Gender = x.Gender,
+//        //Status = x.Status,
+//        Address = x.Address,
+//        City = x.City,
+//        State = x.State,
+//        Zip = x.Zip,
+//        Email = x.eMail,
+//        handle0type = Convert.ToInt32(x.handle0type),
+//        handle0text = x.handle0text,
+//        handle1type = Convert.ToInt32(x.handle1type),
+//        handle1text = x.handle1text,
+//        handle2type = Convert.ToInt32(x.handle2type),
+//        handle2text = x.handle2text,
+//        handle3type = Convert.ToInt32(x.handle3type),
+//        handle3text = x.handle3text,
+//        xdata = x.Xdata,
+//        Notes = x.Notes,
+//        ResumeText = x.ResumeText,
+//        //Source = x.Source,
+//        IdContact = Convert.ToInt32(x.idContact),
+//        IdContactType = Convert.ToInt32(x.idContactType),
+//        IdUser = Convert.ToInt32((x.idUserOwner)),
+//        Source = Convert.ToInt32(x.IdSource),
+//        IdStatus = x.IdStatus,
+//        Created = Convert.ToDateTime(x.Created)
+//    });
+//    //get the record for the contactId we are looking at:
+//    var mployContactResult = data.Where(d => d.IdContact == activityRecord.IdContact).ToList();
+//    foreach (var item in mployContactResult)
+//    {
+//        //Skip Gloria Sharp:
+//        if (item.IdContact != 4226)
+//        {
+//            //Insert as person maybe?
+
+//            //CandidateMigration.InsertCandidate(item);
+//        }
+
+//    }
+
+//}
+//else if (_candidateId == 0){  //If the CandidateId is null:
+//    Debug.WriteLine("\n" + errorString + " - No CandidateId " + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+//                    " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+//                    activityRecord.idJobFlow + " *****");
+//}
