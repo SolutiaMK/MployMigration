@@ -282,6 +282,7 @@
     <EntitySetMapping Name="Companies">
       <EntityTypeMapping TypeName="Model.Company">
         <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
@@ -733,6 +734,7 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="Model.Person">
         <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PreferredHomeMailAddressId" ColumnName="PreferredHomeMailAddressId" />
           <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
           <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
           <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
@@ -903,6 +905,45 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
+    <FunctionImportMapping FunctionImportName="ReadSkill" FunctionName="Model.Store.ReadSkill">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadSkill_Result">
+          <ScalarProperty Name="idSkill" ColumnName="idSkill" />
+          <ScalarProperty Name="Skill" ColumnName="Skill" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="seqno" ColumnName="seqno" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertSkillCategoryMapping" FunctionName="Model.Store.InsertSkillCategoryMapping">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertSkillCategoryMapping_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+          <ScalarProperty Name="SkillCategoryId" ColumnName="SkillCategoryId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertSkill" FunctionName="Model.Store.InsertSkill">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertSkill_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_SkillId" ColumnName="MPLOY_SkillId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ReadContactLog" FunctionName="Model.Store.ReadContactLog">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadContactLog_Result">
@@ -915,8 +956,55 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertCustomerBranch" FunctionName="Model.Store.InsertCustomerBranch" />
-    <FunctionImportMapping FunctionImportName="InsertCompanyBranch" FunctionName="Model.Store.InsertCompanyBranch" />
-    <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
+    <FunctionImportMapping FunctionImportName="InsertPersonSkill" FunctionName="Model.Store.InsertPersonSkill">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertPersonSkill_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+          <ScalarProperty Name="ExpertiseLevelTypeId" ColumnName="ExpertiseLevelTypeId" />
+          <ScalarProperty Name="ExperienceInMonths" ColumnName="ExperienceInMonths" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadContactSkill" FunctionName="Model.Store.ReadContactSkill">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadContactSkill_Result">
+          <ScalarProperty Name="idContactSkill" ColumnName="idContactSkill" />
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="idSkill" ColumnName="idSkill" />
+          <ScalarProperty Name="idSkillLevel" ColumnName="idSkillLevel" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertPersonTypicalRole" FunctionName="Model.Store.InsertPersonTypicalRole">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertPersonTypicalRole_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="TypicalRoleId" ColumnName="TypicalRoleId" />
+          <ScalarProperty Name="InterestLevelTypeId" ColumnName="InterestLevelTypeId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadIntersectSkillCategoryMapping" FunctionName="Model.Store.ReadIntersectSkillCategoryMapping">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadIntersectSkillCategoryMapping_Result">
+          <ScalarProperty Name="PersonSkillId" ColumnName="PersonSkillId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+          <ScalarProperty Name="SkillCategoryId" ColumnName="SkillCategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

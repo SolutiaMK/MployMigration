@@ -61,5 +61,7 @@ namespace ConsoleApplication1
         public virtual GlobalEntity GlobalEntity { get; set; }
         public virtual MaxTravelType MaxTravelType { get; set; }
         public virtual ICollection<RequirementNote> RequirementNotes { get; set; }
+        public virtual Requirement Requirement1 { get; set; }
+        public virtual Requirement Requirement2 { get; set; }
     }
 }

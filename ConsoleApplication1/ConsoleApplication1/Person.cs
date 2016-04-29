@@ -40,6 +40,7 @@ namespace ConsoleApplication1
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_ContactId { get; set; }
         public Nullable<int> MPLOY_UserId { get; set; }
+        public Nullable<int> PreferredHomeMailAddressId { get; set; }
     
         public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }

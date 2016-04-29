@@ -47,7 +47,11 @@ namespace ConsoleApplication1
 
                     //ContactLogMigration.ImportContactLog();
 
-                    SkillsMigration.SkillsImport();
+                    //SkillsMigration.SkillsImport();
+
+                    //PersonSkillMigration.PersonSkillsImport();
+                    //Adds a record to the PersonTypicalRole table after the PersonSkill table is populated:
+                    PersonTypicalRole.AddPersonTypicalRoleRecord();
                 
                 }
                 catch

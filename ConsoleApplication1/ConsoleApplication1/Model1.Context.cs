@@ -1039,11 +1039,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementContactAssociation_Result>("GetRequirementContactAssociation", currentJobIdParameter, currentContactParameter);
         }
     
-        public virtual ObjectResult<ReadContactLog_Result> ReadContactLog()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContactLog_Result>("ReadContactLog");
-        }
-    
         public virtual ObjectResult<Nullable<int>> InsertCustomerBranch(Nullable<int> customerId, Nullable<int> branchId, Nullable<System.DateTime> createDate, Nullable<int> modifiedById, Nullable<int> mPLOY_UserId)
         {
             var customerIdParameter = customerId.HasValue ?
@@ -1148,6 +1143,31 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadSkill_Result>("ReadSkill");
         }
     
+        public virtual ObjectResult<InsertSkillCategoryMapping_Result> InsertSkillCategoryMapping(Nullable<int> skillId, Nullable<int> skillCategoryId, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_IdUser)
+        {
+            var skillIdParameter = skillId.HasValue ?
+                new ObjectParameter("SkillId", skillId) :
+                new ObjectParameter("SkillId", typeof(int));
+    
+            var skillCategoryIdParameter = skillCategoryId.HasValue ?
+                new ObjectParameter("SkillCategoryId", skillCategoryId) :
+                new ObjectParameter("SkillCategoryId", typeof(int));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var mPLOY_IdUserParameter = mPLOY_IdUser.HasValue ?
+                new ObjectParameter("MPLOY_IdUser", mPLOY_IdUser) :
+                new ObjectParameter("MPLOY_IdUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertSkillCategoryMapping_Result>("InsertSkillCategoryMapping", skillIdParameter, skillCategoryIdParameter, modifiedByIdParameter, createDateParameter, mPLOY_IdUserParameter);
+        }
+    
         public virtual ObjectResult<InsertSkill_Result> InsertSkill(string name, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_IdUser, Nullable<int> modifiedById, Nullable<int> mPLOY_SkillId)
         {
             var nameParameter = name != null ?
@@ -1173,29 +1193,65 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertSkill_Result>("InsertSkill", nameParameter, createDateParameter, mPLOY_IdUserParameter, modifiedByIdParameter, mPLOY_SkillIdParameter);
         }
     
-        public virtual ObjectResult<InsertSkillCategoryMapping_Result> InsertSkillCategoryMapping(Nullable<int> skillId, Nullable<int> skillCategoryId, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_IdUser)
+        public virtual ObjectResult<ReadContactLog_Result> ReadContactLog()
         {
-            var skillIdParameter = skillId.HasValue ?
-                new ObjectParameter("SkillId", skillId) :
-                new ObjectParameter("SkillId", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContactLog_Result>("ReadContactLog");
+        }
     
-            var skillCategoryIdParameter = skillCategoryId.HasValue ?
-                new ObjectParameter("SkillCategoryId", skillCategoryId) :
-                new ObjectParameter("SkillCategoryId", typeof(int));
+        public virtual ObjectResult<InsertPersonSkill_Result> InsertPersonSkill(Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_SkillId, Nullable<int> expertiseLevelTypeId, Nullable<int> experienceInMonths, Nullable<int> modifiedById)
+        {
+            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
+                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
+                new ObjectParameter("MPLOY_ContactId", typeof(int));
+    
+            var mPLOY_SkillIdParameter = mPLOY_SkillId.HasValue ?
+                new ObjectParameter("MPLOY_SkillId", mPLOY_SkillId) :
+                new ObjectParameter("MPLOY_SkillId", typeof(int));
+    
+            var expertiseLevelTypeIdParameter = expertiseLevelTypeId.HasValue ?
+                new ObjectParameter("ExpertiseLevelTypeId", expertiseLevelTypeId) :
+                new ObjectParameter("ExpertiseLevelTypeId", typeof(int));
+    
+            var experienceInMonthsParameter = experienceInMonths.HasValue ?
+                new ObjectParameter("ExperienceInMonths", experienceInMonths) :
+                new ObjectParameter("ExperienceInMonths", typeof(int));
     
             var modifiedByIdParameter = modifiedById.HasValue ?
                 new ObjectParameter("ModifiedById", modifiedById) :
                 new ObjectParameter("ModifiedById", typeof(int));
     
-            var createDateParameter = createDate.HasValue ?
-                new ObjectParameter("CreateDate", createDate) :
-                new ObjectParameter("CreateDate", typeof(System.DateTime));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertPersonSkill_Result>("InsertPersonSkill", mPLOY_ContactIdParameter, mPLOY_SkillIdParameter, expertiseLevelTypeIdParameter, experienceInMonthsParameter, modifiedByIdParameter);
+        }
     
-            var mPLOY_IdUserParameter = mPLOY_IdUser.HasValue ?
-                new ObjectParameter("MPLOY_IdUser", mPLOY_IdUser) :
-                new ObjectParameter("MPLOY_IdUser", typeof(int));
+        public virtual ObjectResult<ReadContactSkill_Result> ReadContactSkill()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadContactSkill_Result>("ReadContactSkill");
+        }
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertSkillCategoryMapping_Result>("InsertSkillCategoryMapping", skillIdParameter, skillCategoryIdParameter, modifiedByIdParameter, createDateParameter, mPLOY_IdUserParameter);
+        public virtual ObjectResult<InsertPersonTypicalRole_Result> InsertPersonTypicalRole(Nullable<int> personId, Nullable<int> typicalRoleId, Nullable<int> interestTypeId, Nullable<int> modifiedById)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            var typicalRoleIdParameter = typicalRoleId.HasValue ?
+                new ObjectParameter("TypicalRoleId", typicalRoleId) :
+                new ObjectParameter("TypicalRoleId", typeof(int));
+    
+            var interestTypeIdParameter = interestTypeId.HasValue ?
+                new ObjectParameter("InterestTypeId", interestTypeId) :
+                new ObjectParameter("InterestTypeId", typeof(int));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertPersonTypicalRole_Result>("InsertPersonTypicalRole", personIdParameter, typicalRoleIdParameter, interestTypeIdParameter, modifiedByIdParameter);
+        }
+    
+        public virtual ObjectResult<ReadIntersectSkillCategoryMapping_Result> ReadIntersectSkillCategoryMapping()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadIntersectSkillCategoryMapping_Result>("ReadIntersectSkillCategoryMapping");
         }
     }
 }

@@ -31,9 +31,9 @@ namespace ConsoleApplication1
                     foreach (var contactLogRecord in contactLogData)
                     {
                         //For each contact log record, get the needed values and insert into the SalesRecruitingActivityLog table:
-                        
-                        if (contactLogRecord.idLog > 22452)
-                        {
+
+                        //if (contactLogRecord.idLog > 33494)
+                        //{
                             _mployIdLog = contactLogRecord.idLog;
                         
                             //Get the workflow id for the log type:
@@ -43,7 +43,7 @@ namespace ConsoleApplication1
                             var insertLogResult = _db.InsertContactLog(workflowId, contactLogRecord.Note, null, null, null, null, null, contactLogRecord.created, contactLogRecord.created, contactLogRecord.idContact, contactLogRecord.idUser);
 
                             Debug.WriteLine("\n" + "ContactLog Id: " + _mployIdLog);
-                        }
+                        //}
                     } 
                 }
                 catch

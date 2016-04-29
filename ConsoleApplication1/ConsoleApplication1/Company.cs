@@ -38,6 +38,7 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_IdUser { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public Nullable<int> PaymentTermTypeId { get; set; }
     
         public virtual ICollection<CompanyContactInformation> CompanyContactInformations { get; set; }
         public virtual GlobalEntity GlobalEntity { get; set; }

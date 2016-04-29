@@ -181,7 +181,19 @@
     <Compile Include="InsertCustomer_Result2.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="InsertPersonSkill_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsertPersonTypicalRole_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="InsertRequirement_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsertSkillCategoryMapping_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsertSkill_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="LookupValue.cs" />
@@ -223,6 +235,8 @@
     <Compile Include="PersonMailAddress.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonSkillMigration.cs" />
+    <Compile Include="PersonTypicalRole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadCandidateContractType_Result.cs">
@@ -243,6 +257,9 @@
     <Compile Include="ReadContactLog_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReadContactSkill_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReadContact_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -253,6 +270,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ReadHiringActivity_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReadIntersectSkillCategoryMapping_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ReadJob_Result.cs">

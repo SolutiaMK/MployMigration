@@ -12,8 +12,8 @@ namespace ConsoleApplication1
 {
     class SkillsMigration
     {
-        private static string skillName = String.Empty;
-        private static int skillId = -1;
+        private static string _skillName = String.Empty;
+        private static int _skillId = -1;
 
         static Entities _db;
 
@@ -29,7 +29,7 @@ namespace ConsoleApplication1
                     {
                      //For each skill record, get the data we need and insert it into the Skills table in Intersect.
 
-                        skillName = skillRecord.Skill;
+                        _skillName = skillRecord.Skill;
 
                         //Insert the current skill:
                         var insertedSkillRecord = _db.InsertSkill(skillRecord.Skill, skillRecord.created, null, 0, skillRecord.idSkill).ToList();
@@ -39,22 +39,23 @@ namespace ConsoleApplication1
                         
                         foreach (var item in insertedSkillRecord)
                         {
-                            skillId = item.Id;
+                            _skillId = item.Id;
                         }
 
                         //If the skill category is not -1, then insert the into the skillCategoryMapping table:
                         if (skillCategoryId != -1)
                         {
                             //Insert a record into the SkillCategoryMapping table for the skill:
-                            var skillCategoryMappingId = _db.InsertSkillCategoryMapping(skillId, skillCategoryId, 0, skillRecord.created, null); 
+                            var skillCategoryMappingId = _db.InsertSkillCategoryMapping(_skillId, skillCategoryId, 0, skillRecord.created, null); 
                         }
 
+                        Debug.WriteLine("\n" + "Skill imported: " + _skillName + " : " + " SkillId: " + _skillId);
                     }
                 }
                 catch
                     (Exception ex)
                 {
-                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with Skill: " + skillName + " and SkillId: " + skillId));
+                    new LogWriterFactory().Create().Write(ex.Expand("Error occured with Skill: " + _skillName + " and SkillId: " + _skillId));
                 }
             }
         }
