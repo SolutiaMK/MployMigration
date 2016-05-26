@@ -23,12 +23,14 @@ namespace ConsoleApplication1
         }
     
         public int Id { get; set; }
+        public System.Guid GlobalId { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public Nullable<int> PreferredPhoneNumberId { get; set; }
         public Nullable<int> PreferredEmailAddressId { get; set; }
+        public Nullable<int> PreferredPhysicalAddressId { get; set; }
         public Nullable<int> PreferredTypicalRoleId { get; set; }
         public Nullable<int> GenderTypeId { get; set; }
         public Nullable<int> RaceTypeId { get; set; }
@@ -46,6 +48,7 @@ namespace ConsoleApplication1
         public virtual GenderType GenderType { get; set; }
         public virtual PersonContactInformation PersonContactInformation { get; set; }
         public virtual PersonContactInformation PersonContactInformation1 { get; set; }
+        public virtual PersonMailAddress PersonMailAddress { get; set; }
         public virtual ICollection<PersonContactInformation> PersonContactInformations { get; set; }
         public virtual ICollection<PersonMailAddress> PersonMailAddresses { get; set; }
         public virtual PersonMailAddress PersonMailAddress { get; set; }

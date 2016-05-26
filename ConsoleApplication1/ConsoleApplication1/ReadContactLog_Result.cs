@@ -13,10 +13,11 @@ namespace ConsoleApplication1
     
     public partial class ReadContactLog_Result
     {
-        public Nullable<int> IdContact { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string LogType { get; set; }
-        public Nullable<int> IdUser { get; set; }
+        public int idLog { get; set; }
+        public int idContact { get; set; }
+        public int idUser { get; set; }
+        public System.DateTime created { get; set; }
         public string Note { get; set; }
+        public int idLogType { get; set; }
     }
 }

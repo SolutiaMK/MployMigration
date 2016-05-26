@@ -37,6 +37,7 @@ namespace ConsoleApplication1
         public virtual GlobalEntity GlobalEntity { get; set; }
         public virtual SourceType SourceType { get; set; }
         public virtual Company Company { get; set; }
+        public virtual ICollection<Requirement> Requirements { get; set; }
         public virtual Person Person { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
     }

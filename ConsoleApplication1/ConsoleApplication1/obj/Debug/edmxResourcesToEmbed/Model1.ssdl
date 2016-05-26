@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ActivityTypeId" Type="int" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreatedById" Type="int" Nullable="false" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Candidate">
     <Key>
       <PropertyRef Name="Id" />
@@ -296,6 +307,20 @@
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedById" Type="int" />
   </EntityType>
+  <EntityType Name="WorkflowStateLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WorkflowStateId" Type="int" Nullable="false" />
+    <Property Name="WorkflowStateSubId" Type="int" />
+    <Property Name="WorkflowStateSubReasonCodeId" Type="int" />
+    <Property Name="TimestampBegin" Type="datetime" Nullable="false" />
+    <Property Name="TimestampEnd" Type="datetime" />
+    <Property Name="CreatedById" Type="int" />
+    <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
+  </EntityType>
   <Association Name="CompanyContactCompany">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
     <End Role="CompanyContactInformation" Type="Self.CompanyContactInformation" Multiplicity="*" />
@@ -305,6 +330,18 @@
       </Principal>
       <Dependent Role="CompanyContactInformation">
         <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityLog_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="ActivityLog" Type="Self.ActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="ActivityLog">
+        <PropertyRef Name="GlobalEntityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -497,6 +534,18 @@
       </Principal>
       <Dependent Role="RequirementNote">
         <PropertyRef Name="RequirementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkflowStateLog_GlobalEntity">
+    <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
+    <End Role="WorkflowStateLog" Type="Self.WorkflowStateLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="WorkflowStateLog">
+        <PropertyRef Name="GlobalEntityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -851,6 +900,7 @@
     <Parameter Name="CreateDate" Type="date" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+<<<<<<< HEAD
   <Function Name="InsertSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
     <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
@@ -865,6 +915,8 @@
     <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
     <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
   </Function>
+=======
+>>>>>>> 9dc0ab1491ec17863937115775e8178ebadf2f1e
   <Function Name="InsertSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="Name" Type="varchar" Mode="In" />
     <Parameter Name="CreateDate" Type="datetime" Mode="In" />
@@ -915,9 +967,12 @@
   <Function Name="UpdatePersonPreferredData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="Mploy_ContactId" Type="int" Mode="In" />
   </Function>
+<<<<<<< HEAD
   <Function Name="UpdateRequirementData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="Mploy_ContactId" Type="int" Mode="In" />
   </Function>
+=======
+>>>>>>> 9dc0ab1491ec17863937115775e8178ebadf2f1e
   <Function Name="UpdateRequirementStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
     <Parameter Name="newRequirementStatusTypeId" Type="int" Mode="In" />
@@ -927,6 +982,7 @@
     <Parameter Name="mployUserId" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CandidateNote" EntityType="Self.CandidateNote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -945,9 +1001,14 @@
     <EntitySet Name="Requirement" EntityType="Self.Requirement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequirementNote" EntityType="Self.RequirementNote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SourceType" EntityType="Self.SourceType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkflowStateLog" EntityType="Self.WorkflowStateLog" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="CompanyContactCompany" Association="Self.CompanyContactCompany">
       <End Role="Company" EntitySet="Company" />
       <End Role="CompanyContactInformation" EntitySet="CompanyContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityLog_GlobalEntity" Association="Self.FK_ActivityLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="ActivityLog" EntitySet="ActivityLog" />
     </AssociationSet>
     <AssociationSet Name="FK_Candidate_GlobalEntity" Association="Self.FK_Candidate_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntity" />
@@ -1012,6 +1073,10 @@
     <AssociationSet Name="FK_RequirementNote_Requirement" Association="Self.FK_RequirementNote_Requirement">
       <End Role="Requirement" EntitySet="Requirement" />
       <End Role="RequirementNote" EntitySet="RequirementNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkflowStateLog_GlobalEntity" Association="Self.FK_WorkflowStateLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntity" />
+      <End Role="WorkflowStateLog" EntitySet="WorkflowStateLog" />
     </AssociationSet>
     <AssociationSet Name="FKCandidatePersonId" Association="Self.FKCandidatePersonId">
       <End Role="Person" EntitySet="Person" />

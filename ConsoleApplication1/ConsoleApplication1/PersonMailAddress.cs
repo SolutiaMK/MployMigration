@@ -30,6 +30,7 @@ namespace ConsoleApplication1
     
         public virtual MailingAddress MailingAddress { get; set; }
         public virtual MailingAddressType MailingAddressType { get; set; }
+        public virtual ICollection<Person> People { get; set; }
         public virtual Person Person { get; set; }
         public virtual ICollection<Person> People { get; set; }
     }

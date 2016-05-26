@@ -9,6 +9,29 @@ namespace ConsoleApplication1
     class ImportHelperMethods
     {
 
+        public static int GetBranchId(string state, string city)
+        {
+            var branchId = -1;
+
+            if (state.ToUpper() == "MN")
+            {
+                branchId = 2;
+            }
+            else if(city.ToUpper() == "DALLAS")
+            {
+                branchId = 3;
+            }
+            else if (city.ToUpper() == "AUSTIN")
+            {
+                branchId = 4;
+            }
+            else
+            {
+                //Default to the MN branch:
+                branchId = 2;
+            }
+            return branchId;
+        }
 
         public static int? GetIdOrganization(int idOrganization)
         {

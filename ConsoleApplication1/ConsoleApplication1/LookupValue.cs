@@ -386,10 +386,9 @@ namespace ConsoleApplication1
             return insertRequirement;
         }
 
-        //public static RequirementActivityLog ParseHiringActivityXML(string xdata, RequirementActivityLog insertRequirementActivityLog)
+        //public static SalesRecruitingActivityLog ParseHiringActivityXML(string xdata, SalesRecruitingActivityLog insertRequirementActivityLog)
         //{
         //    //Remove the $ and ',' from the xdata so that I can convert the numbers to ints.
-
         //    xdata = xdata.Replace(",", "");
         //    //Read in the xml string
         //    String pattern = "(<.*?>)|(.+?(?=<|$))"; //"(?<=>)(\w*)(?=<\/)";
@@ -412,13 +411,29 @@ namespace ConsoleApplication1
         //            }
         //            else if (match.Value == "<payrate>" && nextValue != "</payrate>")
         //            {
-        //                //insertRequirementActivityLog.Client
+        //                nextValue = CleanMoneyString.Replace(nextValue, "");
+        //                if (!string.IsNullOrEmpty(nextValue))
+        //                {
+        //                    insertRequirementActivityLog.PayRate = Convert.ToInt32(nextValue);
+        //                }
+        //                else
+        //                {
+        //                    insertRequirementActivityLog.PayRate = null;
+        //                }  
         //            }
         //            else if (match.Value == "<billrate>" && nextValue != "</billrate>")
         //            {
-
+        //                nextValue = CleanMoneyString.Replace(nextValue, "");
+        //                if (!string.IsNullOrEmpty(nextValue))
+        //                {
+        //                    insertRequirementActivityLog.BillRate = Convert.ToInt32(nextValue);
+        //                }
+        //                else
+        //                {
+        //                    insertRequirementActivityLog.BillRate = null;
+        //                }                        
         //            }
-                    
+
         //        }
         //    }
         //    return insertRequirementActivityLog;

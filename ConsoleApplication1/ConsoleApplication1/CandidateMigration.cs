@@ -73,25 +73,34 @@ namespace ConsoleApplication1
                         if (candidateRecord.IdContactType == 2 || candidateRecord.IdContactType == 5)
                         {
                             //Call method to Insert the data as a person and candidate:
+                            //if (candidateRecord.FirstName != "Unknown" && candidateRecord.LastName != "Unknown")
+                            //{
+                                
+                            
+                                _mployContactId = candidateRecord.IdContact;
 
-                            _mployContactId = candidateRecord.IdContact;
+                                //Get the user id:
+                                var idUserVar = ImportHelperMethods.GetUserId(candidateRecord.IdUser);
 
-                            //Get the user id:
-                            var idUserVar = ImportHelperMethods.GetUserId(candidateRecord.IdUser);
+                                //Get the GenderTypeId of the person being inserted:
+                                var genderTypeId = ImportHelperMethods.GetGenderTypeId(candidateRecord.Gender);
 
-                            //Get the GenderTypeId of the person being inserted:
-                            var genderTypeId = ImportHelperMethods.GetGenderTypeId(candidateRecord.Gender);
+                                //Insert the contact as a Person first:
+                                //Returns the PersonId
+                                var personId = -1;
+                                
+                                var personResult = _db.InsertPerson(null, candidateRecord.FirstName, candidateRecord.LastName, genderTypeId, 0, candidateRecord.Created, candidateRecord.IdContact, idUserVar).ToList();
+                                personId = Convert.ToInt32(personResult[0]);
 
-                            //Insert the contact as a Person first:
-                            //Returns the PersonId
-                            var personId = -1;
+                                InsertCandidate(candidateRecord, personId);
 
-                            var personResult = _db.InsertPerson(null, candidateRecord.FirstName, candidateRecord.LastName, genderTypeId, 0, candidateRecord.Created, candidateRecord.IdContact, idUserVar).ToList();
-                            personId = Convert.ToInt32(personResult[0]);
+                                //Update the Person table 'Preferred' columns for email, phone, and home address:
+                                _db.UpdatePersonPreferredData(candidateRecord.IdContact);
 
-                            InsertCandidate(candidateRecord, personId);
+                            //}
                         }                                          
                     }
+                    //Import the contacts that are customers with hiring activities:
 
                 }
                 catch
@@ -137,6 +146,7 @@ namespace ConsoleApplication1
             InsertPersonContactInfoAndMailAddress(candidateRecord, personId, candidateId);
 
 
+
             Debug.WriteLine("\n" + "Person imported: " + personId + " " + candidateRecord.FirstName + " " + candidateRecord.LastName + " Customer Id: " + candidateId);
 
         }
@@ -146,7 +156,7 @@ namespace ConsoleApplication1
             //Insert the Person's email:
             if (!string.IsNullOrEmpty(candidateRecord.Email))
             {
-                var personEmail = _db.InsertPersonContactInformation(personId, 2, candidateRecord.Email, null, null, 0).ToList();
+                var personEmail = _db.InsertPersonContactInformation(personId, 2, candidateRecord.Email, null, true, 0).ToList();
             }
 
             //Insert Candidate Information

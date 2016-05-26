@@ -11,19 +11,18 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class InsertRequirement_Result
+    public partial class UpdateRequirementStatusType_Result
     {
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string VMSField { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public Nullable<int> PrimaryCustomerId { get; set; }
         public int RequirementTypeId { get; set; }
         public int RequirementPriorityTypeId { get; set; }
         public int RequirementProjectTypeId { get; set; }
+        public int RequirementStatusTypeId { get; set; }
+        public Nullable<int> RequirementWinLossReasonTypeId { get; set; }
         public Nullable<int> TravelTypeId { get; set; }
         public Nullable<int> MaxTravelTypeId { get; set; }
         public Nullable<int> PaymentTermTypeId { get; set; }
@@ -31,6 +30,7 @@ namespace ConsoleApplication1
         public Nullable<System.DateTime> DesiredStartDate { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<System.DateTime> ClosedDate { get; set; }
         public Nullable<int> MinRate { get; set; }
         public Nullable<int> MaxRate { get; set; }
         public Nullable<int> Budget { get; set; }
@@ -46,7 +46,6 @@ namespace ConsoleApplication1
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_JobId { get; set; }
         public Nullable<int> MPLOY_ContactId { get; set; }
-        public Nullable<System.DateTime> ClosedDate { get; set; }
         public Nullable<int> MPLOY_IdUserClosed { get; set; }
         public Nullable<int> MPLOY_IdUserFilled { get; set; }
         public Nullable<int> MPLOY_IdUserRecruiter { get; set; }

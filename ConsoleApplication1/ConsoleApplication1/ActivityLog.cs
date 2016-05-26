@@ -10,13 +10,17 @@
 namespace ConsoleApplication1
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class ReadContactLog1_Result
+    public partial class ActivityLog
     {
-        public Nullable<int> IdContact { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string LogType { get; set; }
-        public Nullable<int> IdUser { get; set; }
-        public string Note { get; set; }
+        public int Id { get; set; }
+        public System.Guid GlobalEntityId { get; set; }
+        public int ActivityTypeId { get; set; }
+        public System.DateTime Timestamp { get; set; }
+        public int CreatedById { get; set; }
+        public string CreatedByName { get; set; }
+    
+        public virtual GlobalEntity GlobalEntity { get; set; }
     }
 }

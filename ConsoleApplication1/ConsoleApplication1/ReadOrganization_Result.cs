@@ -11,9 +11,9 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class ReadOrganization1_Result
+    public partial class ReadOrganization_Result
     {
-        public string idorganization { get; set; }
+        public int idOrganization { get; set; }
         public string Organization { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -21,10 +21,14 @@ namespace ConsoleApplication1
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
-        public string Url { get; set; }
+        public string URL { get; set; }
+        public System.DateTime Created { get; set; }
+        public int idOrganizationType { get; set; }
         public string InternalNote { get; set; }
         public string ExternalNote { get; set; }
-        public string OrganizationType { get; set; }
-        public string iduserownerAsIduser { get; set; }
+        public Nullable<int> idUserOwner { get; set; }
+        public Nullable<System.DateTime> Updated { get; set; }
+        public Nullable<int> idbranch { get; set; }
+        public string Country { get; set; }
     }
 }

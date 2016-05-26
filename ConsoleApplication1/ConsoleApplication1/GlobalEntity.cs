@@ -18,7 +18,12 @@ namespace ConsoleApplication1
         {
             this.Customers = new HashSet<Customer>();
             this.Companies = new HashSet<Company>();
+            this.ActivityLogs = new HashSet<ActivityLog>();
             this.Requirements = new HashSet<Requirement>();
+<<<<<<< HEAD
+=======
+            this.WorkflowStateLogs = new HashSet<WorkflowStateLog>();
+>>>>>>> 9dc0ab1491ec17863937115775e8178ebadf2f1e
             this.Candidates = new HashSet<Candidate>();
         }
     
@@ -31,7 +36,12 @@ namespace ConsoleApplication1
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<ActivityLog> ActivityLogs { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual ICollection<WorkflowStateLog> WorkflowStateLogs { get; set; }
+>>>>>>> 9dc0ab1491ec17863937115775e8178ebadf2f1e
         public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }

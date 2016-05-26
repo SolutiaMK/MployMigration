@@ -29,6 +29,7 @@ namespace ConsoleApplication1
         public Nullable<int> CurrentRate { get; set; }
         public Nullable<int> DesiredRate { get; set; }
         public Nullable<int> ReferralId { get; set; }
+        public string ResumeSummary { get; set; }
         public Nullable<bool> IsOpenToRelocation { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }

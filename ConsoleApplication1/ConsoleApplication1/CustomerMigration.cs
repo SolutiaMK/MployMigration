@@ -67,14 +67,19 @@ namespace ConsoleApplication1
                         //if (!checkForDuplicateRecords.Any())
                         //{
 
-                        //If the contact record is a contact (contactTypeId of 1) AND the orgainization record:
+                        //If the contact record is a contact (contactTypeId of 1) AND the orgainization record id is not null or 4 (the id of the blank organization record):
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
                             contactRecord.IdOrganization != 4)
                         {
-                            if (contactRecord.IdContact == 20551)
-                            {
-                                var name = contactRecord.IdContactType;
-                            }
+                            //if (contactRecord.IdContact == 20551)
+                            //{
+                            //    var name = contactRecord.IdContactType;
+                            //}
+
+                            //Get the Contacts with the typeId = 1 that have hiring activities:
+
+                            //Add a catch to skip those records, they are added as a Candidate instead.
+
                             //Get the user id:
                             var idUserVar = ImportHelperMethods.GetUserId(contactRecord.IdUser);
 
@@ -109,9 +114,10 @@ namespace ConsoleApplication1
 
                             //Insert as a Customer
                             //Returns the Customer record
+                            //***********CHANGED THE MPLOY Org Id to the IDORGANIZATION LIKE IT SHOULD BE...
                             var customerResult =
                                 _db.InsertCustomer(orgId, _personId, sourceTypeIdForContact, customerTypeId,
-                                    contactRecord.Title, null, null, contactRecord.Created, 0, orgId).ToList();
+                                    contactRecord.Title, null, null, contactRecord.Created, 0, contactRecord.IdOrganization).ToList();
                             foreach (var item in customerResult)
                             {
                                 _customerId = item.Id;
@@ -125,7 +131,7 @@ namespace ConsoleApplication1
 
                             //Insert Email address:
                             var personEmail =
-                                _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, null, 0)
+                                _db.InsertPersonContactInformation(_personId, 2, contactRecord.Email, null, true, 0)
                                     .ToList();
 
                             //0:                        
@@ -168,6 +174,18 @@ namespace ConsoleApplication1
                                     _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.CreatedDate,
                                         0).ToList();
                             }
+
+
+                            //THIS NEEDS TO BE UPDATED IN THE DB SO THE BRANCH CAN BE ADDED!!!!!!!!!
+                            //Insert the CustomerBranch record:
+                            var branchId = ImportHelperMethods.GetBranchId(contactRecord.State, contactRecord.City);
+                            //var customerBranchResult = _db.InsertCustomerBranch(_customerId, branchId, contactRecord.Created, 0, contactRecord.IdUser);
+
+
+
+
+                            //Update the Person table 'Preferred' columns for email, phone, and home address:
+                            _db.UpdatePersonPreferredData(contactRecord.IdContact);
 
                             Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
                                             contactRecord.LastName + " Customer Id: " + _customerId);

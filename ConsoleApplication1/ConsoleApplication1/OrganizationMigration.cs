@@ -98,6 +98,10 @@ namespace ConsoleApplication1
                                 var noteResult = _db.InsertCompanyNote(_companyId, orgRecord.ExternalNote, 0);
                             }
 
+                            //Insert into the CompanyBranch table
+                            var branchId = ImportHelperMethods.GetBranchId(orgRecord.State, orgRecord.City);
+                            var companyBranchResult = _db.InsertCompanyBranch(_companyId, branchId, orgRecord.Created, 0,
+                                orgRecord.idUserOwner);
                         }
                         else
                         {
@@ -163,7 +167,7 @@ namespace ConsoleApplication1
             return returnedCompanyTypeId;
         }
 
-        static void InsertCompanyMailingAddress(ReadOrganization_Result4 orgRecord)
+        static void InsertCompanyMailingAddress(ReadOrganization_Result orgRecord)
         {
             ///////////////////////////////  MailingAddress for a Company ////////////////////////////////////          
             //If there is an address to insert:
@@ -176,7 +180,7 @@ namespace ConsoleApplication1
             }
         }
 
-        static void InsertCompanyContactInformation(ReadOrganization_Result4 orgRecord)
+        static void InsertCompanyContactInformation(ReadOrganization_Result orgRecord)
         {
             ///////////////////////////////  CompanyContactInformation ////////////////////////////////////
             CompanyContactInformation insertCompanyContactInformation = new CompanyContactInformation();
