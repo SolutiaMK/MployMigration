@@ -14,6 +14,11 @@ namespace ConsoleApplication1
     
     public partial class Customer
     {
+        public Customer()
+        {
+            this.Requirements = new HashSet<Requirement>();
+        }
+    
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public int CompanyId { get; set; }
@@ -33,5 +38,6 @@ namespace ConsoleApplication1
         public virtual SourceType SourceType { get; set; }
         public virtual Company Company { get; set; }
         public virtual Person Person { get; set; }
+        public virtual ICollection<Requirement> Requirements { get; set; }
     }
 }

@@ -10,15 +10,9 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Requirement
+    public partial class InsertRequirement1_Result
     {
-        public Requirement()
-        {
-            this.RequirementNotes = new HashSet<RequirementNote>();
-        }
-    
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string Name { get; set; }
@@ -56,10 +50,5 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_IdUserClosed { get; set; }
         public Nullable<int> MPLOY_IdUserFilled { get; set; }
         public Nullable<int> MPLOY_IdUserRecruiter { get; set; }
-    
-        public virtual Customer Customer { get; set; }
-        public virtual GlobalEntity GlobalEntity { get; set; }
-        public virtual MaxTravelType MaxTravelType { get; set; }
-        public virtual ICollection<RequirementNote> RequirementNotes { get; set; }
     }
 }

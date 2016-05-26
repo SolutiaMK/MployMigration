@@ -73,8 +73,8 @@ namespace ConsoleApplication1
                             , requirementTypeId
                             , priorityType
                             , 3
-                            , reqStatusTypeId
-                            , requirementData.RequirementWinLossReasonTypeId
+                            , null
+                            , null
                             , 3
                             , 11
                             , requirementData.PaymentTermTypeId

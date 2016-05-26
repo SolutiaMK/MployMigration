@@ -10,15 +10,9 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Candidate
+    public partial class UpdateCandidateStatusType_Result
     {
-        public Candidate()
-        {
-            this.CandidateNotes = new HashSet<CandidateNote>();
-        }
-    
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public int PersonId { get; set; }
@@ -41,11 +35,5 @@ namespace ConsoleApplication1
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_OrganizationId { get; set; }
-    
-        public virtual GlobalEntity GlobalEntity { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual SourceType SourceType { get; set; }
-        public virtual MaxTravelType MaxTravelType { get; set; }
-        public virtual ICollection<CandidateNote> CandidateNotes { get; set; }
     }
 }

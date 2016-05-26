@@ -126,7 +126,7 @@ namespace ConsoleApplication1
 
             //Insert as a Candidate
             //Returns the Candidate record
-            var candidateResult = _db.InsertCandidate(personId, candidateStatusTypeId, null, null, null, sourceTypeIdForCandidate, candidateData.MaxTravelTypeId, null, null, candidateData.CurrentSalary, candidateData.DesiredSalary, candidateData.CurrentRate, candidateData.DesiredRate, null, null, candidateData.IsOpenToRelocation, 0, candidateRecord.Created, orgId).ToList();
+            var candidateResult = _db.InsertCandidate(personId, candidateStatusTypeId, null, null, null, sourceTypeIdForCandidate, candidateData.MaxTravelTypeId, null, null, candidateData.CurrentSalary, candidateData.DesiredSalary, candidateData.CurrentRate, candidateData.DesiredRate, null, candidateData.IsOpenToRelocation, 0, candidateRecord.Created, orgId).ToList();
             foreach (var item in candidateResult)
             {
                 candidateId = item.Id;

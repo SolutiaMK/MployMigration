@@ -24,7 +24,7 @@ namespace ConsoleApplication1
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string Name { get; set; }
-        public int CompanyTypeId { get; set; }
+        public Nullable<int> CompanyTypeId { get; set; }
         public Nullable<int> IndustryId { get; set; }
         public Nullable<int> RevenueSizeTypeId { get; set; }
         public Nullable<int> EmployeeSizeTypeId { get; set; }
@@ -36,6 +36,9 @@ namespace ConsoleApplication1
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_OrganizationId { get; set; }
         public Nullable<int> MPLOY_IdUser { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public Nullable<int> PaymentTermTypeId { get; set; }
     
         public virtual ICollection<CompanyContactInformation> CompanyContactInformations { get; set; }
         public virtual GlobalEntity GlobalEntity { get; set; }

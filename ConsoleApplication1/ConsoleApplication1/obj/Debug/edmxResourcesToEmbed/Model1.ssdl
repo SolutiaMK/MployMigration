@@ -20,7 +20,6 @@
     <Property Name="CurrentRate" Type="int" />
     <Property Name="DesiredRate" Type="int" />
     <Property Name="ReferralId" Type="int" />
-    <Property Name="ResumeSummary" Type="varchar(max)" />
     <Property Name="IsOpenToRelocation" Type="bit" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
@@ -46,13 +45,16 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GlobalEntityId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="CompanyTypeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="char" MaxLength="2" />
+    <Property Name="CompanyTypeId" Type="int" />
     <Property Name="IndustryId" Type="int" />
     <Property Name="RevenueSizeTypeId" Type="int" />
     <Property Name="EmployeeSizeTypeId" Type="int" />
     <Property Name="BillingFrequencyTypeId" Type="int" />
     <Property Name="BillingMethodTypeId" Type="int" />
+    <Property Name="PaymentTermTypeId" Type="int" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -183,12 +185,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="101" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MiddleName" Type="varchar" MaxLength="50" />
     <Property Name="PreferredPhoneNumberId" Type="int" />
     <Property Name="PreferredEmailAddressId" Type="int" />
+    <Property Name="PreferredPhysicalAddressId" Type="int" />
     <Property Name="PreferredTypicalRoleId" Type="int" />
     <Property Name="GenderTypeId" Type="int" />
     <Property Name="RaceTypeId" Type="int" />
@@ -235,11 +239,12 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" />
     <Property Name="VMSField" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="char" MaxLength="2" />
+    <Property Name="PrimaryCustomerId" Type="int" />
     <Property Name="RequirementTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementPriorityTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementProjectTypeId" Type="int" Nullable="false" />
-    <Property Name="RequirementStatusTypeId" Type="int" Nullable="false" />
-    <Property Name="RequirementWinLossReasonTypeId" Type="int" />
     <Property Name="TravelTypeId" Type="int" />
     <Property Name="MaxTravelTypeId" Type="int" />
     <Property Name="PaymentTermTypeId" Type="int" />
@@ -247,7 +252,6 @@
     <Property Name="DesiredStartDate" Type="date" />
     <Property Name="StartDate" Type="date" />
     <Property Name="EndDate" Type="date" />
-    <Property Name="ClosedDate" Type="date" />
     <Property Name="MinRate" Type="int" />
     <Property Name="MaxRate" Type="int" />
     <Property Name="Budget" Type="int" />
@@ -263,6 +267,7 @@
     <Property Name="CreatedById" Type="int" />
     <Property Name="MPLOY_JobId" Type="int" />
     <Property Name="MPLOY_ContactId" Type="int" />
+    <Property Name="ClosedDate" Type="date" />
     <Property Name="MPLOY_IdUserClosed" Type="int" />
     <Property Name="MPLOY_IdUserFilled" Type="int" />
     <Property Name="MPLOY_IdUserRecruiter" Type="int" />
@@ -285,7 +290,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -411,6 +416,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Person_PersonMailAddress">
+    <End Role="PersonMailAddress" Type="Self.PersonMailAddress" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonMailAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhysicalAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PersonContactInformation_ContactInformationType">
     <End Role="ContactInformationType" Type="Self.ContactInformationType" Multiplicity="1" />
     <End Role="PersonContactInformation" Type="Self.PersonContactInformation" Multiplicity="*" />
@@ -432,6 +449,18 @@
       </Principal>
       <Dependent Role="PersonContactInformation">
         <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Requirement" Type="Self.Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="PrimaryCustomerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -598,15 +627,6 @@
     <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="PersonId" Type="int" Mode="In" />
   </Function>
-  <Function Name="SaveSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CORE">
-    <Parameter Name="ActivityLogId" Type="int" Mode="In" />
-    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
-    <Parameter Name="SalesRecruitingWorkflowName" Type="varchar" Mode="In" />
-    <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
-    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
-    <Parameter Name="ActivityDetail" Type="varchar(max)" Mode="In" />
-    <Parameter Name="LoggedById" Type="int" Mode="In" />
-  </Function>
   <Function Name="CheckCustomerAgainstCandidateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CustomerIdContact" Type="int" Mode="In" />
   </Function>
@@ -630,6 +650,10 @@
     <Parameter Name="currentJobId" Type="int" Mode="In" />
     <Parameter Name="currentContact" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetRequirementContactAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentJobId" Type="int" Mode="In" />
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetUserFromMployUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MployUserId" Type="int" Mode="In" />
   </Function>
@@ -648,7 +672,6 @@
     <Parameter Name="CurrentRate" Type="int" Mode="In" />
     <Parameter Name="DesiredRate" Type="int" Mode="In" />
     <Parameter Name="ReferralId" Type="int" Mode="In" />
-    <Parameter Name="ResumeSummary" Type="varchar(max)" Mode="In" />
     <Parameter Name="IsOpenToRelocation" Type="bit" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
     <Parameter Name="CreateDate" Type="datetime" Mode="In" />
@@ -694,6 +717,19 @@
     <Parameter Name="Note" Type="varchar(max)" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+    <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PayRate" Type="int" Mode="In" />
+    <Parameter Name="BillRate" Type="int" Mode="In" />
+    <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -738,6 +774,19 @@
     <Parameter Name="Zip" Type="varchar" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertPersonSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_SkillId" Type="int" Mode="In" />
+    <Parameter Name="ExpertiseLevelTypeId" Type="int" Mode="In" />
+    <Parameter Name="ExperienceInMonths" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertPersonTypicalRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+    <Parameter Name="TypicalRoleId" Type="int" Mode="In" />
+    <Parameter Name="InterestTypeId" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="Name" Type="varchar" Mode="In" />
     <Parameter Name="Description" Type="varchar" Mode="In" />
@@ -745,8 +794,8 @@
     <Parameter Name="RequirementTypeId" Type="int" Mode="In" />
     <Parameter Name="RequirementPriorityTypeId" Type="int" Mode="In" />
     <Parameter Name="RequirementProjectTypeId" Type="int" Mode="In" />
-    <Parameter Name="RequirementStatusTypeId" Type="int" Mode="In" />
-    <Parameter Name="RequirementWinLossReasonTypeId" Type="int" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="State" Type="char" Mode="In" />
     <Parameter Name="TravelTypeId" Type="int" Mode="In" />
     <Parameter Name="MaxTravelTypeId" Type="int" Mode="In" />
     <Parameter Name="PaymentTermTypeId" Type="int" Mode="In" />
@@ -773,17 +822,62 @@
     <Parameter Name="MPLOY_IdUserRecruiter" Type="int" Mode="In" />
     <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertRequirementCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="RequirementId" Type="int" Mode="In" />
+    <Parameter Name="CandidateId" Type="int" Mode="In" />
+    <Parameter Name="RequirementCandidateStatusTypeId" Type="int" Mode="In" />
+    <Parameter Name="StatusTypeDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertRequirementCompensation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="RequirementCompensationTypeId" Type="int" Mode="In" />
     <Parameter Name="RequirementId" Type="int" Mode="In" />
     <Parameter Name="Amount" Type="int" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertRequirementCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="RequirementId" Type="int" Mode="In" />
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
+    <Parameter Name="IsPrimaryContact" Type="bit" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertRequirementNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="RequirementId" Type="int" Mode="In" />
     <Parameter Name="Note" Type="varchar(max)" Mode="In" />
     <Parameter Name="CreateDate" Type="date" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
+    <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
+    <Parameter Name="ActivityOutcome" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PayRate" Type="int" Mode="In" />
+    <Parameter Name="BillRate" Type="int" Mode="In" />
+    <Parameter Name="ScheduledDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="ActivityTimestamp" Type="datetime" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_SkillId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertSkillCategoryMapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="SkillId" Type="int" Mode="In" />
+    <Parameter Name="SkillCategoryId" Type="int" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -793,21 +887,40 @@
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
     <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
   </Function>
+  <Function Name="PersonInformationFromMploy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+  </Function>
   <Function Name="ReadCandidateContractType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadCompanyType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadContactLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
-  <Function Name="ReadHiringActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadContactSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadIntersectSkillCategoryMapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadOrganization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadPerson" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="ReadSkill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadSourceType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadtbJobFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadtbJobLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
   <Function Name="ReadUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY" />
+  <Function Name="UpdateCandidateStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_ContactId" Type="int" Mode="In" />
+    <Parameter Name="newCandidateStatusTypeId" Type="int" Mode="In" />
+  </Function>
   <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />
     <Parameter Name="mployContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdatePersonPreferredData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="Mploy_ContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateRequirementData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="Mploy_ContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateRequirementStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
+    <Parameter Name="newRequirementStatusTypeId" Type="int" Mode="In" />
   </Function>
   <Function Name="UpdateUserMployId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />
@@ -872,6 +985,10 @@
       <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
       <End Role="Person" EntitySet="Person" />
     </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonMailAddress" Association="Self.FK_Person_PersonMailAddress">
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddress" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
     <AssociationSet Name="FK_PersonContactInformation_ContactInformationType" Association="Self.FK_PersonContactInformation_ContactInformationType">
       <End Role="ContactInformationType" EntitySet="ContactInformationType" />
       <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
@@ -879,6 +996,10 @@
     <AssociationSet Name="FK_PersonContactInformation_Person" Association="Self.FK_PersonContactInformation_Person">
       <End Role="Person" EntitySet="Person" />
       <End Role="PersonContactInformation" EntitySet="PersonContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_Customer" Association="Self.FK_Requirement_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Requirement" EntitySet="Requirement" />
     </AssociationSet>
     <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Self.FK_Requirement_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntity" />

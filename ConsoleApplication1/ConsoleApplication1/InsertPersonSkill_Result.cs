@@ -10,25 +10,17 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SourceType
+    public partial class InsertPersonSkill_Result
     {
-        public SourceType()
-        {
-            this.Customers = new HashSet<Customer>();
-            this.Candidates = new HashSet<Candidate>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int PersonId { get; set; }
+        public int SkillId { get; set; }
+        public Nullable<int> ExpertiseLevelTypeId { get; set; }
+        public Nullable<int> ExperienceInMonths { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-    
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }

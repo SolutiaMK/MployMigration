@@ -16,8 +16,8 @@ namespace ConsoleApplication1
     {
         public MaxTravelType()
         {
-            this.Candidates = new HashSet<Candidate>();
             this.Requirements = new HashSet<Requirement>();
+            this.Candidates = new HashSet<Candidate>();
         }
     
         public int Id { get; set; }
@@ -27,7 +27,7 @@ namespace ConsoleApplication1
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
     
-        public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
+        public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }
