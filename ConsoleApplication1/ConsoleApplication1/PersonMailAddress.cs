@@ -14,6 +14,11 @@ namespace ConsoleApplication1
     
     public partial class PersonMailAddress
     {
+        public PersonMailAddress()
+        {
+            this.People = new HashSet<Person>();
+        }
+    
         public int Id { get; set; }
         public int PersonId { get; set; }
         public int MailingAddressId { get; set; }
@@ -25,6 +30,7 @@ namespace ConsoleApplication1
     
         public virtual MailingAddress MailingAddress { get; set; }
         public virtual MailingAddressType MailingAddressType { get; set; }
+        public virtual ICollection<Person> People { get; set; }
         public virtual Person Person { get; set; }
     }
 }

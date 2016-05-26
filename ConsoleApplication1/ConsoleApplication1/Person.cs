@@ -30,6 +30,7 @@ namespace ConsoleApplication1
         public string MiddleName { get; set; }
         public Nullable<int> PreferredPhoneNumberId { get; set; }
         public Nullable<int> PreferredEmailAddressId { get; set; }
+        public Nullable<int> PreferredPhysicalAddressId { get; set; }
         public Nullable<int> PreferredTypicalRoleId { get; set; }
         public Nullable<int> GenderTypeId { get; set; }
         public Nullable<int> RaceTypeId { get; set; }
@@ -40,13 +41,13 @@ namespace ConsoleApplication1
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_ContactId { get; set; }
         public Nullable<int> MPLOY_UserId { get; set; }
-        public Nullable<int> PreferredHomeMailAddressId { get; set; }
     
         public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual GenderType GenderType { get; set; }
         public virtual PersonContactInformation PersonContactInformation { get; set; }
         public virtual PersonContactInformation PersonContactInformation1 { get; set; }
+        public virtual PersonMailAddress PersonMailAddress { get; set; }
         public virtual ICollection<PersonContactInformation> PersonContactInformations { get; set; }
         public virtual ICollection<PersonMailAddress> PersonMailAddresses { get; set; }
     }

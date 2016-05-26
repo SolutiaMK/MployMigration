@@ -17,21 +17,8 @@
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="GlobalEntities" EntityType="Model.GlobalEntity" />
-    <EntitySet Name="Candidates" EntityType="Model.Candidate" />
-    <AssociationSet Name="FK_Candidate_GlobalEntity" Association="Model.FK_Candidate_GlobalEntity">
-      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
-      <End Role="Candidate" EntitySet="Candidates" />
-    </AssociationSet>
     <EntitySet Name="MaxTravelTypes" EntityType="Model.MaxTravelType" />
-    <AssociationSet Name="FKCandidatetoTravel" Association="Model.FKCandidatetoTravel">
-      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
-      <End Role="Candidate" EntitySet="Candidates" />
-    </AssociationSet>
     <EntitySet Name="CandidateNotes" EntityType="Model.CandidateNote" />
-    <AssociationSet Name="FKNoteCandidateId" Association="Model.FKNoteCandidateId">
-      <End Role="Candidate" EntitySet="Candidates" />
-      <End Role="CandidateNote" EntitySet="CandidateNotes" />
-    </AssociationSet>
     <EntitySet Name="Customers" EntityType="Model.Customer" />
     <AssociationSet Name="FK_Customer_GlobalEntity" Association="Model.FK_Customer_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntities" />
@@ -40,10 +27,6 @@
     <EntitySet Name="CompanyMailAddresses" EntityType="Model.CompanyMailAddress" />
     <EntitySet Name="GenderTypes" EntityType="Model.GenderType" />
     <EntitySet Name="SourceTypes" EntityType="Model.SourceType" />
-    <AssociationSet Name="FKCandidateSourceId" Association="Model.FKCandidateSourceId">
-      <End Role="SourceType" EntitySet="SourceTypes" />
-      <End Role="Candidate" EntitySet="Candidates" />
-    </AssociationSet>
     <AssociationSet Name="FK_Customer_SourceType" Association="Model.FK_Customer_SourceType">
       <End Role="SourceType" EntitySet="SourceTypes" />
       <End Role="Customer" EntitySet="Customers" />
@@ -203,27 +186,6 @@
       <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertCandidate" ReturnType="Collection(Model.InsertCandidate_Result4)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
-      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
-      <Parameter Name="ReferralId" Mode="In" Type="Int32" />
-      <Parameter Name="ResumeSummary" Mode="In" Type="String" />
-      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <EntitySet Name="RequirementNotes" EntityType="Model.RequirementNote" />
     <FunctionImport Name="InsertRequirementCompensation" ReturnType="Collection(Int32)">
       <Parameter Name="RequirementCompensationTypeId" Mode="In" Type="Int32" />
@@ -241,19 +203,6 @@
       <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadPerson" ReturnType="Collection(Model.ReadPerson_Result)" />
-    <EntitySet Name="Requirements" EntityType="Model.Requirement" />
-    <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Model.FK_Requirement_GlobalEntity">
-      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
-      <End Role="Requirement" EntitySet="Requirements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Requirement_MaxTravelType" Association="Model.FK_Requirement_MaxTravelType">
-      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
-      <End Role="Requirement" EntitySet="Requirements" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RequirementNote_Requirement" Association="Model.FK_RequirementNote_Requirement">
-      <End Role="Requirement" EntitySet="Requirements" />
-      <End Role="RequirementNote" EntitySet="RequirementNotes" />
-    </AssociationSet>
     <FunctionImport Name="InsertPerson" ReturnType="Collection(Int32)">
       <Parameter Name="PersonId" Mode="In" Type="Int32" />
       <Parameter Name="FirstName" Mode="In" Type="String" />
@@ -263,41 +212,6 @@
       <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
       <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
       <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertRequirement" ReturnType="Collection(Model.InsertRequirement_Result)">
-      <Parameter Name="Name" Mode="In" Type="String" />
-      <Parameter Name="Description" Mode="In" Type="String" />
-      <Parameter Name="VMSField" Mode="In" Type="String" />
-      <Parameter Name="RequirementTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementPriorityTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementProjectTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementStatusTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementWinLossReasonTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="PaymentTermTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="PostingDate" Mode="In" Type="DateTime" />
-      <Parameter Name="DesiredStartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ClosedDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MinRate" Mode="In" Type="Int32" />
-      <Parameter Name="MaxRate" Mode="In" Type="Int32" />
-      <Parameter Name="Budget" Mode="In" Type="Int32" />
-      <Parameter Name="Duration" Mode="In" Type="Int32" />
-      <Parameter Name="ContractDetails" Mode="In" Type="String" />
-      <Parameter Name="IsTravelRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsDrugTestRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsBackgroundCheckRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsWorkFromHome" Mode="In" Type="Boolean" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserFilled" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserClosed" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadtbJobLog" ReturnType="Collection(Model.ReadtbJobLog_Result)" />
     <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result)">
@@ -324,53 +238,10 @@
       <Parameter Name="newRequirementStatusTypeId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result)" />
-    <EntitySet Name="People" EntityType="Model.Person" />
-    <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
-      <End Role="Person" EntitySet="People" />
-      <End Role="Candidate" EntitySet="Candidates" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
-      <End Role="Person" EntitySet="People" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FKPersonGenderId" Association="Model.FKPersonGenderId">
-      <End Role="GenderType" EntitySet="GenderTypes" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Model.FK_Person_PersonContactInformation">
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Model.FK_Person_PersonContactInformation1">
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-      <End Role="Person" EntitySet="People" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Model.FK_PersonContactInformation_Person">
-      <End Role="Person" EntitySet="People" />
-      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
-    </AssociationSet>
-    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Model.FKPersonMailAddressPersonId">
-      <End Role="Person" EntitySet="People" />
-      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
-    </AssociationSet>
     <FunctionImport Name="ReadOrganization" ReturnType="Collection(Model.ReadOrganization_Result)" />
     <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result)" />
     <FunctionImport Name="ReadJob" ReturnType="Collection(Model.ReadJob_Result)" />
     <FunctionImport Name="ReadtbJobFlow" ReturnType="Collection(Model.ReadtbJobFlow_Result)" />
-    <EntitySet Name="SalesRecruitingActivityLogs" EntityType="Model.SalesRecruitingActivityLog" />
-    <AssociationSet Name="FK_SalesRecruitingActivityLog_GlobalEntity" Association="Model.FK_SalesRecruitingActivityLog_GlobalEntity">
-      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
-      <End Role="SalesRecruitingActivityLog" EntitySet="SalesRecruitingActivityLogs" />
-    </AssociationSet>
-    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
-      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="InsertRequirementCustomer" ReturnType="Collection(Int32)">
       <Parameter Name="RequirementId" Mode="In" Type="Int32" />
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
@@ -378,20 +249,6 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
       <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
       <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertSalesRecruitingActivityLog" ReturnType="Collection(Int32)">
-      <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
-      <Parameter Name="ActivityNote" Mode="In" Type="String" />
-      <Parameter Name="ActivityOutcome" Mode="In" Type="String" />
-      <Parameter Name="PayRate" Mode="In" Type="Int32" />
-      <Parameter Name="BillRate" Mode="In" Type="Int32" />
-      <Parameter Name="ScheduledDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ActivityTimestamp" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetRequirementContactAssociation" ReturnType="Collection(Model.GetRequirementContactAssociation_Result)">
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
@@ -448,10 +305,6 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadContactSkill" ReturnType="Collection(Model.ReadContactSkill_Result)" />
-    <AssociationSet Name="FK_Requirement_CompensationType" Association="Model.FK_Requirement_CompensationType">
-      <End Role="Requirement" EntitySet="Requirements" />
-      <End Role="Requirement1" EntitySet="Requirements" />
-    </AssociationSet>
     <FunctionImport Name="InsertPersonTypicalRole" ReturnType="Collection(Model.InsertPersonTypicalRole_Result)">
       <Parameter Name="PersonId" Mode="In" Type="Int32" />
       <Parameter Name="TypicalRoleId" Mode="In" Type="Int32" />
@@ -459,6 +312,150 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadIntersectSkillCategoryMapping" ReturnType="Collection(Model.ReadIntersectSkillCategoryMapping_Result)" />
+    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Int32)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementCandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="StatusTypeDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="ActivityLogs" EntityType="Model.ActivityLog" />
+    <AssociationSet Name="FK_ActivityLog_GlobalEntity" Association="Model.FK_ActivityLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="ActivityLog" EntitySet="ActivityLogs" />
+    </AssociationSet>
+    <EntitySet Name="Requirements" EntityType="Model.Requirement" />
+    <AssociationSet Name="FK_Requirement_Customer" Association="Model.FK_Requirement_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_GlobalEntity" Association="Model.FK_Requirement_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requirement_MaxTravelType" Association="Model.FK_Requirement_MaxTravelType">
+      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
+      <End Role="Requirement" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequirementNote_Requirement" Association="Model.FK_RequirementNote_Requirement">
+      <End Role="Requirement" EntitySet="Requirements" />
+      <End Role="RequirementNote" EntitySet="RequirementNotes" />
+    </AssociationSet>
+    <EntitySet Name="WorkflowStateLogs" EntityType="Model.WorkflowStateLog" />
+    <AssociationSet Name="FK_WorkflowStateLog_GlobalEntity" Association="Model.FK_WorkflowStateLog_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="WorkflowStateLog" EntitySet="WorkflowStateLogs" />
+    </AssociationSet>
+    <FunctionImport Name="InsertRequirement" ReturnType="Collection(Model.InsertRequirement_Result)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="VMSField" Mode="In" Type="String" />
+      <Parameter Name="RequirementTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementPriorityTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementProjectTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentTermTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="PostingDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DesiredStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ClosedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MinRate" Mode="In" Type="Int32" />
+      <Parameter Name="MaxRate" Mode="In" Type="Int32" />
+      <Parameter Name="Budget" Mode="In" Type="Int32" />
+      <Parameter Name="Duration" Mode="In" Type="Int32" />
+      <Parameter Name="ContractDetails" Mode="In" Type="String" />
+      <Parameter Name="IsTravelRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsDrugTestRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsBackgroundCheckRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsWorkFromHome" Mode="In" Type="Boolean" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserFilled" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserClosed" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Candidates" EntityType="Model.Candidate" />
+    <AssociationSet Name="FK_Candidate_GlobalEntity" Association="Model.FK_Candidate_GlobalEntity">
+      <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FKCandidateSourceId" Association="Model.FKCandidateSourceId">
+      <End Role="SourceType" EntitySet="SourceTypes" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FKCandidatetoTravel" Association="Model.FKCandidatetoTravel">
+      <End Role="MaxTravelType" EntitySet="MaxTravelTypes" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FKNoteCandidateId" Association="Model.FKNoteCandidateId">
+      <End Role="Candidate" EntitySet="Candidates" />
+      <End Role="CandidateNote" EntitySet="CandidateNotes" />
+    </AssociationSet>
+    <EntitySet Name="People" EntityType="Model.Person" />
+    <AssociationSet Name="FKCandidatePersonId" Association="Model.FKCandidatePersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Candidate" EntitySet="Candidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonGenderId" Association="Model.FKPersonGenderId">
+      <End Role="GenderType" EntitySet="GenderTypes" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation" Association="Model.FK_Person_PersonContactInformation">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonContactInformation1" Association="Model.FK_Person_PersonContactInformation1">
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_PersonMailAddress" Association="Model.FK_Person_PersonMailAddress">
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonContactInformation_Person" Association="Model.FK_PersonContactInformation_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonContactInformation" EntitySet="PersonContactInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FKPersonMailAddressPersonId" Association="Model.FKPersonMailAddressPersonId">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
+    </AssociationSet>
+    <FunctionImport Name="UpdatePersonPreferredData">
+      <Parameter Name="Mploy_ContactId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCandidate" ReturnType="Collection(Model.InsertCandidate_Result)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
+      <Parameter Name="ReferralId" Mode="In" Type="Int32" />
+      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -502,57 +499,13 @@
     <Property Name="ModifiedById" Type="Int32" />
     <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedById" Type="Int32" />
-    <NavigationProperty Name="Candidates" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="GlobalEntity" ToRole="Candidate" />
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_GlobalEntity" FromRole="GlobalEntity" ToRole="Customer" />
     <NavigationProperty Name="Companies" Relationship="Model.FK_Company_GlobalEntity" FromRole="GlobalEntity" ToRole="Company" />
+    <NavigationProperty Name="ActivityLogs" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="ActivityLog" />
     <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="GlobalEntity" ToRole="Requirement" />
-    <NavigationProperty Name="SalesRecruitingActivityLogs" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="SalesRecruitingActivityLog" />
+    <NavigationProperty Name="WorkflowStateLogs" Relationship="Model.FK_WorkflowStateLog_GlobalEntity" FromRole="GlobalEntity" ToRole="WorkflowStateLog" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="GlobalEntity" ToRole="Candidate" />
   </EntityType>
-  <EntityType Name="Candidate">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
-    <Property Name="PersonId" Type="Int32" Nullable="false" />
-    <Property Name="CandidateStatusTypeId" Type="Int32" />
-    <Property Name="DesiredEmploymentTypeId" Type="Int32" />
-    <Property Name="CurrentEmploymentTypeId" Type="Int32" />
-    <Property Name="TravelTypeId" Type="Int32" />
-    <Property Name="SourceTypeId" Type="Int32" />
-    <Property Name="MaxTravelTypeId" Type="Int32" />
-    <Property Name="AvailableDate" Type="DateTime" Precision="0" />
-    <Property Name="StartDate" Type="DateTime" Precision="0" />
-    <Property Name="CurrentSalary" Type="Int32" />
-    <Property Name="DesiredSalary" Type="Int32" />
-    <Property Name="CurrentRate" Type="Int32" />
-    <Property Name="DesiredRate" Type="Int32" />
-    <Property Name="ReferralId" Type="Int32" />
-    <Property Name="ResumeSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="IsOpenToRelocation" Type="Boolean" />
-    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedById" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" />
-    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="Candidate" ToRole="GlobalEntity" />
-    <NavigationProperty Name="MaxTravelType" Relationship="Model.FKCandidatetoTravel" FromRole="Candidate" ToRole="MaxTravelType" />
-    <NavigationProperty Name="CandidateNotes" Relationship="Model.FKNoteCandidateId" FromRole="Candidate" ToRole="CandidateNote" />
-    <NavigationProperty Name="SourceType" Relationship="Model.FKCandidateSourceId" FromRole="Candidate" ToRole="SourceType" />
-    <Property Name="MPLOY_OrganizationId" Type="Int32" />
-    <NavigationProperty Name="Person" Relationship="Model.FKCandidatePersonId" FromRole="Candidate" ToRole="Person" />
-  </EntityType>
-  <Association Name="FK_Candidate_GlobalEntity">
-    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GlobalEntity">
-        <PropertyRef Name="GlobalEntityId" />
-      </Principal>
-      <Dependent Role="Candidate">
-        <PropertyRef Name="GlobalEntityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="MaxTravelType">
     <Key>
       <PropertyRef Name="Id" />
@@ -563,21 +516,9 @@
     <Property Name="ModifiedById" Type="Int32" />
     <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedById" Type="Int32" />
-    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatetoTravel" FromRole="MaxTravelType" ToRole="Candidate" />
     <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="MaxTravelType" ToRole="Requirement" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatetoTravel" FromRole="MaxTravelType" ToRole="Candidate" />
   </EntityType>
-  <Association Name="FKCandidatetoTravel">
-    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MaxTravelType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Candidate">
-        <PropertyRef Name="MaxTravelTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="CandidateNote">
     <Key>
       <PropertyRef Name="Id" />
@@ -591,18 +532,6 @@
     <Property Name="CreatedById" Type="Int32" />
     <NavigationProperty Name="Candidate" Relationship="Model.FKNoteCandidateId" FromRole="CandidateNote" ToRole="Candidate" />
   </EntityType>
-  <Association Name="FKNoteCandidateId">
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="1" />
-    <End Type="Model.CandidateNote" Role="CandidateNote" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Candidate">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CandidateNote">
-        <PropertyRef Name="CandidateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="Id" />
@@ -624,6 +553,7 @@
     <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Customer_GlobalEntity" FromRole="Customer" ToRole="GlobalEntity" />
     <NavigationProperty Name="SourceType" Relationship="Model.FK_Customer_SourceType" FromRole="Customer" ToRole="SourceType" />
     <NavigationProperty Name="Company" Relationship="Model.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
+    <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_Customer" FromRole="Customer" ToRole="Requirement" />
     <NavigationProperty Name="Person" Relationship="Model.FK_Customer_Person" FromRole="Customer" ToRole="Person" />
   </EntityType>
   <Association Name="FK_Customer_GlobalEntity">
@@ -675,22 +605,10 @@
     <Property Name="ModifiedById" Type="Int32" />
     <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedById" Type="Int32" />
-    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
     <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_SourceType" FromRole="SourceType" ToRole="Customer" />
     <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidateSourceId" FromRole="SourceType" ToRole="Candidate" />
   </EntityType>
-  <Association Name="FKCandidateSourceId">
-    <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SourceType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Candidate">
-        <PropertyRef Name="SourceTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Customer_SourceType">
     <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
     <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
@@ -860,6 +778,7 @@
     <Property Name="CreatedById" Type="Int32" />
     <NavigationProperty Name="MailingAddress" Relationship="Model.FKPersonMailAddressAddressId" FromRole="PersonMailAddress" ToRole="MailingAddress" />
     <NavigationProperty Name="MailingAddressType" Relationship="Model.FKPersonMailAddressTypeId" FromRole="PersonMailAddress" ToRole="MailingAddressType" />
+    <NavigationProperty Name="People" Relationship="Model.FK_Person_PersonMailAddress" FromRole="PersonMailAddress" ToRole="Person" />
     <NavigationProperty Name="Person" Relationship="Model.FKPersonMailAddressPersonId" FromRole="PersonMailAddress" ToRole="Person" />
   </EntityType>
   <Association Name="FKCompanyMailAddressAddressId">
@@ -941,153 +860,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertCandidate_Result">
-    <Property Type="Int32" Name="CandidateId" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
-    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
-    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
-    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
-    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="Boolean" Name="HasResume" Nullable="false" />
-    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
-    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
-    <Property Type="Int32" Name="SkillCount" Nullable="false" />
-    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
-    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
-    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
-    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
-    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-  </ComplexType>
-  <ComplexType Name="InsertCandidate_Result1">
-    <Property Type="Int32" Name="CandidateId" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
-    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
-    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
-    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
-    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="Boolean" Name="HasResume" Nullable="false" />
-    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
-    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
-    <Property Type="Int32" Name="SkillCount" Nullable="false" />
-    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
-    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
-    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
-    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
-    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-  </ComplexType>
-  <ComplexType Name="InsertCandidate_Result2">
-    <Property Type="Int32" Name="CandidateId" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
-    <Property Type="Int32" Name="PreferredEmailAddressId" Nullable="true" />
-    <Property Type="String" Name="PreferredEmailAddress" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="PreferredPhoneNumberId" Nullable="true" />
-    <Property Type="String" Name="PreferredPhoneNumber" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TypicalRoleId" Nullable="true" />
-    <Property Type="String" Name="TypicalRoleName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="String" Name="CandidateStatusTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="DesiredEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="String" Name="CurrentEmploymentTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="String" Name="TravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="String" Name="SourceTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="String" Name="MaxTravelTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="Boolean" Name="HasResume" Nullable="false" />
-    <Property Type="String" Name="LastEmployerCompanyName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastJobTitle" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LinkedInProfileUrl" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="ActivityCount" Nullable="false" />
-    <Property Type="Int32" Name="RequirementCount" Nullable="false" />
-    <Property Type="Int32" Name="SkillCount" Nullable="false" />
-    <Property Type="Int32" Name="MatchingSkillCount" Nullable="true" />
-    <Property Type="Decimal" Name="Score" Nullable="true" Precision="18" Scale="0" />
-    <Property Type="String" Name="LastActivityEntityTypeName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivitySalesRecruitingWorkflowName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LastActivityNote" Nullable="true" MaxLength="1000" />
-    <Property Type="DateTime" Name="LastActivityTimestamp" Nullable="true" Precision="23" />
-    <Property Type="String" Name="RequirementCandidateStatusTypeName" Nullable="false" MaxLength="1" />
-  </ComplexType>
   <EntityType Name="CompanyContactInformation">
     <Key>
       <PropertyRef Name="Id" />
@@ -1465,56 +1237,6 @@
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="InsertCandidate_Result3">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Int32" Name="ReferralId" Nullable="true" />
-    <Property Type="String" Name="ResumeSummary" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCandidate_Result4">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Int32" Name="ReferralId" Nullable="true" />
-    <Property Type="String" Name="ResumeSummary" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-  </ComplexType>
   <EntityType Name="RequirementNote">
     <Key>
       <PropertyRef Name="Id" />
@@ -1639,128 +1361,6 @@
     <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="Requirement">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="VMSField" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RequirementTypeId" Type="Int32" Nullable="false" />
-    <Property Name="RequirementPriorityTypeId" Type="Int32" Nullable="false" />
-    <Property Name="RequirementProjectTypeId" Type="Int32" Nullable="false" />
-    <Property Name="RequirementStatusTypeId" Type="Int32" Nullable="false" />
-    <Property Name="RequirementWinLossReasonTypeId" Type="Int32" />
-    <Property Name="TravelTypeId" Type="Int32" />
-    <Property Name="MaxTravelTypeId" Type="Int32" />
-    <Property Name="PaymentTermTypeId" Type="Int32" />
-    <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="DesiredStartDate" Type="DateTime" Precision="0" />
-    <Property Name="StartDate" Type="DateTime" Precision="0" />
-    <Property Name="EndDate" Type="DateTime" Precision="0" />
-    <Property Name="ClosedDate" Type="DateTime" Precision="0" />
-    <Property Name="MinRate" Type="Int32" />
-    <Property Name="MaxRate" Type="Int32" />
-    <Property Name="Budget" Type="Int32" />
-    <Property Name="Duration" Type="Int32" />
-    <Property Name="ContractDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="IsTravelRequired" Type="Boolean" Nullable="false" />
-    <Property Name="IsDrugTestRequired" Type="Boolean" Nullable="false" />
-    <Property Name="IsBackgroundCheckRequired" Type="Boolean" Nullable="false" />
-    <Property Name="IsWorkFromHome" Type="Boolean" Nullable="false" />
-    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedById" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" />
-    <Property Name="MPLOY_JobId" Type="Int32" />
-    <Property Name="MPLOY_ContactId" Type="Int32" />
-    <Property Name="MPLOY_IdUserClosed" Type="Int32" />
-    <Property Name="MPLOY_IdUserFilled" Type="Int32" />
-    <Property Name="MPLOY_IdUserRecruiter" Type="Int32" />
-    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="Requirement" ToRole="GlobalEntity" />
-    <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
-    <NavigationProperty Name="RequirementNotes" Relationship="Model.FK_RequirementNote_Requirement" FromRole="Requirement" ToRole="RequirementNote" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="Requirement1" Relationship="Model.FK_Requirement_CompensationType" FromRole="Requirement" ToRole="Requirement1" />
-    <NavigationProperty Name="Requirement2" Relationship="Model.FK_Requirement_CompensationType" FromRole="Requirement1" ToRole="Requirement" />
-  </EntityType>
-  <Association Name="FK_Requirement_GlobalEntity">
-    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
-    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GlobalEntity">
-        <PropertyRef Name="GlobalEntityId" />
-      </Principal>
-      <Dependent Role="Requirement">
-        <PropertyRef Name="GlobalEntityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Requirement_MaxTravelType">
-    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
-    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MaxTravelType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Requirement">
-        <PropertyRef Name="MaxTravelTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RequirementNote_Requirement">
-    <End Type="Model.Requirement" Role="Requirement" Multiplicity="1" />
-    <End Type="Model.RequirementNote" Role="RequirementNote" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Requirement">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequirementNote">
-        <PropertyRef Name="RequirementId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="InsertRequirement_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementStatusTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementWinLossReasonTypeId" Nullable="true" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="PostingDate" Nullable="false" />
-    <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
-    <Property Type="Int32" Name="MinRate" Nullable="true" />
-    <Property Type="Int32" Name="MaxRate" Nullable="true" />
-    <Property Type="Int32" Name="Budget" Nullable="true" />
-    <Property Type="Int32" Name="Duration" Nullable="true" />
-    <Property Type="String" Name="ContractDetails" Nullable="true" />
-    <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ReadtbJobLog_Result">
     <Property Type="Int32" Name="idJobLog" Nullable="false" />
@@ -1892,121 +1492,6 @@
     <Property Type="Boolean" Name="hidden" Nullable="false" />
     <Property Type="String" Name="initials" Nullable="true" MaxLength="3" />
   </ComplexType>
-  <EntityType Name="Person">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GlobalId" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PreferredPhoneNumberId" Type="Int32" />
-    <Property Name="PreferredEmailAddressId" Type="Int32" />
-    <Property Name="PreferredTypicalRoleId" Type="Int32" />
-    <Property Name="GenderTypeId" Type="Int32" />
-    <Property Name="RaceTypeId" Type="Int32" />
-    <Property Name="CitizenshipTypeId" Type="Int32" />
-    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedById" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" />
-    <Property Name="MPLOY_ContactId" Type="Int32" />
-    <Property Name="MPLOY_UserId" Type="Int32" />
-    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatePersonId" FromRole="Person" ToRole="Candidate" />
-    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
-    <NavigationProperty Name="GenderType" Relationship="Model.FKPersonGenderId" FromRole="Person" ToRole="GenderType" />
-    <NavigationProperty Name="PersonContactInformation" Relationship="Model.FK_Person_PersonContactInformation" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonContactInformation1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_Person" FromRole="Person" ToRole="PersonContactInformation" />
-    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressPersonId" FromRole="Person" ToRole="PersonMailAddress" />
-    <Property Name="PreferredHomeMailAddressId" Type="Int32" />
-  </EntityType>
-  <Association Name="FKCandidatePersonId">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Candidate">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_Person">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKPersonGenderId">
-    <End Type="Model.GenderType" Role="GenderType" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GenderType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="GenderTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Person_PersonContactInformation">
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonContactInformation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="PreferredPhoneNumberId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Person_PersonContactInformation1">
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
-    <End Type="Model.Person" Role="Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonContactInformation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="PreferredEmailAddressId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PersonContactInformation_Person">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonContactInformation">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKPersonMailAddressPersonId">
-    <End Type="Model.Person" Role="Person" Multiplicity="1" />
-    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonMailAddress">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="ReadOrganization_Result">
     <Property Type="Int32" Name="idOrganization" Nullable="false" />
     <Property Type="String" Name="Organization" Nullable="false" MaxLength="50" />
@@ -2105,39 +1590,6 @@
     <Property Type="DateTime" Name="enddate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="IdContact" Nullable="false" />
   </ComplexType>
-  <EntityType Name="SalesRecruitingActivityLog">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalesRecruitingWorkflowId" Type="Int32" Nullable="false" />
-    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
-    <Property Name="ActivityNote" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Name="ActivityDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ActivityTimestamp" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedById" Type="Int32" Nullable="false" />
-    <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PayRate" Type="Int32" />
-    <Property Name="BillRate" Type="Int32" />
-    <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
-    <Property Name="EndDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="MPLOY_ContactId" Type="Int32" />
-    <Property Name="MPLOY_UserId" Type="Int32" />
-    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_SalesRecruitingActivityLog_GlobalEntity" FromRole="SalesRecruitingActivityLog" ToRole="GlobalEntity" />
-  </EntityType>
-  <Association Name="FK_SalesRecruitingActivityLog_GlobalEntity">
-    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
-    <End Type="Model.SalesRecruitingActivityLog" Role="SalesRecruitingActivityLog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GlobalEntity">
-        <PropertyRef Name="GlobalEntityId" />
-      </Principal>
-      <Dependent Role="SalesRecruitingActivityLog">
-        <PropertyRef Name="GlobalEntityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="GetRequirementContactAssociation_Result">
     <Property Type="Int32" Name="jobId" Nullable="true" />
     <Property Type="Int32" Name="candidateId" Nullable="true" />
@@ -2196,18 +1648,6 @@
     <Property Type="Int32" Name="idSkill" Nullable="false" />
     <Property Type="Int32" Name="idSkillLevel" Nullable="false" />
   </ComplexType>
-  <Association Name="FK_Requirement_CompensationType">
-    <End Type="Model.Requirement" Role="Requirement" Multiplicity="1" />
-    <End Type="Model.Requirement" Role="Requirement1" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Requirement">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Requirement1">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="InsertPersonTypicalRole_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Int32" Name="PersonId" Nullable="false" />
@@ -2224,5 +1664,421 @@
     <Property Type="Int32" Name="SkillId" Nullable="false" />
     <Property Type="Int32" Name="SkillCategoryId" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="ActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" Nullable="false" />
+    <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="ActivityLog" ToRole="GlobalEntity" />
+  </EntityType>
+  <Association Name="FK_ActivityLog_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.ActivityLog" Role="ActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="ActivityLog">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Requirement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="VMSField" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="PrimaryCustomerId" Type="Int32" />
+    <Property Name="RequirementTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementPriorityTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RequirementProjectTypeId" Type="Int32" Nullable="false" />
+    <Property Name="TravelTypeId" Type="Int32" />
+    <Property Name="MaxTravelTypeId" Type="Int32" />
+    <Property Name="PaymentTermTypeId" Type="Int32" />
+    <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DesiredStartDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="MinRate" Type="Int32" />
+    <Property Name="MaxRate" Type="Int32" />
+    <Property Name="Budget" Type="Int32" />
+    <Property Name="Duration" Type="Int32" />
+    <Property Name="ContractDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsTravelRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsDrugTestRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsBackgroundCheckRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsWorkFromHome" Type="Boolean" Nullable="false" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_JobId" Type="Int32" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="ClosedDate" Type="DateTime" Precision="0" />
+    <Property Name="MPLOY_IdUserClosed" Type="Int32" />
+    <Property Name="MPLOY_IdUserFilled" Type="Int32" />
+    <Property Name="MPLOY_IdUserRecruiter" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Model.FK_Requirement_Customer" FromRole="Requirement" ToRole="Customer" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="Requirement" ToRole="GlobalEntity" />
+    <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
+    <NavigationProperty Name="RequirementNotes" Relationship="Model.FK_RequirementNote_Requirement" FromRole="Requirement" ToRole="RequirementNote" />
+  </EntityType>
+  <Association Name="FK_Requirement_Customer">
+    <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="PrimaryCustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requirement_MaxTravelType">
+    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirement">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequirementNote_Requirement">
+    <End Type="Model.Requirement" Role="Requirement" Multiplicity="1" />
+    <End Type="Model.RequirementNote" Role="RequirementNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Requirement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequirementNote">
+        <PropertyRef Name="RequirementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="WorkflowStateLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="WorkflowStateId" Type="Int32" Nullable="false" />
+    <Property Name="WorkflowStateSubId" Type="Int32" />
+    <Property Name="WorkflowStateSubReasonCodeId" Type="Int32" />
+    <Property Name="TimestampBegin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TimestampEnd" Type="DateTime" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_WorkflowStateLog_GlobalEntity" FromRole="WorkflowStateLog" ToRole="GlobalEntity" />
+  </EntityType>
+  <Association Name="FK_WorkflowStateLog_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.WorkflowStateLog" Role="WorkflowStateLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="WorkflowStateLog">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="InsertRequirement_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="PrimaryCustomerId" Nullable="true" />
+    <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="PostingDate" Nullable="false" />
+    <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="Int32" Name="MinRate" Nullable="true" />
+    <Property Type="Int32" Name="MaxRate" Nullable="true" />
+    <Property Type="Int32" Name="Budget" Nullable="true" />
+    <Property Type="Int32" Name="Duration" Nullable="true" />
+    <Property Type="String" Name="ContractDetails" Nullable="true" />
+    <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Candidate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+    <Property Name="PersonId" Type="Int32" Nullable="false" />
+    <Property Name="CandidateStatusTypeId" Type="Int32" />
+    <Property Name="DesiredEmploymentTypeId" Type="Int32" />
+    <Property Name="CurrentEmploymentTypeId" Type="Int32" />
+    <Property Name="TravelTypeId" Type="Int32" />
+    <Property Name="SourceTypeId" Type="Int32" />
+    <Property Name="MaxTravelTypeId" Type="Int32" />
+    <Property Name="AvailableDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="CurrentSalary" Type="Int32" />
+    <Property Name="DesiredSalary" Type="Int32" />
+    <Property Name="CurrentRate" Type="Int32" />
+    <Property Name="DesiredRate" Type="Int32" />
+    <Property Name="ReferralId" Type="Int32" />
+    <Property Name="IsOpenToRelocation" Type="Boolean" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_OrganizationId" Type="Int32" />
+    <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="Candidate" ToRole="GlobalEntity" />
+    <NavigationProperty Name="SourceType" Relationship="Model.FKCandidateSourceId" FromRole="Candidate" ToRole="SourceType" />
+    <NavigationProperty Name="MaxTravelType" Relationship="Model.FKCandidatetoTravel" FromRole="Candidate" ToRole="MaxTravelType" />
+    <NavigationProperty Name="CandidateNotes" Relationship="Model.FKNoteCandidateId" FromRole="Candidate" ToRole="CandidateNote" />
+    <NavigationProperty Name="Person" Relationship="Model.FKCandidatePersonId" FromRole="Candidate" ToRole="Person" />
+  </EntityType>
+  <Association Name="FK_Candidate_GlobalEntity">
+    <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GlobalEntity">
+        <PropertyRef Name="GlobalEntityId" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCandidateSourceId">
+    <End Type="Model.SourceType" Role="SourceType" Multiplicity="0..1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="SourceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKCandidatetoTravel">
+    <End Type="Model.MaxTravelType" Role="MaxTravelType" Multiplicity="0..1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaxTravelType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="MaxTravelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKNoteCandidateId">
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="1" />
+    <End Type="Model.CandidateNote" Role="CandidateNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidateNote">
+        <PropertyRef Name="CandidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GlobalId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PreferredPhoneNumberId" Type="Int32" />
+    <Property Name="PreferredEmailAddressId" Type="Int32" />
+    <Property Name="PreferredPhysicalAddressId" Type="Int32" />
+    <Property Name="PreferredTypicalRoleId" Type="Int32" />
+    <Property Name="GenderTypeId" Type="Int32" />
+    <Property Name="RaceTypeId" Type="Int32" />
+    <Property Name="CitizenshipTypeId" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedById" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedById" Type="Int32" />
+    <Property Name="MPLOY_ContactId" Type="Int32" />
+    <Property Name="MPLOY_UserId" Type="Int32" />
+    <NavigationProperty Name="Candidates" Relationship="Model.FKCandidatePersonId" FromRole="Person" ToRole="Candidate" />
+    <NavigationProperty Name="Customers" Relationship="Model.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
+    <NavigationProperty Name="GenderType" Relationship="Model.FKPersonGenderId" FromRole="Person" ToRole="GenderType" />
+    <NavigationProperty Name="PersonContactInformation" Relationship="Model.FK_Person_PersonContactInformation" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonContactInformation1" Relationship="Model.FK_Person_PersonContactInformation1" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonMailAddress" Relationship="Model.FK_Person_PersonMailAddress" FromRole="Person" ToRole="PersonMailAddress" />
+    <NavigationProperty Name="PersonContactInformations" Relationship="Model.FK_PersonContactInformation_Person" FromRole="Person" ToRole="PersonContactInformation" />
+    <NavigationProperty Name="PersonMailAddresses" Relationship="Model.FKPersonMailAddressPersonId" FromRole="Person" ToRole="PersonMailAddress" />
+  </EntityType>
+  <Association Name="FKCandidatePersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Candidate" Role="Candidate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidate">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonGenderId">
+    <End Type="Model.GenderType" Role="GenderType" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="GenderTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhoneNumberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonContactInformation1">
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonContactInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredEmailAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_PersonMailAddress">
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="0..1" />
+    <End Type="Model.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonMailAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PreferredPhysicalAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonContactInformation_Person">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonContactInformation" Role="PersonContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonContactInformation">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKPersonMailAddressPersonId">
+    <End Type="Model.Person" Role="Person" Multiplicity="1" />
+    <End Type="Model.PersonMailAddress" Role="PersonMailAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonMailAddress">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="InsertCandidate_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Int32" Name="ReferralId" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
   </ComplexType>
 </Schema>

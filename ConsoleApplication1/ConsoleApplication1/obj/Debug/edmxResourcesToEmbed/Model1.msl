@@ -14,35 +14,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Candidates">
-      <EntityTypeMapping TypeName="Model.Candidate">
-        <MappingFragment StoreEntitySet="Candidate">
-          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
-          <ScalarProperty Name="ResumeSummary" ColumnName="ResumeSummary" />
-          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
-          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
-          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
-          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
-          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
-          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
-          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
-          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
-          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
-          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
-          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MaxTravelTypes">
       <EntityTypeMapping TypeName="Model.MaxTravelType">
         <MappingFragment StoreEntitySet="MaxTravelType">
@@ -180,7 +151,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="AssignAccountabilityRecruiter" FunctionName="Model.Store.AssignAccountabilityRecruiter" />
-    <FunctionImportMapping FunctionImportName="SaveSalesRecruitingActivityLog" FunctionName="Model.Store.SaveSalesRecruitingActivityLog" />
     <FunctionImportMapping FunctionImportName="ReadCandidateContractType" FunctionName="Model.Store.ReadCandidateContractType" />
     <FunctionImportMapping FunctionImportName="ReadSourceType" FunctionName="Model.Store.ReadSourceType">
       <ResultMapping>
@@ -363,35 +333,6 @@
     <FunctionImportMapping FunctionImportName="FindCustomerOrganizationId" FunctionName="Model.Store.FindCustomerOrganizationId" />
     <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
     <FunctionImportMapping FunctionImportName="InsertCandidateNote" FunctionName="Model.Store.InsertCandidateNote" />
-    <FunctionImportMapping FunctionImportName="InsertCandidate" FunctionName="Model.Store.InsertCandidate">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.InsertCandidate_Result4">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
-          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
-          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
-          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
-          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
-          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
-          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
-          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
-          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
-          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
-          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
-          <ScalarProperty Name="ResumeSummary" ColumnName="ResumeSummary" />
-          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="RequirementNotes">
       <EntityTypeMapping TypeName="Model.RequirementNote">
         <MappingFragment StoreEntitySet="RequirementNote">
@@ -489,93 +430,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Requirements">
-      <EntityTypeMapping TypeName="Model.Requirement">
-        <MappingFragment StoreEntitySet="Requirement">
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
-          <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
-          <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
-          <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
-          <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
-          <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
-          <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
-          <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="Budget" ColumnName="Budget" />
-          <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
-          <ScalarProperty Name="MinRate" ColumnName="MinRate" />
-          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
-          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
-          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
-          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
-          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
-          <ScalarProperty Name="RequirementWinLossReasonTypeId" ColumnName="RequirementWinLossReasonTypeId" />
-          <ScalarProperty Name="RequirementStatusTypeId" ColumnName="RequirementStatusTypeId" />
-          <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
-          <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
-          <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
-          <ScalarProperty Name="VMSField" ColumnName="VMSField" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="InsertPerson" FunctionName="Model.Store.InsertPerson" />
-    <FunctionImportMapping FunctionImportName="InsertRequirement" FunctionName="Model.Store.InsertRequirement">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.InsertRequirement_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="VMSField" ColumnName="VMSField" />
-          <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
-          <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
-          <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
-          <ScalarProperty Name="RequirementStatusTypeId" ColumnName="RequirementStatusTypeId" />
-          <ScalarProperty Name="RequirementWinLossReasonTypeId" ColumnName="RequirementWinLossReasonTypeId" />
-          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
-          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
-          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
-          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
-          <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
-          <ScalarProperty Name="MinRate" ColumnName="MinRate" />
-          <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
-          <ScalarProperty Name="Budget" ColumnName="Budget" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
-          <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
-          <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
-          <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
-          <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
-          <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
-          <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
-          <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ReadtbJobLog" FunctionName="Model.Store.ReadtbJobLog">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadtbJobLog_Result">
@@ -731,31 +586,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="People">
-      <EntityTypeMapping TypeName="Model.Person">
-        <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="PreferredHomeMailAddressId" ColumnName="PreferredHomeMailAddressId" />
-          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="CitizenshipTypeId" ColumnName="CitizenshipTypeId" />
-          <ScalarProperty Name="RaceTypeId" ColumnName="RaceTypeId" />
-          <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
-          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
-          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
-          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="ReadOrganization" FunctionName="Model.Store.ReadOrganization">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadOrganization_Result">
@@ -870,30 +700,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="SalesRecruitingActivityLogs">
-      <EntityTypeMapping TypeName="Model.SalesRecruitingActivityLog">
-        <MappingFragment StoreEntitySet="SalesRecruitingActivityLog">
-          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
-          <ScalarProperty Name="BillRate" ColumnName="BillRate" />
-          <ScalarProperty Name="PayRate" ColumnName="PayRate" />
-          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="ActivityTimestamp" ColumnName="ActivityTimestamp" />
-          <ScalarProperty Name="ActivityDetail" ColumnName="ActivityDetail" />
-          <ScalarProperty Name="ActivityNote" ColumnName="ActivityNote" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="SalesRecruitingWorkflowId" ColumnName="SalesRecruitingWorkflowId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
     <FunctionImportMapping FunctionImportName="InsertRequirementCustomer" FunctionName="Model.Store.InsertRequirementCustomer" />
-    <FunctionImportMapping FunctionImportName="InsertSalesRecruitingActivityLog" FunctionName="Model.Store.InsertSalesRecruitingActivityLog" />
     <FunctionImportMapping FunctionImportName="GetRequirementContactAssociation" FunctionName="Model.Store.GetRequirementContactAssociation">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.GetRequirementContactAssociation_Result">
@@ -1003,6 +810,202 @@
           <ScalarProperty Name="SkillId" ColumnName="SkillId" />
           <ScalarProperty Name="SkillCategoryId" ColumnName="SkillCategoryId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
+    <EntitySetMapping Name="ActivityLogs">
+      <EntityTypeMapping TypeName="Model.ActivityLog">
+        <MappingFragment StoreEntitySet="ActivityLog">
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requirements">
+      <EntityTypeMapping TypeName="Model.Requirement">
+        <MappingFragment StoreEntitySet="Requirement">
+          <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
+          <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
+          <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
+          <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
+          <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
+          <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
+          <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
+          <ScalarProperty Name="MinRate" ColumnName="MinRate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
+          <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
+          <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
+          <ScalarProperty Name="PrimaryCustomerId" ColumnName="PrimaryCustomerId" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="VMSField" ColumnName="VMSField" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkflowStateLogs">
+      <EntityTypeMapping TypeName="Model.WorkflowStateLog">
+        <MappingFragment StoreEntitySet="WorkflowStateLog">
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="TimestampEnd" ColumnName="TimestampEnd" />
+          <ScalarProperty Name="TimestampBegin" ColumnName="TimestampBegin" />
+          <ScalarProperty Name="WorkflowStateSubReasonCodeId" ColumnName="WorkflowStateSubReasonCodeId" />
+          <ScalarProperty Name="WorkflowStateSubId" ColumnName="WorkflowStateSubId" />
+          <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertRequirement" FunctionName="Model.Store.InsertRequirement">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertRequirement_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="VMSField" ColumnName="VMSField" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="PrimaryCustomerId" ColumnName="PrimaryCustomerId" />
+          <ScalarProperty Name="RequirementTypeId" ColumnName="RequirementTypeId" />
+          <ScalarProperty Name="RequirementPriorityTypeId" ColumnName="RequirementPriorityTypeId" />
+          <ScalarProperty Name="RequirementProjectTypeId" ColumnName="RequirementProjectTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+          <ScalarProperty Name="DesiredStartDate" ColumnName="DesiredStartDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="MinRate" ColumnName="MinRate" />
+          <ScalarProperty Name="MaxRate" ColumnName="MaxRate" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="ContractDetails" ColumnName="ContractDetails" />
+          <ScalarProperty Name="IsTravelRequired" ColumnName="IsTravelRequired" />
+          <ScalarProperty Name="IsDrugTestRequired" ColumnName="IsDrugTestRequired" />
+          <ScalarProperty Name="IsBackgroundCheckRequired" ColumnName="IsBackgroundCheckRequired" />
+          <ScalarProperty Name="IsWorkFromHome" ColumnName="IsWorkFromHome" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_JobId" ColumnName="MPLOY_JobId" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
+          <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
+          <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Candidates">
+      <EntityTypeMapping TypeName="Model.Candidate">
+        <MappingFragment StoreEntitySet="Candidate">
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="Model.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CitizenshipTypeId" ColumnName="CitizenshipTypeId" />
+          <ScalarProperty Name="RaceTypeId" ColumnName="RaceTypeId" />
+          <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
+          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
+          <ScalarProperty Name="PreferredPhysicalAddressId" ColumnName="PreferredPhysicalAddressId" />
+          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
+          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UpdatePersonPreferredData" FunctionName="Model.Store.UpdatePersonPreferredData" />
+    <FunctionImportMapping FunctionImportName="InsertCandidate" FunctionName="Model.Store.InsertCandidate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCandidate_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CandidateStatusTypeId" ColumnName="CandidateStatusTypeId" />
+          <ScalarProperty Name="DesiredEmploymentTypeId" ColumnName="DesiredEmploymentTypeId" />
+          <ScalarProperty Name="CurrentEmploymentTypeId" ColumnName="CurrentEmploymentTypeId" />
+          <ScalarProperty Name="TravelTypeId" ColumnName="TravelTypeId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="MaxTravelTypeId" ColumnName="MaxTravelTypeId" />
+          <ScalarProperty Name="AvailableDate" ColumnName="AvailableDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="DesiredSalary" ColumnName="DesiredSalary" />
+          <ScalarProperty Name="CurrentRate" ColumnName="CurrentRate" />
+          <ScalarProperty Name="DesiredRate" ColumnName="DesiredRate" />
+          <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+          <ScalarProperty Name="IsOpenToRelocation" ColumnName="IsOpenToRelocation" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

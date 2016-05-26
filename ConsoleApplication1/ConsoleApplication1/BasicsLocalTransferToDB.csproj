@@ -69,6 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Candidate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -122,18 +125,6 @@
     <Compile Include="HiringActivityMigration.cs" />
     <Compile Include="ImportHelperMethods.cs" />
     <Compile Include="InsertCandidate_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertCandidate_Result1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertCandidate_Result2.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertCandidate_Result3.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertCandidate_Result4.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="InsertCompany1_Result.cs">
@@ -309,9 +300,6 @@
     <Compile Include="RequirementNote.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SalesRecruitingActivityLog.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="SkillsMigration.cs" />
     <Compile Include="SourceType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -324,6 +312,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="UserMigration.cs" />
+    <Compile Include="WorkflowStateLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

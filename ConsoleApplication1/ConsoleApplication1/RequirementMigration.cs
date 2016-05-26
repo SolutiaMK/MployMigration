@@ -50,6 +50,13 @@ namespace ConsoleApplication1
                         var MPLOYIdUserClosed = requirementRecord.idUserClosed;
                         var MPLOYIdUserFilled = requirementRecord.idUserFilled;
 
+                        //var requirementCity = String.Empty;
+                        //var requirementState = String.Empty;
+                        //if (!string.IsNullOrEmpty(requirementRecord.City))
+                        //{
+                            
+                        //}
+
                         //These come from XData -->  Get RequirementStatusTypeId, Get IsTravelRequired, Get MinRate, Get MaxRate, Get RequirementDuration
                         Requirement requirementData = new Requirement();
 
@@ -75,8 +82,8 @@ namespace ConsoleApplication1
                             , requirementTypeId
                             , priorityType
                             , 3
-                            , reqStatusTypeId
-                            , requirementData.RequirementWinLossReasonTypeId
+                            , requirementRecord.City
+                            , requirementRecord.State
                             , 3
                             , 11
                             , requirementData.PaymentTermTypeId

@@ -43,8 +43,6 @@ namespace ConsoleApplication1
                             var personTypicalRoleId = personTypicalRoleRecord.Select(d => d.Id).ToList();
                             Debug.WriteLine("\n" + "PersonTypicalRoleId: " + personTypicalRoleId[0] + "  PersonId: " + contactSkillRecord.PersonId + "  " + " SkillId: " + contactSkillRecord.SkillId + "  " + "TypicalRoleId: " + typicalRoleId);
                         }
-
-
                     }
                 }
                 catch

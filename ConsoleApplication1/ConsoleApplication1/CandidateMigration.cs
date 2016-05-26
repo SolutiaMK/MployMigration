@@ -73,23 +73,31 @@ namespace ConsoleApplication1
                         if (candidateRecord.IdContactType == 2 || candidateRecord.IdContactType == 5)
                         {
                             //Call method to Insert the data as a person and candidate:
+                            //if (candidateRecord.FirstName != "Unknown" && candidateRecord.LastName != "Unknown")
+                            //{
+                                
+                            
+                                _mployContactId = candidateRecord.IdContact;
 
-                            _mployContactId = candidateRecord.IdContact;
+                                //Get the user id:
+                                var idUserVar = ImportHelperMethods.GetUserId(candidateRecord.IdUser);
 
-                            //Get the user id:
-                            var idUserVar = ImportHelperMethods.GetUserId(candidateRecord.IdUser);
+                                //Get the GenderTypeId of the person being inserted:
+                                var genderTypeId = ImportHelperMethods.GetGenderTypeId(candidateRecord.Gender);
 
-                            //Get the GenderTypeId of the person being inserted:
-                            var genderTypeId = ImportHelperMethods.GetGenderTypeId(candidateRecord.Gender);
+                                //Insert the contact as a Person first:
+                                //Returns the PersonId
+                                var personId = -1;
+                                
+                                var personResult = _db.InsertPerson(null, candidateRecord.FirstName, candidateRecord.LastName, genderTypeId, 0, candidateRecord.Created, candidateRecord.IdContact, idUserVar).ToList();
+                                personId = Convert.ToInt32(personResult[0]);
 
-                            //Insert the contact as a Person first:
-                            //Returns the PersonId
-                            var personId = -1;
+                                InsertCandidate(candidateRecord, personId);
 
-                            var personResult = _db.InsertPerson(null, candidateRecord.FirstName, candidateRecord.LastName, genderTypeId, 0, candidateRecord.Created, candidateRecord.IdContact, idUserVar).ToList();
-                            personId = Convert.ToInt32(personResult[0]);
+                                //Update the Person table 'Preferred' columns for email, phone, and home address:
+                                _db.UpdatePersonPreferredData(candidateRecord.IdContact);
 
-                            InsertCandidate(candidateRecord, personId);
+                            //}
                         }                                          
                     }
                     //Import the contacts that are customers with hiring activities:
@@ -127,7 +135,7 @@ namespace ConsoleApplication1
 
             //Insert as a Candidate
             //Returns the Candidate record
-            var candidateResult = _db.InsertCandidate(personId, candidateStatusTypeId, null, null, null, sourceTypeIdForCandidate, candidateData.MaxTravelTypeId, null, null, candidateData.CurrentSalary, candidateData.DesiredSalary, candidateData.CurrentRate, candidateData.DesiredRate, null, null, candidateData.IsOpenToRelocation, 0, candidateRecord.Created, orgId).ToList();
+            var candidateResult = _db.InsertCandidate(personId, candidateStatusTypeId, null, null, null, sourceTypeIdForCandidate, candidateData.MaxTravelTypeId, null, null, candidateData.CurrentSalary, candidateData.DesiredSalary, candidateData.CurrentRate, candidateData.DesiredRate, null, candidateData.IsOpenToRelocation, 0, candidateRecord.Created, orgId).ToList();
             foreach (var item in candidateResult)
             {
                 candidateId = item.Id;
@@ -136,6 +144,7 @@ namespace ConsoleApplication1
 
             //Insert the Candidate's Mailing Address and Contact Information and Notes:
             InsertPersonContactInfoAndMailAddress(candidateRecord, personId, candidateId);
+
 
 
             Debug.WriteLine("\n" + "Person imported: " + personId + " " + candidateRecord.FirstName + " " + candidateRecord.LastName + " Customer Id: " + candidateId);

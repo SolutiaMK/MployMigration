@@ -175,9 +175,17 @@ namespace ConsoleApplication1
                                         0).ToList();
                             }
 
+
+                            //THIS NEEDS TO BE UPDATED IN THE DB SO THE BRANCH CAN BE ADDED!!!!!!!!!
                             //Insert the CustomerBranch record:
                             var branchId = ImportHelperMethods.GetBranchId(contactRecord.State, contactRecord.City);
-                            var customerBranchResult = _db.InsertCustomerBranch(_customerId, branchId, contactRecord.Created, 0, contactRecord.IdUser);
+                            //var customerBranchResult = _db.InsertCustomerBranch(_customerId, branchId, contactRecord.Created, 0, contactRecord.IdUser);
+
+
+
+
+                            //Update the Person table 'Preferred' columns for email, phone, and home address:
+                            _db.UpdatePersonPreferredData(contactRecord.IdContact);
 
                             Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
                                             contactRecord.LastName + " Customer Id: " + _customerId);

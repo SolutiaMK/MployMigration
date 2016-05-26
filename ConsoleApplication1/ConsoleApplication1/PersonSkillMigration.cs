@@ -31,21 +31,22 @@ namespace ConsoleApplication1
                     //For each ContactSkill in the list, insert a record into the PersonSkill table:
                     foreach (var contactSkillRecord in contactSkillData)
                     {
-                        if (contactSkillRecord.idContactSkill > 183615)
-                        {
+                        //'if' statement used to run sections of the contectSkillRecord if the sql connection keeps timing out:
+                        //if (contactSkillRecord.idContactSkill > 183612)
+                        //{
                             
                             _mploySkillId = contactSkillRecord.idSkill;
                             _mployIdContact = contactSkillRecord.idContact;
                             _mployContactSkillId = contactSkillRecord.idContactSkill;
 
                             //Read the record and insert data into the PersonSkill table:
-                            var insertedPersonSkillRecord = _db.InsertPersonSkill(contactSkillRecord.idContact, contactSkillRecord.idSkill, null, null, null);
+                            var insertedPersonSkillRecord = _db.InsertPersonSkill(contactSkillRecord.idContact, contactSkillRecord.idSkill, 3, null, null);
 
                             var personSkillId = insertedPersonSkillRecord.Select(item => item.Id);                           
 
 
                             Debug.WriteLine("\n" + "Skill imported: " + _mployContactSkillId + " : " + " SkillId: " + _mploySkillId);
-                        }
+                        //}
                     }
                 }
                 catch

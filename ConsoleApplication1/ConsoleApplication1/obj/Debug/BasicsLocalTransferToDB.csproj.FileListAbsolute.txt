@@ -18,4 +18,3 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\BasicsLocalTransferToDB\Con
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\BasicsLocalTransferToDB\ConsoleApplication1\ConsoleApplication1\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\BasicsLocalTransferToDB\ConsoleApplication1\ConsoleApplication1\obj\Debug\DataMigration.exe
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\BasicsLocalTransferToDB\ConsoleApplication1\ConsoleApplication1\obj\Debug\DataMigration.pdb
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\BasicsLocalTransferToDB\ConsoleApplication1\ConsoleApplication1\obj\Debug\BasicsLocalTransferToDB.csprojResolveAssemblyReference.cache

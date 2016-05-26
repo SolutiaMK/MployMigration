@@ -16,8 +16,8 @@ namespace ConsoleApplication1
     {
         public SourceType()
         {
-            this.Candidates = new HashSet<Candidate>();
             this.Customers = new HashSet<Customer>();
+            this.Candidates = new HashSet<Candidate>();
         }
     
         public int Id { get; set; }
@@ -28,7 +28,7 @@ namespace ConsoleApplication1
         public Nullable<int> CreatedById { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }

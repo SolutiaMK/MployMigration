@@ -16,11 +16,12 @@ namespace ConsoleApplication1
     {
         public GlobalEntity()
         {
-            this.Candidates = new HashSet<Candidate>();
             this.Customers = new HashSet<Customer>();
             this.Companies = new HashSet<Company>();
+            this.ActivityLogs = new HashSet<ActivityLog>();
             this.Requirements = new HashSet<Requirement>();
-            this.SalesRecruitingActivityLogs = new HashSet<SalesRecruitingActivityLog>();
+            this.WorkflowStateLogs = new HashSet<WorkflowStateLog>();
+            this.Candidates = new HashSet<Candidate>();
         }
     
         public System.Guid GlobalEntityId { get; set; }
@@ -30,10 +31,11 @@ namespace ConsoleApplication1
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
     
-        public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<ActivityLog> ActivityLogs { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
-        public virtual ICollection<SalesRecruitingActivityLog> SalesRecruitingActivityLogs { get; set; }
+        public virtual ICollection<WorkflowStateLog> WorkflowStateLogs { get; set; }
+        public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }

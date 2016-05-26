@@ -63,14 +63,23 @@ namespace ConsoleApplication1
  
                                 //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
 
+                            
+                            
+                            
                             //Get the SalesRecruitingActivityLog PayRate and BillRate:
-                            var insertActivityLog = new SalesRecruitingActivityLog();
+                            
+                            //var insertActivityLog = new SalesRecruitingActivityLog();
                             if (!string.IsNullOrEmpty(activityRecord.XData))
                             {
                                 //Parse the XData for the Bill and Pay rate:
-                                insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
+                               
+                                //insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
                             }
                         
+
+
+
+
 
                             //Get the SalesRecruitingActivityLog.SalesRecruitingWorkflowId:
                             var workflowId = GetSalesRecruitingWorkflowId(activityRecord.idEventType);                      
@@ -102,8 +111,16 @@ namespace ConsoleApplication1
                                 requirementStatusTypeId = 11;
                             }
 
+                            
+                            
+                            
+                            
                             //Insert into the SalesRecruitingActivityLog table:
-                            var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            //var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            
+                            
+                            
+                            
                             
                             //**************** Update or create the RequirementCandodate/Customer relationships based on the incoming hiring activity  *****
 

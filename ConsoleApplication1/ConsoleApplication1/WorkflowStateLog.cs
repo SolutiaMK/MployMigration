@@ -12,23 +12,17 @@ namespace ConsoleApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class SalesRecruitingActivityLog
+    public partial class WorkflowStateLog
     {
         public int Id { get; set; }
-        public int SalesRecruitingWorkflowId { get; set; }
         public System.Guid GlobalEntityId { get; set; }
-        public string ActivityNote { get; set; }
-        public string ActivityDetail { get; set; }
-        public System.DateTime ActivityTimestamp { get; set; }
-        public int CreatedById { get; set; }
+        public int WorkflowStateId { get; set; }
+        public Nullable<int> WorkflowStateSubId { get; set; }
+        public Nullable<int> WorkflowStateSubReasonCodeId { get; set; }
+        public System.DateTime TimestampBegin { get; set; }
+        public Nullable<System.DateTime> TimestampEnd { get; set; }
+        public Nullable<int> CreatedById { get; set; }
         public string CreatedByName { get; set; }
-        public Nullable<int> PayRate { get; set; }
-        public Nullable<int> BillRate { get; set; }
-        public Nullable<System.DateTime> ScheduledDateTime { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> MPLOY_ContactId { get; set; }
-        public Nullable<int> MPLOY_UserId { get; set; }
     
         public virtual GlobalEntity GlobalEntity { get; set; }
     }
