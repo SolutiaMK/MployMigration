@@ -45,8 +45,8 @@ namespace ConsoleApplication1
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<Requirement> Requirements { get; set; }
         public virtual DbSet<WorkflowStateLog> WorkflowStateLogs { get; set; }
-        public virtual DbSet<Candidate> Candidates { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Candidate> Candidates { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetCompanyJobAssociation(Nullable<int> currentCompany)
         {
@@ -786,55 +786,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertCompanyBranch", companyIdParameter, branchIdParameter, createDateParameter, modifiedByIdParameter, mPLOY_UserIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertContactLog(Nullable<int> salesRecruitingWorkflowId, string activityNote, string activityOutcome, Nullable<int> payRate, Nullable<int> billRate, Nullable<System.DateTime> scheduledDateTime, Nullable<System.DateTime> endDate, Nullable<System.DateTime> activityTimestamp, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_UserId)
-        {
-            var salesRecruitingWorkflowIdParameter = salesRecruitingWorkflowId.HasValue ?
-                new ObjectParameter("SalesRecruitingWorkflowId", salesRecruitingWorkflowId) :
-                new ObjectParameter("SalesRecruitingWorkflowId", typeof(int));
-    
-            var activityNoteParameter = activityNote != null ?
-                new ObjectParameter("ActivityNote", activityNote) :
-                new ObjectParameter("ActivityNote", typeof(string));
-    
-            var activityOutcomeParameter = activityOutcome != null ?
-                new ObjectParameter("ActivityOutcome", activityOutcome) :
-                new ObjectParameter("ActivityOutcome", typeof(string));
-    
-            var payRateParameter = payRate.HasValue ?
-                new ObjectParameter("PayRate", payRate) :
-                new ObjectParameter("PayRate", typeof(int));
-    
-            var billRateParameter = billRate.HasValue ?
-                new ObjectParameter("BillRate", billRate) :
-                new ObjectParameter("BillRate", typeof(int));
-    
-            var scheduledDateTimeParameter = scheduledDateTime.HasValue ?
-                new ObjectParameter("ScheduledDateTime", scheduledDateTime) :
-                new ObjectParameter("ScheduledDateTime", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            var activityTimestampParameter = activityTimestamp.HasValue ?
-                new ObjectParameter("ActivityTimestamp", activityTimestamp) :
-                new ObjectParameter("ActivityTimestamp", typeof(System.DateTime));
-    
-            var createDateParameter = createDate.HasValue ?
-                new ObjectParameter("CreateDate", createDate) :
-                new ObjectParameter("CreateDate", typeof(System.DateTime));
-    
-            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
-                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
-                new ObjectParameter("MPLOY_ContactId", typeof(int));
-    
-            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
-                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
-                new ObjectParameter("MPLOY_UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertContactLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter);
-        }
-    
         public virtual ObjectResult<ReadSkill_Result> ReadSkill()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadSkill_Result>("ReadSkill");
@@ -1128,6 +1079,108 @@ namespace ConsoleApplication1
                 new ObjectParameter("Mploy_ContactId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePersonPreferredData", mploy_ContactIdParameter);
+        }
+    
+        public virtual int InsertContactLog(Nullable<int> salesRecruitingWorkflowId, string activityNote, string activityOutcome, Nullable<int> payRate, Nullable<int> billRate, Nullable<System.DateTime> scheduledDateTime, Nullable<System.DateTime> endDate, Nullable<System.DateTime> activityTimestamp, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_UserId)
+        {
+            var salesRecruitingWorkflowIdParameter = salesRecruitingWorkflowId.HasValue ?
+                new ObjectParameter("SalesRecruitingWorkflowId", salesRecruitingWorkflowId) :
+                new ObjectParameter("SalesRecruitingWorkflowId", typeof(int));
+    
+            var activityNoteParameter = activityNote != null ?
+                new ObjectParameter("ActivityNote", activityNote) :
+                new ObjectParameter("ActivityNote", typeof(string));
+    
+            var activityOutcomeParameter = activityOutcome != null ?
+                new ObjectParameter("ActivityOutcome", activityOutcome) :
+                new ObjectParameter("ActivityOutcome", typeof(string));
+    
+            var payRateParameter = payRate.HasValue ?
+                new ObjectParameter("PayRate", payRate) :
+                new ObjectParameter("PayRate", typeof(int));
+    
+            var billRateParameter = billRate.HasValue ?
+                new ObjectParameter("BillRate", billRate) :
+                new ObjectParameter("BillRate", typeof(int));
+    
+            var scheduledDateTimeParameter = scheduledDateTime.HasValue ?
+                new ObjectParameter("ScheduledDateTime", scheduledDateTime) :
+                new ObjectParameter("ScheduledDateTime", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var activityTimestampParameter = activityTimestamp.HasValue ?
+                new ObjectParameter("ActivityTimestamp", activityTimestamp) :
+                new ObjectParameter("ActivityTimestamp", typeof(System.DateTime));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
+                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
+                new ObjectParameter("MPLOY_ContactId", typeof(int));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertContactLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter);
+        }
+    
+        public virtual int InsertSalesRecruitingActivityLog(Nullable<int> salesRecruitingWorkflowId, string activityNote, string activityOutcome, Nullable<int> payRate, Nullable<int> billRate, Nullable<System.DateTime> scheduledDateTime, Nullable<System.DateTime> endDate, Nullable<System.DateTime> activityTimestamp, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_UserId, Nullable<int> mPLOY_JobId)
+        {
+            var salesRecruitingWorkflowIdParameter = salesRecruitingWorkflowId.HasValue ?
+                new ObjectParameter("SalesRecruitingWorkflowId", salesRecruitingWorkflowId) :
+                new ObjectParameter("SalesRecruitingWorkflowId", typeof(int));
+    
+            var activityNoteParameter = activityNote != null ?
+                new ObjectParameter("ActivityNote", activityNote) :
+                new ObjectParameter("ActivityNote", typeof(string));
+    
+            var activityOutcomeParameter = activityOutcome != null ?
+                new ObjectParameter("ActivityOutcome", activityOutcome) :
+                new ObjectParameter("ActivityOutcome", typeof(string));
+    
+            var payRateParameter = payRate.HasValue ?
+                new ObjectParameter("PayRate", payRate) :
+                new ObjectParameter("PayRate", typeof(int));
+    
+            var billRateParameter = billRate.HasValue ?
+                new ObjectParameter("BillRate", billRate) :
+                new ObjectParameter("BillRate", typeof(int));
+    
+            var scheduledDateTimeParameter = scheduledDateTime.HasValue ?
+                new ObjectParameter("ScheduledDateTime", scheduledDateTime) :
+                new ObjectParameter("ScheduledDateTime", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var activityTimestampParameter = activityTimestamp.HasValue ?
+                new ObjectParameter("ActivityTimestamp", activityTimestamp) :
+                new ObjectParameter("ActivityTimestamp", typeof(System.DateTime));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var mPLOY_ContactIdParameter = mPLOY_ContactId.HasValue ?
+                new ObjectParameter("MPLOY_ContactId", mPLOY_ContactId) :
+                new ObjectParameter("MPLOY_ContactId", typeof(int));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            var mPLOY_JobIdParameter = mPLOY_JobId.HasValue ?
+                new ObjectParameter("MPLOY_JobId", mPLOY_JobId) :
+                new ObjectParameter("MPLOY_JobId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertSalesRecruitingActivityLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter, mPLOY_JobIdParameter);
         }
     
         public virtual ObjectResult<InsertCandidate_Result> InsertCandidate(Nullable<int> personId, Nullable<int> candidateStatusTypeId, Nullable<int> desiredEmploymentTypeId, Nullable<int> currentEmploymentTypeId, Nullable<int> travelTypeId, Nullable<int> sourceTypeId, Nullable<int> maxTravelTypeId, Nullable<System.DateTime> availableDate, Nullable<System.DateTime> startDate, Nullable<int> currentSalary, Nullable<int> desiredSalary, Nullable<int> currentRate, Nullable<int> desiredRate, Nullable<int> referralId, Nullable<bool> isOpenToRelocation, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_OrganizationId)

@@ -40,13 +40,7 @@
         <AssociationConnector Association="Model.FK_RequirementNote_Requirement" />
         <EntityTypeShape EntityType="Model.WorkflowStateLog" Width="1.5" PointX="3" PointY="6.5" />
         <AssociationConnector Association="Model.FK_WorkflowStateLog_GlobalEntity" />
-        <EntityTypeShape EntityType="Model.Candidate" Width="1.5" PointX="12.875" PointY="9.5" />
-        <AssociationConnector Association="Model.FK_Candidate_GlobalEntity" />
-        <AssociationConnector Association="Model.FKCandidateSourceId" />
-        <AssociationConnector Association="Model.FKCandidatetoTravel" />
-        <AssociationConnector Association="Model.FKNoteCandidateId" />
         <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="7.5" PointY="10.625" />
-        <AssociationConnector Association="Model.FKCandidatePersonId" />
         <AssociationConnector Association="Model.FK_Customer_Person" />
         <AssociationConnector Association="Model.FKPersonGenderId" />
         <AssociationConnector Association="Model.FK_Person_PersonContactInformation" />
@@ -54,6 +48,12 @@
         <AssociationConnector Association="Model.FK_Person_PersonMailAddress" />
         <AssociationConnector Association="Model.FK_PersonContactInformation_Person" />
         <AssociationConnector Association="Model.FKPersonMailAddressPersonId" />
+        <EntityTypeShape EntityType="Model.Candidate" Width="1.5" PointX="12.75" PointY="9.5" />
+        <AssociationConnector Association="Model.FK_Candidate_GlobalEntity" />
+        <AssociationConnector Association="Model.FKCandidatePersonId" />
+        <AssociationConnector Association="Model.FKCandidateSourceId" />
+        <AssociationConnector Association="Model.FKCandidatetoTravel" />
+        <AssociationConnector Association="Model.FKNoteCandidateId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

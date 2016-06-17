@@ -16,10 +16,10 @@ namespace ConsoleApplication1
     {
         public Person()
         {
-            this.Candidates = new HashSet<Candidate>();
             this.Customers = new HashSet<Customer>();
             this.PersonContactInformations = new HashSet<PersonContactInformation>();
             this.PersonMailAddresses = new HashSet<PersonMailAddress>();
+            this.Candidates = new HashSet<Candidate>();
         }
     
         public int Id { get; set; }
@@ -42,7 +42,6 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_ContactId { get; set; }
         public Nullable<int> MPLOY_UserId { get; set; }
     
-        public virtual ICollection<Candidate> Candidates { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual GenderType GenderType { get; set; }
         public virtual PersonContactInformation PersonContactInformation { get; set; }
@@ -50,5 +49,6 @@ namespace ConsoleApplication1
         public virtual PersonMailAddress PersonMailAddress { get; set; }
         public virtual ICollection<PersonContactInformation> PersonContactInformations { get; set; }
         public virtual ICollection<PersonMailAddress> PersonMailAddresses { get; set; }
+        public virtual ICollection<Candidate> Candidates { get; set; }
     }
 }

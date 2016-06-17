@@ -43,9 +43,9 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_OrganizationId { get; set; }
     
         public virtual GlobalEntity GlobalEntity { get; set; }
+        public virtual Person Person { get; set; }
         public virtual SourceType SourceType { get; set; }
         public virtual MaxTravelType MaxTravelType { get; set; }
         public virtual ICollection<CandidateNote> CandidateNotes { get; set; }
-        public virtual Person Person { get; set; }
     }
 }

@@ -68,12 +68,12 @@ namespace ConsoleApplication1
                             
                             //Get the SalesRecruitingActivityLog PayRate and BillRate:
                             
-                            //var insertActivityLog = new SalesRecruitingActivityLog();
+                            var insertActivityLog = new SalesRecruitingActivityLog();
                             if (!string.IsNullOrEmpty(activityRecord.XData))
                             {
                                 //Parse the XData for the Bill and Pay rate:
                                
-                                //insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
+                                insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
                             }
                         
 
@@ -116,7 +116,7 @@ namespace ConsoleApplication1
                             
                             
                             //Insert into the SalesRecruitingActivityLog table:
-                            //var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
                             
                             
                             
