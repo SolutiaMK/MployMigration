@@ -31,15 +31,11 @@
         <AssociationConnector Association="Model.FK_Customer_Company" />
         <AssociationConnector Association="Model.FKOrganizaitonMailAddressCompanyId" />
         <EntityTypeShape EntityType="Model.RequirementNote" Width="1.5" PointX="10.375" PointY="18.5" />
-        <EntityTypeShape EntityType="Model.ActivityLog" Width="1.5" PointX="3" PointY="1.875" />
-        <AssociationConnector Association="Model.FK_ActivityLog_GlobalEntity" />
         <EntityTypeShape EntityType="Model.Requirement" Width="1.5" PointX="15.625" PointY="14.25" />
         <AssociationConnector Association="Model.FK_Requirement_Customer" />
         <AssociationConnector Association="Model.FK_Requirement_GlobalEntity" />
         <AssociationConnector Association="Model.FK_Requirement_MaxTravelType" />
         <AssociationConnector Association="Model.FK_RequirementNote_Requirement" />
-        <EntityTypeShape EntityType="Model.WorkflowStateLog" Width="1.5" PointX="3" PointY="6.5" />
-        <AssociationConnector Association="Model.FK_WorkflowStateLog_GlobalEntity" />
         <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="7.5" PointY="10.625" />
         <AssociationConnector Association="Model.FK_Customer_Person" />
         <AssociationConnector Association="Model.FKPersonGenderId" />
@@ -54,6 +50,10 @@
         <AssociationConnector Association="Model.FKCandidateSourceId" />
         <AssociationConnector Association="Model.FKCandidatetoTravel" />
         <AssociationConnector Association="Model.FKNoteCandidateId" />
+        <EntityTypeShape EntityType="Model.ActivityLog" Width="1.5" PointX="3" PointY="14.625" />
+        <AssociationConnector Association="Model.FK_ActivityLog_GlobalEntity" />
+        <EntityTypeShape EntityType="Model.WorkflowStateLog" Width="1.5" PointX="3" PointY="10.5" />
+        <AssociationConnector Association="Model.FK_WorkflowStateLog_GlobalEntity" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

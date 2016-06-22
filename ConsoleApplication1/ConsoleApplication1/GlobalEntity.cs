@@ -18,10 +18,10 @@ namespace ConsoleApplication1
         {
             this.Customers = new HashSet<Customer>();
             this.Companies = new HashSet<Company>();
-            this.ActivityLogs = new HashSet<ActivityLog>();
             this.Requirements = new HashSet<Requirement>();
-            this.WorkflowStateLogs = new HashSet<WorkflowStateLog>();
             this.Candidates = new HashSet<Candidate>();
+            this.ActivityLogs = new HashSet<ActivityLog>();
+            this.WorkflowStateLogs = new HashSet<WorkflowStateLog>();
         }
     
         public System.Guid GlobalEntityId { get; set; }
@@ -33,9 +33,9 @@ namespace ConsoleApplication1
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
-        public virtual ICollection<ActivityLog> ActivityLogs { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
-        public virtual ICollection<WorkflowStateLog> WorkflowStateLogs { get; set; }
         public virtual ICollection<Candidate> Candidates { get; set; }
+        public virtual ICollection<ActivityLog> ActivityLogs { get; set; }
+        public virtual ICollection<WorkflowStateLog> WorkflowStateLogs { get; set; }
     }
 }

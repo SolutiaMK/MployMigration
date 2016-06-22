@@ -9,6 +9,10 @@ using ConsoleApplication1;
 using ConsoleApplication1.Helper;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 
+/****
+ * The WorkflowStateLog table has a trigger to automatically update the end time stamp when an entity is inserted that already has records in the table.
+ * This trigger needs to be turned off while this section of the migration runs so that the historical dates can be entered appropriately.
+ ****/
 namespace ConsoleApplication1
 {
     class HiringActivityMigration
@@ -30,132 +34,143 @@ namespace ConsoleApplication1
                     var hiringActivityData = _db.ReadtbJobFlow().ToList();
 
                     //For each record, transform the data and insert into our DB:
-                    foreach (var activityRecord in hiringActivityData)
+                    foreach (var activityRecord in hiringActivityData.Where(x => x.idJob == 1008))
                     {
-                        //Get the Candidate and Requirement Id for the incoming MPLOY Contact and Job Id:
-                        //Set the _candidateId and _requirementId here:
-                        var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob,
-                            activityRecord.IdContact);
+                        //TESTING:
+                        //if (activityRecord.idJobFlow == 1008)
+                        //{
+                            //Get the Candidate and Requirement Id for the incoming MPLOY Contact and Job Id:
+                            //Set the _candidateId and _requirementId here:
+                            var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob,
+                                activityRecord.IdContact);
 
-                        //If the Customer Id returned is not null, then create a record in the Person table and the Candidate table for that MPLOY_contactId
-                        //Skip Gloria Sharp: MPLOY_ContactId = 4226                        
-                        var errorString = string.Empty;
-                        foreach (var result in returnedIds)
-                        {
-                            _requirementId = Convert.ToInt32(result.jobId);
-                            _candidateId = Convert.ToInt32(result.candidateId);
-                            _customerId = Convert.ToInt32(result.customerId);
-                            _personId = Convert.ToInt32(result.personId);
-                            errorString = Convert.ToString(result.errorString);
-                        }
-
-                        //If the error string is null or empty, then continue. Else, there is an orphaned record:
-                        if (!string.IsNullOrEmpty(errorString))
-                        {
-                            //Print out orphaned record info:
-                            Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
-                                            " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
-                                            activityRecord.idJobFlow + " *****");
-                        }                        
-                        else 
-                        {
-                            //Continue like normal:                
- 
-                                //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
-
-                            
-                            
-                            
-                            //Get the SalesRecruitingActivityLog PayRate and BillRate:
-                            
-                            var insertActivityLog = new SalesRecruitingActivityLog();
-                            if (!string.IsNullOrEmpty(activityRecord.XData))
+                            //If the Customer Id returned is not null, then create a record in the Person table and the Candidate table for that MPLOY_contactId
+                            //Skip Gloria Sharp: MPLOY_ContactId = 4226                        
+                            var errorString = string.Empty;
+                            foreach (var result in returnedIds)
                             {
-                                //Parse the XData for the Bill and Pay rate:
-                               
-                                insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
+                                _requirementId = Convert.ToInt32(result.jobId);
+                                _candidateId = Convert.ToInt32(result.candidateId);
+                                _customerId = Convert.ToInt32(result.customerId);
+                                _personId = Convert.ToInt32(result.personId);
+                                errorString = Convert.ToString(result.errorString);
                             }
-                        
+
+                            //If the error string is null or empty, then continue. Else, there is an orphaned record:
+                            if (!string.IsNullOrEmpty(errorString))
+                            {
+                                //Print out orphaned record info:
+                                Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+                                                " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+                                                activityRecord.idJobFlow + " *****");
+                            }                        
+                            else 
+                            {
+                                //Continue like normal:                
+
+                                
+
+                                    //***** Find the ids needed to insert into the SalesRecruitingActivityLog and RequirementCandidate tables, and to update the Candidate and Requirement tables *****
+
+
+                                    //***** Insert into the SalesRecruitingActivityLog and RequirementCandidate tables *****
+
+                                    var activityNote = activityRecord.Note;
+                                    if (string.IsNullOrEmpty(activityRecord.Note))
+                                    {
+                                        activityNote = " ";
+                                    }
+
+                                    //If the hiring activity has a canceled date, the the workflow and req status is closed:
+                                    //if (activityRecord.Canceled.HasValue)
+                                    //{
+                                    //    //Conversion:
+                                    //    workflowId = 44;
+                                    //    //Closed:
+                                    //    requirementStatusTypeId = 11;
+                                    //}
+
+                                    //**************** Update or create the RequirementCandodate/Customer relationships based on the incoming hiring activity  *****
+
+                                    //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
+                                    if (_candidateId != 0)
+                                    {
+                                        var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, 0, activityRecord.Created, activityRecord.idUser);
+                                    }
+
+                                    //***** This RequirementCustomer Relationship is populated during the Requirement import process *****
+                                    //Insert the new record into the RequirementCustomer table if the _customerId if not null:
+                                    if (_customerId != 0)
+                                    {
+                                        var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, true, 0, activityRecord.Created, activityRecord.idUser);
+                                    }
+
+                                    //Get the WorkflowState and SubState ids:
+                                    var workflowStateId = GetWorkflowStateId(activityRecord.idEventType);
+                                    var workflowStateSubId = GetWorkflowStateSubId(workflowStateId, activityRecord.idEventType);
+                                    int? reasonCode = null;
+
+                                    //Insert the WorkflowStateLog record:
+                                    var workflowStateLog = _db.InsertWorkflowStateLog(workflowStateId, workflowStateSubId, reasonCode, activityRecord.Created, null, 0, activityRecord.idJobFlow, _candidateId, _requirementId, activityRecord.idUser);
+
+
+                                    Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
+
+                                }
 
 
 
+                            //**** OLD CODE!! ****                              
 
+                            //Get the SalesRecruitingActivityLog PayRate and BillRate:                            
+                            //var insertActivityLog = new SalesRecruitingActivityLog();
+                            //if (!string.IsNullOrEmpty(activityRecord.XData))
+                            //{
+                            //    //Parse the XData for the Bill and Pay rate:
+
+                            //    insertActivityLog = LookupValue.ParseHiringActivityXML(activityRecord.XData, insertActivityLog);
+                            //}
+  
 
                             //Get the SalesRecruitingActivityLog.SalesRecruitingWorkflowId:
-                            var workflowId = GetSalesRecruitingWorkflowId(activityRecord.idEventType);                      
+                            //var workflowId = GetSalesRecruitingWorkflowId(activityRecord.idEventType);                      
 
                             //Find the RequirementCandidateStatusTypeId for the RequirementCandidate table:
-                            var requirementCandidateStatusTypeId = GetRequirementCandidateStatusTypeId(activityRecord.idEventType);
+                            //var requirementCandidateStatusTypeId = GetRequirementCandidateStatusTypeId(activityRecord.idEventType);
 
                             //Find the RequirementStatusTypeId for the Requirement table
-                            var requirementStatusTypeId = GetRequirementStatusTypeId(activityRecord.idEventType);
+                            //var requirementStatusTypeId = GetRequirementStatusTypeId(activityRecord.idEventType);
 
                             //Find the updated CandidateStatusTypeId to update the CandidateStatusTypeId in the Candidate table 
-                            var candidateStatusTypeId = GetCandidateStatusTypeId(activityRecord.idEventType);
-                         
+                            //var candidateStatusTypeId = GetCandidateStatusTypeId(activityRecord.idEventType);
 
-                            //***** Insert into the SalesRecruitingActivityLog and RequirementCandidate tables *****
 
-                            var activityNote = activityRecord.Note;
-                            if (string.IsNullOrEmpty(activityRecord.Note))
-                            {
-                                activityNote = " ";
-                            }
 
-                            //If the hiring activity has a cancled date, the the workflow and req status is closed:
-                            if (activityRecord.Canceled.HasValue)
-                            {
-                                //Conversion:
-                                workflowId = 44;
-                                //Closed:
-                                requirementStatusTypeId = 11;
-                            }
-
-                            
-                            
-                            
                             
                             //Insert into the SalesRecruitingActivityLog table:
-                            var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
+                            //var saleRecruitingActivityLogId = _db.InsertSalesRecruitingActivityLog(workflowId, activityNote, activityRecord.Outcome, insertActivityLog.PayRate, insertActivityLog.BillRate, activityRecord.Scheduled, activityRecord.enddate, activityRecord.Created, activityRecord.Created, activityRecord.IdContact, activityRecord.idUser, activityRecord.idJob);
                             
                             
                             
                             
-                            
-                            //**************** Update or create the RequirementCandodate/Customer relationships based on the incoming hiring activity  *****
-
-                            //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
-                            if (_candidateId != 0)
-                            {
-                                var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, requirementCandidateStatusTypeId, activityRecord.Created, 0, activityRecord.Created, activityRecord.idUser);    
-                            }
-                            
-                            //***** This RequirementCustomer Relationship is populated during the Requirement import process *****
-                            //Insert the new record into the RequirementCustomer table if the _customerId if not null:
-                            if (_customerId != 0)
-                            {
-                                var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, true, 0, activityRecord.Created,activityRecord.idUser);
-                            }
-                        
+                     
                             //***** Update the Requirement and Candidate tables to have the appropriate types based off of the latest hiring activity associated to them *****
 
                             //Update the Requirement.RequirementStatusTypeId:
-                            if (requirementStatusTypeId != -1)
-                            {
-                                //Same logic as CandidateStatusTypeId, only update if the requirementStatusType is actually reset:
-                                var updatedRequirementId = _db.UpdateRequirementStatusType(activityRecord.idJob, requirementStatusTypeId);
-                            }
+                            //if (requirementStatusTypeId != -1)
+                            //{
+                            //    //Same logic as CandidateStatusTypeId, only update if the requirementStatusType is actually reset:
+                            //    var updatedRequirementId = _db.UpdateRequirementStatusType(activityRecord.idJob, requirementStatusTypeId);
+                            //}
                         
-                            //Update the Candidate.CandidateStatusTypeId:
-                            //Only update if the CandidateStatus is reset in the GetCandidateStatusTypeId function, if it returns a -1 then skip resetting the CandidateStatusType:
-                            if (candidateStatusTypeId != -1)
-                            {                          
-                                var updatedCandidateStatusTypeId = _db.UpdateCandidateStatusType(activityRecord.IdContact, candidateStatusTypeId);
-                            }
-
-                            Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow); 
-                        }
+                            ////Update the Candidate.CandidateStatusTypeId:
+                            ////Only update if the CandidateStatus is reset in the GetCandidateStatusTypeId function, if it returns a -1 then skip resetting the CandidateStatusType:
+                            //if (candidateStatusTypeId != -1)
+                            //{                          
+                            //    var updatedCandidateStatusTypeId = _db.UpdateCandidateStatusType(activityRecord.IdContact, candidateStatusTypeId);
+                            //}                                                 
                                            
+                        //}
                     }
                 }
                  catch
@@ -166,80 +181,16 @@ namespace ConsoleApplication1
              
             }
         }
-
-        static int GetRequirementStatusTypeId(int eventTypeId)
+        //Gets the ReasonCode for the WorkflowStateLog record if it has one:
+        static int? GetReasonCodeId()
         {
-            var requirementStatusTypeId = -1;
-            //RequirementStatusType table ids:
-            switch (eventTypeId)
-            {
-                case 40:
-                    //In intersect - id of 11 = closed
-                    requirementStatusTypeId = 11;
-                    break;
-                case 85:
-                    //In intersect - id of 11 = closed
-                    requirementStatusTypeId = 11;
-                    break;
-                case 110:
-                    requirementStatusTypeId = 4;
-                    break;
-                case 120:
-                    requirementStatusTypeId = 4;
-                    break;
-                case 140:
-                    requirementStatusTypeId = 7;
-                    break;
-            }
+            int? reasonCodeId = null;
 
-            return requirementStatusTypeId;
+            return reasonCodeId;
         }
 
-        static int GetRequirementCandidateStatusTypeId(int eventTypeId)
-        {
-            var reqCandidateStatusTypeId = -1;
-
-            switch (eventTypeId)
-            {
-                case 85:
-                    //In intersect - id of 14 = Conversion
-                    reqCandidateStatusTypeId = 14;
-                    break;
-                case 40:
-                    reqCandidateStatusTypeId = 14;
-                    break;
-                case 110:
-                case 120:
-                case 140:
-                    {
-                        //Assigned
-                        reqCandidateStatusTypeId = 1;
-                        break;
-                    }
-                default:
-                    reqCandidateStatusTypeId = 14;
-                    break;
-            }
-
-            return reqCandidateStatusTypeId;
-        }
-
-        static int GetCandidateStatusTypeId(int eventTypeId)
-        {
-            //Takes in the hiring activity log event type, and resets the candidate status if it needs to
-            var candidateStatusTypeId = -1;
-
-            switch (eventTypeId)
-            {
-                case 40:
-                    candidateStatusTypeId = 6;
-                    break;
-            }
-            //if -1 is returned, then do NOT update the CandidateStatusType in the Candidate table.
-            return candidateStatusTypeId;
-        }
-
-        static int GetSalesRecruitingWorkflowId(int eventTypeId)
+        //Takes in the Mploy eventType and returns the Intersect WorkflowState Id:
+        static int? GetWorkflowStateId(int eventTypeId)
         {
             /*****
              *      Id  EventType -> FROM MPLOY!
@@ -269,104 +220,215 @@ namespace ConsoleApplication1
                     52	Client Manager Interview
                     72	Client Phone Interview
             *****/
-            var workflowId = -1;
+            int? workflowStateId = null;
+
 
             switch (eventTypeId)
             {
                 case 70:
-                    //Intersect - Recruiter Interview
-                    workflowId = 19;
+                    workflowStateId = 8;
                     break;
                 case 80:
-                    //Manager Interview
-                    workflowId = 20;
+                    workflowStateId = 8;
                     break;
                 case 60:
-                    //Candidate Submission
-                    workflowId = 32;
+                    workflowStateId = 18;
                     break;
                 case 100:
-                    //Employment Offer Accepted
-                    workflowId = 25; 
+                    workflowStateId = 13; 
                     break;
                 case 110:
-                    //Requirement Resolved
-                    workflowId = 43;
+                    workflowStateId = 31;
                     break;
                 case 120:
-                    //Requirement Resolved
-                    workflowId = 43;
+                    workflowStateId = 31;
                     break;
                 case 50:
-                    //Recruiter Interview                    
-                    workflowId = 19;
+                    workflowStateId = 8;
                     break;
                 case 40:
-                    //Conversion
-                    workflowId = 44;
+                    workflowStateId = 7;
                     break;
                 case 55:
-                    //Tech Interview
-                    workflowId = 21;
+                    workflowStateId = 8;
                     break;
                 case 90:
-                    //Referrence Check
-                    workflowId = 22;
+                    workflowStateId = 8;
                     break;
                 case 35:
-                    //Applied For Job
-                    workflowId = 17;
+                    workflowStateId = 7;
                     break;
                 case 140:
-                    //Requirement Resolved
-                    workflowId = 43;
+                    workflowStateId = 31;
                     break;
                 case 85:
-                    //Conversion
-                    workflowId = 44;
+                    workflowStateId = 31;
                     break;
                 case 102:
-                    //Approved Independent Contract
-                    workflowId = 23;
+                    workflowStateId = 9;
                     break;
                 case 108:
-                    //Future Candidate
-                    workflowId = 26;
+                    workflowStateId = 9;
                     break;
                 case 51:
-                    //Manager Interview
-                    workflowId = 20;
+                    workflowStateId = 8;
                     break;
                 case 71:
-                    //Recruiter Interview 
-                    workflowId = 19;
+                    workflowStateId = 8;
                     break;
                 case 52:
-                    //Client In-Person Interview
-                    workflowId = 35;
+                    workflowStateId = 19;
                     break;
                 case 72:
-                    //Client Phone Interview
-                    workflowId = 34;
+                    workflowStateId = 19;
                     break;
                 case 20:
-                case 30:
-                case 10:
-                case 95:
-                case 105:
-                case 130:
-                    {
-                        workflowId = 44;
-                    }
+                    workflowStateId = 7;
                     break;
-                default:
-                    //Conversion
-                    workflowId = 44;
+                case 30:
+                    workflowStateId = 1;
+                    break;
+                //case 10: //None with the eventType of 10 currently.  Need to revist mapping.
+                case 95:
+                    workflowStateId = 12;
+                    break;
+                case 105:
+                    workflowStateId = 12;
+                    break;
+                case 130:
+                    workflowStateId = 31;
                     break;
             }
 
-            return workflowId;
+            return workflowStateId;
         }
+
+        //Takes in the Intersect WorkflowStateId and returns the WorkflowStateSubId, if one exists:
+        static int? GetWorkflowStateSubId(int? workflowStateId, int eventTypeId)
+        {
+            int? workflowStateSubId = null;
+            //Check the eventType and then the workFlowStateId to find the correct subState Id:
+            switch (eventTypeId)
+            {
+                case 110:
+                    //Check for the sub state id:
+                    if (workflowStateId == 31)
+                    {
+                        workflowStateSubId = 12;
+                    }
+                    break;
+                case 120:
+                    if (workflowStateId == 31)
+                    {
+                        workflowStateSubId = 12;
+                    }
+                    break;
+                case 105:
+                    if (workflowStateId == 12)
+                    {
+                        workflowStateSubId = 14;
+                    }
+                    break;
+                case 85:
+                    if (workflowStateId == 31)
+                    {
+                        workflowStateSubId = 8;
+                    }
+                    break;
+                case 102:
+                    if (workflowStateId == 9)
+                    {
+                        workflowStateSubId = 13;
+                    }
+                    break;
+                case 108:
+                    if (workflowStateId == 9)
+                    {
+                        workflowStateSubId = 14;
+                    }
+                    break;
+            }
+
+            return workflowStateSubId;
+        }
+
+
+
+
+
+
+        //************* Old Req. and Candidate Status functions ************************
+        //static int GetRequirementStatusTypeId(int eventTypeId)
+        //{
+        //    var requirementStatusTypeId = -1;
+        //    //RequirementStatusType table ids:
+        //    switch (eventTypeId)
+        //    {
+        //        case 40:
+        //            //In intersect - id of 11 = closed
+        //            requirementStatusTypeId = 11;
+        //            break;
+        //        case 85:
+        //            //In intersect - id of 11 = closed
+        //            requirementStatusTypeId = 11;
+        //            break;
+        //        case 110:
+        //            requirementStatusTypeId = 4;
+        //            break;
+        //        case 120:
+        //            requirementStatusTypeId = 4;
+        //            break;
+        //        case 140:
+        //            requirementStatusTypeId = 7;
+        //            break;
+        //    }
+
+        //    return requirementStatusTypeId;
+        //}
+
+        //static int GetRequirementCandidateStatusTypeId(int eventTypeId)
+        //{
+        //    var reqCandidateStatusTypeId = -1;
+
+        //    switch (eventTypeId)
+        //    {
+        //        case 85:
+        //            //In intersect - id of 14 = Conversion
+        //            reqCandidateStatusTypeId = 14;
+        //            break;
+        //        case 40:
+        //            reqCandidateStatusTypeId = 14;
+        //            break;
+        //        case 110:
+        //        case 120:
+        //        case 140:
+        //            {
+        //                //Assigned
+        //                reqCandidateStatusTypeId = 1;
+        //                break;
+        //            }
+        //        default:
+        //            reqCandidateStatusTypeId = 14;
+        //            break;
+        //    }
+
+        //    return reqCandidateStatusTypeId;
+        //}
+
+        //static int GetCandidateStatusTypeId(int eventTypeId)
+        //{
+        //    //Takes in the hiring activity log event type, and resets the candidate status if it needs to
+        //    var candidateStatusTypeId = -1;
+
+        //    switch (eventTypeId)
+        //    {
+        //        case 40:
+        //            candidateStatusTypeId = 6;
+        //            break;
+        //    }
+        //    //if -1 is returned, then do NOT update the CandidateStatusType in the Candidate table.
+        //    return candidateStatusTypeId;
+        //}
     }
 }
 //After the If and before the else in the main section:

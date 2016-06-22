@@ -680,27 +680,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="ReadtbJobFlow" FunctionName="Model.Store.ReadtbJobFlow">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.ReadtbJobFlow_Result">
-          <ScalarProperty Name="idJobFlow" ColumnName="idJobFlow" />
-          <ScalarProperty Name="idJob" ColumnName="idJob" />
-          <ScalarProperty Name="idUser" ColumnName="idUser" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="Outcome" ColumnName="Outcome" />
-          <ScalarProperty Name="Canceled" ColumnName="Canceled" />
-          <ScalarProperty Name="idEventType" ColumnName="idEventType" />
-          <ScalarProperty Name="ShortOutcome" ColumnName="ShortOutcome" />
-          <ScalarProperty Name="XData" ColumnName="XData" />
-          <ScalarProperty Name="guid" ColumnName="guid" />
-          <ScalarProperty Name="enddate" ColumnName="enddate" />
-          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertRequirementCustomer" FunctionName="Model.Store.InsertRequirementCustomer" />
     <FunctionImportMapping FunctionImportName="GetRequirementContactAssociation" FunctionName="Model.Store.GetRequirementContactAssociation">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.GetRequirementContactAssociation_Result">
@@ -712,7 +691,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
     <FunctionImportMapping FunctionImportName="ReadSkill" FunctionName="Model.Store.ReadSkill">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadSkill_Result">
@@ -813,19 +791,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate" />
-    <EntitySetMapping Name="ActivityLogs">
-      <EntityTypeMapping TypeName="Model.ActivityLog">
-        <MappingFragment StoreEntitySet="ActivityLog">
-          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-          <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Requirements">
       <EntityTypeMapping TypeName="Model.Requirement">
         <MappingFragment StoreEntitySet="Requirement">
@@ -864,21 +829,6 @@
           <ScalarProperty Name="VMSField" ColumnName="VMSField" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="WorkflowStateLogs">
-      <EntityTypeMapping TypeName="Model.WorkflowStateLog">
-        <MappingFragment StoreEntitySet="WorkflowStateLog">
-          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="TimestampEnd" ColumnName="TimestampEnd" />
-          <ScalarProperty Name="TimestampBegin" ColumnName="TimestampBegin" />
-          <ScalarProperty Name="WorkflowStateSubReasonCodeId" ColumnName="WorkflowStateSubReasonCodeId" />
-          <ScalarProperty Name="WorkflowStateSubId" ColumnName="WorkflowStateSubId" />
-          <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
           <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -927,6 +877,33 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="Model.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
+          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CitizenshipTypeId" ColumnName="CitizenshipTypeId" />
+          <ScalarProperty Name="RaceTypeId" ColumnName="RaceTypeId" />
+          <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
+          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
+          <ScalarProperty Name="PreferredPhysicalAddressId" ColumnName="PreferredPhysicalAddressId" />
+          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
+          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertContactLog" FunctionName="Model.Store.InsertContactLog" />
+    <FunctionImportMapping FunctionImportName="InsertSalesRecruitingActivityLog" FunctionName="Model.Store.InsertSalesRecruitingActivityLog" />
     <EntitySetMapping Name="Candidates">
       <EntityTypeMapping TypeName="Model.Candidate">
         <MappingFragment StoreEntitySet="Candidate">
@@ -955,32 +932,70 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="People">
-      <EntityTypeMapping TypeName="Model.Person">
-        <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="MPLOY_UserId" ColumnName="MPLOY_UserId" />
-          <ScalarProperty Name="MPLOY_ContactId" ColumnName="MPLOY_ContactId" />
+    <FunctionImportMapping FunctionImportName="InsertRequirementCustomer" FunctionName="Model.Store.InsertRequirementCustomer" />
+    <EntitySetMapping Name="ActivityLogs">
+      <EntityTypeMapping TypeName="Model.ActivityLog">
+        <MappingFragment StoreEntitySet="ActivityLog">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
           <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="CitizenshipTypeId" ColumnName="CitizenshipTypeId" />
-          <ScalarProperty Name="RaceTypeId" ColumnName="RaceTypeId" />
-          <ScalarProperty Name="GenderTypeId" ColumnName="GenderTypeId" />
-          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
-          <ScalarProperty Name="PreferredPhysicalAddressId" ColumnName="PreferredPhysicalAddressId" />
-          <ScalarProperty Name="PreferredEmailAddressId" ColumnName="PreferredEmailAddressId" />
-          <ScalarProperty Name="PreferredPhoneNumberId" ColumnName="PreferredPhoneNumberId" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="UpdatePersonPreferredData" FunctionName="Model.Store.UpdatePersonPreferredData" />
+    <EntitySetMapping Name="WorkflowStateLogs">
+      <EntityTypeMapping TypeName="Model.WorkflowStateLog">
+        <MappingFragment StoreEntitySet="WorkflowStateLog">
+          <ScalarProperty Name="MPLOY_IdJobFlow" ColumnName="MPLOY_IdJobFlow" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="TimestampEnd" ColumnName="TimestampEnd" />
+          <ScalarProperty Name="TimestampBegin" ColumnName="TimestampBegin" />
+          <ScalarProperty Name="ReasonCodeId" ColumnName="ReasonCodeId" />
+          <ScalarProperty Name="WorkflowStateSubId" ColumnName="WorkflowStateSubId" />
+          <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertRequirementCandidate" FunctionName="Model.Store.InsertRequirementCandidate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertRequirementCandidate_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReadtbJobFlow" FunctionName="Model.Store.ReadtbJobFlow">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.ReadtbJobFlow_Result">
+          <ScalarProperty Name="idJobFlow" ColumnName="idJobFlow" />
+          <ScalarProperty Name="idJob" ColumnName="idJob" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+          <ScalarProperty Name="Canceled" ColumnName="Canceled" />
+          <ScalarProperty Name="idEventType" ColumnName="idEventType" />
+          <ScalarProperty Name="ShortOutcome" ColumnName="ShortOutcome" />
+          <ScalarProperty Name="XData" ColumnName="XData" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertCandidate" FunctionName="Model.Store.InsertCandidate">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.InsertCandidate_Result">
@@ -1009,5 +1024,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertWorkflowStateLog" FunctionName="Model.Store.InsertWorkflowStateLog" />
   </EntityContainerMapping>
 </Mapping>

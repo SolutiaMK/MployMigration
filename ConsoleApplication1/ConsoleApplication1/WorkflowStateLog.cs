@@ -18,11 +18,12 @@ namespace ConsoleApplication1
         public System.Guid GlobalEntityId { get; set; }
         public int WorkflowStateId { get; set; }
         public Nullable<int> WorkflowStateSubId { get; set; }
-        public Nullable<int> WorkflowStateSubReasonCodeId { get; set; }
+        public Nullable<int> ReasonCodeId { get; set; }
         public System.DateTime TimestampBegin { get; set; }
         public Nullable<System.DateTime> TimestampEnd { get; set; }
         public Nullable<int> CreatedById { get; set; }
         public string CreatedByName { get; set; }
+        public Nullable<int> MPLOY_IdJobFlow { get; set; }
     
         public virtual GlobalEntity GlobalEntity { get; set; }
     }

@@ -10,18 +10,16 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ActivityLog
+    public partial class InsertRequirementCandidate_Result
     {
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
-        public int ActivityId { get; set; }
-        public System.DateTime Timestamp { get; set; }
-        public int CreatedById { get; set; }
-        public string CreatedByName { get; set; }
-        public string Note { get; set; }
-    
-        public virtual GlobalEntity GlobalEntity { get; set; }
+        public int RequirementId { get; set; }
+        public int CandidateId { get; set; }
+        public System.DateTime LastUpdated { get; set; }
+        public Nullable<int> ModifiedById { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<int> CreatedById { get; set; }
     }
 }

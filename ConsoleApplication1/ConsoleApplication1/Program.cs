@@ -37,13 +37,13 @@ namespace ConsoleApplication1
 
                     //OrganizationMigration.OrganizationImport();
 
-                    CustomerMigration.ContactImport();
+                    //CustomerMigration.ContactImport();
 
                     //CandidateMigration.TestUpdate();
 
                     //RequirementMigration.JobImport();
                     
-                    //HiringActivityMigration.ImportHiringActivity();
+                    HiringActivityMigration.ImportHiringActivity();
 
                     //ContactLogMigration.ImportContactLog();
 

@@ -42,11 +42,11 @@ namespace ConsoleApplication1
         public virtual DbSet<CompanyContactInformation> CompanyContactInformations { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<RequirementNote> RequirementNotes { get; set; }
-        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<Requirement> Requirements { get; set; }
-        public virtual DbSet<WorkflowStateLog> WorkflowStateLogs { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Candidate> Candidates { get; set; }
+        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
+        public virtual DbSet<WorkflowStateLog> WorkflowStateLogs { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetCompanyJobAssociation(Nullable<int> currentCompany)
         {
@@ -689,40 +689,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadJob_Result>("ReadJob");
         }
     
-        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> InsertRequirementCustomer(Nullable<int> requirementId, Nullable<int> customerId, Nullable<bool> isPrimaryContact, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
-        {
-            var requirementIdParameter = requirementId.HasValue ?
-                new ObjectParameter("RequirementId", requirementId) :
-                new ObjectParameter("RequirementId", typeof(int));
-    
-            var customerIdParameter = customerId.HasValue ?
-                new ObjectParameter("CustomerId", customerId) :
-                new ObjectParameter("CustomerId", typeof(int));
-    
-            var isPrimaryContactParameter = isPrimaryContact.HasValue ?
-                new ObjectParameter("IsPrimaryContact", isPrimaryContact) :
-                new ObjectParameter("IsPrimaryContact", typeof(bool));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            var createDateParameter = createDate.HasValue ?
-                new ObjectParameter("CreateDate", createDate) :
-                new ObjectParameter("CreateDate", typeof(System.DateTime));
-    
-            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
-                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
-                new ObjectParameter("MPLOY_UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertRequirementCustomer", requirementIdParameter, customerIdParameter, isPrimaryContactParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
-        }
-    
         public virtual ObjectResult<GetRequirementContactAssociation_Result> GetRequirementContactAssociation(Nullable<int> currentJobId, Nullable<int> currentContact)
         {
             var currentJobIdParameter = currentJobId.HasValue ?
@@ -900,39 +866,6 @@ namespace ConsoleApplication1
         public virtual ObjectResult<ReadIntersectSkillCategoryMapping_Result> ReadIntersectSkillCategoryMapping()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadIntersectSkillCategoryMapping_Result>("ReadIntersectSkillCategoryMapping");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> InsertRequirementCandidate(Nullable<int> requirementId, Nullable<int> candidateId, Nullable<int> requirementCandidateStatusTypeId, Nullable<System.DateTime> statusTypeDate, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
-        {
-            var requirementIdParameter = requirementId.HasValue ?
-                new ObjectParameter("RequirementId", requirementId) :
-                new ObjectParameter("RequirementId", typeof(int));
-    
-            var candidateIdParameter = candidateId.HasValue ?
-                new ObjectParameter("CandidateId", candidateId) :
-                new ObjectParameter("CandidateId", typeof(int));
-    
-            var requirementCandidateStatusTypeIdParameter = requirementCandidateStatusTypeId.HasValue ?
-                new ObjectParameter("RequirementCandidateStatusTypeId", requirementCandidateStatusTypeId) :
-                new ObjectParameter("RequirementCandidateStatusTypeId", typeof(int));
-    
-            var statusTypeDateParameter = statusTypeDate.HasValue ?
-                new ObjectParameter("StatusTypeDate", statusTypeDate) :
-                new ObjectParameter("StatusTypeDate", typeof(System.DateTime));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            var createDateParameter = createDate.HasValue ?
-                new ObjectParameter("CreateDate", createDate) :
-                new ObjectParameter("CreateDate", typeof(System.DateTime));
-    
-            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
-                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
-                new ObjectParameter("MPLOY_UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertRequirementCandidate", requirementIdParameter, candidateIdParameter, requirementCandidateStatusTypeIdParameter, statusTypeDateParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
         }
     
         public virtual ObjectResult<InsertRequirement_Result> InsertRequirement(string name, string description, string vMSField, Nullable<int> requirementTypeId, Nullable<int> requirementPriorityTypeId, Nullable<int> requirementProjectTypeId, string city, string state, Nullable<int> travelTypeId, Nullable<int> maxTravelTypeId, Nullable<int> paymentTermTypeId, Nullable<System.DateTime> postingDate, Nullable<System.DateTime> desiredStartDate, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<System.DateTime> closedDate, Nullable<int> minRate, Nullable<int> maxRate, Nullable<int> budget, Nullable<int> duration, string contractDetails, Nullable<bool> isTravelRequired, Nullable<bool> isDrugTestRequired, Nullable<bool> isBackgroundCheckRequired, Nullable<bool> isWorkFromHome, Nullable<System.DateTime> createDate, Nullable<int> modifiedById, Nullable<int> mPLOY_JobId, Nullable<int> mPLOY_ContactId, Nullable<int> mPLOY_IdUserFilled, Nullable<int> mPLOY_IdUserClosed, Nullable<int> mPLOY_IdUserRecruiter, Nullable<int> mPLOY_IdUser)
@@ -1183,6 +1116,65 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertSalesRecruitingActivityLog", salesRecruitingWorkflowIdParameter, activityNoteParameter, activityOutcomeParameter, payRateParameter, billRateParameter, scheduledDateTimeParameter, endDateParameter, activityTimestampParameter, createDateParameter, mPLOY_ContactIdParameter, mPLOY_UserIdParameter, mPLOY_JobIdParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> InsertRequirementCustomer(Nullable<int> requirementId, Nullable<int> customerId, Nullable<bool> isPrimaryContact, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
+        {
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
+    
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(int));
+    
+            var isPrimaryContactParameter = isPrimaryContact.HasValue ?
+                new ObjectParameter("IsPrimaryContact", isPrimaryContact) :
+                new ObjectParameter("IsPrimaryContact", typeof(bool));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertRequirementCustomer", requirementIdParameter, customerIdParameter, isPrimaryContactParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
+        }
+    
+        public virtual ObjectResult<InsertRequirementCandidate_Result> InsertRequirementCandidate(Nullable<int> requirementId, Nullable<int> candidateId, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_UserId)
+        {
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
+    
+            var candidateIdParameter = candidateId.HasValue ?
+                new ObjectParameter("CandidateId", candidateId) :
+                new ObjectParameter("CandidateId", typeof(int));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertRequirementCandidate_Result>("InsertRequirementCandidate", requirementIdParameter, candidateIdParameter, modifiedByIdParameter, createDateParameter, mPLOY_UserIdParameter);
+        }
+    
+        public virtual ObjectResult<ReadtbJobFlow_Result> ReadtbJobFlow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReadtbJobFlow_Result>("ReadtbJobFlow");
+        }
+    
         public virtual ObjectResult<InsertCandidate_Result> InsertCandidate(Nullable<int> personId, Nullable<int> candidateStatusTypeId, Nullable<int> desiredEmploymentTypeId, Nullable<int> currentEmploymentTypeId, Nullable<int> travelTypeId, Nullable<int> sourceTypeId, Nullable<int> maxTravelTypeId, Nullable<System.DateTime> availableDate, Nullable<System.DateTime> startDate, Nullable<int> currentSalary, Nullable<int> desiredSalary, Nullable<int> currentRate, Nullable<int> desiredRate, Nullable<int> referralId, Nullable<bool> isOpenToRelocation, Nullable<int> modifiedById, Nullable<System.DateTime> createDate, Nullable<int> mPLOY_OrganizationId)
         {
             var personIdParameter = personId.HasValue ?
@@ -1258,6 +1250,51 @@ namespace ConsoleApplication1
                 new ObjectParameter("MPLOY_OrganizationId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCandidate_Result>("InsertCandidate", personIdParameter, candidateStatusTypeIdParameter, desiredEmploymentTypeIdParameter, currentEmploymentTypeIdParameter, travelTypeIdParameter, sourceTypeIdParameter, maxTravelTypeIdParameter, availableDateParameter, startDateParameter, currentSalaryParameter, desiredSalaryParameter, currentRateParameter, desiredRateParameter, referralIdParameter, isOpenToRelocationParameter, modifiedByIdParameter, createDateParameter, mPLOY_OrganizationIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertWorkflowStateLog(Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> candidateId, Nullable<int> requirementId, Nullable<int> mPLOY_UserId)
+        {
+            var workflowStateIdParameter = workflowStateId.HasValue ?
+                new ObjectParameter("WorkflowStateId", workflowStateId) :
+                new ObjectParameter("WorkflowStateId", typeof(int));
+    
+            var workflowStateSubIdParameter = workflowStateSubId.HasValue ?
+                new ObjectParameter("WorkflowStateSubId", workflowStateSubId) :
+                new ObjectParameter("WorkflowStateSubId", typeof(int));
+    
+            var reasonCodeParameter = reasonCode.HasValue ?
+                new ObjectParameter("ReasonCode", reasonCode) :
+                new ObjectParameter("ReasonCode", typeof(int));
+    
+            var timeStampBeginParameter = timeStampBegin.HasValue ?
+                new ObjectParameter("TimeStampBegin", timeStampBegin) :
+                new ObjectParameter("TimeStampBegin", typeof(System.DateTime));
+    
+            var timeStampEndParameter = timeStampEnd.HasValue ?
+                new ObjectParameter("TimeStampEnd", timeStampEnd) :
+                new ObjectParameter("TimeStampEnd", typeof(System.DateTime));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var mPLOY_IdJobFlowParameter = mPLOY_IdJobFlow.HasValue ?
+                new ObjectParameter("MPLOY_IdJobFlow", mPLOY_IdJobFlow) :
+                new ObjectParameter("MPLOY_IdJobFlow", typeof(int));
+    
+            var candidateIdParameter = candidateId.HasValue ?
+                new ObjectParameter("CandidateId", candidateId) :
+                new ObjectParameter("CandidateId", typeof(int));
+    
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertWorkflowStateLog", workflowStateIdParameter, workflowStateSubIdParameter, reasonCodeParameter, timeStampBeginParameter, timeStampEndParameter, modifiedByIdParameter, mPLOY_IdJobFlowParameter, candidateIdParameter, requirementIdParameter, mPLOY_UserIdParameter);
         }
     }
 }

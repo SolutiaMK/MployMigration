@@ -178,6 +178,9 @@
     <Compile Include="InsertPersonTypicalRole_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="InsertRequirementCandidate_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="InsertRequirement_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
