@@ -1252,8 +1252,12 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCandidate_Result>("InsertCandidate", personIdParameter, candidateStatusTypeIdParameter, desiredEmploymentTypeIdParameter, currentEmploymentTypeIdParameter, travelTypeIdParameter, sourceTypeIdParameter, maxTravelTypeIdParameter, availableDateParameter, startDateParameter, currentSalaryParameter, desiredSalaryParameter, currentRateParameter, desiredRateParameter, referralIdParameter, isOpenToRelocationParameter, modifiedByIdParameter, createDateParameter, mPLOY_OrganizationIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertWorkflowStateLog(Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> candidateId, Nullable<int> requirementId, Nullable<int> mPLOY_UserId)
+        public virtual ObjectResult<Nullable<int>> InsertWorkflowStateLog(Nullable<int> workflowTypeId, Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> candidateId, Nullable<int> requirementId, Nullable<int> mPLOY_UserId)
         {
+            var workflowTypeIdParameter = workflowTypeId.HasValue ?
+                new ObjectParameter("WorkflowTypeId", workflowTypeId) :
+                new ObjectParameter("WorkflowTypeId", typeof(int));
+    
             var workflowStateIdParameter = workflowStateId.HasValue ?
                 new ObjectParameter("WorkflowStateId", workflowStateId) :
                 new ObjectParameter("WorkflowStateId", typeof(int));
@@ -1294,7 +1298,7 @@ namespace ConsoleApplication1
                 new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
                 new ObjectParameter("MPLOY_UserId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertWorkflowStateLog", workflowStateIdParameter, workflowStateSubIdParameter, reasonCodeParameter, timeStampBeginParameter, timeStampEndParameter, modifiedByIdParameter, mPLOY_IdJobFlowParameter, candidateIdParameter, requirementIdParameter, mPLOY_UserIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertWorkflowStateLog", workflowTypeIdParameter, workflowStateIdParameter, workflowStateSubIdParameter, reasonCodeParameter, timeStampBeginParameter, timeStampEndParameter, modifiedByIdParameter, mPLOY_IdJobFlowParameter, candidateIdParameter, requirementIdParameter, mPLOY_UserIdParameter);
         }
     }
 }

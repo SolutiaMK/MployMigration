@@ -937,6 +937,7 @@
     <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertWorkflowStateLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="WorkflowTypeId" Type="int" Mode="In" />
     <Parameter Name="WorkflowStateId" Type="int" Mode="In" />
     <Parameter Name="WorkflowStateSubId" Type="int" Mode="In" />
     <Parameter Name="ReasonCode" Type="int" Mode="In" />
