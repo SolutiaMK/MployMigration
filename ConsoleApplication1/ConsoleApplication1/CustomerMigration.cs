@@ -54,7 +54,8 @@ namespace ConsoleApplication1
                         IdContactType = Convert.ToInt32(x.idContactType),
                         IdUser = Convert.ToInt32((x.idUserOwner)),
                         Source = Convert.ToInt32(x.IdSource),
-                        IdStatus = x.IdStatus
+                        IdStatus = x.IdStatus,
+                        Notes = x.Notes
                     });
 
 
@@ -71,10 +72,10 @@ namespace ConsoleApplication1
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
                             contactRecord.IdOrganization != 4)
                         {
-                            //if (contactRecord.IdContact == 20551)
+                            //if (contactRecord.IdContact == 21119)
                             //{
-                            //    var name = contactRecord.IdContactType;
-                            //}
+                                
+                            
 
                             //Get the Contacts with the typeId = 1 that have hiring activities:
 
@@ -171,7 +172,7 @@ namespace ConsoleApplication1
                             {
                                 //Returns the CustomerNote.Id
                                 var customerNoteResult =
-                                    _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.CreatedDate,
+                                    _db.InsertCustomerNote(_customerId, contactRecord.Notes, contactRecord.Created,
                                         0).ToList();
                             }
 
@@ -190,6 +191,7 @@ namespace ConsoleApplication1
                             Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
                                             contactRecord.LastName + " Customer Id: " + _customerId);
 
+                            //}
                         }
                         else
                         {

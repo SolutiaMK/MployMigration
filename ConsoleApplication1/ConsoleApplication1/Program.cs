@@ -24,27 +24,26 @@ namespace ConsoleApplication1
                 {
                     /**
                      * The order of the migration:
-                     * User
-                     * Organization
-                     * Customer
-                     * Candidate
-                     * HiringActivity (tbJobFlow table in MPLOY)
-                     * ContactLog (tbContactLog table in MPLOY)
-                     * Skills
+                     * Run from the top down in the order they are listed
                      **/
 
                     //UserMigration.UserImport();
 
                     //OrganizationMigration.OrganizationImport();
 
-                    //CustomerMigration.ContactImport();
+                    CustomerMigration.ContactImport();
 
-                    //CandidateMigration.TestUpdate();
+                    //CandidateMigration.CandidateImport();
 
                     //RequirementMigration.JobImport();
                     
-                    HiringActivityMigration.ImportHiringActivity();
+                    
+                    
+                    //Reads from the mploy tbJobFlow table and inserts into the Intersect WorkflowStateLog table for each workflow process:
+                    //HiringActivityMigration.ImportHiringActivity();
+                    
 
+                    //ACTIVITIES?  NOT YET IMPLEMENTED:
                     //ContactLogMigration.ImportContactLog();
 
                     //SkillsMigration.SkillsImport();
@@ -52,7 +51,11 @@ namespace ConsoleApplication1
                     //PersonSkillMigration.PersonSkillsImport();
                     //Adds a record to the PersonTypicalRole table after the PersonSkill table is populated:
                     //PersonTypicalRole.AddPersonTypicalRoleRecord();
-                
+
+
+                    //Inserts into the WorkflowStateLog table for each requirement in the Mploy.tbJob table so each Requirement has a workflow state.
+                    //RequirementProcessWorkflow.ImportRequirementProcessWorkflow();
+
                 }
                 catch
                 (Exception ex)

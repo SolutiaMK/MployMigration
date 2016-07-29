@@ -36,7 +36,7 @@ namespace ConsoleApplication1
                     var hiringActivityData = _db.ReadtbJobFlow().ToList();
 
                     //For each record, transform the data and insert into our DB:
-                    foreach (var activityRecord in hiringActivityData.Where(x => x.idJob == 3092))
+                    foreach (var activityRecord in hiringActivityData)//.Where(x => x.idJob == 3092)
                     {
                         //TESTING:
                         //if (activityRecord.idJobFlow == 1008)
@@ -110,11 +110,11 @@ namespace ConsoleApplication1
                                     GetRequirementFulfillmentProcessWorkflowTypwId(activityRecord.idEventType);
                                 
                                 //Get the Workflow state id based on the above process given the mploy event type id:
-                                var candidateWorkflowStateId = GetStateId(activityRecord.idEventType);
+                                var candidateWorkflowStateId = GetStateId(activityRecord.idEventType, workflowTypeIdCandidateProcessId);
 
-                                var requirementWorkflowStateId = GetStateId(activityRecord.idEventType);
+                                var requirementWorkflowStateId = GetStateId(activityRecord.idEventType, workflowTypeIdReqProcessId);
 
-                                var reqFulfillmentStateId = GetStateId(activityRecord.idEventType);
+                                var reqFulfillmentStateId = GetStateId(activityRecord.idEventType, workflowTypeIdReqFulfillProcessId);
 
                                 //State Sub Id:
                                 var candidateSubId = GetWorkflowStateSubId(candidateWorkflowStateId, activityRecord.idEventType);
@@ -303,14 +303,14 @@ namespace ConsoleApplication1
             return workflowTypeId;
         }
 
-        static int? GetStateId(int? workflowTypeId)
+        static int? GetStateId(int eventTypeId, int? workflowTypeId)
         {
             //WorkflowTypeId 1 = Requirement Process, EntityTypeId 3
             //WorkflowTypeId 2 = Candidate Process, EntityTypeId 2
             //WorkflowTypeId 3 = Requirement Fulfillment Process, EntityTypeId 5
             int? workflowStateId = null;
 
-            switch (workflowTypeId)
+            switch (eventTypeId)
             {
                 case 70:
                 case 80:

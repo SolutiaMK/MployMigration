@@ -40,7 +40,7 @@ namespace ConsoleApplication1
 
                         Company insertCompany = new Company();
 
-                        var companyTypeId = GetCompanyType(orgRecord.idOrganizationType.ToString());
+                        var companyTypeId = GetCompanyType(orgRecord.idOrganizationType);
 
                         //Get the Id for the person assigned to this comapny based on the mploy user id:
                         //This Id is used in the SP to assign the Sales or Recruiting Person down the road.
@@ -122,48 +122,45 @@ namespace ConsoleApplication1
 
         //Takes in the company type string from the mploy org record
         //Returns our DB's TypeId for the incoming org record
-        static int GetCompanyType(string companyTypeString)
+        static int GetCompanyType(int companyTypeId)
         {
             var returnedCompanyTypeId = -1;
-            //var companyTypeList = _db.ReadCompanyType().ToList();
-            //foreach (var type in companyTypeList)
-            //{
-            switch (companyTypeString)
+
+            /* MPLOY Company Types:
+                1	Not Potential Client
+                2	Prospect
+                3	Active Client
+                4	Vendor
+                5	Business Partner
+                6	Competitor
+             * */
+
+            switch (companyTypeId)
             {
-                case "Active Client":
-                    //Id of 1 = Active Company
-                    returnedCompanyTypeId = 1;
-                    break;
-                case "Prospect":
-                    //Id of 5 = Prospect
-                    returnedCompanyTypeId = 5;
-                    break;
-                case "Business Partner":
-                    //Id of 3 = Business Partner
-                    returnedCompanyTypeId = 3;
-                    break;
-                case "Competitor":
-                    //Id of 4 = Competitor
+                case 1:                    
                     returnedCompanyTypeId = 4;
                     break;
-                case "Not Potential Client":
-                    //Id of 6 = Not Potential Company
+                case 2:                  
                     returnedCompanyTypeId = 6;
                     break;
-                case "Vendor":
-                    //Id of 7 = Vendor
-                    returnedCompanyTypeId = 7;
+                case 3:
+                    returnedCompanyTypeId = 1;
                     break;
-                case "":
-                    //Id of 9 = Unknown
+                case 4:
                     returnedCompanyTypeId = 9;
+                    break;
+                case 5:
+                    returnedCompanyTypeId = 2;
+                    break;
+                case 6:
+                    returnedCompanyTypeId = 3;
                     break;
                 default:
-                    //Id of 9 = Unknown
-                    returnedCompanyTypeId = 9;
+                    //Id of 8 = Unknown
+                    returnedCompanyTypeId = 8;
                     break;
             }                    
-            //}
+            
             return returnedCompanyTypeId;
         }
 

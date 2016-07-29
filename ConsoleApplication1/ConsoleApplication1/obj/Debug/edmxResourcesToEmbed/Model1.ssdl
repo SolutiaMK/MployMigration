@@ -273,6 +273,7 @@
     <Property Name="IsDrugTestRequired" Type="bit" Nullable="false" />
     <Property Name="IsBackgroundCheckRequired" Type="bit" Nullable="false" />
     <Property Name="IsWorkFromHome" Type="bit" Nullable="false" />
+    <Property Name="PreferredTypicalRoleId" Type="int" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -747,6 +748,13 @@
     <Parameter Name="MployOrganizationId" Type="int" Mode="In" />
     <Parameter Name="MployIdUser" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertCompanyBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertCompanyContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="CompanyId" Type="int" Mode="In" />
     <Parameter Name="ContactInformationTypeId" Type="int" Mode="In" />
@@ -900,6 +908,19 @@
     <Parameter Name="CreateDate" Type="date" Mode="In" />
     <Parameter Name="ModifiedById" Type="int" Mode="In" />
   </Function>
+  <Function Name="InsertRequirementProcessWorkflow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="WorkflowTypeId" Type="int" Mode="In" />
+    <Parameter Name="WorkflowStateId" Type="int" Mode="In" />
+    <Parameter Name="WorkflowStateSubId" Type="int" Mode="In" />
+    <Parameter Name="ReasonCode" Type="int" Mode="In" />
+    <Parameter Name="TimeStampBegin" Type="datetime" Mode="In" />
+    <Parameter Name="TimeStampEnd" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedById" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_IdJobFlow" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_UserId" Type="int" Mode="In" />
+    <Parameter Name="MPLOY_ClosedDate" Type="datetime" Mode="In" />
+    <Parameter Name="MPLOY_IdJob" Type="int" Mode="In" />
+  </Function>
   <Function Name="InsertSalesRecruitingActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="SalesRecruitingWorkflowId" Type="int" Mode="In" />
     <Parameter Name="ActivityNote" Type="varchar" Mode="In" />
@@ -973,6 +994,9 @@
   <Function Name="UpdatePersonMployContactId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="personId" Type="int" Mode="In" />
     <Parameter Name="mployContactId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdatePersonPreferredData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="Mploy_ContactId" Type="int" Mode="In" />
   </Function>
   <Function Name="UpdateRequirementStatusType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />

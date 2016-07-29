@@ -23,7 +23,7 @@ namespace ConsoleApplication1
         static List<KeyValuePair<int, string>> _sourceList = new List<KeyValuePair<int, string>>();
 
 
-        public static void TestUpdate()
+        public static void CandidateImport()
         {
             using (_db = new Entities())
             {

@@ -32,8 +32,8 @@ namespace ConsoleApplication1
                     foreach (var contactSkillRecord in contactSkillData)
                     {
                         //'if' statement used to run sections of the contectSkillRecord if the sql connection keeps timing out:
-                        //if (contactSkillRecord.idContactSkill > 183612)
-                        //{
+                        if (contactSkillRecord.idContactSkill > 183621)
+                        {
                             
                             _mploySkillId = contactSkillRecord.idSkill;
                             _mployIdContact = contactSkillRecord.idContact;
@@ -46,7 +46,7 @@ namespace ConsoleApplication1
 
 
                             Debug.WriteLine("\n" + "Skill imported: " + _mployContactSkillId + " : " + " SkillId: " + _mploySkillId);
-                        //}
+                        }
                     }
                 }
                 catch

@@ -13,6 +13,17 @@ namespace ConsoleApplication1
         {
             var branchId = -1;
 
+            //If the state or city are null, set to an empty string and they will default to the MN branch:
+            if (string.IsNullOrEmpty(state))
+            {
+                state = string.Empty;
+            }
+            if (string.IsNullOrEmpty(city))
+            {
+                city = string.Empty;
+            }
+
+
             if (state.ToUpper() == "MN")
             {
                 branchId = 2;

@@ -274,27 +274,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="Model.Store.InsertUser" />
-    <FunctionImportMapping FunctionImportName="InsertCompany" FunctionName="Model.Store.InsertCompany">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.InsertCompany_Result9">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
-          <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
-          <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
-          <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
-          <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
-          <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
-          <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertCompanyContactInformation" FunctionName="Model.Store.InsertCompanyContactInformation" />
     <FunctionImportMapping FunctionImportName="InsertCompanyMailingAddress" FunctionName="Model.Store.InsertCompanyMailingAddress" />
     <FunctionImportMapping FunctionImportName="InsertCompanyNote" FunctionName="Model.Store.InsertCompanyNote" />
@@ -310,28 +289,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="Model.Store.InsertCustomer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.InsertCustomer_Result2">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
-          <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="FindCustomerOrganizationId" FunctionName="Model.Store.FindCustomerOrganizationId" />
-    <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
     <FunctionImportMapping FunctionImportName="InsertCandidateNote" FunctionName="Model.Store.InsertCandidateNote" />
     <EntitySetMapping Name="RequirementNotes">
       <EntityTypeMapping TypeName="Model.RequirementNote">
@@ -766,20 +724,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="InsertPersonTypicalRole" FunctionName="Model.Store.InsertPersonTypicalRole">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.InsertPersonTypicalRole_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-          <ScalarProperty Name="TypicalRoleId" ColumnName="TypicalRoleId" />
-          <ScalarProperty Name="InterestLevelTypeId" ColumnName="InterestLevelTypeId" />
-          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ReadIntersectSkillCategoryMapping" FunctionName="Model.Store.ReadIntersectSkillCategoryMapping">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Model.ReadIntersectSkillCategoryMapping_Result">
@@ -794,6 +738,7 @@
     <EntitySetMapping Name="Requirements">
       <EntityTypeMapping TypeName="Model.Requirement">
         <MappingFragment StoreEntitySet="Requirement">
+          <ScalarProperty Name="PreferredTypicalRoleId" ColumnName="PreferredTypicalRoleId" />
           <ScalarProperty Name="MPLOY_IdUserRecruiter" ColumnName="MPLOY_IdUserRecruiter" />
           <ScalarProperty Name="MPLOY_IdUserFilled" ColumnName="MPLOY_IdUserFilled" />
           <ScalarProperty Name="MPLOY_IdUserClosed" ColumnName="MPLOY_IdUserClosed" />
@@ -1025,5 +970,83 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertWorkflowStateLog" FunctionName="Model.Store.InsertWorkflowStateLog" />
+    <FunctionImportMapping FunctionImportName="InsertRequirementProcessWorkflow" FunctionName="Model.Store.InsertRequirementProcessWorkflow">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertRequirementProcessWorkflow_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="WorkflowStateId" ColumnName="WorkflowStateId" />
+          <ScalarProperty Name="WorkflowStateSubId" ColumnName="WorkflowStateSubId" />
+          <ScalarProperty Name="ReasonCodeId" ColumnName="ReasonCodeId" />
+          <ScalarProperty Name="TimestampBegin" ColumnName="TimestampBegin" />
+          <ScalarProperty Name="TimestampEnd" ColumnName="TimestampEnd" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="MPLOY_IdJobFlow" ColumnName="MPLOY_IdJobFlow" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertPersonTypicalRole" FunctionName="Model.Store.InsertPersonTypicalRole">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertPersonTypicalRole_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="TypicalRoleId" ColumnName="TypicalRoleId" />
+          <ScalarProperty Name="InterestLevelTypeId" ColumnName="InterestLevelTypeId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCompany" FunctionName="Model.Store.InsertCompany">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCompany_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+          <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
+          <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
+          <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
+          <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
+          <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+          <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCompanyBranch" FunctionName="Model.Store.InsertCompanyBranch" />
+    <FunctionImportMapping FunctionImportName="UpdatePersonPreferredData" FunctionName="Model.Store.UpdatePersonPreferredData" />
+    <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
+    <FunctionImportMapping FunctionImportName="InsertCustomerNote" FunctionName="Model.Store.InsertCustomerNote" />
+    <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="Model.Store.InsertCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Model.InsertCustomer_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="SourceTypeId" ColumnName="SourceTypeId" />
+          <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

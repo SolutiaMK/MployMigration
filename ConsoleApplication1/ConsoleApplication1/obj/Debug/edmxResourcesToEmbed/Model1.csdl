@@ -87,12 +87,6 @@
     <FunctionImport Name="GetUserFromMployUserId" ReturnType="Collection(Int32)">
       <Parameter Name="MployUserId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertCustomerNote" ReturnType="Collection(Int32)">
-      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
-      <Parameter Name="Note" Mode="In" Type="String" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="CheckCustomerAgainstCandidateData" ReturnType="Collection(Boolean)">
       <Parameter Name="CustomerIdContact" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -121,19 +115,6 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
       <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertCompany" ReturnType="Collection(Model.InsertCompany_Result9)">
-      <Parameter Name="CompanyName" Mode="In" Type="String" />
-      <Parameter Name="CompanyTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="IndustryId" Mode="In" Type="Int32" />
-      <Parameter Name="RevenueSizeTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="EmployeeSizeTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="BillingFrequencyTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="BillingMethodTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="SalesPersonId" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
-      <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="InsertCompanyContactInformation" ReturnType="Collection(Int32)">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
@@ -156,29 +137,9 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadCompanyType" ReturnType="Collection(Model.ReadCompanyType_Result1)" />
-    <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result2)">
-      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="CustomerTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="Title" Mode="In" Type="String" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="FindCustomerOrganizationId" ReturnType="Collection(Int32)">
       <Parameter Name="personId" Mode="In" Type="Int32" />
       <Parameter Name="mployOrganizationId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="Line1" Mode="In" Type="String" />
-      <Parameter Name="City" Mode="In" Type="String" />
-      <Parameter Name="State" Mode="In" Type="String" />
-      <Parameter Name="Zip" Mode="In" Type="String" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InsertCandidateNote" ReturnType="Collection(Int32)">
       <Parameter Name="CandidateId" Mode="In" Type="Int32" />
@@ -245,20 +206,6 @@
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertCustomerBranch" ReturnType="Collection(Int32)">
-      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
-      <Parameter Name="BranchId" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
-      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-      <Parameter Name="BranchId" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="ReadSkill" ReturnType="Collection(Model.ReadSkill_Result)" />
     <FunctionImport Name="InsertSkillCategoryMapping" ReturnType="Collection(Model.InsertSkillCategoryMapping_Result)">
       <Parameter Name="SkillId" Mode="In" Type="Int32" />
@@ -283,12 +230,6 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadContactSkill" ReturnType="Collection(Model.ReadContactSkill_Result)" />
-    <FunctionImport Name="InsertPersonTypicalRole" ReturnType="Collection(Model.InsertPersonTypicalRole_Result)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="TypicalRoleId" Mode="In" Type="Int32" />
-      <Parameter Name="InterestTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="ReadIntersectSkillCategoryMapping" ReturnType="Collection(Model.ReadIntersectSkillCategoryMapping_Result)" />
     <EntitySet Name="Requirements" EntityType="Model.Requirement" />
     <AssociationSet Name="FK_Requirement_Customer" Association="Model.FK_Requirement_Customer">
@@ -371,9 +312,6 @@
       <End Role="Person" EntitySet="People" />
       <End Role="PersonMailAddress" EntitySet="PersonMailAddresses" />
     </AssociationSet>
-    <FunctionImport Name="UpdatePersonPreferredData">
-      <Parameter Name="Mploy_ContactId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="InsertContactLog">
       <Parameter Name="SalesRecruitingWorkflowId" Mode="In" Type="Int32" />
       <Parameter Name="ActivityNote" Mode="In" Type="String" />
@@ -480,6 +418,74 @@
       <Parameter Name="CandidateId" Mode="In" Type="Int32" />
       <Parameter Name="RequirementId" Mode="In" Type="Int32" />
       <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertRequirementProcessWorkflow" ReturnType="Collection(Model.InsertRequirementProcessWorkflow_Result)">
+      <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
+      <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
+      <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_ClosedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_IdJob" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonTypicalRole" ReturnType="Collection(Model.InsertPersonTypicalRole_Result)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="TypicalRoleId" Mode="In" Type="Int32" />
+      <Parameter Name="InterestTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompany" ReturnType="Collection(Model.InsertCompany_Result)">
+      <Parameter Name="CompanyName" Mode="In" Type="String" />
+      <Parameter Name="CompanyTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="IndustryId" Mode="In" Type="Int32" />
+      <Parameter Name="RevenueSizeTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeSizeTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="BillingFrequencyTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="BillingMethodTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SalesPersonId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+      <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdatePersonPreferredData">
+      <Parameter Name="Mploy_ContactId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="Line1" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="Zip" Mode="In" Type="String" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCustomerNote" ReturnType="Collection(Int32)">
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
@@ -912,40 +918,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertCompany_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result1">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadCompanyType_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -953,157 +925,6 @@
     <Property Type="Int32" Name="ModifiedById" Nullable="true" />
     <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result2">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result3">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result4">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result5">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result6">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result7">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCompany_Result8">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCustomer_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="CompanyId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCustomer_Result1">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="CompanyId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
   </ComplexType>
   <EntityType Name="Company">
     <Key>
@@ -1180,23 +1001,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertCompany1_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadCompanyType1_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -1205,23 +1009,6 @@
     <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="InsertCompany_Result9">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="CompanyTypeId" Nullable="false" />
-    <Property Type="Int32" Name="IndustryId" Nullable="true" />
-    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
-    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadCompanyType_Result1">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -1229,38 +1016,6 @@
     <Property Type="Int32" Name="ModifiedById" Nullable="true" />
     <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCustomer1_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="CompanyId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertCustomer_Result2">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="CompanyId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
   </ComplexType>
   <EntityType Name="RequirementNote">
     <Key>
@@ -1657,16 +1412,6 @@
     <Property Type="Int32" Name="idSkill" Nullable="false" />
     <Property Type="Int32" Name="idSkillLevel" Nullable="false" />
   </ComplexType>
-  <ComplexType Name="InsertPersonTypicalRole_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="TypicalRoleId" Nullable="false" />
-    <Property Type="Int32" Name="InterestLevelTypeId" Nullable="false" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadIntersectSkillCategoryMapping_Result">
     <Property Type="Int32" Name="PersonSkillId" Nullable="false" />
     <Property Type="Int32" Name="PersonId" Nullable="false" />
@@ -1719,6 +1464,7 @@
     <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="Requirement" ToRole="GlobalEntity" />
     <NavigationProperty Name="MaxTravelType" Relationship="Model.FK_Requirement_MaxTravelType" FromRole="Requirement" ToRole="MaxTravelType" />
     <NavigationProperty Name="RequirementNotes" Relationship="Model.FK_RequirementNote_Requirement" FromRole="Requirement" ToRole="RequirementNote" />
+    <Property Name="PreferredTypicalRoleId" Type="Int32" />
   </EntityType>
   <Association Name="FK_Requirement_Customer">
     <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
@@ -2112,6 +1858,64 @@
     <Property Type="Int32" Name="DesiredRate" Nullable="true" />
     <Property Type="Int32" Name="ReferralId" Nullable="true" />
     <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertRequirementProcessWorkflow_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="WorkflowStateId" Nullable="false" />
+    <Property Type="Int32" Name="WorkflowStateSubId" Nullable="true" />
+    <Property Type="Int32" Name="ReasonCodeId" Nullable="true" />
+    <Property Type="DateTime" Name="TimestampBegin" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="TimestampEnd" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MPLOY_IdJobFlow" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertPersonTypicalRole_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="false" />
+    <Property Type="Int32" Name="InterestLevelTypeId" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCompany_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="CompanyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="IndustryId" Nullable="true" />
+    <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+    <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
     <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="ModifiedById" Nullable="true" />
     <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />

@@ -56,6 +56,7 @@ namespace ConsoleApplication1
         public Nullable<int> MPLOY_IdUserClosed { get; set; }
         public Nullable<int> MPLOY_IdUserFilled { get; set; }
         public Nullable<int> MPLOY_IdUserRecruiter { get; set; }
+        public Nullable<int> PreferredTypicalRoleId { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual GlobalEntity GlobalEntity { get; set; }

@@ -16,12 +16,15 @@ namespace ConsoleApplication1
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string Name { get; set; }
-        public int CompanyTypeId { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public Nullable<int> CompanyTypeId { get; set; }
         public Nullable<int> IndustryId { get; set; }
         public Nullable<int> RevenueSizeTypeId { get; set; }
         public Nullable<int> EmployeeSizeTypeId { get; set; }
         public Nullable<int> BillingFrequencyTypeId { get; set; }
         public Nullable<int> BillingMethodTypeId { get; set; }
+        public Nullable<int> PaymentTermTypeId { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
