@@ -10,44 +10,28 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Company
+    public partial class InsertCompany_Result1
     {
-        public Company()
-        {
-            this.CompanyContactInformations = new HashSet<CompanyContactInformation>();
-            this.Customers = new HashSet<Customer>();
-            this.CompanyMailAddresses = new HashSet<CompanyMailAddress>();
-            this.Company1 = new HashSet<Company>();
-        }
-    
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
         public string Name { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public Nullable<int> PreferredPhysicalAddressId { get; set; }
         public Nullable<int> CompanyTypeId { get; set; }
+        public Nullable<int> ParentCompanyId { get; set; }
         public Nullable<int> IndustryId { get; set; }
         public Nullable<int> RevenueSizeTypeId { get; set; }
         public Nullable<int> EmployeeSizeTypeId { get; set; }
         public Nullable<int> BillingFrequencyTypeId { get; set; }
         public Nullable<int> BillingMethodTypeId { get; set; }
+        public Nullable<int> PaymentTermTypeId { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_OrganizationId { get; set; }
         public Nullable<int> MPLOY_IdUser { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public Nullable<int> PaymentTermTypeId { get; set; }
-        public Nullable<int> PreferredPhysicalAddressId { get; set; }
-        public Nullable<int> ParentCompanyId { get; set; }
-    
-        public virtual ICollection<CompanyContactInformation> CompanyContactInformations { get; set; }
-        public virtual GlobalEntity GlobalEntity { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<CompanyMailAddress> CompanyMailAddresses { get; set; }
-        public virtual ICollection<Company> Company1 { get; set; }
-        public virtual Company Company2 { get; set; }
     }
 }

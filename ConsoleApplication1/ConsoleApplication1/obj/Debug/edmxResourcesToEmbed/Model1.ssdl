@@ -10,7 +10,8 @@
     <Property Name="Timestamp" Type="datetime" Nullable="false" />
     <Property Name="CreatedById" Type="int" Nullable="false" />
     <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Note" Type="varchar" MaxLength="1000" />
+    <Property Name="Note" Type="varchar(max)" />
+    <Property Name="Outcome" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Candidate">
     <Key>
@@ -38,6 +39,7 @@
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedById" Type="int" />
     <Property Name="MPLOY_OrganizationId" Type="int" />
+    <Property Name="CurrentAssignment" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CandidateNote">
     <Key>
@@ -60,7 +62,9 @@
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="City" Type="varchar" MaxLength="50" />
     <Property Name="State" Type="char" MaxLength="2" />
+    <Property Name="PreferredPhysicalAddressId" Type="int" />
     <Property Name="CompanyTypeId" Type="int" />
+    <Property Name="ParentCompanyId" Type="int" />
     <Property Name="IndustryId" Type="int" />
     <Property Name="RevenueSizeTypeId" Type="int" />
     <Property Name="EmployeeSizeTypeId" Type="int" />
@@ -257,6 +261,7 @@
     <Property Name="RequirementTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementPriorityTypeId" Type="int" Nullable="false" />
     <Property Name="RequirementProjectTypeId" Type="int" Nullable="false" />
+    <Property Name="PreferredTypicalRoleId" Type="int" />
     <Property Name="TravelTypeId" Type="int" />
     <Property Name="MaxTravelTypeId" Type="int" />
     <Property Name="PaymentTermTypeId" Type="int" />
@@ -273,7 +278,6 @@
     <Property Name="IsDrugTestRequired" Type="bit" Nullable="false" />
     <Property Name="IsBackgroundCheckRequired" Type="bit" Nullable="false" />
     <Property Name="IsWorkFromHome" Type="bit" Nullable="false" />
-    <Property Name="PreferredTypicalRoleId" Type="int" />
     <Property Name="LastUpdated" Type="datetime" Nullable="false" />
     <Property Name="ModifiedById" Type="int" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -360,6 +364,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Company_CompanyMailAddress' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Company_CompanyMailAddress" />-->
   <Association Name="FK_Company_GlobalEntity">
     <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
     <End Role="Company" Type="Self.Company" Multiplicity="*" />
@@ -369,6 +376,18 @@
       </Principal>
       <Dependent Role="Company">
         <PropertyRef Name="GlobalEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_ParentCompanyId">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Company1" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company1">
+        <PropertyRef Name="ParentCompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -689,6 +708,9 @@
   <Function Name="FindRequirementInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetCandidateOrCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetCompanyContactAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="currentContact" Type="int" Mode="In" />
   </Function>
@@ -697,6 +719,11 @@
   </Function>
   <Function Name="GetContactLogAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="currentContact" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetGlobalEntityIdForEntity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="RequirementId" Type="int" Mode="In" />
+    <Parameter Name="CandidateId" Type="int" Mode="In" />
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
   </Function>
   <Function Name="GetHiringActivityAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="currentJobId" Type="int" Mode="In" />
@@ -708,6 +735,14 @@
   </Function>
   <Function Name="GetUserFromMployUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="MployUserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+    <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ActivityId" Type="int" Mode="In" />
+    <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+    <Parameter Name="Note" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Outcome" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
   </Function>
   <Function Name="InsertCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
     <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -1042,6 +1077,10 @@
     <AssociationSet Name="FK_Company_GlobalEntity" Association="Self.FK_Company_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntity" />
       <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_ParentCompanyId" Association="Self.FK_Company_ParentCompanyId">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Company1" EntitySet="Company" />
     </AssociationSet>
     <AssociationSet Name="FK_CompanyContactInformation_ContactInformationType" Association="Self.FK_CompanyContactInformation_ContactInformationType">
       <End Role="ContactInformationType" EntitySet="ContactInformationType" />

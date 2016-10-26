@@ -59,7 +59,6 @@ namespace ConsoleApplication1
             return orgId;
         }
         
-
         public static int? GetGenderTypeId(string gender)
         {
             int? genderTypeId = null;

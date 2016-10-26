@@ -45,8 +45,8 @@ namespace ConsoleApplication1
         public virtual DbSet<Requirement> Requirements { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Candidate> Candidates { get; set; }
-        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<WorkflowStateLog> WorkflowStateLogs { get; set; }
+        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetCompanyJobAssociation(Nullable<int> currentCompany)
         {
@@ -207,35 +207,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("CheckCustomerAgainstCandidateData", customerIdContactParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertUser(Nullable<int> personId, string firstName, string lastName, string emailAddress, Nullable<int> modifiedById, Nullable<int> mPLOY_UserId)
-        {
-            var personIdParameter = personId.HasValue ?
-                new ObjectParameter("PersonId", personId) :
-                new ObjectParameter("PersonId", typeof(int));
-    
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            var emailAddressParameter = emailAddress != null ?
-                new ObjectParameter("EmailAddress", emailAddress) :
-                new ObjectParameter("EmailAddress", typeof(string));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
-                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
-                new ObjectParameter("MPLOY_UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertUser", personIdParameter, firstNameParameter, lastNameParameter, emailAddressParameter, modifiedByIdParameter, mPLOY_UserIdParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> InsertCompanyContactInformation(Nullable<int> companyId, Nullable<int> contactInformationTypeId, string phoneNumber, string fax, string uRL, Nullable<int> modifiedById)
         {
             var companyIdParameter = companyId.HasValue ?
@@ -263,35 +234,6 @@ namespace ConsoleApplication1
                 new ObjectParameter("ModifiedById", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertCompanyContactInformation", companyIdParameter, contactInformationTypeIdParameter, phoneNumberParameter, faxParameter, uRLParameter, modifiedByIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> InsertCompanyMailingAddress(Nullable<int> companyId, string line1, string city, string state, string zip, Nullable<int> modifiedById)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var line1Parameter = line1 != null ?
-                new ObjectParameter("Line1", line1) :
-                new ObjectParameter("Line1", typeof(string));
-    
-            var cityParameter = city != null ?
-                new ObjectParameter("City", city) :
-                new ObjectParameter("City", typeof(string));
-    
-            var stateParameter = state != null ?
-                new ObjectParameter("State", state) :
-                new ObjectParameter("State", typeof(string));
-    
-            var zipParameter = zip != null ?
-                new ObjectParameter("Zip", zip) :
-                new ObjectParameter("Zip", typeof(string));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertCompanyMailingAddress", companyIdParameter, line1Parameter, cityParameter, stateParameter, zipParameter, modifiedByIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> InsertCompanyNote(Nullable<int> companyId, string note, Nullable<int> modifiedById)
@@ -1028,55 +970,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCandidate_Result>("InsertCandidate", personIdParameter, candidateStatusTypeIdParameter, desiredEmploymentTypeIdParameter, currentEmploymentTypeIdParameter, travelTypeIdParameter, sourceTypeIdParameter, maxTravelTypeIdParameter, availableDateParameter, startDateParameter, currentSalaryParameter, desiredSalaryParameter, currentRateParameter, desiredRateParameter, referralIdParameter, isOpenToRelocationParameter, modifiedByIdParameter, createDateParameter, mPLOY_OrganizationIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> InsertWorkflowStateLog(Nullable<int> workflowTypeId, Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> candidateId, Nullable<int> requirementId, Nullable<int> mPLOY_UserId)
-        {
-            var workflowTypeIdParameter = workflowTypeId.HasValue ?
-                new ObjectParameter("WorkflowTypeId", workflowTypeId) :
-                new ObjectParameter("WorkflowTypeId", typeof(int));
-    
-            var workflowStateIdParameter = workflowStateId.HasValue ?
-                new ObjectParameter("WorkflowStateId", workflowStateId) :
-                new ObjectParameter("WorkflowStateId", typeof(int));
-    
-            var workflowStateSubIdParameter = workflowStateSubId.HasValue ?
-                new ObjectParameter("WorkflowStateSubId", workflowStateSubId) :
-                new ObjectParameter("WorkflowStateSubId", typeof(int));
-    
-            var reasonCodeParameter = reasonCode.HasValue ?
-                new ObjectParameter("ReasonCode", reasonCode) :
-                new ObjectParameter("ReasonCode", typeof(int));
-    
-            var timeStampBeginParameter = timeStampBegin.HasValue ?
-                new ObjectParameter("TimeStampBegin", timeStampBegin) :
-                new ObjectParameter("TimeStampBegin", typeof(System.DateTime));
-    
-            var timeStampEndParameter = timeStampEnd.HasValue ?
-                new ObjectParameter("TimeStampEnd", timeStampEnd) :
-                new ObjectParameter("TimeStampEnd", typeof(System.DateTime));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            var mPLOY_IdJobFlowParameter = mPLOY_IdJobFlow.HasValue ?
-                new ObjectParameter("MPLOY_IdJobFlow", mPLOY_IdJobFlow) :
-                new ObjectParameter("MPLOY_IdJobFlow", typeof(int));
-    
-            var candidateIdParameter = candidateId.HasValue ?
-                new ObjectParameter("CandidateId", candidateId) :
-                new ObjectParameter("CandidateId", typeof(int));
-    
-            var requirementIdParameter = requirementId.HasValue ?
-                new ObjectParameter("RequirementId", requirementId) :
-                new ObjectParameter("RequirementId", typeof(int));
-    
-            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
-                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
-                new ObjectParameter("MPLOY_UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertWorkflowStateLog", workflowTypeIdParameter, workflowStateIdParameter, workflowStateSubIdParameter, reasonCodeParameter, timeStampBeginParameter, timeStampEndParameter, modifiedByIdParameter, mPLOY_IdJobFlowParameter, candidateIdParameter, requirementIdParameter, mPLOY_UserIdParameter);
-        }
-    
         public virtual ObjectResult<InsertRequirementProcessWorkflow_Result> InsertRequirementProcessWorkflow(Nullable<int> workflowTypeId, Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> mPLOY_UserId, Nullable<System.DateTime> mPLOY_ClosedDate, Nullable<int> mPLOY_IdJob)
         {
             var workflowTypeIdParameter = workflowTypeId.HasValue ?
@@ -1147,55 +1040,6 @@ namespace ConsoleApplication1
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertPersonTypicalRole_Result>("InsertPersonTypicalRole", personIdParameter, typicalRoleIdParameter, interestTypeIdParameter, modifiedByIdParameter);
         }
     
-        public virtual ObjectResult<InsertCompany_Result> InsertCompany(string companyName, Nullable<int> companyTypeId, Nullable<int> industryId, Nullable<int> revenueSizeTypeId, Nullable<int> employeeSizeTypeId, Nullable<int> billingFrequencyTypeId, Nullable<int> billingMethodTypeId, Nullable<int> salesPersonId, Nullable<int> modifiedById, Nullable<int> mployOrganizationId, Nullable<int> mployIdUser)
-        {
-            var companyNameParameter = companyName != null ?
-                new ObjectParameter("CompanyName", companyName) :
-                new ObjectParameter("CompanyName", typeof(string));
-    
-            var companyTypeIdParameter = companyTypeId.HasValue ?
-                new ObjectParameter("CompanyTypeId", companyTypeId) :
-                new ObjectParameter("CompanyTypeId", typeof(int));
-    
-            var industryIdParameter = industryId.HasValue ?
-                new ObjectParameter("IndustryId", industryId) :
-                new ObjectParameter("IndustryId", typeof(int));
-    
-            var revenueSizeTypeIdParameter = revenueSizeTypeId.HasValue ?
-                new ObjectParameter("RevenueSizeTypeId", revenueSizeTypeId) :
-                new ObjectParameter("RevenueSizeTypeId", typeof(int));
-    
-            var employeeSizeTypeIdParameter = employeeSizeTypeId.HasValue ?
-                new ObjectParameter("EmployeeSizeTypeId", employeeSizeTypeId) :
-                new ObjectParameter("EmployeeSizeTypeId", typeof(int));
-    
-            var billingFrequencyTypeIdParameter = billingFrequencyTypeId.HasValue ?
-                new ObjectParameter("BillingFrequencyTypeId", billingFrequencyTypeId) :
-                new ObjectParameter("BillingFrequencyTypeId", typeof(int));
-    
-            var billingMethodTypeIdParameter = billingMethodTypeId.HasValue ?
-                new ObjectParameter("BillingMethodTypeId", billingMethodTypeId) :
-                new ObjectParameter("BillingMethodTypeId", typeof(int));
-    
-            var salesPersonIdParameter = salesPersonId.HasValue ?
-                new ObjectParameter("SalesPersonId", salesPersonId) :
-                new ObjectParameter("SalesPersonId", typeof(int));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            var mployOrganizationIdParameter = mployOrganizationId.HasValue ?
-                new ObjectParameter("MployOrganizationId", mployOrganizationId) :
-                new ObjectParameter("MployOrganizationId", typeof(int));
-    
-            var mployIdUserParameter = mployIdUser.HasValue ?
-                new ObjectParameter("MployIdUser", mployIdUser) :
-                new ObjectParameter("MployIdUser", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCompany_Result>("InsertCompany", companyNameParameter, companyTypeIdParameter, industryIdParameter, revenueSizeTypeIdParameter, employeeSizeTypeIdParameter, billingFrequencyTypeIdParameter, billingMethodTypeIdParameter, salesPersonIdParameter, modifiedByIdParameter, mployOrganizationIdParameter, mployIdUserParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> InsertCompanyBranch(Nullable<int> companyId, Nullable<int> branchId, Nullable<System.DateTime> createDate, Nullable<int> modifiedById, Nullable<int> mPLOY_UserId)
         {
             var companyIdParameter = companyId.HasValue ?
@@ -1228,35 +1072,6 @@ namespace ConsoleApplication1
                 new ObjectParameter("Mploy_ContactId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePersonPreferredData", mploy_ContactIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> InsertPersonMailingAddress(Nullable<int> personId, string line1, string city, string state, string zip, Nullable<int> modifiedById)
-        {
-            var personIdParameter = personId.HasValue ?
-                new ObjectParameter("PersonId", personId) :
-                new ObjectParameter("PersonId", typeof(int));
-    
-            var line1Parameter = line1 != null ?
-                new ObjectParameter("Line1", line1) :
-                new ObjectParameter("Line1", typeof(string));
-    
-            var cityParameter = city != null ?
-                new ObjectParameter("City", city) :
-                new ObjectParameter("City", typeof(string));
-    
-            var stateParameter = state != null ?
-                new ObjectParameter("State", state) :
-                new ObjectParameter("State", typeof(string));
-    
-            var zipParameter = zip != null ?
-                new ObjectParameter("Zip", zip) :
-                new ObjectParameter("Zip", typeof(string));
-    
-            var modifiedByIdParameter = modifiedById.HasValue ?
-                new ObjectParameter("ModifiedById", modifiedById) :
-                new ObjectParameter("ModifiedById", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPersonMailingAddress", personIdParameter, line1Parameter, cityParameter, stateParameter, zipParameter, modifiedByIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> InsertCustomerNote(Nullable<int> customerId, string note, Nullable<System.DateTime> createDate, Nullable<int> modifiedById)
@@ -1323,6 +1138,246 @@ namespace ConsoleApplication1
                 new ObjectParameter("MployOrganizationId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCustomer_Result>("InsertCustomer", companyIdParameter, personIdParameter, sourceTypeIdParameter, customerTypeIdParameter, titleParameter, startDateParameter, endDateParameter, createDateParameter, modifiedByIdParameter, mployOrganizationIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertPersonMailingAddress(Nullable<int> personId, string line1, string city, string state, string zip, Nullable<int> modifiedById)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            var line1Parameter = line1 != null ?
+                new ObjectParameter("Line1", line1) :
+                new ObjectParameter("Line1", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var zipParameter = zip != null ?
+                new ObjectParameter("Zip", zip) :
+                new ObjectParameter("Zip", typeof(string));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPersonMailingAddress", personIdParameter, line1Parameter, cityParameter, stateParameter, zipParameter, modifiedByIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertCompanyMailingAddress(Nullable<int> companyId, string line1, string city, string state, string zip, Nullable<int> modifiedById)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var line1Parameter = line1 != null ?
+                new ObjectParameter("Line1", line1) :
+                new ObjectParameter("Line1", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var zipParameter = zip != null ?
+                new ObjectParameter("Zip", zip) :
+                new ObjectParameter("Zip", typeof(string));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertCompanyMailingAddress", companyIdParameter, line1Parameter, cityParameter, stateParameter, zipParameter, modifiedByIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertWorkflowStateLog(Nullable<int> workflowTypeId, Nullable<int> workflowStateId, Nullable<int> workflowStateSubId, Nullable<int> reasonCode, Nullable<System.DateTime> timeStampBegin, Nullable<System.DateTime> timeStampEnd, Nullable<int> modifiedById, Nullable<int> mPLOY_IdJobFlow, Nullable<int> candidateId, Nullable<int> requirementId, Nullable<int> mPLOY_UserId)
+        {
+            var workflowTypeIdParameter = workflowTypeId.HasValue ?
+                new ObjectParameter("WorkflowTypeId", workflowTypeId) :
+                new ObjectParameter("WorkflowTypeId", typeof(int));
+    
+            var workflowStateIdParameter = workflowStateId.HasValue ?
+                new ObjectParameter("WorkflowStateId", workflowStateId) :
+                new ObjectParameter("WorkflowStateId", typeof(int));
+    
+            var workflowStateSubIdParameter = workflowStateSubId.HasValue ?
+                new ObjectParameter("WorkflowStateSubId", workflowStateSubId) :
+                new ObjectParameter("WorkflowStateSubId", typeof(int));
+    
+            var reasonCodeParameter = reasonCode.HasValue ?
+                new ObjectParameter("ReasonCode", reasonCode) :
+                new ObjectParameter("ReasonCode", typeof(int));
+    
+            var timeStampBeginParameter = timeStampBegin.HasValue ?
+                new ObjectParameter("TimeStampBegin", timeStampBegin) :
+                new ObjectParameter("TimeStampBegin", typeof(System.DateTime));
+    
+            var timeStampEndParameter = timeStampEnd.HasValue ?
+                new ObjectParameter("TimeStampEnd", timeStampEnd) :
+                new ObjectParameter("TimeStampEnd", typeof(System.DateTime));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var mPLOY_IdJobFlowParameter = mPLOY_IdJobFlow.HasValue ?
+                new ObjectParameter("MPLOY_IdJobFlow", mPLOY_IdJobFlow) :
+                new ObjectParameter("MPLOY_IdJobFlow", typeof(int));
+    
+            var candidateIdParameter = candidateId.HasValue ?
+                new ObjectParameter("CandidateId", candidateId) :
+                new ObjectParameter("CandidateId", typeof(int));
+    
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertWorkflowStateLog", workflowTypeIdParameter, workflowStateIdParameter, workflowStateSubIdParameter, reasonCodeParameter, timeStampBeginParameter, timeStampEndParameter, modifiedByIdParameter, mPLOY_IdJobFlowParameter, candidateIdParameter, requirementIdParameter, mPLOY_UserIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCandidateOrCustomer_Result> GetCandidateOrCustomer(Nullable<int> currentContact)
+        {
+            var currentContactParameter = currentContact.HasValue ?
+                new ObjectParameter("currentContact", currentContact) :
+                new ObjectParameter("currentContact", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCandidateOrCustomer_Result>("GetCandidateOrCustomer", currentContactParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> GetGlobalEntityIdForEntity(Nullable<int> requirementId, Nullable<int> candidateId, Nullable<int> customerId)
+        {
+            var requirementIdParameter = requirementId.HasValue ?
+                new ObjectParameter("RequirementId", requirementId) :
+                new ObjectParameter("RequirementId", typeof(int));
+    
+            var candidateIdParameter = candidateId.HasValue ?
+                new ObjectParameter("CandidateId", candidateId) :
+                new ObjectParameter("CandidateId", typeof(int));
+    
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("GetGlobalEntityIdForEntity", requirementIdParameter, candidateIdParameter, customerIdParameter);
+        }
+    
+        public virtual ObjectResult<InsertActivityLog_Result> InsertActivityLog(Nullable<System.Guid> globalEntityId, Nullable<int> activityId, Nullable<System.DateTime> createDate, string note, string outcome, Nullable<int> mPLOY_IdUser)
+        {
+            var globalEntityIdParameter = globalEntityId.HasValue ?
+                new ObjectParameter("GlobalEntityId", globalEntityId) :
+                new ObjectParameter("GlobalEntityId", typeof(System.Guid));
+    
+            var activityIdParameter = activityId.HasValue ?
+                new ObjectParameter("ActivityId", activityId) :
+                new ObjectParameter("ActivityId", typeof(int));
+    
+            var createDateParameter = createDate.HasValue ?
+                new ObjectParameter("CreateDate", createDate) :
+                new ObjectParameter("CreateDate", typeof(System.DateTime));
+    
+            var noteParameter = note != null ?
+                new ObjectParameter("Note", note) :
+                new ObjectParameter("Note", typeof(string));
+    
+            var outcomeParameter = outcome != null ?
+                new ObjectParameter("Outcome", outcome) :
+                new ObjectParameter("Outcome", typeof(string));
+    
+            var mPLOY_IdUserParameter = mPLOY_IdUser.HasValue ?
+                new ObjectParameter("MPLOY_IdUser", mPLOY_IdUser) :
+                new ObjectParameter("MPLOY_IdUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertActivityLog_Result>("InsertActivityLog", globalEntityIdParameter, activityIdParameter, createDateParameter, noteParameter, outcomeParameter, mPLOY_IdUserParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertUser(Nullable<int> personId, string firstName, string lastName, string emailAddress, Nullable<int> modifiedById, Nullable<int> mPLOY_UserId)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("PersonId", personId) :
+                new ObjectParameter("PersonId", typeof(int));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var emailAddressParameter = emailAddress != null ?
+                new ObjectParameter("EmailAddress", emailAddress) :
+                new ObjectParameter("EmailAddress", typeof(string));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var mPLOY_UserIdParameter = mPLOY_UserId.HasValue ?
+                new ObjectParameter("MPLOY_UserId", mPLOY_UserId) :
+                new ObjectParameter("MPLOY_UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertUser", personIdParameter, firstNameParameter, lastNameParameter, emailAddressParameter, modifiedByIdParameter, mPLOY_UserIdParameter);
+        }
+    
+        public virtual ObjectResult<InsertCompany_Result1> InsertCompany(string companyName, Nullable<int> companyTypeId, Nullable<int> industryId, Nullable<int> revenueSizeTypeId, Nullable<int> employeeSizeTypeId, Nullable<int> billingFrequencyTypeId, Nullable<int> billingMethodTypeId, Nullable<int> salesPersonId, Nullable<int> modifiedById, Nullable<int> mployOrganizationId, Nullable<int> mployIdUser)
+        {
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            var companyTypeIdParameter = companyTypeId.HasValue ?
+                new ObjectParameter("CompanyTypeId", companyTypeId) :
+                new ObjectParameter("CompanyTypeId", typeof(int));
+    
+            var industryIdParameter = industryId.HasValue ?
+                new ObjectParameter("IndustryId", industryId) :
+                new ObjectParameter("IndustryId", typeof(int));
+    
+            var revenueSizeTypeIdParameter = revenueSizeTypeId.HasValue ?
+                new ObjectParameter("RevenueSizeTypeId", revenueSizeTypeId) :
+                new ObjectParameter("RevenueSizeTypeId", typeof(int));
+    
+            var employeeSizeTypeIdParameter = employeeSizeTypeId.HasValue ?
+                new ObjectParameter("EmployeeSizeTypeId", employeeSizeTypeId) :
+                new ObjectParameter("EmployeeSizeTypeId", typeof(int));
+    
+            var billingFrequencyTypeIdParameter = billingFrequencyTypeId.HasValue ?
+                new ObjectParameter("BillingFrequencyTypeId", billingFrequencyTypeId) :
+                new ObjectParameter("BillingFrequencyTypeId", typeof(int));
+    
+            var billingMethodTypeIdParameter = billingMethodTypeId.HasValue ?
+                new ObjectParameter("BillingMethodTypeId", billingMethodTypeId) :
+                new ObjectParameter("BillingMethodTypeId", typeof(int));
+    
+            var salesPersonIdParameter = salesPersonId.HasValue ?
+                new ObjectParameter("SalesPersonId", salesPersonId) :
+                new ObjectParameter("SalesPersonId", typeof(int));
+    
+            var modifiedByIdParameter = modifiedById.HasValue ?
+                new ObjectParameter("ModifiedById", modifiedById) :
+                new ObjectParameter("ModifiedById", typeof(int));
+    
+            var mployOrganizationIdParameter = mployOrganizationId.HasValue ?
+                new ObjectParameter("MployOrganizationId", mployOrganizationId) :
+                new ObjectParameter("MployOrganizationId", typeof(int));
+    
+            var mployIdUserParameter = mployIdUser.HasValue ?
+                new ObjectParameter("MployIdUser", mployIdUser) :
+                new ObjectParameter("MployIdUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertCompany_Result1>("InsertCompany", companyNameParameter, companyTypeIdParameter, industryIdParameter, revenueSizeTypeIdParameter, employeeSizeTypeIdParameter, billingFrequencyTypeIdParameter, billingMethodTypeIdParameter, salesPersonIdParameter, modifiedByIdParameter, mployOrganizationIdParameter, mployIdUserParameter);
         }
     }
 }

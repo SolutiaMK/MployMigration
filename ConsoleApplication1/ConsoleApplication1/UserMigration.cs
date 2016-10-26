@@ -46,7 +46,7 @@ namespace ConsoleApplication1
                         var phoneResult = _db.InsertPersonContactInformation(_personId, 14, userRecord.Phone, true, null, 0).ToList();
                         //var insertedPersonContactInformationId =  result;
 
-                        Debug.WriteLine("\n" + "Person imported: " + _personId);
+                        Debug.WriteLine("\n" + "Person imported: " + _personId + " " + userRecord.FirstName + " " + userRecord.LastName);
                     }
 
                 }

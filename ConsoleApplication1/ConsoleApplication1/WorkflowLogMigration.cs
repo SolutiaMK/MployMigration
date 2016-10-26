@@ -17,7 +17,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
  ****/
 namespace ConsoleApplication1
 {
-    class HiringActivityMigration
+    class WorkflowLogMigration
     {
 
         static Entities _db;
@@ -39,8 +39,8 @@ namespace ConsoleApplication1
                     foreach (var activityRecord in hiringActivityData)//.Where(x => x.idJob == 3092)
                     {
                         //TESTING:
-                        //if (activityRecord.idJobFlow == 1008)
-                        //{
+                        if (activityRecord.idJobFlow == 6383)
+                        {
                             //Get the Candidate and Requirement Id for the incoming MPLOY Contact and Job Id:
                             //Set the _candidateId and _requirementId here:
                             var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob,
@@ -65,8 +65,8 @@ namespace ConsoleApplication1
                                 Debug.WriteLine("\n" + errorString + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
                                                 " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
                                                 activityRecord.idJobFlow + " *****");
-                            }                        
-                            else 
+                            }
+                            else
                             {
                                 //Continue like normal:                                               
 
@@ -87,41 +87,54 @@ namespace ConsoleApplication1
                                 //Insert a new record in the RequirementCandidate table for the current requirement and Candidate
                                 if (_candidateId != 0)
                                 {
-                                    var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId, _candidateId, 0, activityRecord.Created, activityRecord.idUser);
+                                    var requirementCandidateId = _db.InsertRequirementCandidate(_requirementId,
+                                        _candidateId, 0, activityRecord.Created, activityRecord.idUser);
                                 }
 
+
+
+                                //THIS HAS BEEN REMOVED FOE NOW.  IT MAY NOT BE NEEDED.
                                 //***** This RequirementCustomer Relationship is populated during the Requirement import process *****
                                 //Insert the new record into the RequirementCustomer table if the _customerId if not null:
-                                if (_customerId != 0)
-                                {
-                                    var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, true, 0, activityRecord.Created, activityRecord.idUser);
-                                    Debug.WriteLine("\n" + "Customer data:" + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
-                                        " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
-                                        activityRecord.idJobFlow + " *****");
-                                }
+                                //if (_customerId != 0)
+                                //{
+                                //    var requirementCustomer = _db.InsertRequirementCustomer(_requirementId, _customerId, false, 0, activityRecord.Created, activityRecord.idUser);
+                                //    Debug.WriteLine("\n" + "Customer data:" + "\n" + "***** MPLOY JobId: " + activityRecord.idJob +
+                                //        " MPLOY ContactId: " + activityRecord.IdContact + " MPLOY JobFlowId: " +
+                                //        activityRecord.idJobFlow + " *****");
+                                //}
+
+
+
+
 
                                 //Get the Candidate Process Type Id from the Mploy eventType
                                 var workflowTypeIdCandidateProcessId =
                                     GetCandidateProcessTypeId(activityRecord.idEventType);
                                 //Get the Requirement Process Type Id from the Mploy eventType
-                                var workflowTypeIdReqProcessId = GetRequirementProcessWorkflowTypeId(activityRecord.idEventType);
+                                var workflowTypeIdReqProcessId =
+                                    GetRequirementProcessWorkflowTypeId(activityRecord.idEventType);
                                 //Get the Requirement Fulfillment Process Id from the Mploy eventType
                                 var workflowTypeIdReqFulfillProcessId =
                                     GetRequirementFulfillmentProcessWorkflowTypwId(activityRecord.idEventType);
-                                
+
                                 //Get the Workflow state id based on the above process given the mploy event type id:
-                                var candidateWorkflowStateId = GetStateId(activityRecord.idEventType, workflowTypeIdCandidateProcessId);
+                                var candidateWorkflowStateId = GetStateId(activityRecord.idEventType,
+                                    workflowTypeIdCandidateProcessId);
 
-                                var requirementWorkflowStateId = GetStateId(activityRecord.idEventType, workflowTypeIdReqProcessId);
+                                var requirementWorkflowStateId = GetStateId(activityRecord.idEventType,
+                                    workflowTypeIdReqProcessId);
 
-                                var reqFulfillmentStateId = GetStateId(activityRecord.idEventType, workflowTypeIdReqFulfillProcessId);
+                                var reqFulfillmentStateId = GetStateId(activityRecord.idEventType,
+                                    workflowTypeIdReqFulfillProcessId);
 
                                 //State Sub Id:
-                                var candidateSubId = GetWorkflowStateSubId(candidateWorkflowStateId, activityRecord.idEventType);
-                                
+                                var candidateSubId = GetWorkflowStateSubId(candidateWorkflowStateId,
+                                    activityRecord.idEventType);
+
                                 var requirementSubId = GetWorkflowStateSubId(requirementWorkflowStateId,
                                     activityRecord.idEventType);
-                               
+
                                 var reqFulfillmentSubId = GetWorkflowStateSubId(reqFulfillmentStateId,
                                     activityRecord.idEventType);
 
@@ -133,10 +146,10 @@ namespace ConsoleApplication1
                                 //Get the WorkflowState and SubState ids:
                                 //var workflowStateId = GetWorkflowStateId(activityRecord.idEventType);
                                 //var workflowStateSubId = GetWorkflowStateSubId(workflowStateId, activityRecord.idEventType);
-                                
+
                                 //var workflowTypeId = GetWorkflowTypeId(workflowStateId);
 
-                                    //Insert the WorkflowStateLog record: -> this is only dealing with the Candidates, Requirements, and RequirementCandidates.
+                                //Insert the WorkflowStateLog record: -> this is only dealing with the Candidates, Requirements, and RequirementCandidates.
                                 if (_candidateId != 0)
                                 {
 
@@ -147,7 +160,9 @@ namespace ConsoleApplication1
                                                 candidateWorkflowStateId, candidateSubId, reasonCode,
                                                 activityRecord.Created, null, 0, activityRecord.idJobFlow, _candidateId,
                                                 _requirementId, activityRecord.idUser);
-                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
+                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " +
+                                                        activityRecord.idJob + " Mploy idJobFlow: " +
+                                                        activityRecord.idJobFlow);
                                     }
 
                                     if (workflowTypeIdReqProcessId != null)
@@ -157,7 +172,9 @@ namespace ConsoleApplication1
                                                 requirementWorkflowStateId, requirementSubId, reasonCode,
                                                 activityRecord.Created, null, 0, activityRecord.idJobFlow, _candidateId,
                                                 _requirementId, activityRecord.idUser);
-                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
+                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " +
+                                                        activityRecord.idJob + " Mploy idJobFlow: " +
+                                                        activityRecord.idJobFlow);
                                     }
 
                                     if (workflowTypeIdReqFulfillProcessId != null)
@@ -167,12 +184,15 @@ namespace ConsoleApplication1
                                                 reqFulfillmentStateId, reqFulfillmentSubId, reasonCode,
                                                 activityRecord.Created, null, 0, activityRecord.idJobFlow, _candidateId,
                                                 _requirementId, activityRecord.idUser);
-                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
+                                        Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " +
+                                                        activityRecord.idJob + " Mploy idJobFlow: " +
+                                                        activityRecord.idJobFlow);
                                     }
                                     //var workflowStateLog = _db.InsertWorkflowStateLog(workflowTypeId, workflowStateId, workflowStateSubId, reasonCode, activityRecord.Created, null, 0, activityRecord.idJobFlow, _candidateId, _requirementId, activityRecord.idUser);
                                     //Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
-                                }                                                                    
-                           }                            
+                                }
+                            }
+                        }
                     }
                 }
                  catch
@@ -399,8 +419,21 @@ namespace ConsoleApplication1
                             break;
                     }
                     break;
-                case 140:
+
                 case 85:
+                    {
+                        switch (workflowTypeId)
+                        {
+                            case 2:
+                                workflowStateId = 9;
+                                break;
+                            case 3:
+                                workflowStateId = 44;
+                                break;
+                        }
+                        break;
+                    }
+                case 140:
                 case 108:
                 {
                     switch (workflowTypeId)
@@ -696,7 +729,7 @@ namespace ConsoleApplication1
                 case 85:
                     switch (workflowStateId)
                     {
-                        case 31:
+                        case 44:
                             workflowStateSubId = 8;
                             break;
                         case 9:

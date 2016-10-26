@@ -40,21 +40,24 @@ namespace ConsoleApplication1
                     
                     
                     //Reads from the mploy tbJobFlow table and inserts into the Intersect WorkflowStateLog table for each workflow process:
-                    //HiringActivityMigration.ImportHiringActivity();
+                    //WorkflowLogMigration.ImportHiringActivity();
                     
-
-                    //ACTIVITIES?  NOT YET IMPLEMENTED:
-                    //ContactLogMigration.ImportContactLog();
 
                     //SkillsMigration.SkillsImport();
 
                     //PersonSkillMigration.PersonSkillsImport();
+                    
                     //Adds a record to the PersonTypicalRole table after the PersonSkill table is populated:
                     //PersonTypicalRole.AddPersonTypicalRoleRecord();
 
 
                     //Inserts into the WorkflowStateLog table for each requirement in the Mploy.tbJob table so each Requirement has a workflow state.
                     //RequirementProcessWorkflow.ImportRequirementProcessWorkflow();
+
+                    //ACTIVITIES MIGRATION:
+                    //HiringActivitiesMigration.ImportHiringActivity();
+
+                    //ContactLogMigration.ImportContactLog();
 
                 }
                 catch

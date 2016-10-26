@@ -50,10 +50,11 @@
         <AssociationConnector Association="Model.FKCandidateSourceId" />
         <AssociationConnector Association="Model.FKCandidatetoTravel" />
         <AssociationConnector Association="Model.FKNoteCandidateId" />
-        <EntityTypeShape EntityType="Model.ActivityLog" Width="1.5" PointX="3" PointY="14.625" />
-        <AssociationConnector Association="Model.FK_ActivityLog_GlobalEntity" />
         <EntityTypeShape EntityType="Model.WorkflowStateLog" Width="1.5" PointX="3" PointY="10.5" />
         <AssociationConnector Association="Model.FK_WorkflowStateLog_GlobalEntity" />
+        <EntityTypeShape EntityType="Model.ActivityLog" Width="1.5" PointX="3.125" PointY="14.5" />
+        <AssociationConnector Association="Model.FK_ActivityLog_GlobalEntity" />
+        <AssociationConnector Association="Model.FK_Company_ParentCompanyId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -150,6 +150,7 @@ namespace ConsoleApplication1
 */
 
         private static Regex CleanMoneyString = new Regex(@"\.\d*|(\D)|\d*\s?\-");
+
         private static Regex FormateDate = new Regex(@"th");
 
         //Method to parse through the xml from the Mploy Candidate file.  
@@ -481,6 +482,7 @@ namespace ConsoleApplication1
             }
             return sourceTypeList;
         } 
+        
         //Function to lookup the SourceTypeId for the Candidate table from the SourceType table
         public static Candidate FindSourceType(Candidate insertCandidate, string source, List<KeyValuePair<int, string>> sourceTypeIdList)
         {
@@ -503,9 +505,5 @@ namespace ConsoleApplication1
             return insertCandidate;
         }
 
-        public static void FindOwnerId()
-        {
-            
-        }
     }
 }

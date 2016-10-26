@@ -111,6 +111,9 @@
     <Compile Include="GenderType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetCandidateOrCustomer_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetHiringActivityAssociation_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -122,7 +125,14 @@
     </Compile>
     <Compile Include="Helper\Catch.cs" />
     <Compile Include="Helper\Helper.cs" />
-    <Compile Include="HiringActivityMigration.cs" />
+    <Compile Include="HiringActivitiesMigration.cs" />
+    <Compile Include="InsertActivityLog_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsertCompany_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkflowLogMigration.cs" />
     <Compile Include="ImportHelperMethods.cs" />
     <Compile Include="InsertCandidate_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>

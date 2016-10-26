@@ -68,7 +68,8 @@ namespace ConsoleApplication1
                         
 
                         //If the Organization name is not null or empty, then insert the Org:
-                        if (!string.IsNullOrEmpty(orgRecord.Organization))
+                        //I AM SKIPPING AQYRETT BECAUSE THERE ARE 2 RECORDS FOR IT IN MPLOY.  I UPDATED THE RECORD IN INTERSECT TO CONTAIN THE DATA FROM BOTH MPLOY REOCRDS.
+                        if (!string.IsNullOrEmpty(orgRecord.Organization) && orgRecord.Organization != "AqyrEtt")
                         {
                             var companyInsertResult = _db.InsertCompany(orgRecord.Organization, companyTypeId, null, null, null, null, null, personIdFromUser, 0, Convert.ToInt32(orgRecord.idOrganization), idUser).ToList();
 
@@ -79,7 +80,7 @@ namespace ConsoleApplication1
 
                             }
 
-                            Debug.WriteLine("\n" + orgRecord.Organization);
+                            Debug.WriteLine("\n" + " Intersect Id: " + _companyId + ", Name: " + orgRecord.Organization);
 
                             //Call the function to insert the Company Mailing Address:
                             InsertCompanyMailingAddress(orgRecord);

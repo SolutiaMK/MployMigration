@@ -15,7 +15,8 @@
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="CreatedById" Type="int" Nullable="false" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Note" Type="varchar" MaxLength="1000" />
+          <Property Name="Note" Type="varchar(max)" />
+          <Property Name="Outcome" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -43,6 +44,7 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedById" Type="int" />
           <Property Name="MPLOY_OrganizationId" Type="int" />
+          <Property Name="CurrentAssignment" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="CandidateNote">
           <Key>
@@ -65,7 +67,9 @@
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="50" />
           <Property Name="State" Type="char" MaxLength="2" />
+          <Property Name="PreferredPhysicalAddressId" Type="int" />
           <Property Name="CompanyTypeId" Type="int" />
+          <Property Name="ParentCompanyId" Type="int" />
           <Property Name="IndustryId" Type="int" />
           <Property Name="RevenueSizeTypeId" Type="int" />
           <Property Name="EmployeeSizeTypeId" Type="int" />
@@ -262,6 +266,7 @@
           <Property Name="RequirementTypeId" Type="int" Nullable="false" />
           <Property Name="RequirementPriorityTypeId" Type="int" Nullable="false" />
           <Property Name="RequirementProjectTypeId" Type="int" Nullable="false" />
+          <Property Name="PreferredTypicalRoleId" Type="int" />
           <Property Name="TravelTypeId" Type="int" />
           <Property Name="MaxTravelTypeId" Type="int" />
           <Property Name="PaymentTermTypeId" Type="int" />
@@ -278,7 +283,6 @@
           <Property Name="IsDrugTestRequired" Type="bit" Nullable="false" />
           <Property Name="IsBackgroundCheckRequired" Type="bit" Nullable="false" />
           <Property Name="IsWorkFromHome" Type="bit" Nullable="false" />
-          <Property Name="PreferredTypicalRoleId" Type="int" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="ModifiedById" Type="int" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
@@ -365,6 +369,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Company_CompanyMailAddress' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Company_CompanyMailAddress" />-->
         <Association Name="FK_Company_GlobalEntity">
           <End Role="GlobalEntity" Type="Self.GlobalEntity" Multiplicity="1" />
           <End Role="Company" Type="Self.Company" Multiplicity="*" />
@@ -374,6 +381,18 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="GlobalEntityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_ParentCompanyId">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Company1" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company1">
+              <PropertyRef Name="ParentCompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -694,6 +713,9 @@
         <Function Name="FindRequirementInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="MPLOY_JobId" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetCandidateOrCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="currentContact" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetCompanyContactAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="currentContact" Type="int" Mode="In" />
         </Function>
@@ -702,6 +724,11 @@
         </Function>
         <Function Name="GetContactLogAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="currentContact" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetGlobalEntityIdForEntity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="RequirementId" Type="int" Mode="In" />
+          <Parameter Name="CandidateId" Type="int" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
         </Function>
         <Function Name="GetHiringActivityAssociation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="currentJobId" Type="int" Mode="In" />
@@ -713,6 +740,14 @@
         </Function>
         <Function Name="GetUserFromMployUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="MployUserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
+          <Parameter Name="GlobalEntityId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ActivityId" Type="int" Mode="In" />
+          <Parameter Name="CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="Note" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Outcome" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MPLOY_IdUser" Type="int" Mode="In" />
         </Function>
         <Function Name="InsertCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="MPLOY">
           <Parameter Name="PersonId" Type="int" Mode="In" />
@@ -1048,6 +1083,10 @@
             <End Role="GlobalEntity" EntitySet="GlobalEntity" />
             <End Role="Company" EntitySet="Company" />
           </AssociationSet>
+          <AssociationSet Name="FK_Company_ParentCompanyId" Association="Self.FK_Company_ParentCompanyId">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Company1" EntitySet="Company" />
+          </AssociationSet>
           <AssociationSet Name="FK_CompanyContactInformation_ContactInformationType" Association="Self.FK_CompanyContactInformation_ContactInformationType">
             <End Role="ContactInformationType" EntitySet="ContactInformationType" />
             <End Role="CompanyContactInformation" EntitySet="CompanyContactInformation" />
@@ -1260,28 +1299,12 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="CompanyMailAddress" EntitySet="CompanyMailAddresses" />
           </AssociationSet>
-          <FunctionImport Name="InsertUser" ReturnType="Collection(Int32)">
-            <Parameter Name="PersonId" Mode="In" Type="Int32" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="EmailAddress" Mode="In" Type="String" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="InsertCompanyContactInformation" ReturnType="Collection(Int32)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="ContactInformationTypeId" Mode="In" Type="Int32" />
             <Parameter Name="PhoneNumber" Mode="In" Type="String" />
             <Parameter Name="Fax" Mode="In" Type="String" />
             <Parameter Name="URL" Mode="In" Type="String" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="InsertCompanyMailingAddress" ReturnType="Collection(Int32)">
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="Line1" Mode="In" Type="String" />
-            <Parameter Name="City" Mode="In" Type="String" />
-            <Parameter Name="State" Mode="In" Type="String" />
-            <Parameter Name="Zip" Mode="In" Type="String" />
             <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertCompanyNote" ReturnType="Collection(Int32)">
@@ -1521,11 +1544,6 @@
             <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
             <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="ActivityLogs" EntityType="Model.ActivityLog" />
-          <AssociationSet Name="FK_ActivityLog_GlobalEntity" Association="Model.FK_ActivityLog_GlobalEntity">
-            <End Role="GlobalEntity" EntitySet="GlobalEntities" />
-            <End Role="ActivityLog" EntitySet="ActivityLogs" />
-          </AssociationSet>
           <EntitySet Name="WorkflowStateLogs" EntityType="Model.WorkflowStateLog" />
           <AssociationSet Name="FK_WorkflowStateLog_GlobalEntity" Association="Model.FK_WorkflowStateLog_GlobalEntity">
             <End Role="GlobalEntity" EntitySet="GlobalEntities" />
@@ -1559,19 +1577,6 @@
             <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
             <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="InsertWorkflowStateLog" ReturnType="Collection(Int32)">
-            <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
-            <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
-            <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
-            <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
-            <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-            <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
-            <Parameter Name="CandidateId" Mode="In" Type="Int32" />
-            <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="InsertRequirementProcessWorkflow" ReturnType="Collection(Model.InsertRequirementProcessWorkflow_Result)">
             <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
             <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
@@ -1591,19 +1596,6 @@
             <Parameter Name="InterestTypeId" Mode="In" Type="Int32" />
             <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="InsertCompany" ReturnType="Collection(Model.InsertCompany_Result)">
-            <Parameter Name="CompanyName" Mode="In" Type="String" />
-            <Parameter Name="CompanyTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="IndustryId" Mode="In" Type="Int32" />
-            <Parameter Name="RevenueSizeTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeSizeTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="BillingFrequencyTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="BillingMethodTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="SalesPersonId" Mode="In" Type="Int32" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-            <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
-            <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
@@ -1613,14 +1605,6 @@
           </FunctionImport>
           <FunctionImport Name="UpdatePersonPreferredData">
           <Parameter Name="Mploy_ContactId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
-            <Parameter Name="PersonId" Mode="In" Type="Int32" />
-            <Parameter Name="Line1" Mode="In" Type="String" />
-            <Parameter Name="City" Mode="In" Type="String" />
-            <Parameter Name="State" Mode="In" Type="String" />
-            <Parameter Name="Zip" Mode="In" Type="String" />
-            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertCustomerNote" ReturnType="Collection(Int32)">
             <Parameter Name="CustomerId" Mode="In" Type="Int32" />
@@ -1639,6 +1623,81 @@
             <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
             <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
             <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
+            <Parameter Name="PersonId" Mode="In" Type="Int32" />
+            <Parameter Name="Line1" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Zip" Mode="In" Type="String" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCompanyMailingAddress" ReturnType="Collection(Int32)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Line1" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Zip" Mode="In" Type="String" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertWorkflowStateLog" ReturnType="Collection(Int32)">
+            <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
+            <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
+            <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
+            <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
+            <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
+            <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+            <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCandidateOrCustomer" ReturnType="Collection(Model.GetCandidateOrCustomer_Result)">
+          <Parameter Name="currentContact" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetGlobalEntityIdForEntity" ReturnType="Collection(Guid)">
+            <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+            <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ActivityLogs" EntityType="Model.ActivityLog" />
+          <AssociationSet Name="FK_ActivityLog_GlobalEntity" Association="Model.FK_ActivityLog_GlobalEntity">
+            <End Role="GlobalEntity" EntitySet="GlobalEntities" />
+            <End Role="ActivityLog" EntitySet="ActivityLogs" />
+          </AssociationSet>
+          <FunctionImport Name="InsertActivityLog" ReturnType="Collection(Model.InsertActivityLog_Result)">
+            <Parameter Name="GlobalEntityId" Mode="In" Type="Guid" />
+            <Parameter Name="ActivityId" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Note" Mode="In" Type="String" />
+            <Parameter Name="Outcome" Mode="In" Type="String" />
+            <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Company_ParentCompanyId" Association="Model.FK_Company_ParentCompanyId">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Company1" EntitySet="Companies" />
+          </AssociationSet>
+          <FunctionImport Name="InsertUser" ReturnType="Collection(Int32)">
+            <Parameter Name="PersonId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCompany" ReturnType="Collection(Model.InsertCompany_Result1)">
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="CompanyTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="IndustryId" Mode="In" Type="Int32" />
+            <Parameter Name="RevenueSizeTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeSizeTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="BillingFrequencyTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="BillingMethodTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="SalesPersonId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+            <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+            <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="ReadSourceType_Result">
@@ -1687,8 +1746,8 @@
           <NavigationProperty Name="Companies" Relationship="Model.FK_Company_GlobalEntity" FromRole="GlobalEntity" ToRole="Company" />
           <NavigationProperty Name="Requirements" Relationship="Model.FK_Requirement_GlobalEntity" FromRole="GlobalEntity" ToRole="Requirement" />
           <NavigationProperty Name="Candidates" Relationship="Model.FK_Candidate_GlobalEntity" FromRole="GlobalEntity" ToRole="Candidate" />
-          <NavigationProperty Name="ActivityLogs" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="ActivityLog" />
           <NavigationProperty Name="WorkflowStateLogs" Relationship="Model.FK_WorkflowStateLog_GlobalEntity" FromRole="GlobalEntity" ToRole="WorkflowStateLog" />
+          <NavigationProperty Name="ActivityLogs" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="GlobalEntity" ToRole="ActivityLog" />
         </EntityType>
         <EntityType Name="MaxTravelType">
           <Key>
@@ -2105,6 +2164,10 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="PaymentTermTypeId" Type="Int32" />
+          <Property Name="PreferredPhysicalAddressId" Type="Int32" />
+          <Property Name="ParentCompanyId" Type="Int32" />
+          <NavigationProperty Name="Company1" Relationship="Model.FK_Company_ParentCompanyId" FromRole="Company" ToRole="Company1" />
+          <NavigationProperty Name="Company2" Relationship="Model.FK_Company_ParentCompanyId" FromRole="Company1" ToRole="Company" />
         </EntityType>
         <Association Name="CompanyContactCompany">
           <End Type="Model.Company" Role="Company" Multiplicity="1" />
@@ -2853,6 +2916,7 @@
           <NavigationProperty Name="SourceType" Relationship="Model.FKCandidateSourceId" FromRole="Candidate" ToRole="SourceType" />
           <NavigationProperty Name="MaxTravelType" Relationship="Model.FKCandidatetoTravel" FromRole="Candidate" ToRole="MaxTravelType" />
           <NavigationProperty Name="CandidateNotes" Relationship="Model.FKNoteCandidateId" FromRole="Candidate" ToRole="CandidateNote" />
+          <Property Name="CurrentAssignment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Candidate_GlobalEntity">
           <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
@@ -2911,31 +2975,6 @@
             </Principal>
             <Dependent Role="CandidateNote">
               <PropertyRef Name="CandidateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ActivityLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
-          <Property Name="ActivityId" Type="Int32" Nullable="false" />
-          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedById" Type="Int32" Nullable="false" />
-          <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="ActivityLog" ToRole="GlobalEntity" />
-        </EntityType>
-        <Association Name="FK_ActivityLog_GlobalEntity">
-          <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
-          <End Type="Model.ActivityLog" Role="ActivityLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GlobalEntity">
-              <PropertyRef Name="GlobalEntityId" />
-            </Principal>
-            <Dependent Role="ActivityLog">
-              <PropertyRef Name="GlobalEntityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3074,6 +3113,82 @@
           <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CreatedById" Nullable="true" />
           <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCandidateOrCustomer_Result">
+          <Property Type="Int32" Name="candidateId" Nullable="true" />
+          <Property Type="Int32" Name="customerId" Nullable="true" />
+          <Property Type="Int32" Name="personId" Nullable="true" />
+          <Property Type="String" Name="errorString" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GlobalEntityId" Type="Guid" Nullable="false" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedById" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Outcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GlobalEntity" Relationship="Model.FK_ActivityLog_GlobalEntity" FromRole="ActivityLog" ToRole="GlobalEntity" />
+        </EntityType>
+        <Association Name="FK_ActivityLog_GlobalEntity">
+          <End Type="Model.GlobalEntity" Role="GlobalEntity" Multiplicity="1" />
+          <End Type="Model.ActivityLog" Role="ActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GlobalEntity">
+              <PropertyRef Name="GlobalEntityId" />
+            </Principal>
+            <Dependent Role="ActivityLog">
+              <PropertyRef Name="GlobalEntityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="InsertActivityLog_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+          <Property Type="Int32" Name="ActivityId" Nullable="false" />
+          <Property Type="DateTime" Name="Timestamp" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="false" />
+          <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Note" Nullable="true" />
+          <Property Type="String" Name="Outcome" Nullable="true" />
+        </ComplexType>
+        <Association Name="FK_Company_ParentCompanyId">
+          <End Type="Model.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="Model.Company" Role="Company1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company1">
+              <PropertyRef Name="ParentCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="InsertCompany_Result1">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="PreferredPhysicalAddressId" Nullable="true" />
+          <Property Type="Int32" Name="CompanyTypeId" Nullable="true" />
+          <Property Type="Int32" Name="ParentCompanyId" Nullable="true" />
+          <Property Type="Int32" Name="IndustryId" Nullable="true" />
+          <Property Type="Int32" Name="RevenueSizeTypeId" Nullable="true" />
+          <Property Type="Int32" Name="EmployeeSizeTypeId" Nullable="true" />
+          <Property Type="Int32" Name="BillingFrequencyTypeId" Nullable="true" />
+          <Property Type="Int32" Name="BillingMethodTypeId" Nullable="true" />
+          <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedById" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+          <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3332,6 +3447,8 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="Model.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ParentCompanyId" ColumnName="ParentCompanyId" />
+                <ScalarProperty Name="PreferredPhysicalAddressId" ColumnName="PreferredPhysicalAddressId" />
                 <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -3353,9 +3470,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="Model.Store.InsertUser" />
           <FunctionImportMapping FunctionImportName="InsertCompanyContactInformation" FunctionName="Model.Store.InsertCompanyContactInformation" />
-          <FunctionImportMapping FunctionImportName="InsertCompanyMailingAddress" FunctionName="Model.Store.InsertCompanyMailingAddress" />
           <FunctionImportMapping FunctionImportName="InsertCompanyNote" FunctionName="Model.Store.InsertCompanyNote" />
           <FunctionImportMapping FunctionImportName="ReadCompanyType" FunctionName="Model.Store.ReadCompanyType">
             <ResultMapping>
@@ -3932,6 +4047,7 @@
           <EntitySetMapping Name="Candidates">
             <EntityTypeMapping TypeName="Model.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="CurrentAssignment" ColumnName="CurrentAssignment" />
                 <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
                 <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -3958,19 +4074,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="InsertRequirementCustomer" FunctionName="Model.Store.InsertRequirementCustomer" />
-          <EntitySetMapping Name="ActivityLogs">
-            <EntityTypeMapping TypeName="Model.ActivityLog">
-              <MappingFragment StoreEntitySet="ActivityLog">
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
-                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WorkflowStateLogs">
             <EntityTypeMapping TypeName="Model.WorkflowStateLog">
               <MappingFragment StoreEntitySet="WorkflowStateLog">
@@ -4049,7 +4152,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="InsertWorkflowStateLog" FunctionName="Model.Store.InsertWorkflowStateLog" />
           <FunctionImportMapping FunctionImportName="InsertRequirementProcessWorkflow" FunctionName="Model.Store.InsertRequirementProcessWorkflow">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model.InsertRequirementProcessWorkflow_Result">
@@ -4080,33 +4182,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="InsertCompany" FunctionName="Model.Store.InsertCompany">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.InsertCompany_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
-                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
-                <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
-                <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
-                <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
-                <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
-                <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
-                <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
-                <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertCompanyBranch" FunctionName="Model.Store.InsertCompanyBranch" />
           <FunctionImportMapping FunctionImportName="UpdatePersonPreferredData" FunctionName="Model.Store.UpdatePersonPreferredData" />
-          <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
           <FunctionImportMapping FunctionImportName="InsertCustomerNote" FunctionName="Model.Store.InsertCustomerNote" />
           <FunctionImportMapping FunctionImportName="InsertCustomer" FunctionName="Model.Store.InsertCustomer">
             <ResultMapping>
@@ -4125,6 +4202,75 @@
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
                 <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertPersonMailingAddress" FunctionName="Model.Store.InsertPersonMailingAddress" />
+          <FunctionImportMapping FunctionImportName="InsertCompanyMailingAddress" FunctionName="Model.Store.InsertCompanyMailingAddress" />
+          <FunctionImportMapping FunctionImportName="InsertWorkflowStateLog" FunctionName="Model.Store.InsertWorkflowStateLog" />
+          <FunctionImportMapping FunctionImportName="GetCandidateOrCustomer" FunctionName="Model.Store.GetCandidateOrCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetCandidateOrCustomer_Result">
+                <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+                <ScalarProperty Name="errorString" ColumnName="errorString" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGlobalEntityIdForEntity" FunctionName="Model.Store.GetGlobalEntityIdForEntity" />
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="Model.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLog">
+                <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertActivityLog" FunctionName="Model.Store.InsertActivityLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.InsertActivityLog_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="Model.Store.InsertUser" />
+          <FunctionImportMapping FunctionImportName="InsertCompany" FunctionName="Model.Store.InsertCompany">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.InsertCompany_Result1">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GlobalEntityId" ColumnName="GlobalEntityId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PreferredPhysicalAddressId" ColumnName="PreferredPhysicalAddressId" />
+                <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+                <ScalarProperty Name="ParentCompanyId" ColumnName="ParentCompanyId" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="RevenueSizeTypeId" ColumnName="RevenueSizeTypeId" />
+                <ScalarProperty Name="EmployeeSizeTypeId" ColumnName="EmployeeSizeTypeId" />
+                <ScalarProperty Name="BillingFrequencyTypeId" ColumnName="BillingFrequencyTypeId" />
+                <ScalarProperty Name="BillingMethodTypeId" ColumnName="BillingMethodTypeId" />
+                <ScalarProperty Name="PaymentTermTypeId" ColumnName="PaymentTermTypeId" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ModifiedById" ColumnName="ModifiedById" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="MPLOY_OrganizationId" ColumnName="MPLOY_OrganizationId" />
+                <ScalarProperty Name="MPLOY_IdUser" ColumnName="MPLOY_IdUser" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -41,6 +41,7 @@ namespace ConsoleApplication1
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_OrganizationId { get; set; }
+        public string CurrentAssignment { get; set; }
     
         public virtual GlobalEntity GlobalEntity { get; set; }
         public virtual Person Person { get; set; }

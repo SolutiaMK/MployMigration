@@ -10,9 +10,8 @@
 namespace ConsoleApplication1
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ActivityLog
+    public partial class InsertActivityLog_Result
     {
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
@@ -22,7 +21,5 @@ namespace ConsoleApplication1
         public string CreatedByName { get; set; }
         public string Note { get; set; }
         public string Outcome { get; set; }
-    
-        public virtual GlobalEntity GlobalEntity { get; set; }
     }
 }
