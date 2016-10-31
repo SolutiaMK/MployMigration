@@ -39,8 +39,8 @@ namespace ConsoleApplication1
                     foreach (var activityRecord in hiringActivityData)//.Where(x => x.idJob == 3092)
                     {
                         //TESTING:
-                        if (activityRecord.idJobFlow == 6383)
-                        {
+                        //if (activityRecord.idJobFlow == 6383)
+                        //{
                             //Get the Candidate and Requirement Id for the incoming MPLOY Contact and Job Id:
                             //Set the _candidateId and _requirementId here:
                             var returnedIds = _db.GetHiringActivityAssociation(activityRecord.idJob,
@@ -192,7 +192,7 @@ namespace ConsoleApplication1
                                     //Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Mploy Job Id: " + activityRecord.idJob + " Mploy idJobFlow: " + activityRecord.idJobFlow);
                                 }
                             }
-                        }
+                        //}
                     }
                 }
                  catch

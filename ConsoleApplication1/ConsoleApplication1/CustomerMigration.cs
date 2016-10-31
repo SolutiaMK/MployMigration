@@ -72,10 +72,18 @@ namespace ConsoleApplication1
                         if (contactRecord.IdContactType == 1 && contactRecord.IdOrganization != 0 &&
                             contactRecord.IdOrganization != 4)
                         {
-                            //if (contactRecord.IdContact == 21119)
+                            //TESTING
+                            //if (contactRecord.LastName == "Centers")
                             //{
-                                
-                            
+                            //    int i = 0;
+
+                            //}
+
+                            //IF THE COMPANY IS 2446, then associate to the AqyrEtt id in Intersect (2436) 
+                            if (contactRecord.IdOrganization == 2446)
+                            {
+                                contactRecord.IdOrganization = 2436;
+                            }
 
                             //Get the Contacts with the typeId = 1 that have hiring activities:
 
@@ -189,9 +197,9 @@ namespace ConsoleApplication1
                             _db.UpdatePersonPreferredData(contactRecord.IdContact);
 
                             Debug.WriteLine("\n" + "Person imported: " + _personId + " " + contactRecord.FirstName + " " +
-                                            contactRecord.LastName + " Customer Id: " + _customerId);
+                                            contactRecord.LastName + " Customer Id: " + _customerId + " Mploy Id: " + contactRecord.IdContact);
 
-                            //}
+                            
                         }
                         else
                         {

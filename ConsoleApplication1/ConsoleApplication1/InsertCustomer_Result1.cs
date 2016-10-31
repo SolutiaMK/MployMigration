@@ -11,30 +11,21 @@ namespace ConsoleApplication1
 {
     using System;
     
-    public partial class InsertCandidate_Result
+    public partial class InsertCustomer_Result1
     {
         public int Id { get; set; }
         public System.Guid GlobalEntityId { get; set; }
+        public int CompanyId { get; set; }
         public int PersonId { get; set; }
-        public Nullable<int> CandidateStatusTypeId { get; set; }
-        public Nullable<int> DesiredEmploymentTypeId { get; set; }
-        public Nullable<int> CurrentEmploymentTypeId { get; set; }
-        public Nullable<int> TravelTypeId { get; set; }
         public Nullable<int> SourceTypeId { get; set; }
-        public Nullable<int> MaxTravelTypeId { get; set; }
-        public Nullable<System.DateTime> AvailableDate { get; set; }
+        public Nullable<int> CustomerTypeId { get; set; }
+        public string Title { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<int> CurrentSalary { get; set; }
-        public Nullable<int> DesiredSalary { get; set; }
-        public Nullable<int> CurrentRate { get; set; }
-        public Nullable<int> DesiredRate { get; set; }
-        public Nullable<int> ReferralId { get; set; }
-        public Nullable<bool> IsOpenToRelocation { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public System.DateTime LastUpdated { get; set; }
         public Nullable<int> ModifiedById { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<int> CreatedById { get; set; }
         public Nullable<int> MPLOY_OrganizationId { get; set; }
-        public string CurrentAssignment { get; set; }
     }
 }

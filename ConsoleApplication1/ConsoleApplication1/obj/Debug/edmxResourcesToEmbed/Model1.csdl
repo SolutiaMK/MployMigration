@@ -147,17 +147,6 @@
     <FunctionImport Name="FindRequirementInfo" ReturnType="Collection(Model.FindRequirementInfo_Result1)">
       <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="ReadPerson" ReturnType="Collection(Model.ReadPerson_Result)" />
-    <FunctionImport Name="InsertPerson" ReturnType="Collection(Int32)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="FirstName" Mode="In" Type="String" />
-      <Parameter Name="LastName" Mode="In" Type="String" />
-      <Parameter Name="GenderTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="ReadtbJobLog" ReturnType="Collection(Model.ReadtbJobLog_Result)" />
     <FunctionImport Name="GetHiringActivityAssociation" ReturnType="Collection(Model.GetHiringActivityAssociation_Result)">
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
@@ -184,8 +173,6 @@
     </FunctionImport>
     <FunctionImport Name="ReadUser" ReturnType="Collection(Model.ReadUser_Result)" />
     <FunctionImport Name="ReadOrganization" ReturnType="Collection(Model.ReadOrganization_Result)" />
-    <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result)" />
-    <FunctionImport Name="ReadJob" ReturnType="Collection(Model.ReadJob_Result)" />
     <FunctionImport Name="GetRequirementContactAssociation" ReturnType="Collection(Model.GetRequirementContactAssociation_Result)">
       <Parameter Name="currentJobId" Mode="In" Type="Int32" />
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
@@ -206,13 +193,6 @@
       <Parameter Name="MPLOY_SkillId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="ReadContactLog" ReturnType="Collection(Model.ReadContactLog_Result)" />
-    <FunctionImport Name="InsertPersonSkill" ReturnType="Collection(Model.InsertPersonSkill_Result)">
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_SkillId" Mode="In" Type="Int32" />
-      <Parameter Name="ExpertiseLevelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="ExperienceInMonths" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="ReadContactSkill" ReturnType="Collection(Model.ReadContactSkill_Result)" />
     <FunctionImport Name="ReadIntersectSkillCategoryMapping" ReturnType="Collection(Model.ReadIntersectSkillCategoryMapping_Result)" />
     <EntitySet Name="Requirements" EntityType="Model.Requirement" />
@@ -232,41 +212,6 @@
       <End Role="Requirement" EntitySet="Requirements" />
       <End Role="RequirementNote" EntitySet="RequirementNotes" />
     </AssociationSet>
-    <FunctionImport Name="InsertRequirement" ReturnType="Collection(Model.InsertRequirement_Result)">
-      <Parameter Name="Name" Mode="In" Type="String" />
-      <Parameter Name="Description" Mode="In" Type="String" />
-      <Parameter Name="VMSField" Mode="In" Type="String" />
-      <Parameter Name="RequirementTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementPriorityTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementProjectTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="City" Mode="In" Type="String" />
-      <Parameter Name="State" Mode="In" Type="String" />
-      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="PaymentTermTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="PostingDate" Mode="In" Type="DateTime" />
-      <Parameter Name="DesiredStartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ClosedDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MinRate" Mode="In" Type="Int32" />
-      <Parameter Name="MaxRate" Mode="In" Type="Int32" />
-      <Parameter Name="Budget" Mode="In" Type="Int32" />
-      <Parameter Name="Duration" Mode="In" Type="Int32" />
-      <Parameter Name="ContractDetails" Mode="In" Type="String" />
-      <Parameter Name="IsTravelRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsDrugTestRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsBackgroundCheckRequired" Mode="In" Type="Boolean" />
-      <Parameter Name="IsWorkFromHome" Mode="In" Type="Boolean" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserFilled" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserClosed" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
-    </FunctionImport>
     <EntitySet Name="People" EntityType="Model.Person" />
     <AssociationSet Name="FK_Customer_Person" Association="Model.FK_Customer_Person">
       <End Role="Person" EntitySet="People" />
@@ -344,66 +289,12 @@
       <End Role="Candidate" EntitySet="Candidates" />
       <End Role="CandidateNote" EntitySet="CandidateNotes" />
     </AssociationSet>
-    <FunctionImport Name="InsertRequirementCustomer" ReturnType="Collection(Int32)">
-      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
-      <Parameter Name="IsPrimaryContact" Mode="In" Type="Boolean" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <EntitySet Name="WorkflowStateLogs" EntityType="Model.WorkflowStateLog" />
     <AssociationSet Name="FK_WorkflowStateLog_GlobalEntity" Association="Model.FK_WorkflowStateLog_GlobalEntity">
       <End Role="GlobalEntity" EntitySet="GlobalEntities" />
       <End Role="WorkflowStateLog" EntitySet="WorkflowStateLogs" />
     </AssociationSet>
-    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Model.InsertRequirementCandidate_Result)">
-      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="ReadtbJobFlow" ReturnType="Collection(Model.ReadtbJobFlow_Result)" />
-    <FunctionImport Name="InsertCandidate" ReturnType="Collection(Model.InsertCandidate_Result)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
-      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
-      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
-      <Parameter Name="ReferralId" Mode="In" Type="Int32" />
-      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertRequirementProcessWorkflow" ReturnType="Collection(Model.InsertRequirementProcessWorkflow_Result)">
-      <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
-      <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
-      <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
-      <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
-      <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_ClosedDate" Mode="In" Type="DateTime" />
-      <Parameter Name="MPLOY_IdJob" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertPersonTypicalRole" ReturnType="Collection(Model.InsertPersonTypicalRole_Result)">
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="TypicalRoleId" Mode="In" Type="Int32" />
-      <Parameter Name="InterestTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="InsertCompanyBranch" ReturnType="Collection(Int32)">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
       <Parameter Name="BranchId" Mode="In" Type="Int32" />
@@ -419,18 +310,6 @@
       <Parameter Name="Note" Mode="In" Type="String" />
       <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result)">
-      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-      <Parameter Name="PersonId" Mode="In" Type="Int32" />
-      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="CustomerTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="Title" Mode="In" Type="String" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="InsertPersonMailingAddress" ReturnType="Collection(Int32)">
       <Parameter Name="PersonId" Mode="In" Type="Int32" />
@@ -448,19 +327,6 @@
       <Parameter Name="Zip" Mode="In" Type="String" />
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="InsertWorkflowStateLog" ReturnType="Collection(Int32)">
-      <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
-      <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
-      <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
-      <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
-      <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
-      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
-      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
-      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
-      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="GetCandidateOrCustomer" ReturnType="Collection(Model.GetCandidateOrCustomer_Result)">
       <Parameter Name="currentContact" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -474,14 +340,6 @@
       <End Role="GlobalEntity" EntitySet="GlobalEntities" />
       <End Role="ActivityLog" EntitySet="ActivityLogs" />
     </AssociationSet>
-    <FunctionImport Name="InsertActivityLog" ReturnType="Collection(Model.InsertActivityLog_Result)">
-      <Parameter Name="GlobalEntityId" Mode="In" Type="Guid" />
-      <Parameter Name="ActivityId" Mode="In" Type="Int32" />
-      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
-      <Parameter Name="Note" Mode="In" Type="String" />
-      <Parameter Name="Outcome" Mode="In" Type="String" />
-      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
-    </FunctionImport>
     <AssociationSet Name="FK_Company_ParentCompanyId" Association="Model.FK_Company_ParentCompanyId">
       <End Role="Company" EntitySet="Companies" />
       <End Role="Company1" EntitySet="Companies" />
@@ -506,6 +364,148 @@
       <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
       <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
       <Parameter Name="MployIdUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertCustomer" ReturnType="Collection(Model.InsertCustomer_Result1)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MployOrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPerson" ReturnType="Collection(Int32)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="GenderTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadContact" ReturnType="Collection(Model.ReadContact_Result)" />
+    <FunctionImport Name="InsertCandidate" ReturnType="Collection(Model.InsertCandidate_Result)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateStatusTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentEmploymentTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="SourceTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="AvailableDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CurrentSalary" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredSalary" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentRate" Mode="In" Type="Int32" />
+      <Parameter Name="DesiredRate" Mode="In" Type="Int32" />
+      <Parameter Name="ReferralId" Mode="In" Type="Int32" />
+      <Parameter Name="IsOpenToRelocation" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_OrganizationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadPerson" ReturnType="Collection(Model.ReadPerson_Result)" />
+    <FunctionImport Name="InsertRequirement" ReturnType="Collection(Model.InsertRequirement_Result)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="VMSField" Mode="In" Type="String" />
+      <Parameter Name="RequirementTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementPriorityTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementProjectTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="State" Mode="In" Type="String" />
+      <Parameter Name="TravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="MaxTravelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentTermTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="PostingDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DesiredStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ClosedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MinRate" Mode="In" Type="Int32" />
+      <Parameter Name="MaxRate" Mode="In" Type="Int32" />
+      <Parameter Name="Budget" Mode="In" Type="Int32" />
+      <Parameter Name="Duration" Mode="In" Type="Int32" />
+      <Parameter Name="ContractDetails" Mode="In" Type="String" />
+      <Parameter Name="IsTravelRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsDrugTestRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsBackgroundCheckRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="IsWorkFromHome" Mode="In" Type="Boolean" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_JobId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserFilled" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserClosed" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUserRecruiter" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ReadJob" ReturnType="Collection(Model.ReadJob_Result)" />
+    <FunctionImport Name="InsertRequirementCustomer" ReturnType="Collection(Int32)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="IsPrimaryContact" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertWorkflowStateLog" ReturnType="Collection(Int32)">
+      <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
+      <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
+      <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertRequirementCandidate" ReturnType="Collection(Model.InsertRequirementCandidate_Result)">
+      <Parameter Name="RequirementId" Mode="In" Type="Int32" />
+      <Parameter Name="CandidateId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonSkill" ReturnType="Collection(Model.InsertPersonSkill_Result1)">
+      <Parameter Name="MPLOY_ContactId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_SkillId" Mode="In" Type="Int32" />
+      <Parameter Name="ExpertiseLevelTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ExperienceInMonths" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertPersonTypicalRole" ReturnType="Collection(Model.InsertPersonTypicalRole_Result)">
+      <Parameter Name="PersonId" Mode="In" Type="Int32" />
+      <Parameter Name="TypicalRoleId" Mode="In" Type="Int32" />
+      <Parameter Name="InterestTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertRequirementProcessWorkflow" ReturnType="Collection(Model.InsertRequirementProcessWorkflow_Result)">
+      <Parameter Name="WorkflowTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkflowStateSubId" Mode="In" Type="Int32" />
+      <Parameter Name="ReasonCode" Mode="In" Type="Int32" />
+      <Parameter Name="TimeStampBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="TimeStampEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedById" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_IdJobFlow" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_UserId" Mode="In" Type="Int32" />
+      <Parameter Name="MPLOY_ClosedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MPLOY_IdJob" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertActivityLog" ReturnType="Collection(Model.InsertActivityLog_Result)">
+      <Parameter Name="GlobalEntityId" Mode="In" Type="Guid" />
+      <Parameter Name="ActivityId" Mode="In" Type="Int32" />
+      <Parameter Name="CreateDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="Outcome" Mode="In" Type="String" />
+      <Parameter Name="MPLOY_IdUser" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ReadSourceType_Result">
@@ -1130,42 +1130,6 @@
     <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="ReadPerson_Result">
-    <Property Type="Int32" Name="idContact" Nullable="false" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
-    <Property Type="Int32" Name="idOrganization" Nullable="true" />
-    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="idContactType" Nullable="false" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
-    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
-    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
-    <Property Type="Guid" Name="guid" Nullable="false" />
-    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
-    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle1type" Nullable="true" />
-    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle2type" Nullable="true" />
-    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle3type" Nullable="true" />
-    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle0type" Nullable="true" />
-    <Property Type="Int32" Name="IdSource" Nullable="true" />
-    <Property Type="Int32" Name="IdStatus" Nullable="false" />
-    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
-    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadtbJobLog_Result">
     <Property Type="Int32" Name="idJobLog" Nullable="false" />
     <Property Type="Int32" Name="idJob" Nullable="false" />
@@ -1314,69 +1278,6 @@
     <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="idbranch" Nullable="true" />
     <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-  </ComplexType>
-  <ComplexType Name="ReadContact_Result">
-    <Property Type="Int32" Name="idContact" Nullable="false" />
-    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
-    <Property Type="Int32" Name="idOrganization" Nullable="true" />
-    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="idContactType" Nullable="false" />
-    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
-    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
-    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
-    <Property Type="Guid" Name="guid" Nullable="false" />
-    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
-    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle1type" Nullable="true" />
-    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle2type" Nullable="true" />
-    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle3type" Nullable="true" />
-    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
-    <Property Type="Int32" Name="handle0type" Nullable="true" />
-    <Property Type="Int32" Name="IdSource" Nullable="true" />
-    <Property Type="Int32" Name="IdStatus" Nullable="false" />
-    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
-    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="INTERSECT_GenderTypeId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="ReadJob_Result">
-    <Property Type="Int32" Name="idJob" Nullable="false" />
-    <Property Type="String" Name="PositionTitle" Nullable="false" MaxLength="100" />
-    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="Closed" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="iduser" Nullable="false" />
-    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
-    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
-    <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
-    <Property Type="Int32" Name="idJobType" Nullable="false" />
-    <Property Type="Int32" Name="idUserClosed" Nullable="true" />
-    <Property Type="Int32" Name="idUserFilled" Nullable="true" />
-    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="Priority" Nullable="true" />
-    <Property Type="String" Name="XData" Nullable="true" MaxLength="Max" />
-    <Property Type="Int32" Name="idContactManager" Nullable="true" />
-    <Property Type="String" Name="ClosedReason" Nullable="true" MaxLength="Max" />
-    <Property Type="Int32" Name="idUserRecruiter" Nullable="true" />
-    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="ThankYou" Nullable="true" />
   </ComplexType>
   <ComplexType Name="GetRequirementContactAssociation_Result">
     <Property Type="Int32" Name="jobId" Nullable="true" />
@@ -1538,45 +1439,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertRequirement_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-    <Property Type="Int32" Name="PrimaryCustomerId" Nullable="true" />
-    <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="PostingDate" Nullable="false" />
-    <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="DateTime" Name="EndDate" Nullable="true" />
-    <Property Type="Int32" Name="MinRate" Nullable="true" />
-    <Property Type="Int32" Name="MaxRate" Nullable="true" />
-    <Property Type="Int32" Name="Budget" Nullable="true" />
-    <Property Type="Int32" Name="Duration" Nullable="true" />
-    <Property Type="String" Name="ContractDetails" Nullable="true" />
-    <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
-    <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
-    <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
-  </ComplexType>
   <EntityType Name="Person">
     <Key>
       <PropertyRef Name="Id" />
@@ -1814,16 +1676,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertRequirementCandidate_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="RequirementId" Nullable="false" />
-    <Property Type="Int32" Name="CandidateId" Nullable="false" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="ReadtbJobFlow_Result">
     <Property Type="Int32" Name="idJobFlow" Nullable="false" />
     <Property Type="Int32" Name="idJob" Nullable="false" />
@@ -1839,52 +1691,6 @@
     <Property Type="Guid" Name="guid" Nullable="false" />
     <Property Type="DateTime" Name="enddate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="IdContact" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="InsertCandidate_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
-    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
-    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
-    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
-    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
-    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
-    <Property Type="DateTime" Name="StartDate" Nullable="true" />
-    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
-    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
-    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
-    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
-    <Property Type="Int32" Name="ReferralId" Nullable="true" />
-    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertRequirementProcessWorkflow_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="WorkflowStateId" Nullable="false" />
-    <Property Type="Int32" Name="WorkflowStateSubId" Nullable="true" />
-    <Property Type="Int32" Name="ReasonCodeId" Nullable="true" />
-    <Property Type="DateTime" Name="TimestampBegin" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="TimestampEnd" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
-    <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="MPLOY_IdJobFlow" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="InsertPersonTypicalRole_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int32" Name="PersonId" Nullable="false" />
-    <Property Type="Int32" Name="TypicalRoleId" Nullable="false" />
-    <Property Type="Int32" Name="InterestLevelTypeId" Nullable="false" />
-    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="true" />
   </ComplexType>
   <ComplexType Name="InsertCompany_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1954,16 +1760,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="InsertActivityLog_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
-    <Property Type="Int32" Name="ActivityId" Nullable="false" />
-    <Property Type="DateTime" Name="Timestamp" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="CreatedById" Nullable="false" />
-    <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Note" Nullable="true" />
-    <Property Type="String" Name="Outcome" Nullable="true" />
-  </ComplexType>
   <Association Name="FK_Company_ParentCompanyId">
     <End Type="Model.Company" Role="Company" Multiplicity="0..1" />
     <End Type="Model.Company" Role="Company1" Multiplicity="*" />
@@ -1997,5 +1793,236 @@
     <Property Type="Int32" Name="CreatedById" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
     <Property Type="Int32" Name="MPLOY_IdUser" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertCustomer_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="CompanyId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CustomerTypeId" Nullable="true" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadContact_Result">
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idOrganization" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idContactType" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle1type" Nullable="true" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle2type" Nullable="true" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle3type" Nullable="true" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle0type" Nullable="true" />
+    <Property Type="Int32" Name="IdSource" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="InsertCandidate_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateStatusTypeId" Nullable="true" />
+    <Property Type="Int32" Name="DesiredEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="CurrentEmploymentTypeId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="SourceTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="AvailableDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Int32" Name="CurrentSalary" Nullable="true" />
+    <Property Type="Int32" Name="DesiredSalary" Nullable="true" />
+    <Property Type="Int32" Name="CurrentRate" Nullable="true" />
+    <Property Type="Int32" Name="DesiredRate" Nullable="true" />
+    <Property Type="Int32" Name="ReferralId" Nullable="true" />
+    <Property Type="Boolean" Name="IsOpenToRelocation" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_OrganizationId" Nullable="true" />
+    <Property Type="String" Name="CurrentAssignment" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ReadPerson_Result">
+    <Property Type="Int32" Name="idContact" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="eMail" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idOrganization" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="idContactType" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="idUserOwner" Nullable="true" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Xdata" Nullable="true" MaxLength="Max" />
+    <Property Type="Guid" Name="guid" Nullable="false" />
+    <Property Type="String" Name="password" Nullable="true" MaxLength="12" />
+    <Property Type="String" Name="handle1text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle1type" Nullable="true" />
+    <Property Type="String" Name="handle2text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle2type" Nullable="true" />
+    <Property Type="String" Name="handle3text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle3type" Nullable="true" />
+    <Property Type="String" Name="handle0text" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="handle0type" Nullable="true" />
+    <Property Type="Int32" Name="IdSource" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="String" Name="ResumeText" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SelfId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="InsertRequirement_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="VMSField" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="PrimaryCustomerId" Nullable="true" />
+    <Property Type="Int32" Name="RequirementTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementPriorityTypeId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementProjectTypeId" Nullable="false" />
+    <Property Type="Int32" Name="PreferredTypicalRoleId" Nullable="true" />
+    <Property Type="Int32" Name="TravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MaxTravelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="PaymentTermTypeId" Nullable="true" />
+    <Property Type="DateTime" Name="PostingDate" Nullable="false" />
+    <Property Type="DateTime" Name="DesiredStartDate" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" />
+    <Property Type="Int32" Name="MinRate" Nullable="true" />
+    <Property Type="Int32" Name="MaxRate" Nullable="true" />
+    <Property Type="Int32" Name="Budget" Nullable="true" />
+    <Property Type="Int32" Name="Duration" Nullable="true" />
+    <Property Type="String" Name="ContractDetails" Nullable="true" />
+    <Property Type="Boolean" Name="IsTravelRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsDrugTestRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsBackgroundCheckRequired" Nullable="false" />
+    <Property Type="Boolean" Name="IsWorkFromHome" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_JobId" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_ContactId" Nullable="true" />
+    <Property Type="DateTime" Name="ClosedDate" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserClosed" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserFilled" Nullable="true" />
+    <Property Type="Int32" Name="MPLOY_IdUserRecruiter" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ReadJob_Result">
+    <Property Type="Int32" Name="idJob" Nullable="false" />
+    <Property Type="String" Name="PositionTitle" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Closed" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="iduser" Nullable="false" />
+    <Property Type="String" Name="RequirementNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Zip" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="StartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="InternalNote" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idJobType" Nullable="false" />
+    <Property Type="Int32" Name="idUserClosed" Nullable="true" />
+    <Property Type="Int32" Name="idUserFilled" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Priority" Nullable="true" />
+    <Property Type="String" Name="XData" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idContactManager" Nullable="true" />
+    <Property Type="String" Name="ClosedReason" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="idUserRecruiter" Nullable="true" />
+    <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ThankYou" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertRequirementCandidate_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="RequirementId" Nullable="false" />
+    <Property Type="Int32" Name="CandidateId" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertPersonSkill_Result1">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="SkillId" Nullable="false" />
+    <Property Type="Int32" Name="ExpertiseLevelTypeId" Nullable="true" />
+    <Property Type="Int32" Name="ExperienceInMonths" Nullable="true" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertPersonTypicalRole_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="TypicalRoleId" Nullable="false" />
+    <Property Type="Int32" Name="InterestLevelTypeId" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ModifiedById" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertRequirementProcessWorkflow_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="WorkflowStateId" Nullable="false" />
+    <Property Type="Int32" Name="WorkflowStateSubId" Nullable="true" />
+    <Property Type="Int32" Name="ReasonCodeId" Nullable="true" />
+    <Property Type="DateTime" Name="TimestampBegin" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="TimestampEnd" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="true" />
+    <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MPLOY_IdJobFlow" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="InsertActivityLog_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="GlobalEntityId" Nullable="false" />
+    <Property Type="Int32" Name="ActivityId" Nullable="false" />
+    <Property Type="DateTime" Name="Timestamp" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedById" Nullable="false" />
+    <Property Type="String" Name="CreatedByName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="String" Name="Outcome" Nullable="true" />
   </ComplexType>
 </Schema>

@@ -76,20 +76,31 @@ namespace ConsoleApplication1
 
                                 Guid? globalEntityId = getGlobalEntityIdResult[0];
 
-                                //Only append the "Note:" & "Outcome:" when that filed has data.
-                                //If the Note and Outcome fields are both blank, do not insert.
+
+                                //Create the note to insert.  Take the Note and outcome fields from mploy and append them to create the whole note to insert into intersect:
+                                var noteAndOutcomeString = String.Empty;
+
+                                if (!string.IsNullOrEmpty(activityRecord.Note))
+                                {
+                                    noteAndOutcomeString += "Note: " + activityRecord.Note;
+                                }
+
+                                if (!string.IsNullOrEmpty(activityRecord.Outcome))
+                                {
+                                    noteAndOutcomeString += " Outcome: " + activityRecord.Outcome;
+                                }
                                 //if (!string.IsNullOrEmpty(activityRecord.Note) || !string.IsNullOrEmpty(activityRecord.Outcome))
                                 //{
-                                //    //Create the note to insert.  Take the Note and outcome fields from mploy and append them to create the whole note to insert into intersect:
-                                //    var noteAndOutcomeString = "Note: " + activityRecord.Note + " Outcome: " +
-                                //                               activityRecord.Outcome;
+
+                                //var noteAndOutcomeString = "Note: " + activityRecord.Note + " Outcome: " +
+                                                          // activityRecord.Outcome;
 
                                     //If the returned activity type id is NOT -1, then insert into the activityLog table. If it IS -1, then don't insert because something is wrong.
                                     if (activityId != -1)
                                     {
                                         //Insert the ActivityLog record here:
                                         var insertedActivityLogId = _db.InsertActivityLog(globalEntityId, activityId, activityRecord.Created,
-                                            null, null, activityRecord.idUser);
+                                            noteAndOutcomeString, null, activityRecord.idUser);
 
                                         Debug.WriteLine("\n" + "Requirement Id: " + _requirementId + " Candidate Id: " + _candidateId + " Global Entity Id: " + globalEntityId);
                                     }

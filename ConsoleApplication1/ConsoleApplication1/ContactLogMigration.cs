@@ -35,8 +35,8 @@ namespace ConsoleApplication1
                     {
                         //For each contact log record, get the needed values and insert into the SalesRecruitingActivityLog table:
 
-                        if (contactLogRecord.idLog >= 34631)
-                        {
+                        //if (contactLogRecord.idLog >= 34648)
+                        //{
                                      
                             _mployIdLog = contactLogRecord.idLog;
 
@@ -78,10 +78,18 @@ namespace ConsoleApplication1
                                     //If the Note field is blank, do not insert.
                                     //if (!string.IsNullOrEmpty(contactLogRecord.Note))
                                     //{                                  
-                                        //Insert the ActivityLog record here:
-                                        var insertedActivityLogId = _db.InsertActivityLog(globalEntityId, activityId, contactLogRecord.created,
-                                            null, null, contactLogRecord.idUser);
-                                        Debug.WriteLine("\n" + " Candidate Id: " + _candidateId + " Global Entity Id: " + globalEntityId + " Mploy Contact Log Id: " + contactLogRecord.idLog);
+                                    //Create the note to insert.  Take the Note and outcome fields from mploy and append them to create the whole note to insert into intersect:
+                                    var noteAndOutcomeString = String.Empty;
+
+                                    if (!string.IsNullOrEmpty(contactLogRecord.Note))
+                                    {
+                                        noteAndOutcomeString += "Note: " + contactLogRecord.Note;
+                                    }
+
+                                    //Insert the ActivityLog record here:
+                                    var insertedActivityLogId = _db.InsertActivityLog(globalEntityId, activityId, contactLogRecord.created,
+                                        noteAndOutcomeString, null, contactLogRecord.idUser);
+                                    Debug.WriteLine("\n" + " Candidate Id: " + _candidateId + " Global Entity Id: " + globalEntityId + " Mploy Contact Log Id: " + contactLogRecord.idLog);
                                     //}
                                     if (activityId == -1)
                                     {
@@ -90,30 +98,54 @@ namespace ConsoleApplication1
 
                                 }
 
+                                /*******
+                                 * For right now, only import the Candidate contact log info.  
+                                 * There are no Customer activities in the Activity table in the Intersect DB yet.
+                                 * These Customer Activities will need to be decided on and added to the Activity table before we can import the Customer contact log data from Mploy.
+                                 * 
+                                 *DEVELOPERS NOTE:
+                                 *  AFTER the activities have been added to the activity table, the function 'GetActivityId' below will need to have those new Activity Id's added to the mapping.
+                                 *  Look at that function for further explanation.
+                                 */
+
                                 //If the current record is dealing with a Customer:
                                 //if (_customerId != 0)
                                 //{
-                                //    //*************************** Only migrate the Candidates for now ************************
-
 
                                 //    //Entity type, Customer = 1:
                                 //    var entityTypeId = 1;
                                 //    //Get the activity id for the job flow record based on the event type id on the mploy table:
                                 //    var activityId = GetActivityId(contactLogRecord.idLogType, entityTypeId);
 
-                                //    //Insert the activity log associated to the customer:
+                                //    var getGlobalEntityIdResult = _db.GetGlobalEntityIdForEntity(null, null, _customer).ToList();
 
-                                //    //If the Note field is blank, do not insert.
+                                //    Guid? globalEntityId = getGlobalEntityIdResult[0];
+
+                                //    //Create the note to insert.  Take the Note and outcome fields from mploy and append them to create the whole note to insert into intersect:
+                                //    var noteAndOutcomeString = String.Empty;
+
                                 //    if (!string.IsNullOrEmpty(contactLogRecord.Note))
                                 //    {
-                                    
-                                //        //Insert the ActivityLog record here:
-                                //        //var insertedActivityLogId = _db.InsertActivityLog(activityId, contactLogRecord.created,
-                                //        //    contactLogRecord.Note, contactLogRecord.idUser);
+                                //        noteAndOutcomeString += "Note: " + contactLogRecord.Note;
                                 //    }
+
+                                //    //Insert the activity log associated to the customer:
+
+
+                                //    //Insert the ActivityLog record here:
+                                //    var insertedActivityLogId = _db.InsertActivityLog(globalEntityId, activityId, contactLogRecord.created,
+                                //        noteAndOutcomeString, null, contactLogRecord.idUser);
+
+                                //    Debug.WriteLine("\n" + " Customer Id: " + _customerId + " Global Entity Id: " + globalEntityId + " Mploy Contact Log Id: " + contactLogRecord.idLog);
+                                //    //}
+                                //    if (activityId == -1)
+                                //    {
+                                //        Debug.WriteLine("\n" + "***** Following activity was not inserted *****" + "\n" + "  -> Contact Log Id: " + contactLogRecord.idLog + " Id Event Type: " + contactLogRecord.idLogType);
+                                //    }
+
                                 //}
                             }
-                        }//Log Id If statement
+                        //}//Log Id If statement
                     } 
                 }
                 catch
@@ -123,6 +155,19 @@ namespace ConsoleApplication1
                 }
             }
         }
+
+
+        /****
+         * GetActivityId takes in the logTypeId from the Mploy tbContactLog table and the entity type in Intersect of the current entity.
+         * Customer: entity 1
+         * Candidate: entity 2
+         * 
+         * based on the entity type, it finds the activty id in Intersect based on the logTypeId from Mploy.
+         * 
+         * 
+         * Right now only the mappings for the Candidate entity type exist.  In the Activity table there are no Activities for Customer type 1.
+         * Once those activites are added, in the case 1 section the log types are listed and the corresponding activityTypeId (from Activity table) will need to be added.  Just like in the case 2 section.
+         ****/
 
         static int GetActivityId(int logTypeId, int entityTypeId)
         {

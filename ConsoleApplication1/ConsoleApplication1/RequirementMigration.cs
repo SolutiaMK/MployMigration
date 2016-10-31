@@ -158,7 +158,7 @@ namespace ConsoleApplication1
                         }
 
 
-                        Debug.WriteLine("\n" + "Requirement imported: " + MPLOYIdJob + " : " + Name + " CustomerId: " + _customerId);
+                        Debug.WriteLine("\n" + "MployId: " + MPLOYIdJob + " : " + Name + " CustomerId: " + _customerId + " RequirementId: " + _requirementId);
                     }
                 }
                 catch

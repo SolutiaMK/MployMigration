@@ -24,6 +24,7 @@ namespace ConsoleApplication1
         public int RequirementTypeId { get; set; }
         public int RequirementPriorityTypeId { get; set; }
         public int RequirementProjectTypeId { get; set; }
+        public Nullable<int> PreferredTypicalRoleId { get; set; }
         public Nullable<int> TravelTypeId { get; set; }
         public Nullable<int> MaxTravelTypeId { get; set; }
         public Nullable<int> PaymentTermTypeId { get; set; }

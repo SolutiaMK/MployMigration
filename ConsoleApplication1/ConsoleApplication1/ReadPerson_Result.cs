@@ -46,6 +46,5 @@ namespace ConsoleApplication1
         public string ResumeText { get; set; }
         public string Country { get; set; }
         public string SelfId { get; set; }
-        public Nullable<int> INTERSECT_GenderTypeId { get; set; }
     }
 }

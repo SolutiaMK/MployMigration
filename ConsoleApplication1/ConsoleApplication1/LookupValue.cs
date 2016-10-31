@@ -346,11 +346,23 @@ namespace ConsoleApplication1
                     }
                     else if (match.Value == "<annualsalary>" && nextValue != "</annualsalary>")
                     {
+                        var annualSalary = 0L;
                         
                         nextValue = CleanMoneyString.Replace(nextValue, "");
-                        insertRequirement.MinRate = Convert.ToInt32(nextValue);
-                        insertRequirement.MaxRate = Convert.ToInt32(nextValue);
 
+                        annualSalary = Convert.ToInt64(nextValue);
+
+                        //Handles the one case that the number is way too big because of a salary range being sent in:
+                        if (annualSalary >= Int32.MaxValue)
+                        {
+                            insertRequirement.MinRate = Convert.ToInt32(0);
+                            insertRequirement.MaxRate = Convert.ToInt32(0);
+                        }
+                        else
+                        {
+                            insertRequirement.MinRate = Convert.ToInt32(nextValue);
+                            insertRequirement.MaxRate = Convert.ToInt32(nextValue);
+                        }                  
 
                     }
                     else if (match.Value == "<annualsalary>" && nextValue == "</annualsalary>")
@@ -370,7 +382,7 @@ namespace ConsoleApplication1
                     {
 
                     }
-                    else if (match.Value == "<contactduration>" && nextValue != "</contactduration>")
+                    else if (match.Value == "<contractduration>" && nextValue != "</contractduration>")
                     {
                         
                     }

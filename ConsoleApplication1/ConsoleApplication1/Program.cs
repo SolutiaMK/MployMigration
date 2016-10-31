@@ -31,7 +31,7 @@ namespace ConsoleApplication1
 
                     //OrganizationMigration.OrganizationImport();
 
-                    CustomerMigration.ContactImport();
+                    //CustomerMigration.ContactImport();
 
                     //CandidateMigration.CandidateImport();
 
